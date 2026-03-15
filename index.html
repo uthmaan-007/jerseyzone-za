@@ -14,7 +14,7 @@ body{font-family:'Raleway',sans-serif;background:var(--bg);color:var(--cream);mi
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(11,11,13,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);}
+nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(11,11,13,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);}
 .nav-left{display:flex;align-items:center;gap:12px;cursor:pointer;}
 .nav-logo{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid var(--red);}
 .nav-brand{font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;letter-spacing:0.12em;}
@@ -23,8 +23,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;ali
 .nl:hover,.nl.active{color:var(--cream);background:rgba(255,255,255,0.06);}
 .nl-wa{background:linear-gradient(135deg,#1db954,#128c7e)!important;color:#fff!important;font-weight:600!important;border-radius:4px;}
 .hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
-.hbg span{width:22px;height:1.5px;background:var(--cream);border-radius:2px;display:block;}
-@media(max-width:760px){nav{padding:0 1.25rem;}.nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(11,11,13,0.99);flex-direction:column;padding:0.75rem;border-bottom:1px solid var(--border);gap:2px;}.nav-links.open{display:flex;}.nl{font-size:0.8rem;padding:11px 14px;width:100%;text-align:left;}.hbg{display:flex;}}
+.hbg span{width:22px;height:1.5px;background:var(--cream);border-radius:2px;display:block;transition:background 0.3s;}
+@media(max-width:760px){nav{padding:0 1.25rem;}.nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(11,11,13,0.99);flex-direction:column;padding:0.75rem;border-bottom:1px solid var(--border);gap:2px;transition:background 0.3s;}.nav-links.open{display:flex;}.nl{font-size:0.8rem;padding:11px 14px;width:100%;text-align:left;}.hbg{display:flex;}}
 
 /* PAGES */
 .page{padding-top:64px;min-height:100vh;display:none;}
@@ -113,6 +113,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;ali
 .ktb{position:absolute;top:12px;right:12px;font-family:'Raleway',sans-serif;font-weight:700;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 9px;border-radius:2px;z-index:5;}
 .badge-imported{background:var(--red);color:#fff;}
 .badge-local{background:rgba(201,168,76,0.9);color:#111;}
+.badge-both{background:linear-gradient(135deg,var(--red),rgba(201,168,76,0.9));color:#fff;}
 .koos{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.8);color:#ff6b6b;font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 9px;border-radius:2px;z-index:5;}
 .ki{padding:1.25rem;flex:1;display:flex;flex-direction:column;}
 .kn{font-family:'Cinzel',serif;font-size:0.83rem;font-weight:600;letter-spacing:0.04em;margin-bottom:0.25rem;}
@@ -280,6 +281,41 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .drag-over{border-top:2px solid var(--red) !important;}
 
 
+
+/* ANNOUNCEMENT BANNER */
+.announce-bar{background:var(--red);color:#fff;text-align:center;padding:8px 1rem;font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;position:relative;z-index:99;overflow:hidden;}
+.announce-inner{display:inline-block;white-space:nowrap;animation:ticker 20s linear infinite;}
+@keyframes ticker{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}}
+
+/* HOW TO ORDER */
+.hto-wrap{max-width:860px;margin:0 auto;padding:3rem 2rem;}
+.hto-title{font-family:"Cinzel",serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;letter-spacing:0.08em;text-align:center;margin-bottom:0.5rem;}
+.hto-sub{text-align:center;color:var(--muted);font-size:0.85rem;font-weight:300;margin-bottom:3rem;}
+.hto-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);}
+.hto-step{background:var(--bg2);padding:1.75rem 1.25rem;text-align:center;position:relative;}
+.hto-step-num{font-family:"Cinzel",serif;font-size:2.2rem;font-weight:700;color:var(--red);opacity:0.9;margin-bottom:0.5rem;line-height:1;text-shadow:0 0 20px rgba(220,30,35,0.3);}
+.hto-step-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+.hto-step-title{font-family:"Cinzel",serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:0.4rem;}
+.hto-step-text{font-size:0.78rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+/* CUSTOMER ORDERS */
+.co-carousel{overflow:hidden;position:relative;padding:0 2rem 2rem;}
+.co-track{display:flex;gap:1px;transition:transform 0.4s ease;}
+.co-slide{min-width:280px;background:var(--bg2);flex-shrink:0;border-radius:3px;overflow:hidden;}
+.co-slide img{width:100%;height:300px;object-fit:cover;display:block;}
+.co-slide-caption{padding:0.9rem 1rem;font-size:0.78rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
+.co-nav{display:flex;gap:0.5rem;justify-content:center;margin-top:0.75rem;}
+.co-nav-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:3px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+.co-nav-btn:hover{border-color:var(--red);color:var(--cream);}
+
+/* CUSTOMER ORDERS GRID PAGE */
+.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}
+.co-card{background:var(--bg);overflow:hidden;transition:background 0.2s;}
+.co-card:hover{background:var(--bg2);}
+.co-card img{width:100%;height:300px;object-fit:cover;display:block;transition:transform 0.4s;}
+.co-card:hover img{transform:scale(1.03);}
+.co-card-cap{padding:1rem 1.25rem;font-size:0.82rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
+
 /* ON HAND */
 .oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);}
 .oh-card{background:var(--bg);padding:1.25rem;display:flex;flex-direction:column;transition:background 0.2s;}
@@ -297,12 +333,194 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .oh-size.avail{border-color:rgba(29,185,84,0.4);color:#1db954;}
 .oh-size.sold{border-color:var(--border);color:var(--muted2);text-decoration:line-through;opacity:0.4;}
 
+
+/* FLOATING BUTTONS */
+.float-wa{position:fixed;bottom:5rem;right:1.5rem;z-index:500;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);cursor:pointer;text-decoration:none;transition:all 0.2s;border:none;}
+.float-wa:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,0.55);}
+.float-top{position:fixed;bottom:9.5rem;right:1.5rem;z-index:500;width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:none;align-items:center;justify-content:center;font-size:0.9rem;color:var(--muted);cursor:pointer;transition:all 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.4);}
+.float-top:hover{border-color:var(--red);color:var(--cream);}
+.float-top.visible{display:flex;}
+
+/* RELATED KITS */
+.related-wrap{padding:2rem;border-top:1px solid var(--border);background:var(--bg);}
+.related-title{font-family:"Cinzel",serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:1.25rem;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border);}
+.related-card{background:var(--bg2);cursor:pointer;transition:background 0.2s;}
+.related-card:hover{background:var(--bg3);}
+.related-img{height:180px;overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;}
+.related-img img{width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.related-img-ph{font-size:2.5rem;opacity:0.1;}
+.related-info{padding:0.75rem 1rem;}
+.related-name{font-family:"Cinzel",serif;font-size:0.72rem;font-weight:600;margin-bottom:0.2rem;color:var(--cream);}
+.related-team{font-size:0.7rem;color:var(--muted);font-weight:300;}
+
+/* INSTAGRAM FOOTER BAR */
+.ig-footer-bar{background:var(--bg2);border-top:1px solid var(--border);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.ig-footer-bar a{display:flex;align-items:center;gap:8px;font-family:"Cinzel",serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.ig-footer-bar a:hover{color:var(--cream);}
+.ig-icon{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
+
+
+/* NEW ARRIVALS */
+.na-wrap{padding:3rem 2rem;border-top:1px solid var(--border);}
+.na-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.na-title{font-family:"Cinzel",serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:700;letter-spacing:0.08em;}
+.na-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);}
+.na-card{background:var(--bg2);cursor:pointer;transition:background 0.2s;overflow:hidden;}
+.na-card:hover{background:var(--bg3);}
+.na-img{height:240px;overflow:hidden;background:var(--bg3);position:relative;}
+.na-img img{width:100%;height:100%;object-fit:contain;background:var(--bg3);transition:transform 0.4s;}
+.na-card:hover .na-img img{transform:scale(1.04);}
+.na-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.1;}
+.na-badge{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#f5a623,#e8252a);color:#fff;font-family:"Raleway",sans-serif;font-weight:700;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 9px;border-radius:2px;}
+.na-info{padding:1rem 1.25rem;}
+.na-name{font-family:"Cinzel",serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem;color:var(--cream);}
+.na-team{font-size:0.72rem;color:var(--muted);font-weight:300;margin-bottom:0.5rem;}
+.na-price{font-family:"Cinzel",serif;font-size:0.8rem;font-weight:700;color:var(--red);}
+
+/* ABOUT US */
+.about-wrap{max-width:860px;margin:0 auto;padding:3rem 2rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:640px){.about-grid{grid-template-columns:1fr;gap:2rem;}}
+.about-logo{width:160px;height:160px;border-radius:50%;object-fit:cover;border:2px solid var(--red);display:block;margin:0 auto;}
+.about-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--red);margin-bottom:0.75rem;}
+.about-title{font-family:"Cinzel",serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:700;letter-spacing:0.06em;margin-bottom:1rem;line-height:1.2;}
+.about-text{font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:1rem;}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.about-stat-num{font-family:"Cinzel",serif;font-size:1.4rem;font-weight:700;color:var(--red);margin-bottom:0.2rem;}
+.about-stat-label{font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+
+/* TERMS */
+.terms-wrap{max-width:760px;margin:0 auto;padding:0 2rem 4rem;}
+.terms-sec{margin-bottom:2rem;}
+.terms-sec-title{font-family:"Cinzel",serif;font-size:0.78rem;letter-spacing:0.18em;color:var(--red);text-transform:uppercase;margin-bottom:0.9rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+.terms-text{font-size:0.83rem;color:var(--muted);font-weight:300;line-height:1.9;}
+.terms-text p{margin-bottom:0.75rem;}
+.terms-text ul{padding-left:1.25rem;margin-bottom:0.75rem;}
+.terms-text ul li{margin-bottom:0.4rem;}
+
+/* COUNTDOWN TIMER */
+.countdown-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 2rem;display:none;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.countdown-bar.show{display:flex;}
+.countdown-label{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+.countdown-timer{display:flex;gap:0.75rem;align-items:center;}
+.countdown-unit{text-align:center;}
+.countdown-num{font-family:"Cinzel",serif;font-size:1.1rem;font-weight:700;color:var(--red);line-height:1;}
+.countdown-unit-label{font-size:0.55rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2);}
+.countdown-sep{font-family:"Cinzel",serif;font-size:1rem;color:var(--muted2);margin-bottom:0.5rem;}
+.countdown-cta{font-family:"Raleway",sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;background:var(--red);color:#fff;border:none;border-radius:3px;cursor:pointer;text-decoration:none;white-space:nowrap;}
+
+
+/* LIGHT MODE */
+body.light{
+  --bg:#f5f5f7;
+  --bg2:#ffffff;
+  --bg3:#ebebed;
+  --border:rgba(0,0,0,0.08);
+  --cream:#1a1a1a;
+  --muted:#666;
+  --muted2:#aaa;
+}
+body.light nav{background:rgba(245,245,247,0.97);border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .nav-brand{color:#1a1a1a;}
+body.light .nl{color:#666;}
+body.light .nl:hover,.light .nl.active{color:#1a1a1a;background:rgba(0,0,0,0.05);}
+body.light .nav-links{background:rgba(245,245,247,0.99) !important;border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .hbg span{background:#1a1a1a !important;}
+body.light .theme-toggle{color:#666;border-color:rgba(0,0,0,0.15);}
+body.light .announce-bar{background:var(--red);}
+body.light .float-wa{box-shadow:0 4px 20px rgba(37,211,102,0.3);}
+body.light .float-top{background:#fff;box-shadow:0 4px 16px rgba(0,0,0,0.15);}
+body.light .toast{box-shadow:0 8px 32px rgba(0,0,0,0.15);}
+
+/* THEME TOGGLE */
+.theme-toggle{background:none;border:1px solid var(--border);border-radius:20px;padding:5px 10px;cursor:pointer;font-size:0.75rem;color:var(--muted);transition:all 0.2s;display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.theme-toggle:hover{border-color:var(--red);color:var(--cream);}
+
+
+/* LIGHT MODE */
+body.light{
+  --bg:#f5f5f7;
+  --bg2:#ffffff;
+  --bg3:#ebebed;
+  --border:rgba(0,0,0,0.08);
+  --cream:#1a1a1a;
+  --muted:#666;
+  --muted2:#999;
+}
+body.light nav{background:rgba(245,245,247,0.97);border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .nav-brand{color:#1a1a1a;}
+body.light .nl{color:#666;}
+body.light .nl:hover,.light .nl.active{color:#1a1a1a;background:rgba(0,0,0,0.05);}
+body.light .nav-links{background:rgba(245,245,247,0.99) !important;border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .hbg span{background:#1a1a1a !important;}
+body.light .theme-toggle{color:#666;border-color:rgba(0,0,0,0.15);}
+body.light .announce-bar{background:var(--red);}
+body.light .float-wa{box-shadow:0 4px 20px rgba(37,211,102,0.35);}
+body.light .hero{background:radial-gradient(ellipse at 50% 40%,rgba(220,30,35,0.04) 0%,transparent 60%);}
+body.light .feat{background:var(--bg2);}
+body.light .feat:hover{background:var(--bg3);}
+body.light .kc{background:var(--bg2);}
+body.light .kc:hover{background:var(--bg3);}
+body.light .rc{background:var(--bg2);}
+body.light .rc:hover{background:var(--bg3);}
+body.light .pricing-card{background:var(--bg2);}
+body.light .admin-card-inner,.light .ac{background:var(--bg2);}
+
+/* SETTINGS PAGE */
+.settings-wrap{max-width:600px;margin:0 auto;padding:0 2rem 4rem;}
+.settings-group{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1.5rem;}
+.settings-group-title{font-family:"Cinzel",serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);padding:1rem 1.25rem 0.5rem;border-bottom:1px solid var(--border);}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border);gap:1rem;}
+.settings-row:last-child{border-bottom:none;}
+.settings-label{font-size:0.85rem;font-weight:500;color:var(--cream);}
+.settings-desc{font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.2rem;}
+
+/* TOGGLE SWITCH */
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:var(--muted2);border-radius:24px;cursor:pointer;transition:background 0.3s;}
+.toggle-slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform 0.3s;}
+.toggle input:checked + .toggle-slider{background:var(--red);}
+.toggle input:checked + .toggle-slider:before{transform:translateX(20px);}
+
+/* COMPACT VIEW */
+body.compact .kit-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+body.compact .kia{height:200px;}
+body.compact .gallery{height:200px;}
+body.compact .ki{padding:0.75rem;}
+body.compact .kn{font-size:0.72rem;}
+body.compact .km{font-size:0.65rem;margin-bottom:0.5rem;}
+body.compact .ksz{display:none;}
+body.compact .kao{display:none;}
+
+
+/* FADE IN ON SCROLL */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
 /* KIT TYPE DROPDOWN GROUPS */
 .type-group-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 13px 3px;display:block;}
 </style>
 </head>
 <body>
 
+<div class="announce-bar" id="announcebar" style="display:none;">
+  <span class="announce-inner" id="announcetext"></span>
+</div>
+<div class="countdown-bar" id="countdownBar">
+  <span class="countdown-label">Import Order Closes In</span>
+  <div class="countdown-timer">
+    <div class="countdown-unit"><div class="countdown-num" id="cd-days">00</div><div class="countdown-unit-label">Days</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-hrs">00</div><div class="countdown-unit-label">Hrs</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-min">00</div><div class="countdown-unit-label">Min</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-sec">00</div><div class="countdown-unit-label">Sec</div></div>
+  </div>
+  <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27d%20like%20to%20place%20an%20order%20before%20the%20deadline." target="_blank" class="countdown-cta">Order Now</a>
+</div>
 <nav>
   <div class="nav-left" onclick="showPage('home')">
     <img src="https://i.imgur.com/3BVaOIx.png" alt="JZ" class="nav-logo"/>
@@ -311,14 +529,17 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
   <div class="nav-links" id="navLinks">
     <button class="nl active" onclick="showPage('home')">Home</button>
     <button class="nl" onclick="showPage('catalogue')">Catalogue</button>
+    <button class="nl" onclick="showPage('onhand')">On Hand</button>
     <button class="nl" onclick="showPage('reviews')">Reviews</button>
+    <button class="nl" onclick="showPage('orders')">Customer Orders</button>
     <button class="nl" onclick="showPage('pricing')">Pricing</button>
     <button class="nl" onclick="showPage('sizeguide')">Size Guide</button>
-    <button class="nl" onclick="showPage('onhand')">On Hand</button>
-    <button class="nl" onclick="showPage('faq')">FAQ</button>
     <button class="nl" onclick="showPage('suggest')">Suggest a Kit</button>
+    <button class="nl" onclick="showPage('faq')">FAQ</button>
+    <button class="nl" onclick="showPage('settings')">⚙ Settings</button>
     <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!" target="_blank" class="nl nl-wa">💬 WhatsApp</a>
   </div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
   <button class="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
@@ -349,19 +570,104 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
       </div>
     </div>
   </div>
-  <div class="feats">
+  <div class="feats fade-in">
     <div class="feat"><div class="feat-icon">⚽</div><div class="feat-title">Imported Kits</div><p class="feat-text">Fan, Player, Retro &amp; Special edition kits sourced directly from international suppliers.</p></div>
     <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">Replica Kits</div><p class="feat-text">Quality replica football kits for both men and kids, available at affordable local prices.</p></div>
     <div class="feat"><div class="feat-icon">✂️</div><div class="feat-title">Customisation</div><p class="feat-text">Personalise your imported kit with your name, number, badges and sleeve sponsors.</p></div>
     <div class="feat"><div class="feat-icon">🔍</div><div class="feat-title">Sourcing</div><p class="feat-text">Don't see your kit? We'll do our best to source it for you at standard imported pricing.</p></div>
     <div class="feat"><div class="feat-icon">📦</div><div class="feat-title">Delivery</div><p class="feat-text">Imported kits arrive in approximately 21 days, excluding delays. Discounts available for bulk orders.</p></div>
+    <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">On Hand</div><p class="feat-text">Discounted kits available immediately — limited stock at reduced prices, ready for collection or fast delivery.</p></div>
     <div class="feat"><div class="feat-icon">💬</div><div class="feat-title">WhatsApp Orders</div><p class="feat-text">No complicated checkout — simply message us on WhatsApp and we'll handle the rest.</p></div>
   </div>
+  <!-- NEW ARRIVALS -->
+  <div class="na-wrap fade-in" id="newArrivalsSection">
+    <div class="na-header">
+      <h2 class="na-title">New Arrivals</h2>
+      <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('catalogue')">View All</button>
+    </div>
+    <div class="na-grid" id="naGrid"></div>
+  </div>
+
+  <!-- HOW TO ORDER -->
+  <div class="hto-wrap fade-in">
+    <h2 class="hto-title">How to Order</h2>
+    <p class="hto-sub">Simple, fast and secure — straight to your door</p>
+    <div class="hto-steps">
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">01</div>
+        <div class="hto-step-icon">🔍</div>
+        <div class="hto-step-title">Browse</div>
+        <p class="hto-step-text">Find your kit in our catalogue or ask us to source one for you.</p>
+      </div>
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">02</div>
+        <div class="hto-step-icon">💬</div>
+        <div class="hto-step-title">Message Us</div>
+        <p class="hto-step-text">Tap "Order via WhatsApp" and send us your kit name and size.</p>
+      </div>
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">03</div>
+        <div class="hto-step-icon">💳</div>
+        <div class="hto-step-title">Make Payment</div>
+        <p class="hto-step-text">We'll send you banking details. Once paid, your order is secured.</p>
+      </div>
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">04</div>
+        <div class="hto-step-icon">📦</div>
+        <div class="hto-step-title">Receive Your Kit</div>
+        <p class="hto-step-text">Imported kits arrive in approx. 21 days. Local kits are faster.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT US HOME SECTION -->
+  <div style="border-top:1px solid var(--border);" class="fade-in">
+    <div class="about-wrap">
+      <div class="about-grid">
+        <div>
+          <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+        </div>
+        <div>
+          <p class="about-eyebrow">Est. 2024 · Johannesburg, SA</p>
+          <h2 class="about-title">About JerseyZone_ZA</h2>
+          <p class="about-text">JerseyZone_ZA started as a small side hustle in 2024, initially selling quality local replica kits to football fans across South Africa. Towards the end of 2024, we expanded into internationally sourced imported kits — Fan, Player, Retro and Special editions — with one clear goal in mind: to be the most affordable football kit retailer in South Africa without compromising on quality.</p>
+          <p class="about-text">Based in Johannesburg, we serve customers nationwide via courier, and every order is backed by a personal quality check before it leaves our hands.</p>
+          <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('about')">Read More</button>
+          <div class="about-stats">
+            <div><div class="about-stat-num">2024</div><div class="about-stat-label">Est.</div></div>
+            <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based</div></div>
+            <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMER ORDERS CAROUSEL -->
+  <div id="homeOrdersSection" class="fade-in" style="display:none;padding:0 0 1rem;">
+    <div style="padding:0 2rem 1.25rem;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;letter-spacing:0.08em;margin-bottom:0.25rem;">Happy Customers</h2>
+        <p style="font-size:0.83rem;color:var(--muted);font-weight:300;">Real orders from real people</p>
+      </div>
+      <button class="btn-o" style="font-size:0.65rem;flex-shrink:0;" onclick="showPage('orders')">View All</button>
+    </div>
+    <div class="co-carousel">
+      <div class="co-track" id="coTrack"></div>
+    </div>
+    <div class="co-nav">
+      <button class="co-nav-btn" onclick="coSlide(-1)">‹</button>
+      <button class="co-nav-btn" onclick="coSlide(1)">›</button>
+    </div>
+  </div>
+
   <footer>
     <span class="fbrand">© 2024 JerseyZone_ZA</span>
     <div class="flinks">
       <a href="https://instagram.com/jerseyzone2_za" target="_blank" class="flink">Instagram</a>
       <a href="https://wa.me/27710396374" target="_blank" class="flink">WhatsApp</a>
+      <span class="flink" onclick="showPage('about')">About</span>
+      <span class="flink" onclick="showPage('terms')">T&amp;Cs</span>
       <span class="flink" onclick="showPage('admin')">Admin</span>
     </div>
   </footer>
@@ -376,8 +682,13 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
       <button class="fb" onclick="setFilter('fan',this)">Fan Version</button>
       <button class="fb" onclick="setFilter('player',this)">Player Version</button>
       <button class="fb" onclick="setFilter('retro',this)">Retro</button>
-      <button class="fb" onclick="setFilter('replica',this)">Replica</button>
-      <button class="fb" onclick="setFilter('other',this)">Other</button>
+      <button class="fb" onclick="setFilter('replica_mens',this)">Replica</button>
+      <button class="fb" onclick="setFilter('kids_kit',this)">Kids Kits</button>
+      <button class="fb" onclick="setFilter('f1',this)">F1</button>
+      <button class="fb" onclick="setFilter('tracksuit',this)">Tracksuits</button>
+      <button class="fb" onclick="setFilter('training_set',this)">Training Sets</button>
+      <button class="fb" onclick="setFilter('windbreaker',this)">Windbreakers</button>
+      <button class="fb" onclick="setFilter('baby_grower',this)">Baby Growers</button>
     </div>
     <div class="sw"><span class="sico">🔍</span><input class="si" id="si" placeholder="Search kits..." oninput="renderCat()"/></div>
   </div>
@@ -387,17 +698,19 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
     <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Looking for a specific kit?</p>
     <button class="btn-p" onclick="showPage('suggest')">Suggest a Kit</button>
   </div>
+  <div class="ig-footer-bar"><a href="https://instagram.com/jerseyzone2_za" target="_blank"><span class="ig-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>Follow us @jerseyzone2_za for new stock &amp; updates</span></a></div>
 </div>
 
 <!-- REVIEWS -->
 <div class="page" id="page-reviews">
   <div class="ph"><h2>Reviews</h2><p>What our customers are saying</p></div>
-  <div id="reviewsGrid" class="rg"></div>
+  <div id="reviewsGrid" class="rg fade-in"></div>
   <div id="reviewsEmpty" class="empty-state" style="display:none;">No reviews yet. Check back soon.</div>
   <div class="ig-sec">
     <p>Follow us on Instagram for more reviews and latest stock</p>
     <a href="https://instagram.com/jerseyzone2_za" target="_blank" class="btn-o">@jerseyzone2_za</a>
   </div>
+  <div class="ig-footer-bar"><a href="https://instagram.com/jerseyzone2_za" target="_blank"><span class="ig-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>Follow us @jerseyzone2_za for new stock &amp; updates</span></a></div>
 </div>
 
 <!-- PRICING -->
@@ -406,7 +719,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
   <div class="pricing-wrap">
     <div style="margin-bottom:2rem;">
       <div class="pricing-section-title">Imported Kits</div>
-      <div class="pricing-grid">
+      <div class="pricing-grid fade-in">
         <div class="pricing-card">
           <div class="pricing-card-header"><div class="pricing-card-title">Fan &amp; Player Versions</div><div class="pricing-card-sub">Internationally sourced match kits</div></div>
           <div class="pricing-card-body">
@@ -427,7 +740,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
     </div>
     <div style="margin-bottom:2rem;">
       <div class="pricing-section-title">Local Replica Kits</div>
-      <div class="pricing-grid">
+      <div class="pricing-grid fade-in">
         <div class="pricing-card">
           <div class="pricing-card-header"><div class="pricing-card-title">Replica</div><div class="pricing-card-sub">Quality local replicas</div></div>
           <div class="pricing-card-body">
@@ -439,7 +752,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
     </div>
     <div style="margin-bottom:2rem;">
       <div class="pricing-section-title">Other Items</div>
-      <div class="pricing-grid">
+      <div class="pricing-grid fade-in">
         <div class="pricing-card">
           <div class="pricing-card-header"><div class="pricing-card-title">Clothing &amp; Accessories</div><div class="pricing-card-sub">Additional items available</div></div>
           <div class="pricing-card-body">
@@ -472,19 +785,19 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 <div class="page" id="page-faq">
   <div class="ph"><h2>FAQ</h2><p>Everything you need to know before ordering</p></div>
   <div class="faq-wrap">
-    <div class="faq-sec">
+    <div class="faq-sec fade-in">
       <div class="faq-sec-title">Ordering</div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>How do I place an order?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Click "Order via WhatsApp" on any kit, or contact us directly via Instagram at <a href="https://instagram.com/jerseyzone2_za" target="_blank" style="color:var(--red);">@jerseyzone2_za</a> or on WhatsApp at 071 039 6374. Simply provide the kit name, your size, and the type (Imported or Replica). Once payment is confirmed, your order is secured.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>How long does delivery take?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Imported kits are shipped internationally and arrive in approximately 21 days, excluding any unforeseen delays. Ordering multiple imported items together qualifies for a discount as it consolidates international shipping costs.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Can you source a kit not listed in the catalogue?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Yes. Use our "Suggest a Kit" page to submit your request along with your contact number. We will do our best to source the kit for you. Please note that sourced kits are imported only, priced at standard imported rates, and a small additional fee may apply.</div></div>
     </div>
-    <div class="faq-sec">
+    <div class="faq-sec fade-in">
       <div class="faq-sec-title">Kit Types</div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>What is the difference between Player and Fan version?</span><span class="faq-arr">▼</span></div><div class="faq-ans"><strong style="color:var(--cream);">Player Version:</strong> Constructed from high-performance, lightweight materials featuring advanced moisture-wicking technology. Slim athletic fit with heat-pressed badges for enhanced flexibility.<br/><br/><strong style="color:var(--cream);">Fan Version:</strong> Made from durable, comfortable materials with a relaxed fit. Features embroidered or stitched badges — ideal for everyday wear at a more accessible price point.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Do Replica kits include customisation options?</span><span class="faq-arr">▼</span></div><div class="faq-ans">No. Replica kits do not include any add-on customisation. All imported kits offer a fully customisable name and number option as well as selected badge additions. Certain imported kits also offer a long sleeve option, which will be indicated in the product listing.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>What does "Imported" and "Local" mean?</span><span class="faq-arr">▼</span></div><div class="faq-ans"><strong style="color:var(--cream);">Imported</strong> kits are sourced directly from international suppliers and include Fan, Player, Retro and Special edition versions. <strong style="color:var(--cream);">Local</strong> kits are quality replica versions produced locally, available for men and kids at lower price points.</div></div>
     </div>
-    <div class="faq-sec">
+    <div class="faq-sec fade-in">
       <div class="faq-sec-title">Pricing</div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Where can I find your full pricing?</span><span class="faq-arr">▼</span></div><div class="faq-ans">All pricing is available on our dedicated <span onclick="showPage('pricing')" style="color:var(--red);cursor:pointer;text-decoration:underline;">Pricing page</span>. Prices are subject to change — for the latest pricing please contact us directly.</div></div>
     </div>
@@ -502,9 +815,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
       <button class="btn-o" onclick="resetSug()">Submit Another</button>
     </div>
     <div id="sugForm">
-      <div class="sug-note">
-        <strong style="color:var(--cream);">Please note:</strong> Kit sourcing is available for <strong style="color:var(--cream);">imported kits only</strong>. Sourced kits are priced at standard imported rates and a small additional fee may apply. We will contact you directly on the number provided if the kit becomes available.
-      </div>
+      <div class="sug-note"><strong style="color:var(--cream);">Please note:</strong> Kit sourcing is available for imported kits only. Sourced kits are priced at standard imported rates and a small additional fee may apply. We will contact you directly on the number provided if the kit becomes available.</div>
       <div class="fg"><label class="fl">Your Name *</label><input class="fi" id="sn" placeholder="e.g. Yusuf"/></div>
       <div class="fg"><label class="fl">Contact Number *</label><input class="fi" id="sphone" placeholder="e.g. 071 234 5678" type="tel"/></div>
       <div class="fg"><label class="fl">Kit You Are Looking For *</label><input class="fi" id="sk" placeholder="e.g. Brazil Away 2024/25"/></div>
@@ -540,7 +851,6 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
           <tr><td>L</td><td>51–53</td><td>72–74</td><td>170–175</td><td>75–80</td></tr>
           <tr><td>XL</td><td>53–55</td><td>74–76</td><td>175–180</td><td>80–85</td></tr>
           <tr><td>XXL</td><td>55–57</td><td>76–78</td><td>180–185</td><td>85–90</td></tr>
-          <tr><td>3XL</td><td>57–59</td><td>78–80</td><td>185–190</td><td>90–95</td></tr>
         </tbody>
       </table>
       <p class="sg-disclaimer">* All measurements are in centimetres. There may be a 2–3cm variance due to manual measurement or differing measurement methods.</p>
@@ -557,7 +867,6 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
           <tr><td>L</td><td>54–56</td><td>72–74</td><td>173–180</td><td>62–75</td></tr>
           <tr><td>XL</td><td>57–60</td><td>74–76</td><td>178–185</td><td>67–88</td></tr>
           <tr><td>XXL</td><td>60–63</td><td>76–78</td><td>185–192</td><td>85–92</td></tr>
-          <tr><td>3XL</td><td>63–65</td><td>78–80</td><td>192–195</td><td>92–95</td></tr>
         </tbody>
       </table>
     </div>
@@ -571,14 +880,133 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 </div>
 
 
+
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+  <div class="ph"><h2>About Us</h2><p>The story behind JerseyZone_ZA</p></div>
+  <div class="about-wrap" style="padding-top:1rem;">
+    <div class="about-grid">
+      <div>
+        <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+      </div>
+      <div>
+        <p class="about-eyebrow">Est. 2024 · Johannesburg, South Africa</p>
+        <h2 class="about-title">Our Story</h2>
+        <p class="about-text">JerseyZone_ZA was founded in 2024 as a small side hustle with a simple idea — make quality football kits accessible and affordable to South African fans. We started by offering local replica kits, building a reputation for good products and reliable service.</p>
+        <p class="about-text">Towards the end of 2024, we took the next step and began sourcing internationally imported kits — Fan, Player, Retro and Special editions from clubs around the world. Our goal from day one has been to become the most affordable football kit retailer in South Africa, without ever sacrificing quality.</p>
+        <p class="about-text">Every order placed with us is personally quality-checked before it ships. We're based in Johannesburg and deliver nationwide via courier, with WhatsApp as our primary channel — keeping things personal, fast and hassle-free.</p>
+        <div class="about-stats">
+          <div><div class="about-stat-num">2024</div><div class="about-stat-label">Founded</div></div>
+          <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based In</div></div>
+          <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ig-footer-bar" style="margin-top:2rem;"><a href="https://instagram.com/jerseyzone2_za" target="_blank"><span class="ig-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>Follow us @jerseyzone2_za</span></a></div>
+  </div>
+</div>
+
+<!-- TERMS PAGE -->
+<div class="page" id="page-terms">
+  <div class="ph"><h2>Terms &amp; Conditions</h2><p>Please read carefully before placing an order</p></div>
+  <div class="terms-wrap">
+    <div class="terms-sec">
+      <div class="terms-sec-title">Orders &amp; Payment</div>
+      <div class="terms-text">
+        <p>All orders are placed via WhatsApp. An order is only considered confirmed and secured once full payment has been received. JerseyZone_ZA reserves the right to cancel any unconfirmed order.</p>
+        <p>We accept payment via EFT/bank transfer only. Banking details will be provided upon order confirmation. Please use your name and order details as the payment reference.</p>
+        <p>We aim to respond to all enquiries within 24 hours. Orders placed over weekends or public holidays will be processed on the next business day.</p>
+      </div>
+    </div>
+    <div class="terms-sec">
+      <div class="terms-sec-title">Delivery</div>
+      <div class="terms-text">
+        <p>We deliver nationwide across South Africa via courier. A courier fee will be added to your order total and communicated before payment is requested.</p>
+        <p>Imported kits are shipped internationally and arrive in approximately 21 days from the date the order is placed with our supplier, excluding any unforeseen delays. JerseyZone_ZA is not liable for delays caused by customs, courier services or international shipping conditions.</p>
+        <p>Local replica kits are dispatched sooner and delivery times will be communicated at the time of order.</p>
+      </div>
+    </div>
+    <div class="terms-sec">
+      <div class="terms-sec-title">Quality Check</div>
+      <div class="terms-text">
+        <p>Every imported kit undergoes a personal quality check before it is shipped to the customer. Quality check photos are sent to the customer via WhatsApp prior to dispatch. By approving the quality check, the customer acknowledges that the item is in acceptable condition.</p>
+      </div>
+    </div>
+    <div class="terms-sec">
+      <div class="terms-sec-title">Returns &amp; Refunds</div>
+      <div class="terms-text">
+        <p><strong style="color:var(--cream);">Local Replica Kits:</strong> Returns are accepted on local replica kits only, provided the item is reported within 24 hours of receipt and is in its original condition with no signs of wear or washing.</p>
+        <p><strong style="color:var(--cream);">Imported Kits:</strong> No refunds or returns are accepted on imported kits. As quality check photos are provided and approved by the customer prior to dispatch, all imported kit sales are considered final.</p>
+        <p>JerseyZone_ZA reserves the right to assess each return request individually. To initiate a return, contact us via WhatsApp within the applicable timeframe.</p>
+      </div>
+    </div>
+    <div class="terms-sec">
+      <div class="terms-sec-title">Sourcing &amp; Pricing</div>
+      <div class="terms-text">
+        <p>All prices displayed on this website are subject to change without prior notice. The price applicable to your order will be confirmed at the time of purchase via WhatsApp.</p>
+        <p>Kit sourcing requests are for imported kits only. Sourced kits are priced at standard imported rates, and a small additional sourcing fee may apply. Sourcing requests do not guarantee availability.</p>
+        <p>Bulk order discounts are available on a case-by-case basis. Please enquire via WhatsApp for more information.</p>
+      </div>
+    </div>
+    <div class="terms-sec">
+      <div class="terms-sec-title">General</div>
+      <div class="terms-text">
+        <p>JerseyZone_ZA operates as a small independent business based in Johannesburg, South Africa. We are committed to providing quality products and honest service to every customer.</p>
+        <p>By placing an order with JerseyZone_ZA, you agree to these terms and conditions in full.</p>
+        <p>For any queries, contact us via WhatsApp at 071 039 6374 or on Instagram at <a href="https://instagram.com/jerseyzone2_za" target="_blank" style="color:var(--red);">@jerseyzone2_za</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDERS PAGE -->
+<div class="page" id="page-orders">
+  <div class="ph"><h2>Customer Orders</h2><p>Real orders from our customers — submitted by us on their behalf</p></div>
+  <div id="ordersGrid" class="co-grid"></div>
+  <div id="ordersEmpty" class="empty-state" style="display:none;">No orders posted yet. Check back soon.</div>
+</div>
+
 <!-- ON HAND -->
 <div class="page" id="page-onhand">
-  <div class="ph"><h2>On Hand</h2><p>Available stock — ready for immediate collection or delivery</p></div>
+  <div class="ph"><h2>On Hand</h2><p>Discounted kits available for immediate collection or delivery — limited stock, grab them while they last</p></div>
   <div id="ohGrid" class="oh-grid"></div>
   <div id="ohEmpty" class="empty-state" style="display:none;">No items currently on hand. Check back soon.</div>
   <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
     <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Interested in any of these items?</p>
     <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27m%20interested%20in%20an%20on%20hand%20item." target="_blank" class="btn-p">📲 Order via WhatsApp</a>
+  </div>
+</div>
+
+
+<!-- SETTINGS PAGE -->
+<div class="page" id="page-settings">
+  <div class="ph"><h2>Settings</h2><p>Customise your experience</p></div>
+  <div class="settings-wrap">
+    <div class="settings-group">
+      <div class="settings-group-title">Appearance</div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Light Mode</div>
+          <div class="settings-desc">Switch between dark and light theme</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggleLight" onchange="applyTheme()"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Compact Catalogue</div>
+          <div class="settings-desc">Show smaller kit cards — more kits visible at once</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggleCompact" onchange="applyCompact()"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+    <p style="font-size:0.72rem;color:var(--muted);font-weight:300;text-align:center;">Your preferences are saved automatically and will be remembered next time you visit.</p>
   </div>
 </div>
 
@@ -603,6 +1031,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
         <button class="abt" onclick="stab('reviews',this)">Reviews (<span id="rc">0</span>)</button>
         <button class="abt" onclick="stab('suggestions',this)">Suggestions<span class="nbadge" id="sb" style="display:none;"></span></button>
         <button class="abt" onclick="stab('onhand',this)">On Hand (<span id="ohc">0</span>)</button>
+        <button class="abt" onclick="stab('orders',this)">Orders (<span id="ordc">0</span>)</button>
       </div>
       <div class="atab active" id="tab-kits">
         <div class="ath"><span class="att">Manage Kits</span><button class="btn-p" style="font-size:0.65rem;" onclick="openKM(null)">+ Add Kit</button></div>
@@ -616,7 +1045,25 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
         <div class="ath"><span class="att">On Hand Items</span><button class="btn-p" style="font-size:0.65rem;" onclick="openOHM(null)">+ Add Item</button></div>
         <div class="adl" id="ohl"></div>
       </div>
+      <div class="atab" id="tab-orders">
+        <div class="ath"><span class="att">Customer Orders</span><button class="btn-p" style="font-size:0.65rem;" onclick="openOrdM(null)">+ Add Order</button></div>
+        <div class="adl" id="ordl"></div>
+      </div>
       <div class="atab" id="tab-suggestions">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.25rem;margin-bottom:1.5rem;">
+          <div style="font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.08em;color:var(--red);margin-bottom:0.75rem;">⏳ Import Order Deadline</div>
+          <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;">
+            <input class="fi" id="cd-input" type="datetime-local" style="flex:1;"/>
+            <button class="btn-p" style="font-size:0.65rem;flex-shrink:0;" onclick="saveCountdown()">Set</button>
+            <button class="btn-d" style="flex-shrink:0;" onclick="clearCountdown()">Clear</button>
+          </div>
+          <div style="font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.08em;color:var(--red);margin-bottom:0.75rem;">📢 Announcement Banner</div>
+          <div style="display:flex;gap:0.5rem;">
+            <input class="fi" id="ann-text" placeholder="e.g. Next import order closes 30 March — order now!" style="flex:1;"/>
+            <button class="btn-p" style="font-size:0.65rem;flex-shrink:0;" onclick="saveAnnouncement()">Update</button>
+            <button class="btn-d" style="flex-shrink:0;" onclick="clearAnnouncement()">Clear</button>
+          </div>
+        </div>
         <div class="ath"><span class="att">Kit Sourcing Requests</span></div>
         <div id="sl" style="border:1px solid var(--border);border-radius:3px;overflow:hidden;"></div>
       </div>
@@ -624,6 +1071,17 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
   </div>
 </div>
 
+
+
+<!-- ORDER MODAL -->
+<div class="mo" id="ordModal">
+  <div class="md">
+    <div class="mdt" id="ordmTitle">Add Customer Order</div>
+    <div class="fg"><label class="fl">Image URL (Imgur) *</label><input class="fi" id="ord-img" placeholder="https://i.imgur.com/..."/></div>
+    <div class="fg"><label class="fl">Caption *</label><textarea class="fta" id="ord-cap" placeholder="e.g. Yusuf rocking the Brazil away kit 🔥" style="min-height:70px;"></textarea></div>
+    <div class="mdf"><button class="btn-o" onclick="closeOrdM()">Cancel</button><button class="btn-p" onclick="saveOrd()">Save</button></div>
+  </div>
+</div>
 
 <!-- ON HAND MODAL -->
 <div class="mo" id="ohModal">
@@ -658,19 +1116,26 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
     <div class="fr2">
       <div class="fg"><label class="fl">League / Tournament</label><input class="fi" id="km-l" placeholder="e.g. World Cup"/></div>
       <div class="fg">
-        <label class="fl">Kit Type</label>
-        <select class="fsel" id="km-ty" onchange="onTypeChange()">
-          <optgroup label="IMPORTED">
-            <option value="fan">Fan Version</option>
-            <option value="player">Player Version</option>
-            <option value="retro">Retro</option>
-            <option value="other">Other (Imported)</option>
-          </optgroup>
-          <optgroup label="LOCAL">
-            <option value="replica_mens">Replica (Men's)</option>
-            <option value="replica_kids">Replica (Kids)</option>
-          </optgroup>
-        </select>
+        <label class="fl">Kit Types (select all that apply)</label>
+        <div style="margin-top:0.5rem;">
+          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Imported</div>
+          <div class="cbg" style="margin-bottom:0.75rem;">
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="fan" onchange="onTypeChange()"/> Fan Version</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="player" onchange="onTypeChange()"/> Player Version</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="retro" onchange="onTypeChange()"/> Retro</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="f1" onchange="onTypeChange()"/> F1</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="tracksuit" onchange="onTypeChange()"/> Tracksuit</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="training_set" onchange="onTypeChange()"/> Training Set</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="windbreaker" onchange="onTypeChange()"/> Windbreaker</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="baby_grower" onchange="onTypeChange()"/> Baby Grower</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="kids_kit" onchange="onTypeChange()"/> Kids Kit</label>
+          </div>
+          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Local</div>
+          <div class="cbg">
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="replica_mens" onchange="onTypeChange()"/> Replica (Men's)</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="replica_kids" onchange="onTypeChange()"/> Replica (Kids)</label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="fg">
@@ -718,7 +1183,12 @@ const KIT_TYPES={
   fan:{label:"Fan Version",category:"imported",price:490},
   player:{label:"Player Version",category:"imported",price:575},
   retro:{label:"Retro",category:"imported",price:575},
-  other:{label:"Other",category:"imported",price:490},
+  f1:{label:"F1",category:"imported",price:550},
+  tracksuit:{label:"Tracksuit",category:"imported",price:850},
+  training_set:{label:"Training Set",category:"imported",price:750},
+  windbreaker:{label:"Windbreaker",category:"imported",price:900},
+  baby_grower:{label:"Baby Grower",category:"imported",price:500},
+  kids_kit:{label:"Kids Kit",category:"imported",price:490},
   replica_mens:{label:"Replica (Men's)",category:"local",price:230},
   replica_kids:{label:"Replica (Kids)",category:"local",price:300}
 };
@@ -753,10 +1223,15 @@ function renderOnHand(){
 }
 
 async function init(){
+  loadSettings();
   await loadKits();
+  renderNewArrivals();
   await loadReviews();
   await loadSuggestions();
   await loadOnHand();
+  await loadOrders();
+  await loadAnnouncement();
+  await loadCountdown();
 }
 
 async function loadKits(){
@@ -785,15 +1260,17 @@ function showPage(p){
   document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
   document.getElementById("page-"+p).classList.add("active");
   document.querySelectorAll(".nl").forEach(x=>x.classList.remove("active"));
-  const m={home:0,catalogue:1,reviews:2,pricing:3,faq:4,suggest:5,sizeguide:6,onhand:7};
+  const m={home:0,catalogue:1,onhand:2,reviews:3,orders:4,pricing:5,sizeguide:6,suggest:7,faq:8,settings:9,about:10,terms:11};
   const b=document.querySelectorAll(".nl");
   if(m[p]!==undefined)b[m[p]].classList.add("active");
   document.getElementById("navLinks").classList.remove("open");
   window.scrollTo(0,0);
+  setTimeout(initFadeIn,100);
   if(p==="catalogue")loadKits();
   if(p==="reviews")loadReviews();
   if(p==="admin")renderAdmin();
   if(p==="onhand")loadOnHand();
+  if(p==="orders"){loadOrders();}
 }
 function toggleMenu(){document.getElementById("navLinks").classList.toggle("open");}
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000);}
@@ -857,7 +1334,15 @@ function goRevSlide(idx){
 // CATALOGUE
 function setFilter(f,b){af=f;document.querySelectorAll(".fb").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCat();}
 
-function getKitCategory(type){
+function getKitCategory(type,types){
+  // If any local type exists, show local badge; if mixed show imported
+  if(types&&types.length){
+    const hasImported=types.some(t=>!t.startsWith("replica"));
+    const hasLocal=types.some(t=>t.startsWith("replica"));
+    if(hasImported&&hasLocal)return"both";
+    if(hasLocal)return"local";
+    return"imported";
+  }
   if(!type)return"imported";
   if(type.startsWith("replica"))return"local";
   return"imported";
@@ -869,7 +1354,7 @@ function renderCat(){
   const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   const newInIds=new Set(sorted.slice(0,5).map(k=>k.id));
   const f=allKits.filter(j=>{
-    const matchFilter=af==="all"||j.type===af;
+    const matchFilter=af==="all"||(j.types||[j.type]).includes(af);
     const matchSearch=j.name.toLowerCase().includes(q)||(j.team||"").toLowerCase().includes(q);
     return matchFilter&&matchSearch;
   });
@@ -878,9 +1363,9 @@ function renderCat(){
   e.style.display="none";
   g.innerHTML=f.map(j=>{
     const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:\n\n*${j.name}*\nType: ${KIT_TYPES[j.type]?.label||j.type}\nSize: [please specify]\n\nPlease advise on availability and payment.`);
-    const cat=getKitCategory(j.type);
-    const badgeClass=cat==="local"?"badge-local":"badge-imported";
-    const badgeLabel=cat==="local"?"Local":"Imported";
+    const cat=getKitCategory(j.type,j.types);
+    const badgeClass=cat==="local"?"badge-local":cat==="both"?"badge-both":"badge-imported";
+    const badgeLabel=cat==="local"?"Local":cat==="both"?"Imported & Local":"Imported";
     const isNewIn=newInIds.has(j.id);
     const newBadge=isNewIn?'<span class="badge-new">New In</span>':'';
     const images=j.images||[];
@@ -907,7 +1392,7 @@ function renderCat(){
     const ao=(j.addons||[]).length?`<div class="kao">Add-ons available: ${j.addons.join(", ")}</div>`:"";
     const sz=(j.sizes||[]).map(s=>`<span class="ksc">${s}</span>`).join("");
     const btn=j.in_stock?`<a href="https://wa.me/${WA}?text=${msg}" target="_blank" class="bwa">📲 Order via WhatsApp</a>`:`<span class="bwa bwa-dis">Currently Out of Stock</span>`;
-    return`<div class="kc">${imgHTML}<div class="ki"><div class="kn">${j.name}</div><div class="km">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel}</div><div class="kpv">${pvs}</div>${ao}<div class="ksz">${sz}</div>${btn}</div></div>`;
+    return`<div class="kc" data-id="${j.id}"><div class="kc-inner">${imgHTML}<div class="ki"><div class="kn">${j.name}</div><div class="km">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel}</div><div class="kpv">${pvs}</div>${ao}<div class="ksz">${sz}</div>${btn}<button onclick="showRelated('${j.id}','${j.team||''}','${(j.types||[j.type]).join(',')}')" style="background:none;border:none;color:var(--muted);font-size:0.7rem;cursor:pointer;padding:4px 0;text-align:left;font-family:Raleway,sans-serif;letter-spacing:0.06em;">Similar kits ›</button></div></div></div>`;
   }).join("");
   // Init swipe on all galleries
   f.forEach(j=>{
@@ -992,17 +1477,18 @@ function renderAdmin(){
   document.getElementById("rc").textContent=allReviews.length;
   const badge=document.getElementById("sb");badge.textContent=allSugs.length;badge.style.display=allSugs.length?"inline-block":"none";
   document.getElementById("kl").innerHTML=!allKits.length?'<div class="empty-state">No kits yet. Click "+ Add Kit" to get started.</div>':allKits.map(j=>{
-    const cat=getKitCategory(j.type);
-    const typeLabel=KIT_TYPES[j.type]?.label||j.type;
+    const cat=getKitCategory(j.type,j.types);
+    const typeLabel=(j.types||[j.type]).map(t=>KIT_TYPES[t]?.label||t).join(", ");
     return`<div class="adi drag-item" draggable="true" ondragstart="onDragStart(event,'${j.id}')" ondrageend="onDragEnd(event)" ondragover="onDragOver(event,'${j.id}')" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'${j.id}')" ondragend="onDragEnd(event)">
       <div style="display:flex;align-items:center;gap:0.75rem;flex:1;">
         <span style="color:var(--muted2);font-size:1rem;cursor:grab;">⠿</span>
-        <div class="adin"><div class="adin-n">${j.name} <span class="ktb ${cat==="local"?"badge-local":"badge-imported"}" style="position:static;font-size:0.55rem;">${cat==="local"?"Local":"Imported"}</span></div><div class="adin-m">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel} · ${j.in_stock?"In Stock":"Out of Stock"}</div></div>
+        <div class="adin"><div class="adin-n">${j.name} <span class="ktb ${cat==="local"?"badge-local":cat==="both"?"badge-both":"badge-imported"}" style="position:static;font-size:0.55rem;">${cat==="local"?"Local":cat==="both"?"Imported & Local":"Imported"}</span></div><div class="adin-m">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel} · ${j.in_stock?"In Stock":"Out of Stock"}</div></div>
       </div>
       <div class="adi-ac"><button class="btn-g" onclick="openKM('${j.id}')">Edit</button><button class="btn-d" onclick="delKit('${j.id}')">Delete</button></div>
     </div>`;
   }).join("");
   document.getElementById("rl").innerHTML=!allReviews.length?'<div class="empty-state">No reviews yet.</div>':allReviews.map(r=>`<div class="adi"><div class="adin"><div class="adin-n">${"★".repeat(r.rating)} · ${r.name}</div><div class="adin-m" style="font-style:italic;">"${r.text.slice(0,60)}${r.text.length>60?"...":""}" · ${r.date}</div></div><div class="adi-ac"><button class="btn-g" onclick="openRM('${r.id}')">Edit</button><button class="btn-d" onclick="delRev('${r.id}')">Delete</button></div></div>`).join("");
+  renderOrdersAdmin();
   renderOnHandAdmin();
   document.getElementById("sl").innerHTML=!allSugs.length?'<div class="empty-state">No sourcing requests yet.</div>':allSugs.map(s=>`<div class="sgc"><div class="sg-meta"><span class="sg-name">${s.name}</span><span class="sg-phone">📞 ${s.phone||"No number provided"}</span><span class="sg-date">${s.date}</span></div><p class="sg-text">"${s.text}"</p><div class="sg-ac"><a href="https://wa.me/${(s.phone||"").replace(/\D/g,"")}" target="_blank" class="btn-p" style="font-size:0.62rem;padding:7px 13px;text-decoration:none;">📲 Call/WhatsApp</a><button class="btn-d" onclick="delSug('${s.id}')">Dismiss</button></div></div>`).join("");
 }
@@ -1010,14 +1496,24 @@ function stab(t,b){document.querySelectorAll(".atab").forEach(x=>x.classList.rem
 
 // KIT MODAL
 function onTypeChange(){
-  const type=document.getElementById("km-ty").value;
-  const cfg=KIT_TYPES[type];
-  // Update price
+  const selected=Array.from(document.querySelectorAll(".km-type-cb:checked")).map(cb=>cb.value);
   const pvc=document.getElementById("pvc");
-  pvc.innerHTML=`<div class="pvr"><input class="fi" style="flex:2;" placeholder="Label" value="${cfg.label}" data-l/><input class="fi" style="flex:1;" type="number" placeholder="R" value="${cfg.price}" data-p/></div>`;
-  // Hide addons for replica
-  const addonsSection=document.getElementById("addonsSection");
-  addonsSection.style.display=cfg.category==="local"?"none":"block";
+  // Get existing prices to preserve user edits
+  const existing={};
+  document.querySelectorAll("#pvc .pvr").forEach(r=>{
+    const lbl=r.querySelector("[data-l]").value;
+    const pr=r.querySelector("[data-p]").value;
+    existing[lbl]=pr;
+  });
+  if(selected.length===0){pvc.innerHTML="";return;}
+  pvc.innerHTML=selected.map(type=>{
+    const cfg=KIT_TYPES[type];
+    const existingPrice=existing[cfg.label]||cfg.price;
+    return`<div class="pvr"><input class="fi" style="flex:2;" value="${cfg.label}" data-l readonly/><input class="fi" style="flex:1;" type="number" placeholder="R" value="${existingPrice}" data-p data-type="${type}"/></div>`;
+  }).join("");
+  // Show addons if any imported type selected
+  const hasImported=selected.some(t=>KIT_TYPES[t]?.category==="imported");
+  document.getElementById("addonsSection").style.display=hasImported?"block":"none";
 }
 
 function openKM(id){
@@ -1026,18 +1522,19 @@ function openKM(id){
   document.getElementById("km-n").value=k?.name||"";
   document.getElementById("km-t").value=k?.team||"";
   document.getElementById("km-l").value=k?.league||"";
-  document.getElementById("km-ty").value=k?.type||"fan";
+  // Handle types as array
+  const types=k?.types||( k?.type ? [k.type] : [] );
+  document.querySelectorAll(".km-type-cb").forEach(cb=>{
+    cb.checked=types.includes(cb.value);
+  });
   document.getElementById("km-is").checked=k?k.in_stock:true;
   const ic=document.getElementById("imgContainer");ic.innerHTML="";imgc=0;
   (k?.images||[""]).forEach(url=>addImgField(url));
-  // Trigger type change to set prices and addons
-  if(k){
-    const cfg=KIT_TYPES[k.type];
-    if(cfg){
-      const pvs=k.price_variants||[{label:cfg.label,price:cfg.price}];
-      document.getElementById("pvc").innerHTML=pvs.map(v=>`<div class="pvr"><input class="fi" style="flex:2;" placeholder="Label" value="${v.label}" data-l/><input class="fi" style="flex:1;" type="number" placeholder="R" value="${v.price}" data-p/></div>`).join("");
-    }
-    document.getElementById("addonsSection").style.display=cfg?.category==="local"?"none":"block";
+  // Set prices from existing or defaults
+  if(k && k.price_variants && k.price_variants.length){
+    document.getElementById("pvc").innerHTML=k.price_variants.map(v=>`<div class="pvr"><input class="fi" style="flex:2;" value="${v.label}" data-l readonly/><input class="fi" style="flex:1;" type="number" value="${v.price}" data-p/></div>`).join("");
+    const hasImported=types.some(t=>KIT_TYPES[t]?.category==="imported");
+    document.getElementById("addonsSection").style.display=hasImported?"block":"none";
   } else {
     onTypeChange();
   }
@@ -1058,8 +1555,11 @@ async function saveKit(){
   const pvs=Array.from(document.querySelectorAll("#pvc .pvr")).map(r=>({label:r.querySelector("[data-l]").value,price:+r.querySelector("[data-p]").value}));
   const sz=Array.from(document.querySelectorAll("#szcbg input:checked")).map(i=>i.value);
   const ao=Array.from(document.querySelectorAll("#adcbg input:checked")).map(i=>i.value);
-  const type=document.getElementById("km-ty").value;
-  const kit={name:n,team:t,league:document.getElementById("km-l").value.trim(),type,in_stock:document.getElementById("km-is").checked,images,price_variants:pvs,sizes:sz,addons:ao};
+  const types=Array.from(document.querySelectorAll(".km-type-cb:checked")).map(cb=>cb.value);
+  if(!types.length){toast("⚠ Please select at least one kit type.");return;}
+  // Primary type is first selected (for badge display)
+  const type=types[0];
+  const kit={name:n,team:t,league:document.getElementById("km-l").value.trim(),type,types,in_stock:document.getElementById("km-is").checked,images,price_variants:pvs,sizes:sz,addons:ao};
   let error;
   if(ekid){({error}=await sb.from('kits').update(kit).eq('id',ekid));toast("✓ Kit updated.");}
   else{({error}=await sb.from('kits').insert([kit]));toast("✓ Kit added.");}
@@ -1094,6 +1594,216 @@ async function delRev(id){if(!confirm("Delete this review?"))return;await sb.fro
 async function delSug(id){await sb.from('suggestions').delete().eq('id',id);toast("Request dismissed.");await loadSuggestions();renderAdmin();}
 
 
+
+
+// CUSTOMER ORDERS
+let allOrders=[];
+let coIdx=0;
+async function loadOrders(){
+  const{data,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});
+  if(error){console.error(error);return;}
+  allOrders=data||[];
+  renderOrdersCarousel();
+  renderOrdersGrid();
+  renderOrdersAdmin();
+}
+function renderOrdersCarousel(){
+  const track=document.getElementById('coTrack');
+  const section=document.getElementById('homeOrdersSection');
+  if(!track)return;
+  if(!allOrders.length){if(section)section.style.display='none';return;}
+  if(section)section.style.display='block';
+  track.innerHTML=allOrders.map(o=>`<div class="co-slide"><img src="${o.image}" onerror="this.parentElement.style.display='none'"/><div class="co-slide-caption">${o.caption}</div></div>`).join('');
+  coIdx=0;
+  // Touch swipe
+  const car=track.parentElement;
+  let sx=0;
+  car.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  car.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40)coSlide(d>0?1:-1);},{passive:true});
+}
+function coSlide(dir){
+  const track=document.getElementById('coTrack');
+  if(!track)return;
+  const total=track.children.length;
+  coIdx=(coIdx+dir+total)%total;
+  const slideW=track.children[0]?.offsetWidth||280;
+  track.style.transform=`translateX(-${coIdx*(slideW+1)}px)`;
+}
+function renderOrdersGrid(){
+  const g=document.getElementById('ordersGrid'),e=document.getElementById('ordersEmpty');
+  if(!g)return;
+  if(!allOrders.length){g.innerHTML='';if(e)e.style.display='block';return;}
+  if(e)e.style.display='none';
+  g.innerHTML=allOrders.map(o=>`<div class="co-card"><img src="${o.image}" onerror="this.style.display='none'"/><div class="co-card-cap">${o.caption}</div></div>`).join('');
+}
+function renderOrdersAdmin(){
+  const count=allOrders.length;
+  const el=document.getElementById('ordc');
+  if(el)el.textContent=count;
+  const list=document.getElementById('ordl');
+  if(!list)return;
+  list.innerHTML=!count?'<div class="empty-state">No orders posted yet.</div>':allOrders.map(o=>`<div class="adi"><div class="adin"><div class="adin-n" style="display:flex;align-items:center;gap:0.75rem;"><img src="${o.image}" style="width:40px;height:40px;object-fit:cover;border-radius:3px;" onerror="this.style.display='none'"/><span>${o.caption.slice(0,60)}${o.caption.length>60?'...':''}</span></div></div><div class="adi-ac"><button class="btn-d" onclick="delOrd('${o.id}')">Remove</button></div></div>`).join('');
+}
+let eordid=null;
+function openOrdM(id){
+  eordid=id;
+  document.getElementById('ordmTitle').textContent=id?'Edit Order':'Add Customer Order';
+  const item=id?allOrders.find(x=>x.id==id):null;
+  document.getElementById('ord-img').value=item?.image||'';
+  document.getElementById('ord-cap').value=item?.caption||'';
+  document.getElementById('ordModal').classList.add('open');
+}
+function closeOrdM(){document.getElementById('ordModal').classList.remove('open');}
+async function saveOrd(){
+  const img=document.getElementById('ord-img').value.trim();
+  const cap=document.getElementById('ord-cap').value.trim();
+  if(!img||!cap){toast('⚠ Image and caption required.');return;}
+  const{error}=await sb.from('orders').insert([{image:img,caption:cap}]);
+  if(error){toast('Error saving.');console.error(error);return;}
+  toast('✓ Order added.');
+  closeOrdM();await loadOrders();
+}
+async function delOrd(id){if(!confirm('Remove this order?'))return;await sb.from('orders').delete().eq('id',id);toast('Removed.');await loadOrders();}
+
+// ANNOUNCEMENT BANNER
+async function loadAnnouncement(){
+  const{data}=await sb.from('settings').select('*').eq('key','announcement').single();
+  if(data&&data.value){
+    document.getElementById('announcetext').textContent=data.value+' · '+data.value+' · '+data.value;
+    document.getElementById('announcebar').style.display='block';
+  }
+}
+
+
+
+// NEW ARRIVALS
+function renderNewArrivals(){
+  const grid=document.getElementById('naGrid');
+  if(!grid||!allKits.length)return;
+  const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  const latest=sorted.slice(0,6);
+  grid.innerHTML=latest.map(j=>{
+    const img=j.images&&j.images[0]?`<img src="${j.images[0]}" onerror="this.style.display='none'"/>`:`<div class="na-img-ph">⚽</div>`;
+    const price=j.price_variants&&j.price_variants[0]?`R${j.price_variants[0].price}`:'';
+    const typeLabel=(j.types||[j.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
+    const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:
+
+*${j.name}*
+Type: ${typeLabel}
+Size: [please specify]
+
+Please advise on availability and payment.`);
+    return`<div class="na-card" onclick="showPage('catalogue')">
+      <div class="na-img"><span class="na-badge">New In</span>${img}</div>
+      <div class="na-info">
+        <div class="na-name">${j.name}</div>
+        <div class="na-team">${j.team||''} · ${typeLabel}</div>
+        <div class="na-price">${price}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// COUNTDOWN TIMER
+let countdownInterval=null;
+async function loadCountdown(){
+  const{data}=await sb.from('settings').select('*').eq('key','countdown_date').single().catch(()=>({data:null}));
+  if(data&&data.value){
+    startCountdown(new Date(data.value));
+  }
+}
+function startCountdown(targetDate){
+  const bar=document.getElementById('countdownBar');
+  if(!bar)return;
+  if(countdownInterval)clearInterval(countdownInterval);
+  function tick(){
+    const now=new Date();
+    const diff=targetDate-now;
+    if(diff<=0){
+      bar.classList.remove('show');
+      clearInterval(countdownInterval);
+      return;
+    }
+    bar.classList.add('show');
+    const days=Math.floor(diff/86400000);
+    const hrs=Math.floor((diff%86400000)/3600000);
+    const min=Math.floor((diff%3600000)/60000);
+    const sec=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent=String(days).padStart(2,'0');
+    document.getElementById('cd-hrs').textContent=String(hrs).padStart(2,'0');
+    document.getElementById('cd-min').textContent=String(min).padStart(2,'0');
+    document.getElementById('cd-sec').textContent=String(sec).padStart(2,'0');
+  }
+  tick();
+  countdownInterval=setInterval(tick,1000);
+}
+
+
+// THEME & SETTINGS
+function applyTheme(){
+  const isLight=document.getElementById('toggleLight')?.checked;
+  document.body.classList.toggle('light', isLight);
+  localStorage.setItem('jz_theme', isLight?'light':'dark');
+  updateThemeUI(isLight);
+}
+function applyCompact(){
+  const isCompact=document.getElementById('toggleCompact')?.checked;
+  document.body.classList.toggle('compact', isCompact);
+  localStorage.setItem('jz_compact', isCompact?'1':'0');
+}
+function loadSettings(){
+  const theme=localStorage.getItem('jz_theme')||'light';
+  const compact=localStorage.getItem('jz_compact')||'0';
+  const isLight=theme==='light';
+  const isCompact=compact==='1';
+  document.body.classList.toggle('light', isLight);
+  document.body.classList.toggle('compact', isCompact);
+  const tl=document.getElementById('toggleLight');
+  const tc=document.getElementById('toggleCompact');
+  if(tl)tl.checked=isLight;
+  if(tc)tc.checked=isCompact;
+  updateThemeUI(isLight);
+}
+
+
+// FADE IN ON SCROLL
+function initFadeIn(){
+  const els=document.querySelectorAll('.fade-in');
+  if(!els.length)return;
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>obs.observe(el));
+}
+
+// RELATED KITS
+function showRelated(kitId, team, typesStr){
+  document.querySelectorAll('.related-wrap').forEach(el=>el.remove());
+  const types=typesStr.split(',').filter(Boolean);
+  const related=allKits.filter(k=>{
+    if(k.id==kitId)return false;
+    const sameTeam=team&&k.team&&k.team.toLowerCase()===team.toLowerCase();
+    const kTypes=(k.types||[k.type]);
+    const sameType=types.some(t=>kTypes.includes(t));
+    return sameTeam||sameType;
+  }).slice(0,6);
+  if(!related.length)return;
+  const relHTML=related.map(k=>{
+    const img=k.images&&k.images[0]?`<img src="${k.images[0]}" onerror="this.style.display='none'"/>`:`<div class="related-img-ph">⚽</div>`;
+    const typeLabel=(k.types||[k.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
+    return`<div class="related-card" onclick="showRelated('${k.id}','${k.team||''}','${(k.types||[k.type]).join(',')}');window.scrollTo({top:0,behavior:'smooth'})"><div class="related-img">${img}</div><div class="related-info"><div class="related-name">${k.name}</div><div class="related-team">${k.team||''} · ${typeLabel}</div></div></div>`;
+  }).join('');
+  const wrap=document.createElement('div');
+  wrap.className='related-wrap';
+  wrap.innerHTML=`<div class="related-title">You May Also Like</div><div class="related-grid">${relHTML}</div>`;
+  const card=document.querySelector(`.kc[data-id="${kitId}"]`);
+  if(card)card.insertAdjacentElement('afterend',wrap);
+}
 
 // ON HAND ADMIN
 let eohid=null,ohSizeCount=0;
@@ -1187,9 +1897,73 @@ async function onDrop(e,targetId){
 
 document.getElementById("kitModal").addEventListener("click",e=>{if(e.target===document.getElementById("kitModal"))closeKM();});
 document.getElementById("ohModal").addEventListener("click",e=>{if(e.target===document.getElementById("ohModal"))closeOHM();});
+document.getElementById("ordModal").addEventListener("click",e=>{if(e.target===document.getElementById("ordModal"))closeOrdM();});
 document.getElementById("revModal").addEventListener("click",e=>{if(e.target===document.getElementById("revModal"))closeRM();});
+async function saveCountdown(){
+  const val=document.getElementById('cd-input').value;
+  if(!val){toast('⚠ Please select a date and time.');return;}
+  await sb.from('settings').upsert([{key:'countdown_date',value:val}],{onConflict:'key'});
+  startCountdown(new Date(val));
+  toast('✓ Countdown set.');
+}
+async function clearCountdown(){
+  await sb.from('settings').delete().eq('key','countdown_date');
+  if(countdownInterval)clearInterval(countdownInterval);
+  document.getElementById('countdownBar').classList.remove('show');
+  document.getElementById('cd-input').value='';
+  toast('Countdown cleared.');
+}
+async function saveAnnouncement(){
+  const val=document.getElementById('ann-text').value.trim();
+  if(!val){toast('⚠ Enter announcement text.');return;}
+  await sb.from('settings').upsert([{key:'announcement',value:val}],{onConflict:'key'});
+  document.getElementById('announcebar').style.display='block';
+  document.getElementById('announcetext').textContent=val+' · '+val+' · '+val;
+  toast('✓ Announcement updated.');
+}
+async function clearAnnouncement(){
+  await sb.from('settings').delete().eq('key','announcement');
+  document.getElementById('announcebar').style.display='none';
+  document.getElementById('ann-text').value='';
+  toast('Announcement cleared.');
+}
+
+// THEME TOGGLE
+function updateThemeUI(isLight){
+  // Update nav button
+  const btn=document.getElementById('themeToggle');
+  if(btn)btn.innerHTML=isLight?'🌙 Dark':'☀️ Light';
+  // Sync settings slider
+  const slider=document.getElementById('toggleLight');
+  if(slider)slider.checked=isLight;
+}
+function toggleTheme(){
+  const isLight=document.body.classList.toggle('light');
+  updateThemeUI(isLight);
+  try{localStorage.setItem('jz_theme',isLight?'light':'dark');}catch{}
+}
+function initTheme(){
+  try{
+    const saved=localStorage.getItem('jz_theme')||'light';
+    const isLight=saved==='light';
+    document.body.classList.toggle('light',isLight);
+    updateThemeUI(isLight);
+  }catch{}
+}
+
+initTheme();
+initFadeIn();
+window.addEventListener('scroll',()=>{
+  const btn=document.getElementById('backToTop');
+  if(btn)btn.classList.toggle('visible',window.scrollY>400);
+});
 renderStars();
 init();
 </script>
+
+<!-- FLOATING BUTTONS -->
+<a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27d%20like%20to%20enquire." target="_blank" class="float-wa" title="Chat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.538 5.878L.057 23.5a.5.5 0 0 0 .61.61l5.764-1.481A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.512-5.236-1.4l-.374-.217-3.878.997.999-3.79-.24-.389A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+<button class="float-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
 </body>
 </html>
