@@ -103,10 +103,7 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .gallery{position:relative;height:340px;overflow:hidden;}
 .gallery-imgs{display:flex;height:100%;transition:transform 0.3s ease;}
 .gallery-img{min-width:100%;height:100%;object-fit:contain;background:var(--bg3);}
-.gallery-prev,.gallery-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;padding:8px 12px;cursor:pointer;font-size:1rem;z-index:10;transition:background 0.2s;}
-.gallery-prev{left:0;border-radius:0 3px 3px 0;}
-.gallery-next{right:0;border-radius:3px 0 0 3px;}
-.gallery-prev:hover,.gallery-next:hover{background:rgba(220,30,35,0.8);}
+
 .gallery-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;}
 .gdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:background 0.2s;}
 .gdot.active{background:#fff;}
@@ -143,8 +140,11 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .faq-sec{margin-bottom:2.5rem;}
 .faq-sec-title{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
 .faq-item{border-bottom:1px solid var(--border);}
-.faq-q{padding:1.1rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.83rem;font-weight:500;color:var(--cream);transition:color 0.2s;user-select:none;gap:1rem;}
+.faq-q{padding:1.1rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.83rem;font-weight:500;color:var(--cream);transition:color 0.2s;user-select:none;gap:1rem;-webkit-tap-highlight-color:transparent;}
 .faq-q:hover{color:rgba(245,240,234,0.65);}
+body.light .faq-q{color:var(--cream);}
+body.light .faq-q:hover{color:rgba(0,0,0,0.6);}
+body.light .faq-q:focus{color:var(--cream);outline:none;}
 .faq-arr{color:var(--muted2);font-size:0.65rem;flex-shrink:0;transition:transform 0.3s;}
 .faq-arr.o{transform:rotate(180deg);}
 .faq-ans{font-size:0.83rem;font-weight:300;color:var(--muted);line-height:1.8;padding-bottom:1.1rem;display:none;}
@@ -208,7 +208,7 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .ap{padding:0 2rem 4rem;max-width:1060px;margin:0 auto;}
 .ap-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-top:0.5rem;flex-wrap:wrap;gap:1rem;}
 .ap-top h2{font-family:'Cinzel',serif;font-size:1.15rem;letter-spacing:0.06em;}
-.atabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.atabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem;flex-wrap:wrap;}
 .abt{font-family:'Raleway',sans-serif;font-weight:600;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;border-bottom:2px solid transparent;margin-bottom:-1px;}
 .abt.active,.abt:hover{color:var(--cream);border-bottom-color:var(--red);}
 .atab{display:none;}
@@ -283,7 +283,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 
 
 /* ANNOUNCEMENT BANNER */
-.announce-bar{background:var(--red);color:#fff;text-align:center;padding:8px 1rem;font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;position:relative;z-index:99;overflow:hidden;}
+.announce-bar{background:var(--red);color:#fff;text-align:center;padding:8px 1rem;font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;position:relative;z-index:99;overflow:hidden;width:100%;}
 .announce-inner{display:inline-block;white-space:nowrap;animation:ticker 20s linear infinite;}
 @keyframes ticker{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}}
 
@@ -365,7 +365,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .na-wrap{padding:3rem 2rem;border-top:1px solid var(--border);}
 .na-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
 .na-title{font-family:"Cinzel",serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:700;letter-spacing:0.08em;}
-.na-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);}
+.na-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--border);}
 .na-card{background:var(--bg2);cursor:pointer;transition:background 0.2s;overflow:hidden;}
 .na-card:hover{background:var(--bg3);}
 .na-img{height:240px;overflow:hidden;background:var(--bg3);position:relative;}
@@ -400,7 +400,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .terms-text ul li{margin-bottom:0.4rem;}
 
 /* COUNTDOWN TIMER */
-.countdown-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 2rem;display:none;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.countdown-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 2rem;display:none;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:99;width:100%;}
 .countdown-bar.show{display:flex;}
 .countdown-label{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
 .countdown-timer{display:flex;gap:0.75rem;align-items:center;}
@@ -498,6 +498,45 @@ body.compact .kao{display:none;}
 /* FADE IN ON SCROLL */
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
+.fade-in.fade-out{opacity:0;transform:translateY(-24px);}
+
+
+/* KIT DETAIL MODAL */
+.kit-detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px);}
+.kit-detail-overlay.open{display:flex;}
+.kit-detail{background:var(--bg2);border-radius:16px 16px 0 0;width:100%;max-width:680px;max-height:92vh;overflow-y:auto;padding-bottom:2rem;animation:slideUp 0.35s ease;}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.kit-detail-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;}
+.kit-detail-gallery{position:relative;height:320px;overflow:hidden;background:var(--bg3);}
+.kit-detail-gallery img{width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.kit-detail-gallery-track{display:flex;height:100%;transition:transform 0.3s ease;}
+.kit-detail-gallery-img{min-width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.kit-detail-gallery-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;}
+.kit-detail-body{padding:1.5rem;}
+.kit-detail-badges{display:flex;gap:6px;margin-bottom:0.75rem;flex-wrap:wrap;}
+.kit-detail-name{font-family:"Cinzel",serif;font-size:1.2rem;font-weight:700;letter-spacing:0.04em;color:var(--cream);margin-bottom:0.25rem;}
+.kit-detail-team{font-size:0.85rem;color:var(--muted);font-weight:300;margin-bottom:1.25rem;}
+.kit-detail-prices{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem;}
+.kit-detail-price{font-family:"Cinzel",serif;font-size:1rem;font-weight:700;color:var(--red);background:rgba(220,30,35,0.08);border:1px solid rgba(220,30,35,0.2);padding:6px 14px;border-radius:3px;}
+.kit-detail-price-label{font-size:0.65rem;color:var(--muted);font-weight:300;display:block;margin-top:2px;}
+.kit-detail-section-title{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;margin-top:1.25rem;}
+.kit-detail-sizes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.5rem;}
+.kit-detail-size{font-size:0.72rem;font-weight:600;letter-spacing:0.06em;padding:6px 12px;border:1px solid var(--border);border-radius:3px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.kit-detail-size:hover,.kit-detail-size.selected{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.08);}
+.kit-detail-addons{display:flex;flex-wrap:wrap;gap:6px;}
+.kit-detail-addon{font-size:0.72rem;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:4px 10px;border-radius:3px;}
+.kit-detail-order-btn{display:block;text-align:center;font-family:"Raleway",sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:14px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;border-radius:6px;cursor:pointer;text-decoration:none;margin-top:1.5rem;transition:opacity 0.2s;width:100%;}
+.kit-detail-order-btn:hover{opacity:0.9;}
+.kit-detail-similar-title{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.kit-detail-similar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1px;background:var(--border);}
+.kit-detail-similar-card{background:var(--bg3);cursor:pointer;transition:background 0.2s;}
+.kit-detail-similar-card:hover{background:var(--bg);}
+.kit-detail-similar-img{height:130px;overflow:hidden;}
+.kit-detail-similar-img img{width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.kit-detail-similar-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;opacity:0.1;}
+.kit-detail-similar-info{padding:0.6rem 0.75rem;}
+.kit-detail-similar-name{font-family:"Cinzel",serif;font-size:0.65rem;font-weight:600;color:var(--cream);margin-bottom:0.15rem;}
+.kit-detail-similar-team{font-size:0.62rem;color:var(--muted);font-weight:300;}
 
 /* KIT TYPE DROPDOWN GROUPS */
 .type-group-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 13px 3px;display:block;}
@@ -505,6 +544,7 @@ body.compact .kao{display:none;}
 </head>
 <body>
 
+<div id="stickyBars" style="position:sticky;top:64px;z-index:98;width:100%;">
 <div class="announce-bar" id="announcebar" style="display:none;">
   <span class="announce-inner" id="announcetext"></span>
 </div>
@@ -520,6 +560,7 @@ body.compact .kao{display:none;}
     <div class="countdown-unit"><div class="countdown-num" id="cd-sec">00</div><div class="countdown-unit-label">Sec</div></div>
   </div>
   <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27d%20like%20to%20place%20an%20order%20before%20the%20deadline." target="_blank" class="countdown-cta">Order Now</a>
+</div>
 </div>
 <nav>
   <div class="nav-left" onclick="showPage('home')">
@@ -570,15 +611,6 @@ body.compact .kao{display:none;}
       </div>
     </div>
   </div>
-  <div class="feats fade-in">
-    <div class="feat"><div class="feat-icon">⚽</div><div class="feat-title">Imported Kits</div><p class="feat-text">Fan, Player, Retro &amp; Special edition kits sourced directly from international suppliers.</p></div>
-    <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">Replica Kits</div><p class="feat-text">Quality replica football kits for both men and kids, available at affordable local prices.</p></div>
-    <div class="feat"><div class="feat-icon">✂️</div><div class="feat-title">Customisation</div><p class="feat-text">Personalise your imported kit with your name, number, badges and sleeve sponsors.</p></div>
-    <div class="feat"><div class="feat-icon">🔍</div><div class="feat-title">Sourcing</div><p class="feat-text">Don't see your kit? We'll do our best to source it for you at standard imported pricing.</p></div>
-    <div class="feat"><div class="feat-icon">📦</div><div class="feat-title">Delivery</div><p class="feat-text">Imported kits arrive in approximately 21 days, excluding delays. Discounts available for bulk orders.</p></div>
-    <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">On Hand</div><p class="feat-text">Discounted kits available immediately — limited stock at reduced prices, ready for collection or fast delivery.</p></div>
-    <div class="feat"><div class="feat-icon">💬</div><div class="feat-title">WhatsApp Orders</div><p class="feat-text">No complicated checkout — simply message us on WhatsApp and we'll handle the rest.</p></div>
-  </div>
   <!-- NEW ARRIVALS -->
   <div class="na-wrap fade-in" id="newArrivalsSection">
     <div class="na-header">
@@ -588,6 +620,15 @@ body.compact .kao{display:none;}
     <div class="na-grid" id="naGrid"></div>
   </div>
 
+  <div class="feats fade-in">
+    <div class="feat"><div class="feat-icon">⚽</div><div class="feat-title">Imported Kits</div><p class="feat-text">Fan, Player, Retro &amp; Special edition kits sourced directly from international suppliers.</p></div>
+    <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">Replica Kits</div><p class="feat-text">Quality replica football kits for both men and kids, available at affordable local prices.</p></div>
+    <div class="feat"><div class="feat-icon">✂️</div><div class="feat-title">Customisation</div><p class="feat-text">Personalise your imported kit with your name, number, badges and sleeve sponsors.</p></div>
+    <div class="feat"><div class="feat-icon">🔍</div><div class="feat-title">Sourcing</div><p class="feat-text">Don't see your kit? We'll do our best to source it for you at standard imported pricing.</p></div>
+    <div class="feat"><div class="feat-icon">📦</div><div class="feat-title">Delivery</div><p class="feat-text">Imported kits arrive in approximately 21 days, excluding delays. Discounts available for bulk orders.</p></div>
+    <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">On Hand</div><p class="feat-text">Discounted kits available immediately — limited stock at reduced prices, ready for collection or fast delivery.</p></div>
+    <div class="feat"><div class="feat-icon">💬</div><div class="feat-title">WhatsApp Orders</div><p class="feat-text">No complicated checkout — simply message us on WhatsApp and we'll handle the rest.</p></div>
+  </div>
   <!-- HOW TO ORDER -->
   <div class="hto-wrap fade-in">
     <h2 class="hto-title">How to Order</h2>
@@ -623,7 +664,7 @@ body.compact .kao{display:none;}
   <!-- ABOUT US HOME SECTION -->
   <div style="border-top:1px solid var(--border);" class="fade-in">
     <div class="about-wrap">
-      <div class="about-grid">
+      <div class="about-grid fade-in">
         <div>
           <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
         </div>
@@ -633,7 +674,7 @@ body.compact .kao{display:none;}
           <p class="about-text">JerseyZone_ZA started as a small side hustle in 2024, initially selling quality local replica kits to football fans across South Africa. Towards the end of 2024, we expanded into internationally sourced imported kits — Fan, Player, Retro and Special editions — with one clear goal in mind: to be the most affordable football kit retailer in South Africa without compromising on quality.</p>
           <p class="about-text">Based in Johannesburg, we serve customers nationwide via courier, and every order is backed by a personal quality check before it leaves our hands.</p>
           <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('about')">Read More</button>
-          <div class="about-stats">
+          <div class="about-stats fade-in">
             <div><div class="about-stat-num">2024</div><div class="about-stat-label">Est.</div></div>
             <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based</div></div>
             <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
@@ -675,8 +716,8 @@ body.compact .kao{display:none;}
 
 <!-- CATALOGUE -->
 <div class="page" id="page-catalogue">
-  <div class="ph"><h2>Catalogue</h2><p>Browse our available kits — tap any item to order via WhatsApp</p></div>
-  <div class="fs-bar">
+  <div class="ph fade-in"><h2>Catalogue</h2><p>Browse our available kits — tap any item to order via WhatsApp</p></div>
+  <div class="fs-bar fade-in">
     <div class="fbar">
       <button class="fb active" onclick="setFilter('all',this)">All</button>
       <button class="fb" onclick="setFilter('fan',this)">Fan Version</button>
@@ -692,8 +733,8 @@ body.compact .kao{display:none;}
     </div>
     <div class="sw"><span class="sico">🔍</span><input class="si" id="si" placeholder="Search kits..." oninput="renderCat()"/></div>
   </div>
-  <div id="kitGrid" class="kit-grid"></div>
-  <div id="emptyState" class="empty-state" style="display:none;">No kits found. Try a different search or filter.</div>
+  <div id="kitGrid" class="kit-grid fade-in"></div>
+  <div id="emptyState" class="fade-in" class="empty-state" style="display:none;">No kits found. Try a different search or filter.</div>
   <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
     <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Looking for a specific kit?</p>
     <button class="btn-p" onclick="showPage('suggest')">Suggest a Kit</button>
@@ -703,10 +744,10 @@ body.compact .kao{display:none;}
 
 <!-- REVIEWS -->
 <div class="page" id="page-reviews">
-  <div class="ph"><h2>Reviews</h2><p>What our customers are saying</p></div>
+  <div class="ph fade-in"><h2>Reviews</h2><p>What our customers are saying</p></div>
   <div id="reviewsGrid" class="rg fade-in"></div>
   <div id="reviewsEmpty" class="empty-state" style="display:none;">No reviews yet. Check back soon.</div>
-  <div class="ig-sec">
+  <div class="ig-sec fade-in">
     <p>Follow us on Instagram for more reviews and latest stock</p>
     <a href="https://instagram.com/jerseyzone2_za" target="_blank" class="btn-o">@jerseyzone2_za</a>
   </div>
@@ -715,8 +756,8 @@ body.compact .kao{display:none;}
 
 <!-- PRICING -->
 <div class="page" id="page-pricing">
-  <div class="ph"><h2>Pricing</h2><p>Transparent pricing across all our kit categories</p></div>
-  <div class="pricing-wrap">
+  <div class="ph fade-in"><h2>Pricing</h2><p>Transparent pricing across all our kit categories</p></div>
+  <div class="pricing-wrap fade-in">
     <div style="margin-bottom:2rem;">
       <div class="pricing-section-title">Imported Kits</div>
       <div class="pricing-grid fade-in">
@@ -783,8 +824,8 @@ body.compact .kao{display:none;}
 
 <!-- FAQ -->
 <div class="page" id="page-faq">
-  <div class="ph"><h2>FAQ</h2><p>Everything you need to know before ordering</p></div>
-  <div class="faq-wrap">
+  <div class="ph fade-in"><h2>FAQ</h2><p>Everything you need to know before ordering</p></div>
+  <div class="faq-wrap fade-in">
     <div class="faq-sec fade-in">
       <div class="faq-sec-title">Ordering</div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>How do I place an order?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Click "Order via WhatsApp" on any kit, or contact us directly via Instagram at <a href="https://instagram.com/jerseyzone2_za" target="_blank" style="color:var(--red);">@jerseyzone2_za</a> or on WhatsApp at 071 039 6374. Simply provide the kit name, your size, and the type (Imported or Replica). Once payment is confirmed, your order is secured.</div></div>
@@ -806,8 +847,8 @@ body.compact .kao{display:none;}
 
 <!-- SUGGEST -->
 <div class="page" id="page-suggest">
-  <div class="ph"><h2>Suggest a Kit</h2><p>Can't find what you're looking for? Let us know and we'll try to source it.</p></div>
-  <div class="sug-wrap">
+  <div class="ph fade-in"><h2>Suggest a Kit</h2><p>Can't find what you're looking for? Let us know and we'll try to source it.</p></div>
+  <div class="sug-wrap fade-in">
     <div class="sug-done" id="sugDone">
       <div style="font-size:2.5rem;margin-bottom:1rem;">✓</div>
       <h3>Suggestion Received</h3>
@@ -828,13 +869,13 @@ body.compact .kao{display:none;}
 
 <!-- SIZE GUIDE -->
 <div class="page" id="page-sizeguide">
-  <div class="ph"><h2>Size Guide</h2><p>Find your perfect fit before ordering</p></div>
-  <div class="sg-wrap">
+  <div class="ph fade-in"><h2>Size Guide</h2><p>Find your perfect fit before ordering</p></div>
+  <div class="sg-wrap fade-in">
     <div class="sg-note">
       <strong>Important:</strong> Player version kits are designed with a slim, athletic fit and a waist-cinching design. If you prefer a looser or more relaxed fit, we recommend sizing up by one size. Fan version kits have a more relaxed fit and follow standard sizing.
     </div>
-    <div class="sg-section-title">Player Version — Size Chart</div>
-    <div class="sg-table-wrap">
+    <div class="sg-section-title fade-in">Player Version — Size Chart</div>
+    <div class="sg-table-wrap fade-in">
       <table class="sg-table">
         <thead>
           <tr>
@@ -855,8 +896,8 @@ body.compact .kao{display:none;}
       </table>
       <p class="sg-disclaimer">* All measurements are in centimetres. There may be a 2–3cm variance due to manual measurement or differing measurement methods.</p>
     </div>
-    <div class="sg-section-title">Fan Version — Size Guide</div>
-    <div class="sg-table-wrap">
+    <div class="sg-section-title fade-in">Fan Version — Size Guide</div>
+    <div class="sg-table-wrap fade-in">
       <table class="sg-table">
         <thead>
           <tr><th>Size</th><th>Chest (cm)</th><th>Length (cm)</th><th>Height (cm)</th><th>Weight (kg)</th></tr>
@@ -870,7 +911,7 @@ body.compact .kao{display:none;}
         </tbody>
       </table>
     </div>
-    <div class="sg-tip">
+    <div class="sg-tip fade-in">
       <strong>Not sure which size to order?</strong> Feel free to message us on WhatsApp with your height, weight and preferred fit — we'll recommend the best size for you.
     </div>
     <div style="text-align:center;margin-top:2rem;">
@@ -884,9 +925,9 @@ body.compact .kao{display:none;}
 
 <!-- ABOUT PAGE -->
 <div class="page" id="page-about">
-  <div class="ph"><h2>About Us</h2><p>The story behind JerseyZone_ZA</p></div>
-  <div class="about-wrap" style="padding-top:1rem;">
-    <div class="about-grid">
+  <div class="ph fade-in"><h2>About Us</h2><p>The story behind JerseyZone_ZA</p></div>
+  <div class="about-wrap fade-in" style="padding-top:1rem;">
+    <div class="about-grid fade-in">
       <div>
         <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
       </div>
@@ -896,7 +937,7 @@ body.compact .kao{display:none;}
         <p class="about-text">JerseyZone_ZA was founded in 2024 as a small side hustle with a simple idea — make quality football kits accessible and affordable to South African fans. We started by offering local replica kits, building a reputation for good products and reliable service.</p>
         <p class="about-text">Towards the end of 2024, we took the next step and began sourcing internationally imported kits — Fan, Player, Retro and Special editions from clubs around the world. Our goal from day one has been to become the most affordable football kit retailer in South Africa, without ever sacrificing quality.</p>
         <p class="about-text">Every order placed with us is personally quality-checked before it ships. We're based in Johannesburg and deliver nationwide via courier, with WhatsApp as our primary channel — keeping things personal, fast and hassle-free.</p>
-        <div class="about-stats">
+        <div class="about-stats fade-in">
           <div><div class="about-stat-num">2024</div><div class="about-stat-label">Founded</div></div>
           <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based In</div></div>
           <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
@@ -909,9 +950,9 @@ body.compact .kao{display:none;}
 
 <!-- TERMS PAGE -->
 <div class="page" id="page-terms">
-  <div class="ph"><h2>Terms &amp; Conditions</h2><p>Please read carefully before placing an order</p></div>
-  <div class="terms-wrap">
-    <div class="terms-sec">
+  <div class="ph fade-in"><h2>Terms &amp; Conditions</h2><p>Please read carefully before placing an order</p></div>
+  <div class="terms-wrap fade-in">
+    <div class="terms-sec fade-in">
       <div class="terms-sec-title">Orders &amp; Payment</div>
       <div class="terms-text">
         <p>All orders are placed via WhatsApp. An order is only considered confirmed and secured once full payment has been received. JerseyZone_ZA reserves the right to cancel any unconfirmed order.</p>
@@ -919,7 +960,7 @@ body.compact .kao{display:none;}
         <p>We aim to respond to all enquiries within 24 hours. Orders placed over weekends or public holidays will be processed on the next business day.</p>
       </div>
     </div>
-    <div class="terms-sec">
+    <div class="terms-sec fade-in">
       <div class="terms-sec-title">Delivery</div>
       <div class="terms-text">
         <p>We deliver nationwide across South Africa via courier. A courier fee will be added to your order total and communicated before payment is requested.</p>
@@ -927,13 +968,13 @@ body.compact .kao{display:none;}
         <p>Local replica kits are dispatched sooner and delivery times will be communicated at the time of order.</p>
       </div>
     </div>
-    <div class="terms-sec">
+    <div class="terms-sec fade-in">
       <div class="terms-sec-title">Quality Check</div>
       <div class="terms-text">
         <p>Every imported kit undergoes a personal quality check before it is shipped to the customer. Quality check photos are sent to the customer via WhatsApp prior to dispatch. By approving the quality check, the customer acknowledges that the item is in acceptable condition.</p>
       </div>
     </div>
-    <div class="terms-sec">
+    <div class="terms-sec fade-in">
       <div class="terms-sec-title">Returns &amp; Refunds</div>
       <div class="terms-text">
         <p><strong style="color:var(--cream);">Local Replica Kits:</strong> Returns are accepted on local replica kits only, provided the item is reported within 24 hours of receipt and is in its original condition with no signs of wear or washing.</p>
@@ -941,7 +982,7 @@ body.compact .kao{display:none;}
         <p>JerseyZone_ZA reserves the right to assess each return request individually. To initiate a return, contact us via WhatsApp within the applicable timeframe.</p>
       </div>
     </div>
-    <div class="terms-sec">
+    <div class="terms-sec fade-in">
       <div class="terms-sec-title">Sourcing &amp; Pricing</div>
       <div class="terms-text">
         <p>All prices displayed on this website are subject to change without prior notice. The price applicable to your order will be confirmed at the time of purchase via WhatsApp.</p>
@@ -949,7 +990,7 @@ body.compact .kao{display:none;}
         <p>Bulk order discounts are available on a case-by-case basis. Please enquire via WhatsApp for more information.</p>
       </div>
     </div>
-    <div class="terms-sec">
+    <div class="terms-sec fade-in">
       <div class="terms-sec-title">General</div>
       <div class="terms-text">
         <p>JerseyZone_ZA operates as a small independent business based in Johannesburg, South Africa. We are committed to providing quality products and honest service to every customer.</p>
@@ -962,15 +1003,15 @@ body.compact .kao{display:none;}
 
 <!-- ORDERS PAGE -->
 <div class="page" id="page-orders">
-  <div class="ph"><h2>Customer Orders</h2><p>Real orders from our customers — submitted by us on their behalf</p></div>
-  <div id="ordersGrid" class="co-grid"></div>
+  <div class="ph fade-in"><h2>Customer Orders</h2><p>Real orders from our customers — submitted by us on their behalf</p></div>
+  <div id="ordersGrid" class="co-grid fade-in"></div>
   <div id="ordersEmpty" class="empty-state" style="display:none;">No orders posted yet. Check back soon.</div>
 </div>
 
 <!-- ON HAND -->
 <div class="page" id="page-onhand">
-  <div class="ph"><h2>On Hand</h2><p>Discounted kits available for immediate collection or delivery — limited stock, grab them while they last</p></div>
-  <div id="ohGrid" class="oh-grid"></div>
+  <div class="ph fade-in"><h2>On Hand</h2><p>Discounted kits available for immediate collection or delivery — limited stock, grab them while they last</p></div>
+  <div id="ohGrid" class="oh-grid fade-in"></div>
   <div id="ohEmpty" class="empty-state" style="display:none;">No items currently on hand. Check back soon.</div>
   <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
     <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Interested in any of these items?</p>
@@ -981,9 +1022,9 @@ body.compact .kao{display:none;}
 
 <!-- SETTINGS PAGE -->
 <div class="page" id="page-settings">
-  <div class="ph"><h2>Settings</h2><p>Customise your experience</p></div>
-  <div class="settings-wrap">
-    <div class="settings-group">
+  <div class="ph fade-in"><h2>Settings</h2><p>Customise your experience</p></div>
+  <div class="settings-wrap fade-in">
+    <div class="settings-group fade-in">
       <div class="settings-group-title">Appearance</div>
       <div class="settings-row">
         <div>
@@ -1091,7 +1132,11 @@ body.compact .kao{display:none;}
       <div class="fg"><label class="fl">Kit Name *</label><input class="fi" id="oh-n" placeholder="e.g. Brazil Away 24/25"/></div>
       <div class="fg"><label class="fl">Team</label><input class="fi" id="oh-t" placeholder="e.g. Brazil"/></div>
     </div>
-    <div class="fg"><label class="fl">Image URL (Imgur)</label><input class="fi" id="oh-img" placeholder="https://i.imgur.com/..."/></div>
+    <div class="fg">
+      <label class="fl">Images (Imgur links)</label>
+      <div id="ohImgContainer"></div>
+      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addOHImgField()">+ Add Image</button>
+    </div>
     <div class="fr2">
       <div class="fg"><label class="fl">Original Price (R) *</label><input class="fi" id="oh-op" type="number" placeholder="490"/></div>
       <div class="fg"><label class="fl">Discounted Price (R)</label><input class="fi" id="oh-dp" type="number" placeholder="Leave blank if no discount"/></div>
@@ -1213,7 +1258,15 @@ function renderOnHand(){
   e.style.display='none';
   g.innerHTML=allOnHand.map(item=>{
     const hasDiscount=item.discounted_price&&item.discounted_price<item.original_price;
-    const img=item.image?`<img class="oh-img" src="${item.image}" onerror="this.style.display='none'">`:`<div class="oh-img-placeholder">⚽</div>`;
+    const ohImgs=item.images&&item.images.length?item.images:(item.image?[item.image]:[]);
+    let img='';
+    if(ohImgs.length===0){img=`<div class="oh-img-placeholder">⚽</div>`;}
+    else if(ohImgs.length===1){img=`<img class="oh-img" src="${ohImgs[0]}" onerror="this.style.display='none'">`;}
+    else{
+      const ohDots=ohImgs.map((_,i)=>`<span class="gdot ${i===0?'active':''}" onclick="goSlide('oh${item.id}',${i})"></span>`).join('');
+      const ohImgsHTML=ohImgs.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join('');
+      img=`<div class="gallery" id="oh${item.id}" style="height:220px;"><div class="gallery-imgs" id="gioh${item.id}">${ohImgsHTML}</div><div class="gallery-dots">${ohDots}</div></div>`;
+    }
     const priceHTML=hasDiscount
       ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
       :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
@@ -1270,7 +1323,7 @@ function showPage(p){
   if(p==="reviews")loadReviews();
   if(p==="admin")renderAdmin();
   if(p==="onhand")loadOnHand();
-  if(p==="orders"){loadOrders();}
+  if(p==="orders"){loadOrders().then(()=>setTimeout(initFadeIn,100));}
 }
 function toggleMenu(){document.getElementById("navLinks").classList.toggle("open");}
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000);}
@@ -1379,8 +1432,6 @@ function renderCat(){
       const imgs=images.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join("");
       imgHTML=`<div class="gallery" id="g${j.id}">
         <div class="gallery-imgs" id="gi${j.id}">${imgs}</div>
-        <button class="gallery-prev" onclick="slideGallery('g${j.id}',-1)">‹</button>
-        <button class="gallery-next" onclick="slideGallery('g${j.id}',1)">›</button>
         <div class="gallery-dots">${dots}</div>
         <span class="ktb ${badgeClass}">${badgeLabel}</span>
         ${!j.in_stock?'<span class="koos">Out of Stock</span>':''}
@@ -1392,7 +1443,7 @@ function renderCat(){
     const ao=(j.addons||[]).length?`<div class="kao">Add-ons available: ${j.addons.join(", ")}</div>`:"";
     const sz=(j.sizes||[]).map(s=>`<span class="ksc">${s}</span>`).join("");
     const btn=j.in_stock?`<a href="https://wa.me/${WA}?text=${msg}" target="_blank" class="bwa">📲 Order via WhatsApp</a>`:`<span class="bwa bwa-dis">Currently Out of Stock</span>`;
-    return`<div class="kc" data-id="${j.id}"><div class="kc-inner">${imgHTML}<div class="ki"><div class="kn">${j.name}</div><div class="km">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel}</div><div class="kpv">${pvs}</div>${ao}<div class="ksz">${sz}</div>${btn}<button onclick="showRelated('${j.id}','${j.team||''}','${(j.types||[j.type]).join(',')}')" style="background:none;border:none;color:var(--muted);font-size:0.7rem;cursor:pointer;padding:4px 0;text-align:left;font-family:Raleway,sans-serif;letter-spacing:0.06em;">Similar kits ›</button></div></div></div>`;
+    return`<div class="kc" data-id="${j.id}" style="cursor:pointer;" onclick="openKitDetail('${j.id}')">${imgHTML}<div class="ki"><div class="kn">${j.name}</div><div class="km">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel}</div><div class="kpv">${pvs}</div>${ao}<div class="ksz">${sz}</div></div></div>`;
   }).join("");
   // Init swipe on all galleries
   f.forEach(j=>{
@@ -1666,11 +1717,35 @@ async function saveOrd(){
 async function delOrd(id){if(!confirm('Remove this order?'))return;await sb.from('orders').delete().eq('id',id);toast('Removed.');await loadOrders();}
 
 // ANNOUNCEMENT BANNER
+function adjustPagePadding(){
+  const nav=64;
+  const ann=document.getElementById('announcebar');
+  const cd=document.getElementById('countdownBar');
+  const annH=(ann&&ann.style.display!=='none')?ann.offsetHeight:0;
+  const cdH=(cd&&cd.classList.contains('show'))?cd.offsetHeight:0;
+  const extra=annH+cdH;
+  document.querySelectorAll('.page').forEach(p=>{
+    p.style.paddingTop=(nav+extra)+'px';
+  });
+}
 async function loadAnnouncement(){
-  const{data}=await sb.from('settings').select('*').eq('key','announcement').single();
+  // Try localStorage first for instant display
+  const cached=localStorage.getItem('jz_announcement');
+  if(cached){
+    document.getElementById('announcetext').textContent=cached+' · '+cached+' · '+cached;
+    document.getElementById('announcebar').style.display='block';
+  }
+  // Then fetch from Supabase
+  const{data}=await sb.from('settings').select('*').eq('key','announcement').single().catch(()=>({data:null}));
   if(data&&data.value){
+    localStorage.setItem('jz_announcement',data.value);
     document.getElementById('announcetext').textContent=data.value+' · '+data.value+' · '+data.value;
     document.getElementById('announcebar').style.display='block';
+    setTimeout(adjustPagePadding,50);
+  } else if(!cached){
+    document.getElementById('announcebar').style.display='none';
+    localStorage.removeItem('jz_announcement');
+    setTimeout(adjustPagePadding,50);
   }
 }
 
@@ -1693,7 +1768,7 @@ Type: ${typeLabel}
 Size: [please specify]
 
 Please advise on availability and payment.`);
-    return`<div class="na-card" onclick="showPage('catalogue')">
+    return`<div class="na-card" onclick="openKitDetail('${j.id}')" style="cursor:pointer;">
       <div class="na-img"><span class="na-badge">New In</span>${img}</div>
       <div class="na-info">
         <div class="na-name">${j.name}</div>
@@ -1707,9 +1782,15 @@ Please advise on availability and payment.`);
 // COUNTDOWN TIMER
 let countdownInterval=null;
 async function loadCountdown(){
+  const cached=localStorage.getItem('jz_countdown');
+  if(cached){startCountdown(new Date(cached));}
   const{data}=await sb.from('settings').select('*').eq('key','countdown_date').single().catch(()=>({data:null}));
   if(data&&data.value){
+    localStorage.setItem('jz_countdown',data.value);
     startCountdown(new Date(data.value));
+  } else {
+    localStorage.removeItem('jz_countdown');
+    document.getElementById('countdownBar').classList.remove('show');
   }
 }
 function startCountdown(targetDate){
@@ -1725,6 +1806,7 @@ function startCountdown(targetDate){
       return;
     }
     bar.classList.add('show');
+  setTimeout(adjustPagePadding,50);
     const days=Math.floor(diff/86400000);
     const hrs=Math.floor((diff%86400000)/3600000);
     const min=Math.floor((diff%3600000)/60000);
@@ -1773,12 +1855,28 @@ function initFadeIn(){
   const obs=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){
+        // Fade in when entering viewport
+        e.target.classList.remove('fade-out');
         e.target.classList.add('visible');
-        obs.unobserve(e.target);
+      } else {
+        // Fade out when leaving viewport
+        const rect=e.target.getBoundingClientRect();
+        if(rect.top<0){
+          // Element scrolled above viewport - fade out upward
+          e.target.classList.add('fade-out');
+        } else {
+          // Element below viewport - reset to fade-in state
+          e.target.classList.remove('visible');
+          e.target.classList.remove('fade-out');
+        }
       }
     });
-  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-  els.forEach(el=>obs.observe(el));
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(el=>{
+    // Reset all first
+    el.classList.remove('visible','fade-out');
+    obs.observe(el);
+  });
 }
 
 // RELATED KITS
@@ -1805,6 +1903,111 @@ function showRelated(kitId, team, typesStr){
   if(card)card.insertAdjacentElement('afterend',wrap);
 }
 
+
+// KIT DETAIL MODAL
+let kdGalIdx=0;
+let selectedSize='';
+
+function openKitDetail(kitId){
+  const kit=allKits.find(k=>k.id==kitId);
+  if(!kit)return;
+  selectedSize='';
+  const overlay=document.getElementById('kitDetailOverlay');
+  const WA_NUM='27710396374';
+
+  // Gallery
+  const gallery=document.getElementById('kdGallery');
+  const images=kit.images||[];
+  kdGalIdx=0;
+  if(images.length===0){
+    gallery.innerHTML=`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.1;">⚽</div>`;
+  } else if(images.length===1){
+    gallery.innerHTML=`<img src="${images[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/>`;
+  } else {
+    const imgs=images.map(src=>`<img class="kit-detail-gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join('');
+    const dots=images.map((_,i)=>`<span class="gdot ${i===0?'active':''}" onclick="kdGoSlide(${i})"></span>`).join('');
+    gallery.innerHTML=`<div class="kit-detail-gallery-track" id="kdTrack">${imgs}</div><div class="kit-detail-gallery-dots">${dots}</div>`;
+    // Touch swipe
+    let sx=0;
+    gallery.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true,once:false});
+    gallery.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40){kdGalIdx=(kdGalIdx+(d>0?1:-1)+images.length)%images.length;kdGoSlide(kdGalIdx);}},{passive:true,once:false});
+  }
+
+  // Badges
+  const cat=getKitCategory(kit.type,kit.types);
+  const badgeLabel=cat==='local'?'Local':cat==='both'?'Imported & Local':'Imported';
+  const badgeClass=cat==='local'?'badge-local':cat==='both'?'badge-both':'badge-imported';
+  document.getElementById('kdBadges').innerHTML=`<span class="ktb ${badgeClass}" style="position:static;font-size:0.65rem;">${badgeLabel}</span>`;
+
+  // Name & team
+  document.getElementById('kdName').textContent=kit.name;
+  document.getElementById('kdTeam').textContent=`${kit.team||''}${kit.league?' · '+kit.league:''}`;
+
+  // Prices
+  const pvs=kit.price_variants||[];
+  document.getElementById('kdPrices').innerHTML=pvs.map(v=>`<div class="kit-detail-price">R${v.price}<span class="kit-detail-price-label">${v.label}</span></div>`).join('');
+
+  // Sizes
+  const sizes=kit.sizes||[];
+  const sizesWrap=document.getElementById('kdSizesWrap');
+  if(sizes.length){
+    sizesWrap.style.display='block';
+    document.getElementById('kdSizes').innerHTML=sizes.map(s=>`<div class="kit-detail-size" onclick="selectSize(this,'${s}')">${s}</div>`).join('');
+  } else { sizesWrap.style.display='none'; }
+
+  // Addons
+  const addons=kit.addons||[];
+  const addonsWrap=document.getElementById('kdAddonsWrap');
+  if(addons.length){
+    addonsWrap.style.display='block';
+    document.getElementById('kdAddons').innerHTML=addons.map(a=>`<span class="kit-detail-addon">${a}</span>`).join('');
+  } else { addonsWrap.style.display='none'; }
+
+  // Order button
+  const typeLabel=(kit.types||[kit.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
+  const updateOrderBtn=()=>{
+    const sizeStr=selectedSize?'\nSize: '+selectedSize:'\nSize: [please specify]';
+    const msg=encodeURIComponent('Hi JerseyZone_ZA! I\'d like to order:\n\n*'+kit.name+'*\nType: '+typeLabel+sizeStr+'\n\nPlease advise on availability and payment.');
+    document.getElementById('kdOrderBtn').href=`https://wa.me/${WA_NUM}?text=${msg}`;
+  };
+  updateOrderBtn();
+  window._updateOrderBtn=updateOrderBtn;
+
+  // Similar kits by team
+  const similar=allKits.filter(k=>k.id!=kit.id&&k.team&&kit.team&&k.team.toLowerCase()===kit.team.toLowerCase()).slice(0,6);
+  const simWrap=document.getElementById('kdSimilarWrap');
+  if(similar.length){
+    simWrap.style.display='block';
+    document.getElementById('kdSimilar').innerHTML=similar.map(k=>{
+      const img=k.images&&k.images[0]?`<img src="${k.images[0]}" onerror="this.style.display='none'"/>`:`<div class="kit-detail-similar-img-ph">⚽</div>`;
+      return`<div class="kit-detail-similar-card" onclick="openKitDetail('${k.id}')"><div class="kit-detail-similar-img">${img}</div><div class="kit-detail-similar-info"><div class="kit-detail-similar-name">${k.name}</div><div class="kit-detail-similar-team">${k.team||''}</div></div></div>`;
+    }).join('');
+  } else { simWrap.style.display='none'; }
+
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function kdGoSlide(idx){
+  const track=document.getElementById('kdTrack');
+  if(!track)return;
+  kdGalIdx=idx;
+  track.style.transform=`translateX(-${idx*100}%)`;
+  document.querySelectorAll('#kdGallery .gdot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+
+function selectSize(el,size){
+  selectedSize=size;
+  document.querySelectorAll('.kit-detail-size').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+  if(window._updateOrderBtn)window._updateOrderBtn();
+}
+
+function closeKitDetail(){
+  document.getElementById('kitDetailOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 // ON HAND ADMIN
 let eohid=null,ohSizeCount=0;
 function openOHM(id){
@@ -1813,12 +2016,21 @@ function openOHM(id){
   document.getElementById("ohmTitle").textContent=item?"Edit Item":"Add On Hand Item";
   document.getElementById("oh-n").value=item?.name||"";
   document.getElementById("oh-t").value=item?.team||"";
-  document.getElementById("oh-img").value=item?.image||"";
+  const ohic=document.getElementById("ohImgContainer");
+  if(ohic){ohic.innerHTML="";ohImgCount=0;(item?.images||(item?.image?[item.image]:[""])).forEach(url=>addOHImgField(url));}
   document.getElementById("oh-op").value=item?.original_price||"";
   document.getElementById("oh-dp").value=item?.discounted_price||"";
   const sc=document.getElementById("ohSizes");sc.innerHTML="";ohSizeCount=0;
   (item?.sizes||[{size:"S",available:true},{size:"M",available:true},{size:"L",available:true},{size:"XL",available:true}]).forEach(s=>addOHSize(s.size,s.available));
   document.getElementById("ohModal").classList.add("open");
+}
+let ohImgCount=0;
+function addOHImgField(url=''){
+  const id=ohImgCount++;
+  const d=document.createElement('div');
+  d.className='imgr';d.id='ohimg'+id;
+  d.innerHTML=`<input class="fi" placeholder="https://i.imgur.com/..." value="${url}" data-ohimg/><button class="btn-d" style="padding:6px 10px;flex-shrink:0;" onclick="document.getElementById('ohimg${id}').remove()">✕</button>`;
+  document.getElementById('ohImgContainer').appendChild(d);
 }
 function addOHSize(size="",available=true){
   const id=ohSizeCount++;
@@ -1852,7 +2064,8 @@ async function saveOH(){
   const item={
     name,
     team:document.getElementById("oh-t").value.trim(),
-    image:document.getElementById("oh-img").value.trim(),
+    images:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean),
+    image:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean)[0]||"",
     original_price:+op,
     discounted_price:document.getElementById("oh-dp").value?+document.getElementById("oh-dp").value:null,
     sizes
@@ -1903,6 +2116,7 @@ async function saveCountdown(){
   const val=document.getElementById('cd-input').value;
   if(!val){toast('⚠ Please select a date and time.');return;}
   await sb.from('settings').upsert([{key:'countdown_date',value:val}],{onConflict:'key'});
+  localStorage.setItem('jz_countdown',val);
   startCountdown(new Date(val));
   toast('✓ Countdown set.');
 }
@@ -1917,14 +2131,17 @@ async function saveAnnouncement(){
   const val=document.getElementById('ann-text').value.trim();
   if(!val){toast('⚠ Enter announcement text.');return;}
   await sb.from('settings').upsert([{key:'announcement',value:val}],{onConflict:'key'});
+  localStorage.setItem('jz_announcement',val);
   document.getElementById('announcebar').style.display='block';
   document.getElementById('announcetext').textContent=val+' · '+val+' · '+val;
+  adjustPagePadding();
   toast('✓ Announcement updated.');
 }
 async function clearAnnouncement(){
   await sb.from('settings').delete().eq('key','announcement');
   document.getElementById('announcebar').style.display='none';
   document.getElementById('ann-text').value='';
+  adjustPagePadding();
   toast('Announcement cleared.');
 }
 
@@ -1960,6 +2177,34 @@ window.addEventListener('scroll',()=>{
 renderStars();
 init();
 </script>
+
+
+<!-- KIT DETAIL MODAL -->
+<div class="kit-detail-overlay" id="kitDetailOverlay" onclick="if(event.target===this)closeKitDetail()">
+  <div class="kit-detail" id="kitDetailPanel">
+    <div class="kit-detail-handle"></div>
+    <div class="kit-detail-gallery" id="kdGallery"></div>
+    <div class="kit-detail-body">
+      <div class="kit-detail-badges" id="kdBadges"></div>
+      <div class="kit-detail-name" id="kdName"></div>
+      <div class="kit-detail-team" id="kdTeam"></div>
+      <div class="kit-detail-prices" id="kdPrices"></div>
+      <div id="kdSizesWrap" style="display:none;">
+        <div class="kit-detail-section-title">Select Size</div>
+        <div class="kit-detail-sizes" id="kdSizes"></div>
+      </div>
+      <div id="kdAddonsWrap" style="display:none;">
+        <div class="kit-detail-section-title">Available Add-ons</div>
+        <div class="kit-detail-addons" id="kdAddons"></div>
+      </div>
+      <a id="kdOrderBtn" href="#" target="_blank" class="kit-detail-order-btn">📲 Order via WhatsApp</a>
+      <div id="kdSimilarWrap" style="display:none;">
+        <div class="kit-detail-similar-title">Similar Kits</div>
+        <div class="kit-detail-similar-grid" id="kdSimilar"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- FLOATING BUTTONS -->
 <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27d%20like%20to%20enquire." target="_blank" class="float-wa" title="Chat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.538 5.878L.057 23.5a.5.5 0 0 0 .61.61l5.764-1.481A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.512-5.236-1.4l-.374-.217-3.878.997.999-3.79-.24-.389A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
