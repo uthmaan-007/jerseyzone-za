@@ -1011,7 +1011,7 @@ body.compact .kao{display:none;}
 <!-- ON HAND -->
 <div class="page" id="page-onhand">
   <div class="ph fade-in"><h2>On Hand</h2><p>Discounted kits available for immediate collection or delivery — limited stock, grab them while they last</p></div>
-  <div id="ohGrid" class="oh-grid fade-in"></div>
+  <div id="ohGrid" class="oh-grid fade-in" style="overflow:visible;"></div>
   <div id="ohEmpty" class="empty-state" style="display:none;">No items currently on hand. Check back soon.</div>
   <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
     <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Interested in any of these items?</p>
@@ -1318,6 +1318,7 @@ function showPage(p){
   if(m[p]!==undefined)b[m[p]].classList.add("active");
   document.getElementById("navLinks").classList.remove("open");
   window.scrollTo(0,0);
+  document.body.style.overflow="";
   setTimeout(initFadeIn,100);
   if(p==="catalogue")loadKits();
   if(p==="reviews")loadReviews();
@@ -1984,6 +1985,13 @@ function openKitDetail(kitId){
     }).join('');
   } else { simWrap.style.display='none'; }
 
+  // Swipe down to close
+  const panel=document.getElementById('kitDetailPanel');
+  let startY=0;
+  panel.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;},{passive:true,once:true});
+  panel.addEventListener('touchend',e=>{
+    if(e.changedTouches[0].clientY-startY>80)closeKitDetail();
+  },{passive:true,once:true});
   overlay.classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -2182,7 +2190,10 @@ init();
 <!-- KIT DETAIL MODAL -->
 <div class="kit-detail-overlay" id="kitDetailOverlay" onclick="if(event.target===this)closeKitDetail()">
   <div class="kit-detail" id="kitDetailPanel">
-    <div class="kit-detail-handle"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 1.25rem 0;">
+      <div class="kit-detail-handle" style="margin:0;"></div>
+      <button onclick="closeKitDetail()" style="background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;">✕</button>
+    </div>
     <div class="kit-detail-gallery" id="kdGallery"></div>
     <div class="kit-detail-body">
       <div class="kit-detail-badges" id="kdBadges"></div>
