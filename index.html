@@ -97,12 +97,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;ali
 .kc{background:var(--bg);display:flex;flex-direction:column;transition:background 0.2s;}
 .kc:hover{background:var(--bg2);}
 .kia{height:340px;background:var(--bg3);position:relative;overflow:hidden;}
-.kia img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.kia img{width:100%;height:100%;object-fit:contain;background:var(--bg3);transition:transform 0.4s;}
 .kc:hover .kia img{transform:scale(1.04);}
 .kph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.1;}
 .gallery{position:relative;height:340px;overflow:hidden;}
 .gallery-imgs{display:flex;height:100%;transition:transform 0.3s ease;}
-.gallery-img{min-width:100%;height:100%;object-fit:cover;}
+.gallery-img{min-width:100%;height:100%;object-fit:contain;background:var(--bg3);}
 .gallery-prev,.gallery-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;padding:8px 12px;cursor:pointer;font-size:1rem;z-index:10;transition:background 0.2s;}
 .gallery-prev{left:0;border-radius:0 3px 3px 0;}
 .gallery-next{right:0;border-radius:3px 0 0 3px;}
@@ -255,6 +255,48 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .toast.show{display:block;animation:ti 0.25s ease;}
 @keyframes ti{from{opacity:0;transform:translateX(-50%) translateY(6px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
 
+
+.badge-new{position:absolute;top:12px;left:12px;background:linear-gradient(135deg,#f5a623,#e8252a);color:#fff;font-family:"Raleway",sans-serif;font-weight:700;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 9px;border-radius:2px;z-index:6;}
+
+/* SIZE GUIDE */
+.sg-wrap{max-width:800px;margin:0 auto;padding:0 2rem 4rem;}
+.sg-note{background:rgba(220,30,35,0.06);border:1px solid rgba(220,30,35,0.2);border-radius:4px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:0.82rem;color:var(--muted);line-height:1.7;}
+.sg-note strong{color:var(--cream);}
+.sg-section-title{font-family:"Cinzel",serif;font-size:0.68rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+.sg-table-wrap{overflow-x:auto;margin-bottom:2rem;}
+.sg-table{width:100%;border-collapse:collapse;min-width:500px;}
+.sg-table th{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);text-align:center;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--bg2);}
+.sg-table th:first-child{text-align:left;}
+.sg-table td{padding:10px 12px;font-size:0.82rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);text-align:center;transition:background 0.2s;}
+.sg-table td:first-child{font-family:"Cinzel",serif;font-weight:700;color:var(--cream);font-size:0.85rem;text-align:left;}
+.sg-table tr:hover td{background:var(--bg2);}
+.sg-disclaimer{font-size:0.75rem;color:var(--muted2);font-style:italic;margin-top:0.75rem;font-weight:300;}
+.sg-tip{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;margin-top:1.5rem;font-size:0.82rem;color:var(--muted);line-height:1.7;}
+.sg-tip strong{color:var(--cream);}
+
+/* DRAG REORDER */
+.drag-item{cursor:grab;}
+.drag-item.dragging{opacity:0.4;cursor:grabbing;}
+.drag-over{border-top:2px solid var(--red) !important;}
+
+
+/* ON HAND */
+.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);}
+.oh-card{background:var(--bg);padding:1.25rem;display:flex;flex-direction:column;transition:background 0.2s;}
+.oh-card:hover{background:var(--bg2);}
+.oh-img{width:100%;height:220px;object-fit:contain;background:var(--bg3);border-radius:3px;margin-bottom:1rem;}
+.oh-img-placeholder{width:100%;height:220px;background:var(--bg3);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.1;margin-bottom:1rem;}
+.oh-name{font-family:"Cinzel",serif;font-size:0.83rem;font-weight:600;margin-bottom:0.25rem;}
+.oh-team{font-size:0.76rem;color:var(--muted);font-weight:300;margin-bottom:0.75rem;}
+.oh-prices{display:flex;gap:6px;margin-bottom:0.5rem;flex-wrap:wrap;}
+.oh-price-orig{font-size:0.72rem;color:var(--muted2);text-decoration:line-through;}
+.oh-price-disc{font-family:"Cinzel",serif;font-size:0.9rem;font-weight:700;color:var(--red);}
+.oh-discount-badge{background:rgba(220,30,35,0.15);border:1px solid rgba(220,30,35,0.3);color:var(--red);font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:2px;letter-spacing:0.08em;}
+.oh-sizes{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem;}
+.oh-size{font-size:0.65rem;font-weight:700;letter-spacing:0.06em;padding:4px 10px;border:1px solid var(--border);border-radius:2px;color:var(--muted);}
+.oh-size.avail{border-color:rgba(29,185,84,0.4);color:#1db954;}
+.oh-size.sold{border-color:var(--border);color:var(--muted2);text-decoration:line-through;opacity:0.4;}
+
 /* KIT TYPE DROPDOWN GROUPS */
 .type-group-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 13px 3px;display:block;}
 </style>
@@ -271,6 +313,8 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
     <button class="nl" onclick="showPage('catalogue')">Catalogue</button>
     <button class="nl" onclick="showPage('reviews')">Reviews</button>
     <button class="nl" onclick="showPage('pricing')">Pricing</button>
+    <button class="nl" onclick="showPage('sizeguide')">Size Guide</button>
+    <button class="nl" onclick="showPage('onhand')">On Hand</button>
     <button class="nl" onclick="showPage('faq')">FAQ</button>
     <button class="nl" onclick="showPage('suggest')">Suggest a Kit</button>
     <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!" target="_blank" class="nl nl-wa">💬 WhatsApp</a>
@@ -470,6 +514,74 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
   </div>
 </div>
 
+
+<!-- SIZE GUIDE -->
+<div class="page" id="page-sizeguide">
+  <div class="ph"><h2>Size Guide</h2><p>Find your perfect fit before ordering</p></div>
+  <div class="sg-wrap">
+    <div class="sg-note">
+      <strong>Important:</strong> Player version kits are designed with a slim, athletic fit and a waist-cinching design. If you prefer a looser or more relaxed fit, we recommend sizing up by one size. Fan version kits have a more relaxed fit and follow standard sizing.
+    </div>
+    <div class="sg-section-title">Player Version — Size Chart</div>
+    <div class="sg-table-wrap">
+      <table class="sg-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Width (cm)</th>
+            <th>Length (cm)</th>
+            <th>Height (cm)</th>
+            <th>Weight (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>S</td><td>47–49</td><td>68–70</td><td>160–165</td><td>50–62</td></tr>
+          <tr><td>M</td><td>49–51</td><td>70–72</td><td>165–170</td><td>62–75</td></tr>
+          <tr><td>L</td><td>51–53</td><td>72–74</td><td>170–175</td><td>75–80</td></tr>
+          <tr><td>XL</td><td>53–55</td><td>74–76</td><td>175–180</td><td>80–85</td></tr>
+          <tr><td>XXL</td><td>55–57</td><td>76–78</td><td>180–185</td><td>85–90</td></tr>
+          <tr><td>3XL</td><td>57–59</td><td>78–80</td><td>185–190</td><td>90–95</td></tr>
+        </tbody>
+      </table>
+      <p class="sg-disclaimer">* All measurements are in centimetres. There may be a 2–3cm variance due to manual measurement or differing measurement methods.</p>
+    </div>
+    <div class="sg-section-title">Fan Version — Size Guide</div>
+    <div class="sg-table-wrap">
+      <table class="sg-table">
+        <thead>
+          <tr><th>Size</th><th>Chest (cm)</th><th>Length (cm)</th><th>Height (cm)</th><th>Weight (kg)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>S</td><td>48–51</td><td>68–70</td><td>163–170</td><td>50–65</td></tr>
+          <tr><td>M</td><td>51–54</td><td>70–72</td><td>168–175</td><td>56–70</td></tr>
+          <tr><td>L</td><td>54–56</td><td>72–74</td><td>173–180</td><td>62–75</td></tr>
+          <tr><td>XL</td><td>57–60</td><td>74–76</td><td>178–185</td><td>67–88</td></tr>
+          <tr><td>XXL</td><td>60–63</td><td>76–78</td><td>185–192</td><td>85–92</td></tr>
+          <tr><td>3XL</td><td>63–65</td><td>78–80</td><td>192–195</td><td>92–95</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sg-tip">
+      <strong>Not sure which size to order?</strong> Feel free to message us on WhatsApp with your height, weight and preferred fit — we'll recommend the best size for you.
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%20need%20help%20with%20sizing." target="_blank" class="btn-p">💬 Ask Us for Sizing Help</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ON HAND -->
+<div class="page" id="page-onhand">
+  <div class="ph"><h2>On Hand</h2><p>Available stock — ready for immediate collection or delivery</p></div>
+  <div id="ohGrid" class="oh-grid"></div>
+  <div id="ohEmpty" class="empty-state" style="display:none;">No items currently on hand. Check back soon.</div>
+  <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
+    <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Interested in any of these items?</p>
+    <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27m%20interested%20in%20an%20on%20hand%20item." target="_blank" class="btn-p">📲 Order via WhatsApp</a>
+  </div>
+</div>
+
 <!-- ADMIN -->
 <div class="page" id="page-admin">
   <div id="adminLogin" class="alp">
@@ -490,6 +602,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
         <button class="abt active" onclick="stab('kits',this)">Kits (<span id="kc">0</span>)</button>
         <button class="abt" onclick="stab('reviews',this)">Reviews (<span id="rc">0</span>)</button>
         <button class="abt" onclick="stab('suggestions',this)">Suggestions<span class="nbadge" id="sb" style="display:none;"></span></button>
+        <button class="abt" onclick="stab('onhand',this)">On Hand (<span id="ohc">0</span>)</button>
       </div>
       <div class="atab active" id="tab-kits">
         <div class="ath"><span class="att">Manage Kits</span><button class="btn-p" style="font-size:0.65rem;" onclick="openKM(null)">+ Add Kit</button></div>
@@ -499,11 +612,38 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
         <div class="ath"><span class="att">Manage Reviews</span><button class="btn-p" style="font-size:0.65rem;" onclick="openRM(null)">+ Add Review</button></div>
         <div class="adl" id="rl"></div>
       </div>
+      <div class="atab" id="tab-onhand">
+        <div class="ath"><span class="att">On Hand Items</span><button class="btn-p" style="font-size:0.65rem;" onclick="openOHM(null)">+ Add Item</button></div>
+        <div class="adl" id="ohl"></div>
+      </div>
       <div class="atab" id="tab-suggestions">
         <div class="ath"><span class="att">Kit Sourcing Requests</span></div>
         <div id="sl" style="border:1px solid var(--border);border-radius:3px;overflow:hidden;"></div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<!-- ON HAND MODAL -->
+<div class="mo" id="ohModal">
+  <div class="md">
+    <div class="mdt" id="ohmTitle">Add On Hand Item</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Kit Name *</label><input class="fi" id="oh-n" placeholder="e.g. Brazil Away 24/25"/></div>
+      <div class="fg"><label class="fl">Team</label><input class="fi" id="oh-t" placeholder="e.g. Brazil"/></div>
+    </div>
+    <div class="fg"><label class="fl">Image URL (Imgur)</label><input class="fi" id="oh-img" placeholder="https://i.imgur.com/..."/></div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Original Price (R) *</label><input class="fi" id="oh-op" type="number" placeholder="490"/></div>
+      <div class="fg"><label class="fl">Discounted Price (R)</label><input class="fi" id="oh-dp" type="number" placeholder="Leave blank if no discount"/></div>
+    </div>
+    <div class="fg">
+      <label class="fl">Sizes &amp; Availability</label>
+      <div id="ohSizes" style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.3rem;"></div>
+      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addOHSize()">+ Add Size</button>
+    </div>
+    <div class="mdf"><button class="btn-o" onclick="closeOHM()">Cancel</button><button class="btn-p" onclick="saveOH()">Save Item</button></div>
   </div>
 </div>
 
@@ -570,7 +710,7 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 const ADMINS=[{u:"Uthmaan_007",p:"Ammaar2007"},{u:"JerseyzoneAdmin",p:"Ammaar2007"}];
 const WA="27710396374";
-const SIZES=["XS","S","M","L","XL","XXL","XXXL","Kids S","Kids M","Kids L"];
+const SIZES=["XS","S","M","L","XL","XXL","Kids S","Kids M","Kids L"];
 const ADDONS=["Custom Name & Number","Badges","Long Sleeve","Sleeve Sponsor"];
 
 // Kit type config
@@ -587,10 +727,36 @@ let isAdmin=false,af="all",ekid=null,erid=null,cr=5,imgc=0;
 let allKits=[],allReviews=[],allSugs=[];
 let revIdx=0,revTimer=null;
 
+
+// ON HAND
+let allOnHand=[];
+async function loadOnHand(){
+  const{data,error}=await sb.from('on_hand').select('*').order('created_at',{ascending:false});
+  if(error){console.error(error);return;}
+  allOnHand=data||[];
+  renderOnHand();
+}
+function renderOnHand(){
+  const g=document.getElementById('ohGrid'),e=document.getElementById('ohEmpty');
+  if(!g)return;
+  if(!allOnHand.length){g.innerHTML='';e.style.display='block';return;}
+  e.style.display='none';
+  g.innerHTML=allOnHand.map(item=>{
+    const hasDiscount=item.discounted_price&&item.discounted_price<item.original_price;
+    const img=item.image?`<img class="oh-img" src="${item.image}" onerror="this.style.display='none'">`:`<div class="oh-img-placeholder">⚽</div>`;
+    const priceHTML=hasDiscount
+      ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
+      :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
+    const sizes=(item.sizes||[]).map(s=>`<span class="oh-size ${s.available?'avail':'sold'}">${s.size}</span>`).join('');
+    return`<div class="oh-card">${img}<div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
+  }).join('');
+}
+
 async function init(){
   await loadKits();
   await loadReviews();
   await loadSuggestions();
+  await loadOnHand();
 }
 
 async function loadKits(){
@@ -619,7 +785,7 @@ function showPage(p){
   document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
   document.getElementById("page-"+p).classList.add("active");
   document.querySelectorAll(".nl").forEach(x=>x.classList.remove("active"));
-  const m={home:0,catalogue:1,reviews:2,pricing:3,faq:4,suggest:5};
+  const m={home:0,catalogue:1,reviews:2,pricing:3,faq:4,suggest:5,sizeguide:6,onhand:7};
   const b=document.querySelectorAll(".nl");
   if(m[p]!==undefined)b[m[p]].classList.add("active");
   document.getElementById("navLinks").classList.remove("open");
@@ -627,6 +793,7 @@ function showPage(p){
   if(p==="catalogue")loadKits();
   if(p==="reviews")loadReviews();
   if(p==="admin")renderAdmin();
+  if(p==="onhand")loadOnHand();
 }
 function toggleMenu(){document.getElementById("navLinks").classList.toggle("open");}
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000);}
@@ -698,6 +865,9 @@ function getKitCategory(type){
 
 function renderCat(){
   const q=(document.getElementById("si")?.value||"").toLowerCase();
+  // Compute New In: 5 most recently added kits by created_at
+  const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  const newInIds=new Set(sorted.slice(0,5).map(k=>k.id));
   const f=allKits.filter(j=>{
     const matchFilter=af==="all"||j.type===af;
     const matchSearch=j.name.toLowerCase().includes(q)||(j.team||"").toLowerCase().includes(q);
@@ -711,12 +881,14 @@ function renderCat(){
     const cat=getKitCategory(j.type);
     const badgeClass=cat==="local"?"badge-local":"badge-imported";
     const badgeLabel=cat==="local"?"Local":"Imported";
+    const isNewIn=newInIds.has(j.id);
+    const newBadge=isNewIn?'<span class="badge-new">New In</span>':'';
     const images=j.images||[];
     let imgHTML='';
     if(images.length===0){
-      imgHTML=`<div class="kia"><div class="kph">⚽</div><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''}</div>`;
+      imgHTML=`<div class="kia"><div class="kph">⚽</div><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''} ${newBadge}</div>`;
     } else if(images.length===1){
-      imgHTML=`<div class="kia"><img src="${images[0]}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''}</div>`;
+      imgHTML=`<div class="kia"><img src="${images[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''}${newBadge}</div>`;
     } else {
       const dots=images.map((_,i)=>`<span class="gdot ${i===0?"active":""}" onclick="goSlide('g${j.id}',${i})"></span>`).join("");
       const imgs=images.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join("");
@@ -727,6 +899,7 @@ function renderCat(){
         <div class="gallery-dots">${dots}</div>
         <span class="ktb ${badgeClass}">${badgeLabel}</span>
         ${!j.in_stock?'<span class="koos">Out of Stock</span>':''}
+        ${newBadge}
       </div>`;
     }
     const typeLabel=KIT_TYPES[j.type]?.label||j.type;
@@ -736,10 +909,25 @@ function renderCat(){
     const btn=j.in_stock?`<a href="https://wa.me/${WA}?text=${msg}" target="_blank" class="bwa">📲 Order via WhatsApp</a>`:`<span class="bwa bwa-dis">Currently Out of Stock</span>`;
     return`<div class="kc">${imgHTML}<div class="ki"><div class="kn">${j.name}</div><div class="km">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel}</div><div class="kpv">${pvs}</div>${ao}<div class="ksz">${sz}</div>${btn}</div></div>`;
   }).join("");
+  // Init swipe on all galleries
+  f.forEach(j=>{
+    if((j.images||[]).length>1)setTimeout(()=>initGallerySwipe('g'+j.id),50);
+  });
 }
 
 // Gallery
 const galState={};
+const galTouch={};
+function initGallerySwipe(id){
+  const el=document.getElementById(id);
+  if(!el||el.dataset.swipe)return;
+  el.dataset.swipe="1";
+  el.addEventListener("touchstart",e=>{galTouch[id]=e.touches[0].clientX;},{passive:true});
+  el.addEventListener("touchend",e=>{
+    const diff=galTouch[id]-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>40)slideGallery(id,diff>0?1:-1);
+  },{passive:true});
+}
 function slideGallery(id,dir){
   const wrap=document.getElementById("gi"+id.substring(1));
   if(!wrap)return;
@@ -806,9 +994,16 @@ function renderAdmin(){
   document.getElementById("kl").innerHTML=!allKits.length?'<div class="empty-state">No kits yet. Click "+ Add Kit" to get started.</div>':allKits.map(j=>{
     const cat=getKitCategory(j.type);
     const typeLabel=KIT_TYPES[j.type]?.label||j.type;
-    return`<div class="adi"><div class="adin"><div class="adin-n">${j.name} <span class="ktb ${cat==="local"?"badge-local":"badge-imported"}" style="position:static;font-size:0.55rem;">${cat==="local"?"Local":"Imported"}</span></div><div class="adin-m">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel} · ${j.in_stock?"In Stock":"Out of Stock"}</div></div><div class="adi-ac"><button class="btn-g" onclick="openKM('${j.id}')">Edit</button><button class="btn-d" onclick="delKit('${j.id}')">Delete</button></div></div>`;
+    return`<div class="adi drag-item" draggable="true" ondragstart="onDragStart(event,'${j.id}')" ondrageend="onDragEnd(event)" ondragover="onDragOver(event,'${j.id}')" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'${j.id}')" ondragend="onDragEnd(event)">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex:1;">
+        <span style="color:var(--muted2);font-size:1rem;cursor:grab;">⠿</span>
+        <div class="adin"><div class="adin-n">${j.name} <span class="ktb ${cat==="local"?"badge-local":"badge-imported"}" style="position:static;font-size:0.55rem;">${cat==="local"?"Local":"Imported"}</span></div><div class="adin-m">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel} · ${j.in_stock?"In Stock":"Out of Stock"}</div></div>
+      </div>
+      <div class="adi-ac"><button class="btn-g" onclick="openKM('${j.id}')">Edit</button><button class="btn-d" onclick="delKit('${j.id}')">Delete</button></div>
+    </div>`;
   }).join("");
   document.getElementById("rl").innerHTML=!allReviews.length?'<div class="empty-state">No reviews yet.</div>':allReviews.map(r=>`<div class="adi"><div class="adin"><div class="adin-n">${"★".repeat(r.rating)} · ${r.name}</div><div class="adin-m" style="font-style:italic;">"${r.text.slice(0,60)}${r.text.length>60?"...":""}" · ${r.date}</div></div><div class="adi-ac"><button class="btn-g" onclick="openRM('${r.id}')">Edit</button><button class="btn-d" onclick="delRev('${r.id}')">Delete</button></div></div>`).join("");
+  renderOnHandAdmin();
   document.getElementById("sl").innerHTML=!allSugs.length?'<div class="empty-state">No sourcing requests yet.</div>':allSugs.map(s=>`<div class="sgc"><div class="sg-meta"><span class="sg-name">${s.name}</span><span class="sg-phone">📞 ${s.phone||"No number provided"}</span><span class="sg-date">${s.date}</span></div><p class="sg-text">"${s.text}"</p><div class="sg-ac"><a href="https://wa.me/${(s.phone||"").replace(/\D/g,"")}" target="_blank" class="btn-p" style="font-size:0.62rem;padding:7px 13px;text-decoration:none;">📲 Call/WhatsApp</a><button class="btn-d" onclick="delSug('${s.id}')">Dismiss</button></div></div>`).join("");
 }
 function stab(t,b){document.querySelectorAll(".atab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".abt").forEach(x=>x.classList.remove("active"));document.getElementById("tab-"+t).classList.add("active");b.classList.add("active");}
@@ -898,7 +1093,100 @@ async function saveRev(){
 async function delRev(id){if(!confirm("Delete this review?"))return;await sb.from('reviews').delete().eq('id',id);toast("Review deleted.");await loadReviews();renderAdmin();}
 async function delSug(id){await sb.from('suggestions').delete().eq('id',id);toast("Request dismissed.");await loadSuggestions();renderAdmin();}
 
+
+
+// ON HAND ADMIN
+let eohid=null,ohSizeCount=0;
+function openOHM(id){
+  eohid=id;
+  const item=id?allOnHand.find(x=>x.id==id):null;
+  document.getElementById("ohmTitle").textContent=item?"Edit Item":"Add On Hand Item";
+  document.getElementById("oh-n").value=item?.name||"";
+  document.getElementById("oh-t").value=item?.team||"";
+  document.getElementById("oh-img").value=item?.image||"";
+  document.getElementById("oh-op").value=item?.original_price||"";
+  document.getElementById("oh-dp").value=item?.discounted_price||"";
+  const sc=document.getElementById("ohSizes");sc.innerHTML="";ohSizeCount=0;
+  (item?.sizes||[{size:"S",available:true},{size:"M",available:true},{size:"L",available:true},{size:"XL",available:true}]).forEach(s=>addOHSize(s.size,s.available));
+  document.getElementById("ohModal").classList.add("open");
+}
+function addOHSize(size="",available=true){
+  const id=ohSizeCount++;
+  const d=document.createElement("div");
+  d.style.cssText="display:flex;gap:0.5rem;align-items:center;";
+  d.id="ohs"+id;
+  d.innerHTML=`<select class="fsel" style="flex:1;" data-sz>
+    <option value="XS" ${size==="XS"?"selected":""}>XS</option>
+    <option value="S" ${size==="S"?"selected":""}>S</option>
+    <option value="M" ${size==="M"?"selected":""}>M</option>
+    <option value="L" ${size==="L"?"selected":""}>L</option>
+    <option value="XL" ${size==="XL"?"selected":""}>XL</option>
+    <option value="XXL" ${size==="XXL"?"selected":""}>XXL</option>
+    <option value="Kids S" ${size==="Kids S"?"selected":""}>Kids S</option>
+    <option value="Kids M" ${size==="Kids M"?"selected":""}>Kids M</option>
+    <option value="Kids L" ${size==="Kids L"?"selected":""}>Kids L</option>
+  </select>
+  <label class="cl"><input type="checkbox" data-av ${available?"checked":""}/><span>Available</span></label>
+  <button class="btn-d" style="padding:5px 9px;flex-shrink:0;" onclick="document.getElementById('ohs${id}').remove()">✕</button>`;
+  document.getElementById("ohSizes").appendChild(d);
+}
+function closeOHM(){document.getElementById("ohModal").classList.remove("open");}
+async function saveOH(){
+  const name=document.getElementById("oh-n").value.trim();
+  const op=document.getElementById("oh-op").value;
+  if(!name||!op){toast("⚠ Name and original price required.");return;}
+  const sizes=Array.from(document.querySelectorAll("#ohSizes > div")).map(d=>({
+    size:d.querySelector("[data-sz]").value,
+    available:d.querySelector("[data-av]").checked
+  }));
+  const item={
+    name,
+    team:document.getElementById("oh-t").value.trim(),
+    image:document.getElementById("oh-img").value.trim(),
+    original_price:+op,
+    discounted_price:document.getElementById("oh-dp").value?+document.getElementById("oh-dp").value:null,
+    sizes
+  };
+  let error;
+  if(eohid){({error}=await sb.from("on_hand").update(item).eq("id",eohid));toast("✓ Item updated.");}
+  else{({error}=await sb.from("on_hand").insert([item]));toast("✓ Item added.");}
+  if(error){toast("Error saving item.");console.error(error);return;}
+  closeOHM();await loadOnHand();renderOnHandAdmin();
+}
+async function delOH(id){if(!confirm("Remove this item?"))return;await sb.from("on_hand").delete().eq("id",id);toast("Item removed.");await loadOnHand();renderOnHandAdmin();}
+function renderOnHandAdmin(){
+  document.getElementById("ohc").textContent=allOnHand.length;
+  document.getElementById("ohl").innerHTML=!allOnHand.length?'<div class="empty-state">No on hand items yet.</div>':allOnHand.map(item=>{
+    const hasDisc=item.discounted_price&&item.discounted_price<item.original_price;
+    return`<div class="adi"><div class="adin"><div class="adin-n">${item.name}${hasDisc?` <span style="background:rgba(220,30,35,0.15);border:1px solid rgba(220,30,35,0.3);color:var(--red);font-size:0.55rem;padding:2px 6px;border-radius:2px;font-weight:700;">SALE</span>`:''}</div><div class="adin-m">${item.team?item.team+" · ":""}R${item.original_price}${hasDisc?" → R"+item.discounted_price:""} · ${(item.sizes||[]).filter(s=>s.available).map(s=>s.size).join(", ")||"No sizes"}</div></div><div class="adi-ac"><button class="btn-g" onclick="openOHM('${item.id}')">Edit</button><button class="btn-d" onclick="delOH('${item.id}')">Remove</button></div></div>`;
+  }).join("");
+}
+
+// DRAG TO REORDER KITS
+let dragSrcId=null;
+function onDragStart(e,id){dragSrcId=id;e.currentTarget.classList.add("dragging");}
+function onDragEnd(e){e.currentTarget.classList.remove("dragging");document.querySelectorAll(".drag-over").forEach(el=>el.classList.remove("drag-over"));}
+function onDragOver(e,id){e.preventDefault();if(id!==dragSrcId){e.currentTarget.classList.add("drag-over");}}
+function onDragLeave(e){e.currentTarget.classList.remove("drag-over");}
+async function onDrop(e,targetId){
+  e.currentTarget.classList.remove("drag-over");
+  if(!dragSrcId||dragSrcId===targetId)return;
+  const srcIdx=allKits.findIndex(k=>k.id==dragSrcId);
+  const tgtIdx=allKits.findIndex(k=>k.id==targetId);
+  if(srcIdx<0||tgtIdx<0)return;
+  const reordered=[...allKits];
+  const [moved]=reordered.splice(srcIdx,1);
+  reordered.splice(tgtIdx,0,moved);
+  // Update sort_order in supabase
+  const updates=reordered.map((k,i)=>sb.from("kits").update({sort_order:i}).eq("id",k.id));
+  await Promise.all(updates);
+  allKits=reordered;
+  renderAdmin();
+  toast("✓ Kit order updated.");
+}
+
 document.getElementById("kitModal").addEventListener("click",e=>{if(e.target===document.getElementById("kitModal"))closeKM();});
+document.getElementById("ohModal").addEventListener("click",e=>{if(e.target===document.getElementById("ohModal"))closeOHM();});
 document.getElementById("revModal").addEventListener("click",e=>{if(e.target===document.getElementById("revModal"))closeRM();});
 renderStars();
 init();
