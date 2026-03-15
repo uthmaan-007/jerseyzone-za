@@ -1009,7 +1009,7 @@ body.compact .kao{display:none;}
 </div>
 
 <!-- ON HAND -->
-<div class="page" id="page-onhand">
+<div class="page" id="page-onhand" style="overflow-y:auto;">
   <div class="ph fade-in"><h2>On Hand</h2><p>Discounted kits available for immediate collection or delivery — limited stock, grab them while they last</p></div>
   <div id="ohGrid" class="oh-grid fade-in" style="overflow:visible;"></div>
   <div id="ohEmpty" class="empty-state" style="display:none;">No items currently on hand. Check back soon.</div>
@@ -1271,7 +1271,7 @@ function renderOnHand(){
       ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
       :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
     const sizes=(item.sizes||[]).map(s=>`<span class="oh-size ${s.available?'avail':'sold'}">${s.size}</span>`).join('');
-    return`<div class="oh-card">${img}<div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
+    return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
   }).join('');
 }
 
@@ -1319,6 +1319,7 @@ function showPage(p){
   document.getElementById("navLinks").classList.remove("open");
   window.scrollTo(0,0);
   document.body.style.overflow="";
+  document.documentElement.style.overflow="";
   setTimeout(initFadeIn,100);
   if(p==="catalogue")loadKits();
   if(p==="reviews")loadReviews();
@@ -1783,15 +1784,23 @@ Please advise on availability and payment.`);
 // COUNTDOWN TIMER
 let countdownInterval=null;
 async function loadCountdown(){
+  // Show instantly from cache
   const cached=localStorage.getItem('jz_countdown');
   if(cached){startCountdown(new Date(cached));}
-  const{data}=await sb.from('settings').select('*').eq('key','countdown_date').single().catch(()=>({data:null}));
-  if(data&&data.value){
-    localStorage.setItem('jz_countdown',data.value);
-    startCountdown(new Date(data.value));
-  } else {
-    localStorage.removeItem('jz_countdown');
-    document.getElementById('countdownBar').classList.remove('show');
+  // Then sync with Supabase
+  try{
+    const{data}=await sb.from('settings').select('value').eq('key','countdown_date').maybeSingle();
+    if(data&&data.value){
+      localStorage.setItem('jz_countdown',data.value);
+      startCountdown(new Date(data.value));
+    } else if(!error){
+      // Only clear if Supabase confirmed there is no deadline set
+      localStorage.removeItem('jz_countdown');
+      if(!cached){document.getElementById('countdownBar').classList.remove('show');}
+    }
+    // If error (network issue), keep showing cached value
+  }catch(e){
+    // Network error — keep showing cached value silently
   }
 }
 function startCountdown(targetDate){
@@ -1993,7 +2002,6 @@ function openKitDetail(kitId){
     if(e.changedTouches[0].clientY-startY>80)closeKitDetail();
   },{passive:true,once:true});
   overlay.classList.add('open');
-  document.body.style.overflow='hidden';
 }
 
 function kdGoSlide(idx){
@@ -2013,7 +2021,78 @@ function selectSize(el,size){
 
 function closeKitDetail(){
   document.getElementById('kitDetailOverlay').classList.remove('open');
-  document.body.style.overflow='';
+}
+
+
+// ON HAND DETAIL
+function openOHDetail(itemId){
+  const item=allOnHand.find(x=>x.id==itemId);
+  if(!item)return;
+  const WA_NUM='27710396374';
+  const overlay=document.getElementById('kitDetailOverlay');
+  const gallery=document.getElementById('kdGallery');
+  const images=(item.images&&item.images.length)?item.images:(item.image?[item.image]:[]);
+  gallery.innerHTML='';
+  if(!images.length){
+    gallery.innerHTML='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.1;">⚽</div>';
+  } else if(images.length===1){
+    const im=document.createElement('img');
+    im.src=images[0];im.style.cssText='width:100%;height:100%;object-fit:contain;';
+    im.setAttribute('onerror','this.style.display="none"');
+    gallery.appendChild(im);
+  } else {
+    const track=document.createElement('div');
+    track.className='kit-detail-gallery-track';track.id='kdTrack';
+    images.forEach(src=>{
+      const im=document.createElement('img');
+      im.className='kit-detail-gallery-img';im.src=src;
+      im.setAttribute('onerror','this.style.display="none"');
+      track.appendChild(im);
+    });
+    const dotsDiv=document.createElement('div');
+    dotsDiv.className='kit-detail-gallery-dots';
+    images.forEach((_,i)=>{
+      const d=document.createElement('span');
+      d.className='gdot'+(i===0?' active':'');
+      d.onclick=()=>kdGoSlide(i);
+      dotsDiv.appendChild(d);
+    });
+    gallery.appendChild(track);
+    gallery.appendChild(dotsDiv);
+  }
+  const hasDisc=item.discounted_price&&item.discounted_price<item.original_price;
+  document.getElementById('kdBadges').innerHTML='<span class="ktb badge-local" style="position:static;font-size:0.65rem;">On Hand</span>'+(hasDisc?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">Sale</span>':'');
+  document.getElementById('kdName').textContent=item.name;
+  document.getElementById('kdTeam').textContent=item.team||'';
+  document.getElementById('kdPrices').innerHTML=hasDisc
+    ?'<div class="kit-detail-price" style="text-decoration:line-through;color:var(--muted);font-size:0.8rem;">R'+item.original_price+'</div><div class="kit-detail-price">R'+item.discounted_price+'<span class="kit-detail-price-label">Discounted</span></div>'
+    :'<div class="kit-detail-price">R'+item.original_price+'</div>';
+  const sizes=item.sizes||[];
+  const sizesWrap=document.getElementById('kdSizesWrap');
+  if(sizes.length){
+    sizesWrap.style.display='block';
+    const szDiv=document.getElementById('kdSizes');szDiv.innerHTML='';
+    sizes.forEach(s=>{
+      const el=document.createElement('div');
+      el.className='kit-detail-size'+(s.available?'':' bwa-dis');
+      el.textContent=s.size+(s.available?'':' (Sold)');
+      if(s.available)el.onclick=()=>selectSize(el,s.size);
+      szDiv.appendChild(el);
+    });
+  } else { sizesWrap.style.display='none'; }
+  document.getElementById('kdAddonsWrap').style.display='none';
+  document.getElementById('kdSimilarWrap').style.display='none';
+  const price=hasDisc?item.discounted_price:item.original_price;
+  const ohMsg='Hi JerseyZone_ZA! I would like to order an On Hand item. Item: '+item.name+'. Price: R'+price+'. Please advise on availability and payment.';
+
+  document.getElementById('kdOrderBtn').href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(ohMsg);
+  const panel=document.getElementById('kitDetailPanel');
+  let startY=0;
+  panel.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;},{passive:true,once:true});
+  panel.addEventListener('touchend',e=>{if(e.changedTouches[0].clientY-startY>80)closeKitDetail();},{passive:true,once:true});
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  const cb=document.getElementById('kitDetailClose');if(cb)cb.style.display='flex';
 }
 
 // ON HAND ADMIN
@@ -2189,11 +2268,9 @@ init();
 
 <!-- KIT DETAIL MODAL -->
 <div class="kit-detail-overlay" id="kitDetailOverlay" onclick="if(event.target===this)closeKitDetail()">
+  <button id="kitDetailClose" onclick="closeKitDetail()" style="position:fixed;top:1rem;right:1rem;z-index:400;background:rgba(30,30,30,0.85);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:1.2rem;width:36px;height:36px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1;">✕</button>
   <div class="kit-detail" id="kitDetailPanel">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 1.25rem 0;">
-      <div class="kit-detail-handle" style="margin:0;"></div>
-      <button onclick="closeKitDetail()" style="background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;">✕</button>
-    </div>
+    <div class="kit-detail-handle"></div>
     <div class="kit-detail-gallery" id="kdGallery"></div>
     <div class="kit-detail-body">
       <div class="kit-detail-badges" id="kdBadges"></div>
