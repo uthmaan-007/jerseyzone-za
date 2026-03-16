@@ -317,16 +317,16 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .co-card-cap{padding:1rem 1.25rem;font-size:0.82rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
 
 /* ON HAND */
-.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);}@media(min-width:900px){.oh-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}.oh-img{height:300px;}}
-.oh-card{background:var(--bg);padding:1.25rem;display:flex;flex-direction:column;transition:background 0.2s;}
+.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}
+.oh-card{background:var(--bg);display:flex;flex-direction:column;transition:background 0.2s;}
 .oh-card:hover{background:var(--bg2);}
-.oh-img{width:100%;height:220px;object-fit:contain;background:var(--bg3);border-radius:3px;margin-bottom:1rem;}
+.oh-img{width:100%;height:340px;object-fit:contain;background:var(--bg3);margin-bottom:0;}
 .oh-img-placeholder{width:100%;height:220px;background:var(--bg3);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.1;margin-bottom:1rem;}
 .oh-name{font-family:"Cinzel",serif;font-size:0.83rem;font-weight:600;margin-bottom:0.25rem;}
 .oh-team{font-size:0.76rem;color:var(--muted);font-weight:300;margin-bottom:0.75rem;}
-.oh-prices{display:flex;gap:6px;margin-bottom:0.5rem;flex-wrap:wrap;}
-.oh-price-orig{font-size:0.72rem;color:var(--muted2);text-decoration:line-through;}
-.oh-price-disc{font-family:"Cinzel",serif;font-size:0.9rem;font-weight:700;color:var(--red);}
+.oh-prices{display:flex;gap:6px;margin-bottom:0.5rem;flex-wrap:wrap;align-items:center;}
+.oh-price-orig{font-size:0.72rem;font-weight:600;background:var(--bg3);border:1px solid var(--border);padding:3px 9px;border-radius:2px;color:var(--muted2);text-decoration:line-through;}
+.oh-price-disc{font-family:"Cinzel",serif;font-size:0.82rem;font-weight:700;background:rgba(220,30,35,0.08);border:1px solid rgba(220,30,35,0.25);padding:3px 9px;border-radius:2px;color:var(--red);}
 .oh-discount-badge{background:rgba(220,30,35,0.15);border:1px solid rgba(220,30,35,0.3);color:var(--red);font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:2px;letter-spacing:0.08em;}
 .oh-sizes{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem;}
 .oh-size{font-size:0.65rem;font-weight:700;letter-spacing:0.06em;padding:4px 10px;border:1px solid var(--border);border-radius:2px;color:var(--muted);}
@@ -376,7 +376,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .na-info{padding:1rem 1.25rem;}
 .na-name{font-family:"Cinzel",serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem;color:var(--cream);}
 .na-team{font-size:0.72rem;color:var(--muted);font-weight:300;margin-bottom:0.5rem;}
-.na-price{font-family:"Cinzel",serif;font-size:0.8rem;font-weight:700;color:var(--red);}
+.na-price{display:flex;flex-wrap:wrap;gap:5px;margin-top:0.25rem;}
 
 /* ABOUT US */
 .about-wrap{max-width:860px;margin:0 auto;padding:2rem;}
@@ -512,7 +512,7 @@ body.compact .kao{display:none;}
 .kd-page-back:hover{color:var(--cream);}
 .kd-page-gallery{width:100%;background:var(--bg3);position:relative;overflow:hidden;min-height:280px;}
 .kd-page-gallery img{width:100%;height:300px;max-height:450px;object-fit:contain;display:block;background:var(--bg3);}
-.kd-page-gallery-track{display:flex;transition:transform 0.3s ease;}
+.kd-page-gallery-track{display:flex;height:100%;transition:transform 0.3s ease;}
 .kd-page-gallery-img{min-width:100%;height:300px;max-height:450px;object-fit:contain;background:var(--bg3);}
 .kd-page-gallery-dots{display:flex;gap:6px;justify-content:center;padding:0.75rem 0;}
 .kd-page-body{padding:1.5rem;}
@@ -1584,13 +1584,13 @@ function renderOnHand(){
     else{
       const ohDots=ohImgs.map((_,i)=>`<span class="gdot ${i===0?'active':''}" onclick="goSlide('oh${item.id}',${i})"></span>`).join('');
       const ohImgsHTML=ohImgs.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join('');
-      img=`<div class="gallery" id="oh${item.id}" style="height:220px;"><div class="gallery-imgs" id="gioh${item.id}">${ohImgsHTML}</div><div class="gallery-dots">${ohDots}</div><button class="gallery-prev" onclick="event.stopPropagation();slideGallery('oh${item.id}',-1)">‹</button><button class="gallery-next" onclick="event.stopPropagation();slideGallery('oh${item.id}',1)">›</button></div>`;
+      img=`<div class="gallery" id="oh${item.id}" style="height:340px;"><div class="gallery-imgs" id="gioh${item.id}">${ohImgsHTML}</div><div class="gallery-dots">${ohDots}</div><button class="gallery-prev" onclick="event.stopPropagation();slideGallery('oh${item.id}',-1)">‹</button><button class="gallery-next" onclick="event.stopPropagation();slideGallery('oh${item.id}',1)">›</button></div>`;
     }
     const priceHTML=hasDiscount
       ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
       :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
     const sizes=(item.sizes||[]).map(s=>`<span class="oh-size ${s.available?'avail':'sold'}">${s.size}</span>`).join('');
-    return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
+    return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;"><div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
   }).join('');
 }
 
@@ -2177,7 +2177,7 @@ function renderNewArrivals(){
       const slides=naImgs.map(src=>`<img class="na-img-slide" src="${src}" onerror="this.style.display='none'"/>`).join('');
       img=`<div class="na-img-track" id="nat${j.id}">${slides}</div>`;
     }
-    const price=j.price_variants&&j.price_variants.length?j.price_variants.map(v=>'R'+v.price+' '+v.label).join(' · '):'';
+    const price=j.price_variants&&j.price_variants.length?j.price_variants.map(v=>`<span class="kpt">R${v.price} · ${v.label}</span>`).join(''):'';
     const typeLabel=(j.types||[j.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
     const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:
 
@@ -2191,7 +2191,7 @@ Please advise on availability and payment.`);
       <div class="na-info">
         <div class="na-name">${j.name}</div>
         <div class="na-team">${j.team||''} · ${typeLabel}</div>
-        <div class="na-price">${price}</div>
+        <div class="na-price kpv">${price}</div>
       </div>
     </div>`;
   }).join('');
