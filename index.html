@@ -1417,6 +1417,19 @@ body.compact .kao{display:none;}
       <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addOHImgField()">+ Add Image</button>
     </div>
     <div class="fr2">
+      <div class="fg"><label class="fl">Version</label>
+        <select class="fsel" id="oh-version">
+          <option value="">Select Version</option>
+          <option value="Fan Version">Fan Version</option>
+          <option value="Player Version">Player Version</option>
+          <option value="Retro">Retro</option>
+          <option value="Special">Special</option>
+          <option value="Replica">Replica</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Addons Applied <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(what's already on the kit)</span></label>
+        <input class="fi" id="oh-addons" placeholder="e.g. Custom Name & Number, UCL Badge"/>
+      </div>
       <div class="fg"><label class="fl">Original Price (R) *</label><input class="fi" id="oh-op" type="number" placeholder="490"/></div>
       <div class="fg"><label class="fl">Discounted Price (R)</label><input class="fi" id="oh-dp" type="number" placeholder="Leave blank if no discount"/></div>
     </div>
@@ -1590,6 +1603,8 @@ function renderOnHand(){
       ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
       :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
     const sizes=(item.sizes||[]).map(s=>`<span class="oh-size ${s.available?'avail':'sold'}">${s.size}</span>`).join('');
+    const versionBadge=item.version?`<span class="kpt" style="margin-bottom:0.4rem;">${item.version}</span>`:'\`';
+    const addonsBadge=(item.addons_applied||[]).length?`<div class="kao">Addons: ${item.addons_applied.join(", ")}</div>`:'';
     return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;"><div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
   }).join('');
 }
@@ -2675,7 +2690,8 @@ function openOHDetail(itemId){
 
   // Badge
   const hasDisc=item.discounted_price&&item.discounted_price<item.original_price;
-  document.getElementById('kdpBadges').innerHTML='<span class="ktb badge-local" style="position:static;font-size:0.65rem;">On Hand</span>'+(hasDisc?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">Sale</span>':'');
+  const vBadge=item.version?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">'+item.version+'</span>':'';
+  document.getElementById('kdpBadges').innerHTML='<span class="ktb badge-local" style="position:static;font-size:0.65rem;">On Hand</span>'+vBadge+(hasDisc?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">Sale</span>':'');
   document.getElementById('kdpName').textContent=item.name;
   document.getElementById('kdpTeam').textContent=item.team||'';
 
@@ -2702,7 +2718,12 @@ function openOHDetail(itemId){
     });
   } else { sizesWrap.style.display='none'; }
 
-  document.getElementById('kdpAddonsWrap').style.display='none';
+  const ohAddons=item.addons_applied||[];
+  const ohAddonsWrap=document.getElementById('kdpAddonsWrap');
+  if(ohAddons.length){
+    ohAddonsWrap.style.display='block';
+    document.getElementById('kdpAddons').innerHTML=ohAddons.map(a=>'<span class="kd-page-addon">'+a+'</span>').join('');
+  } else { ohAddonsWrap.style.display='none'; }
   document.getElementById('kdpSimilarWrap').style.display='none';
 
   // Order button
@@ -2725,6 +2746,8 @@ function openOHM(id){
   document.getElementById("oh-t").value=item?.team||"";
   const ohLEl=document.getElementById("oh-league");if(ohLEl)ohLEl.value=item?.league||"";
   const ohTEl=document.getElementById("oh-type");if(ohTEl)ohTEl.value=item?.item_type||"";
+  const ohVEl=document.getElementById("oh-version");if(ohVEl)ohVEl.value=item?.version||"";
+  const ohAEl=document.getElementById("oh-addons");if(ohAEl)ohAEl.value=(item?.addons_applied||[]).join(", ");
   const ohic=document.getElementById("ohImgContainer");
   if(ohic){ohic.innerHTML="";ohImgCount=0;(item?.images||(item?.image?[item.image]:[""])).forEach(url=>addOHImgField(url));}
   document.getElementById("oh-op").value=item?.original_price||"";
@@ -2775,6 +2798,8 @@ async function saveOH(){
     team:document.getElementById("oh-t").value.trim(),
     league:document.getElementById("oh-league")?.value||'',
     item_type:document.getElementById("oh-type")?.value||'',
+    version:document.getElementById("oh-version")?.value||'',
+    addons_applied:document.getElementById("oh-addons")?.value.trim()?document.getElementById("oh-addons").value.split(',').map(a=>a.trim()).filter(Boolean):[],
     images:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean),
     image:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean)[0]||"",
     original_price:+op,
