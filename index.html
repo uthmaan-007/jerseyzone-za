@@ -41,8 +41,8 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .btn-g:hover{background:rgba(201,168,76,0.1);}
 
 /* HERO */
-.hero{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;background:radial-gradient(ellipse at 50% 40%,rgba(220,30,35,0.05) 0%,transparent 60%);}
-.hero-logo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid var(--red);margin-bottom:2rem;animation:pulse 4s ease-in-out infinite;}
+.hero{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem 2rem;background:radial-gradient(ellipse at 50% 40%,rgba(220,30,35,0.05) 0%,transparent 60%);}
+.hero-logo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid var(--red);margin-bottom:1rem;animation:pulse 4s ease-in-out infinite;}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(220,30,35,0.25),0 0 30px rgba(220,30,35,0.1);}50%{box-shadow:0 0 0 8px rgba(220,30,35,0),0 0 50px rgba(220,30,35,0.2);}}
 .hero-eye{font-size:0.62rem;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
 .hero h1{font-family:'Cinzel',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;letter-spacing:0.06em;line-height:1;margin-bottom:0.6rem;}
@@ -68,7 +68,7 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .rev-arr:hover{border-color:var(--red);color:var(--cream);}
 
 /* FEATURES */
-.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}@media(min-width:900px){.feats{grid-template-columns:repeat(4,1fr);}}
 .feat{background:var(--bg);padding:2rem 1.5rem;transition:background 0.3s;}
 .feat:hover{background:var(--bg2);}
 .feat-icon{font-size:1.5rem;margin-bottom:0.75rem;}
@@ -93,7 +93,7 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 @media(max-width:600px){.fs-bar{padding:0 1.25rem 1.5rem;}.si{width:100%;}.fs-bar{flex-direction:column;align-items:flex-start;}}
 
 /* KIT GRID */
-.kit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}
+.kit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}@media(min-width:900px){.kit-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}.kia{height:420px;}.gallery{height:420px;}}
 .kc{background:var(--bg);display:flex;flex-direction:column;transition:background 0.2s;}
 .kc:hover{background:var(--bg2);}
 .kia{height:340px;background:var(--bg3);position:relative;overflow:hidden;}
@@ -132,7 +132,7 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .rs{color:var(--red);font-size:1rem;letter-spacing:0.12em;margin-bottom:0.75rem;}
 .rt{font-size:0.88rem;font-weight:300;font-style:italic;color:var(--cream);line-height:1.7;margin-bottom:1.25rem;}
 .rm{display:flex;justify-content:space-between;font-size:0.7rem;font-weight:600;letter-spacing:0.07em;color:var(--muted);text-transform:uppercase;}
-.ig-sec{padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);}
+.ig-sec{padding:1.5rem 2rem;text-align:center;border-top:1px solid var(--border);}
 .ig-sec p{color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.5rem;}
 
 /* FAQ */
@@ -317,7 +317,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .co-card-cap{padding:1rem 1.25rem;font-size:0.82rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
 
 /* ON HAND */
-.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);}
+.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);}@media(min-width:900px){.oh-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}.oh-img{height:300px;}}
 .oh-card{background:var(--bg);padding:1.25rem;display:flex;flex-direction:column;transition:background 0.2s;}
 .oh-card:hover{background:var(--bg2);}
 .oh-img{width:100%;height:220px;object-fit:contain;background:var(--bg3);border-radius:3px;margin-bottom:1rem;}
@@ -365,7 +365,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .na-wrap{padding:3rem 2rem;border-top:1px solid var(--border);}
 .na-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
 .na-title{font-family:"Cinzel",serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:700;letter-spacing:0.08em;}
-.na-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--border);}
+.na-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);}@media(min-width:600px){.na-grid{grid-template-columns:repeat(3,1fr);}}
 .na-card{background:var(--bg2);cursor:pointer;transition:background 0.2s;overflow:hidden;}
 .na-card:hover{background:var(--bg3);}
 .na-img{height:240px;overflow:hidden;background:var(--bg3);position:relative;}
@@ -668,6 +668,7 @@ body.compact .kao{display:none;}
     <div class="feat"><div class="feat-icon">📦</div><div class="feat-title">Delivery</div><p class="feat-text">Imported kits arrive in approximately 21 days, excluding delays. Discounts available for bulk orders.</p></div>
     <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">On Hand</div><p class="feat-text">Discounted kits available immediately — limited stock at reduced prices, ready for collection or fast delivery.</p></div>
     <div class="feat"><div class="feat-icon">💬</div><div class="feat-title">WhatsApp Orders</div><p class="feat-text">No complicated checkout — simply message us on WhatsApp and we'll handle the rest.</p></div>
+    <div class="feat"><div class="feat-icon">⭐</div><div class="feat-title">Quality Guaranteed</div><p class="feat-text">Every imported kit is personally quality checked before it ships to you.</p></div>
   </div>
   <!-- HOW TO ORDER -->
   <div class="hto-wrap fade-in">
@@ -1870,8 +1871,8 @@ async function loadCountdown(){
   const cached=localStorage.getItem('jz_countdown');
   if(cached){
     const d=new Date(cached);
-    if(d>new Date()){console.log('[CD] starting from cache');startCountdown(d);}
-    else{console.log('[CD] cache expired');localStorage.removeItem('jz_countdown');}
+    if(d>new Date()){startCountdown(d);}
+    else{localStorage.removeItem('jz_countdown');}
   }
   try{
     const{data}=await sb.from('settings').select('value').eq('key','countdown_date').maybeSingle();
@@ -1881,7 +1882,7 @@ async function loadCountdown(){
     } else if(data===null&&!cached){
           document.getElementById('countdownBar').style.display='none';
     }
-  }catch(e){console.log('[CD] error:', e);}
+  }catch(e){}
 }
 function startCountdown(targetDate){
   const bar=document.getElementById('countdownBar');
