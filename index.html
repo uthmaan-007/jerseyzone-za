@@ -510,10 +510,10 @@ body.compact .kao{display:none;}
 #page-kitdetail{padding-top:64px;}
 .kd-page-back{display:flex;align-items:center;gap:8px;padding:1rem 1.5rem;border-bottom:1px solid var(--border);cursor:pointer;font-family:"Raleway",sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
 .kd-page-back:hover{color:var(--cream);}
-.kd-page-gallery{width:100%;background:var(--bg3);}
-.kd-page-gallery img{width:100%;max-height:450px;object-fit:contain;display:block;background:var(--bg3);}
+.kd-page-gallery{width:100%;background:var(--bg3);position:relative;overflow:hidden;min-height:280px;}
+.kd-page-gallery img{width:100%;height:300px;max-height:450px;object-fit:contain;display:block;background:var(--bg3);}
 .kd-page-gallery-track{display:flex;transition:transform 0.3s ease;}
-.kd-page-gallery-img{min-width:100%;max-height:450px;object-fit:contain;background:var(--bg3);}
+.kd-page-gallery-img{min-width:100%;height:300px;max-height:450px;object-fit:contain;background:var(--bg3);}
 .kd-page-gallery-dots{display:flex;gap:6px;justify-content:center;padding:0.75rem 0;}
 .kd-page-body{padding:1.5rem;}
 .kd-page-badges{display:flex;gap:6px;margin-bottom:0.75rem;flex-wrap:wrap;}
@@ -615,6 +615,20 @@ body.compact .kao{display:none;}
 .pag-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
 .pag-btn:disabled{opacity:0.3;cursor:not-allowed;}
 .pag-info{font-size:0.68rem;color:var(--muted);font-weight:300;padding:0 0.5rem;}
+
+
+.gallery-prev,.gallery-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.75);color:#fff;border:none;width:36px;height:52px;cursor:pointer;font-size:1.2rem;z-index:20;transition:background 0.2s;line-height:1;display:flex;align-items:center;justify-content:center;}
+.gallery-prev{left:0;border-radius:0 4px 4px 0;}
+.gallery-next{right:0;border-radius:4px 0 0 4px;}
+.gallery-prev:hover,.gallery-next:hover{background:rgba(220,30,35,0.85);}
+.kd-page-gallery-prev,.kd-page-gallery-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.75);color:#fff;border:none;width:36px;height:56px;cursor:pointer;font-size:1.2rem;z-index:20;transition:background 0.2s;line-height:1;display:flex;align-items:center;justify-content:center;}
+.kd-page-gallery-prev{left:0;border-radius:0 4px 4px 0;}
+.kd-page-gallery-next{right:0;border-radius:4px 0 0 4px;}
+.kd-page-gallery-prev:hover,.kd-page-gallery-next:hover{background:rgba(220,30,35,0.85);}
+
+
+.na-img-track{display:flex;height:100%;transition:transform 0.6s ease;}
+.na-img-slide{min-width:100%;height:100%;object-fit:contain;background:var(--bg3);}
 
 /* KIT TYPE DROPDOWN GROUPS */
 .type-group-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 13px 3px;display:block;}
@@ -1584,6 +1598,7 @@ async function init(){
   loadSettings();
   await loadKits();
   renderNewArrivals();
+  setTimeout(startNARotation,500);
   await loadReviews();
   await loadSuggestions();
   await loadOnHand();
@@ -1847,7 +1862,9 @@ function initGallerySwipe(id){
   },{passive:true});
 }
 function slideGallery(id,dir){
-  const wrap=document.getElementById("gi"+id.substring(1));
+  // id is like "g{kitid}" or "oh{itemid}" — inner imgs div is "gi{kitid}" or "gioh{itemid}"
+  const innerId=id.startsWith('oh')?'gi'+id:'gi'+id.substring(1);
+  const wrap=document.getElementById(innerId);
   if(!wrap)return;
   const total=wrap.children.length;
   if(!galState[id])galState[id]=0;
@@ -1856,7 +1873,8 @@ function slideGallery(id,dir){
   document.querySelectorAll(`#${id} .gdot`).forEach((d,i)=>d.classList.toggle("active",i===galState[id]));
 }
 function goSlide(id,idx){
-  const wrap=document.getElementById("gi"+id.substring(1));
+  const innerId=id.startsWith('oh')?'gi'+id:'gi'+id.substring(1);
+  const wrap=document.getElementById(innerId);
   if(!wrap)return;
   galState[id]=idx;
   wrap.style.transform=`translateX(-${idx*100}%)`;
@@ -2151,7 +2169,14 @@ function renderNewArrivals(){
   const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   const latest=sorted.slice(0,6);
   grid.innerHTML=latest.map(j=>{
-    const img=j.images&&j.images[0]?`<img src="${j.images[0]}" onerror="this.style.display='none'"/>`:`<div class="na-img-ph">⚽</div>`;
+    const naImgs=j.images&&j.images.length?j.images:[];
+    let img='';
+    if(!naImgs.length){img='<div class="na-img-ph">⚽</div>';}
+    else if(naImgs.length===1){img=`<img src="${naImgs[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/>`;}
+    else{
+      const slides=naImgs.map(src=>`<img class="na-img-slide" src="${src}" onerror="this.style.display='none'"/>`).join('');
+      img=`<div class="na-img-track" id="nat${j.id}">${slides}</div>`;
+    }
     const price=j.price_variants&&j.price_variants.length?j.price_variants.map(v=>'R'+v.price+' '+v.label).join(' · '):'';
     const typeLabel=(j.types||[j.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
     const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:
@@ -2170,6 +2195,25 @@ Please advise on availability and payment.`);
       </div>
     </div>`;
   }).join('');
+}
+
+
+// NEW ARRIVALS AUTO ROTATE
+let naRotateInterval=null;
+function startNARotation(){
+  if(naRotateInterval)clearInterval(naRotateInterval);
+  const tracks=document.querySelectorAll('[id^="nat"]');
+  if(!tracks.length)return;
+  const states={};
+  tracks.forEach(t=>{states[t.id]=0;});
+  naRotateInterval=setInterval(()=>{
+    tracks.forEach(t=>{
+      const total=t.children.length;
+      if(total<=1)return;
+      states[t.id]=(states[t.id]+1)%total;
+      t.style.transform=`translateX(-${states[t.id]*100}%)`;
+    });
+  },4000);
 }
 
 // COUNTDOWN TIMER
@@ -2357,10 +2401,19 @@ function openKitDetail(kitId, fromPage){
       d.onclick=()=>kdpGoSlide(i);
       dotsContainer.appendChild(d);
     });
+    // Prev/Next buttons
+    const prevBtn=document.createElement('button');
+    prevBtn.className='kd-page-gallery-prev';prevBtn.innerHTML='‹';
+    prevBtn.onclick=()=>kdpGoSlide((kdpGalIdx-1+images.length)%images.length);
+    const nextBtn=document.createElement('button');
+    nextBtn.className='kd-page-gallery-next';nextBtn.innerHTML='›';
+    nextBtn.onclick=()=>kdpGoSlide((kdpGalIdx+1)%images.length);
+    gallery.appendChild(prevBtn);
+    gallery.appendChild(nextBtn);
     // Touch swipe
     let sx=0;
     gallery.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
-    gallery.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40){kdpGalIdx=(kdpGalIdx+(d>0?1:-1)+images.length)%images.length;kdpGoSlide(kdpGalIdx);}},{passive:true});
+    gallery.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>80){kdpGalIdx=(kdpGalIdx+(d>0?1:-1)+images.length)%images.length;kdpGoSlide(kdpGalIdx);}},{passive:true});
   }
 
   // Badges
@@ -2610,6 +2663,14 @@ function openOHDetail(itemId){
     let sx=0;
     gallery.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
     gallery.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40){kdpGalIdx=(kdpGalIdx+(d>0?1:-1)+images.length)%images.length;kdpGoSlide(kdpGalIdx);}},{passive:true});
+    const pbOH=document.createElement('button');
+    pbOH.className='kd-page-gallery-prev';pbOH.textContent='‹';
+    pbOH.onclick=()=>kdpGoSlide((kdpGalIdx-1+images.length)%images.length);
+    const nbOH=document.createElement('button');
+    nbOH.className='kd-page-gallery-next';nbOH.textContent='›';
+    nbOH.onclick=()=>kdpGoSlide((kdpGalIdx+1)%images.length);
+    gallery.appendChild(pbOH);
+    gallery.appendChild(nbOH);
   }
 
   // Badge
