@@ -1,0 +1,2464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JerseyZone_ZA</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0b0b0d;--bg2:#111114;--bg3:#161619;--border:rgba(255,255,255,0.07);--red:#dc1e23;--red2:#ff2d33;--cream:#f5f0ea;--muted:#888;--muted2:#444;}
+html{scroll-behavior:smooth;}
+body{font-family:'Raleway',sans-serif;background:var(--bg);color:var(--cream);min-height:100vh;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(11,11,13,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);}
+.nav-left{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.nav-logo{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid var(--red);}
+.nav-brand{font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;letter-spacing:0.12em;}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nl{font-family:'Raleway',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:7px 11px;border-radius:4px;cursor:pointer;transition:all 0.2s;border:none;background:none;}
+.nl:hover,.nl.active{color:var(--cream);background:rgba(255,255,255,0.06);}
+.nl-wa{background:linear-gradient(135deg,#1db954,#128c7e)!important;color:#fff!important;font-weight:600!important;border-radius:4px;}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
+.hbg span{width:22px;height:1.5px;background:var(--cream);border-radius:2px;display:block;transition:background 0.3s;}
+@media(max-width:760px){nav{padding:0 1.25rem;}.nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(11,11,13,0.99);flex-direction:column;padding:0.75rem;border-bottom:1px solid var(--border);gap:2px;transition:background 0.3s;}.nav-links.open{display:flex;}.nl{font-size:0.8rem;padding:11px 14px;width:100%;text-align:left;}.hbg{display:flex;}}
+
+/* PAGES */
+.page{padding-top:64px;min-height:100vh;display:none;}
+.page.active{display:block;}
+
+/* BUTTONS */
+.btn-p{font-family:'Raleway',sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;padding:12px 26px;background:var(--red);color:#fff;border:none;border-radius:3px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.btn-p:hover{background:var(--red2);box-shadow:0 4px 20px rgba(220,30,35,0.35);}
+.btn-o{font-family:'Raleway',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;padding:12px 26px;background:transparent;color:var(--cream);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.btn-o:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);}
+.btn-d{font-family:'Raleway',sans-serif;font-weight:600;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 13px;background:transparent;color:var(--red);border:1px solid rgba(220,30,35,0.3);border-radius:3px;cursor:pointer;transition:all 0.2s;}
+.btn-d:hover{background:rgba(220,30,35,0.1);}
+.btn-g{font-family:'Raleway',sans-serif;font-weight:600;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 13px;background:transparent;color:#c9a84c;border:1px solid rgba(201,168,76,0.3);border-radius:3px;cursor:pointer;transition:all 0.2s;}
+.btn-g:hover{background:rgba(201,168,76,0.1);}
+
+/* HERO */
+.hero{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem 2rem;background:radial-gradient(ellipse at 50% 40%,rgba(220,30,35,0.05) 0%,transparent 60%);}
+.hero-logo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid var(--red);margin-bottom:1rem;animation:pulse 4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(220,30,35,0.25),0 0 30px rgba(220,30,35,0.1);}50%{box-shadow:0 0 0 8px rgba(220,30,35,0),0 0 50px rgba(220,30,35,0.2);}}
+.hero-eye{font-size:0.62rem;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;letter-spacing:0.06em;line-height:1;margin-bottom:0.6rem;}
+.hero-slogan{font-size:0.85rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;}
+.hero-tag{font-size:0.9rem;font-weight:300;color:var(--muted);letter-spacing:0.08em;margin-bottom:2.5rem;}
+.hero-line{width:40px;height:1px;background:var(--red);margin:0 auto 2.5rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;}
+
+/* REVIEWS SLIDER ON HOME */
+.home-reviews{width:100%;max-width:700px;margin:0 auto;padding:0 1rem;position:relative;}
+.home-reviews-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;}
+.rev-slider{overflow:hidden;border-radius:4px;position:relative;}
+.rev-track{display:flex;transition:transform 0.5s ease;}
+.rev-slide{min-width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;padding:1.5rem;text-align:left;}
+.rev-slide-stars{color:var(--red);font-size:0.95rem;letter-spacing:0.1em;margin-bottom:0.6rem;}
+.rev-slide-text{font-size:0.9rem;font-style:italic;font-weight:300;color:var(--cream);line-height:1.7;margin-bottom:0.9rem;}
+.rev-slide-meta{font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+.rev-dots{display:flex;gap:6px;justify-content:center;margin-top:1rem;}
+.rev-dot{width:6px;height:6px;border-radius:50%;background:var(--muted2);cursor:pointer;transition:background 0.2s;}
+.rev-dot.active{background:var(--red);}
+.rev-arrows{display:flex;gap:0.5rem;justify-content:center;margin-top:0.75rem;}
+.rev-arr{background:none;border:1px solid var(--border);color:var(--muted);padding:5px 12px;border-radius:3px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+.rev-arr:hover{border-color:var(--red);color:var(--cream);}
+
+/* FEATURES */
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}@media(min-width:900px){.feats{grid-template-columns:repeat(4,1fr);}}
+.feat{background:var(--bg);padding:2rem 1.5rem;transition:background 0.3s;}
+.feat:hover{background:var(--bg2);}
+.feat-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+.feat-title{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.1em;margin-bottom:0.4rem;}
+.feat-text{font-size:0.8rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+/* PAGE HEADER */
+.ph{padding:3rem 2rem 1.5rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.ph h2{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;letter-spacing:0.08em;margin-bottom:0.3rem;}
+.ph p{font-size:0.83rem;color:var(--muted);font-weight:300;}
+
+/* FILTER + SEARCH */
+.fs-bar{display:flex;align-items:center;justify-content:space-between;padding:0 2rem 1.5rem;flex-wrap:wrap;gap:1rem;}
+.fbar{display:flex;gap:6px;flex-wrap:wrap;}
+.fb{font-family:'Raleway',sans-serif;font-weight:600;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 13px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.fb.active,.fb:hover{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.08);}
+.sw{position:relative;}
+.si{padding:8px 14px 8px 36px;background:var(--bg2);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-family:'Raleway',sans-serif;font-size:0.78rem;outline:none;width:220px;}
+.si:focus{border-color:rgba(255,255,255,0.18);}
+.si::placeholder{color:var(--muted2);}
+.sico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted2);font-size:0.8rem;}
+@media(max-width:600px){.fs-bar{padding:0 1.25rem 1.5rem;}.si{width:100%;}.fs-bar{flex-direction:column;align-items:flex-start;}}
+
+/* KIT GRID */
+.kit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}@media(min-width:900px){.kit-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}.kia{height:420px;}.gallery{height:420px;}}
+.kc{background:var(--bg);display:flex;flex-direction:column;transition:background 0.2s;}
+.kc:hover{background:var(--bg2);}
+.kia{height:340px;background:var(--bg3);position:relative;overflow:hidden;}
+.kia img{width:100%;height:100%;object-fit:contain;background:var(--bg3);transition:transform 0.4s;}
+.kc:hover .kia img{transform:scale(1.04);}
+.kph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.1;}
+.gallery{position:relative;height:340px;overflow:hidden;}
+.gallery-imgs{display:flex;height:100%;transition:transform 0.3s ease;}
+.gallery-img{min-width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+
+.gallery-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;}
+.gdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:background 0.2s;}
+.gdot.active{background:#fff;}
+.ktb{position:absolute;top:12px;right:12px;font-family:'Raleway',sans-serif;font-weight:700;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 9px;border-radius:2px;z-index:5;}
+.badge-imported{background:var(--red);color:#fff;}
+.badge-local{background:rgba(201,168,76,0.9);color:#111;}
+.badge-both{background:linear-gradient(135deg,var(--red),rgba(201,168,76,0.9));color:#fff;}
+.koos{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.8);color:#ff6b6b;font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 9px;border-radius:2px;z-index:5;}
+.ki{padding:1.25rem;flex:1;display:flex;flex-direction:column;}
+.kn{font-family:'Cinzel',serif;font-size:0.83rem;font-weight:600;letter-spacing:0.04em;margin-bottom:0.25rem;}
+.km{font-size:0.76rem;color:var(--muted);font-weight:300;margin-bottom:1rem;}
+.kpv{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.75rem;}
+.kpt{font-size:0.7rem;font-weight:600;background:var(--bg3);border:1px solid var(--border);padding:3px 9px;border-radius:2px;}
+.kao{font-size:0.7rem;color:var(--muted);margin-bottom:0.75rem;font-weight:300;}
+.ksz{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem;}
+.ksc{font-size:0.62rem;font-weight:600;letter-spacing:0.06em;padding:3px 8px;border:1px solid var(--border);border-radius:2px;color:var(--muted);}
+.bwa{display:block;text-align:center;font-family:'Raleway',sans-serif;font-weight:700;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px;background:linear-gradient(135deg,#1db954,#128c7e);color:#fff;border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:opacity 0.2s;margin-top:auto;}
+.bwa:hover{opacity:0.9;}
+.bwa-dis{opacity:0.25;cursor:not-allowed;pointer-events:none;background:var(--bg3);color:var(--muted);border:1px solid var(--border);}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted);font-weight:300;font-size:0.88rem;}
+
+/* REVIEWS PAGE */
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);}
+.rc{background:var(--bg);padding:1.75rem;transition:background 0.2s;}
+.rc:hover{background:var(--bg2);}
+.rs{color:var(--red);font-size:1rem;letter-spacing:0.12em;margin-bottom:0.75rem;}
+.rt{font-size:0.88rem;font-weight:300;font-style:italic;color:var(--cream);line-height:1.7;margin-bottom:1.25rem;}
+.rm{display:flex;justify-content:space-between;font-size:0.7rem;font-weight:600;letter-spacing:0.07em;color:var(--muted);text-transform:uppercase;}
+.ig-sec{padding:1.5rem 2rem;text-align:center;border-top:1px solid var(--border);}
+.ig-sec p{color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.5rem;}
+
+/* FAQ */
+.faq-wrap{max-width:720px;margin:0 auto;padding:0 2rem 4rem;}
+.faq-sec{margin-bottom:2.5rem;}
+.faq-sec-title{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{padding:1.1rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.83rem;font-weight:500;color:var(--cream);transition:color 0.2s;user-select:none;gap:1rem;-webkit-tap-highlight-color:transparent;}
+.faq-q:hover{color:rgba(245,240,234,0.65);}
+body.light .faq-q{color:var(--cream);}
+body.light .faq-q:hover{color:rgba(0,0,0,0.6);}
+body.light .faq-q:focus{color:var(--cream);outline:none;}
+.faq-arr{color:var(--muted2);font-size:0.65rem;flex-shrink:0;transition:transform 0.3s;}
+.faq-arr.o{transform:rotate(180deg);}
+.faq-ans{font-size:0.83rem;font-weight:300;color:var(--muted);line-height:1.8;padding-bottom:1.1rem;display:none;}
+.faq-ans.o{display:block;}
+.ptbl{width:100%;border-collapse:collapse;margin-top:0.75rem;}
+.ptbl th{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-align:left;padding:7px 0;border-bottom:1px solid var(--border);}
+.ptbl td{padding:7px 0;font-size:0.8rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.03);}
+.ptbl .pr{color:var(--cream);font-weight:600;}
+
+/* PRICING PAGE */
+.pricing-wrap{max-width:860px;margin:0 auto;padding:0 2rem 4rem;}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-bottom:2.5rem;}
+.pricing-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:transform 0.2s,border-color 0.2s;}
+.pricing-card:hover{transform:translateY(-3px);border-color:rgba(220,30,35,0.3);}
+.pricing-card-header{background:linear-gradient(135deg,rgba(220,30,35,0.15),rgba(220,30,35,0.05));padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);}
+.pricing-card-title{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;color:var(--cream);margin-bottom:0.2rem;}
+.pricing-card-sub{font-size:0.72rem;color:var(--muted);font-weight:300;}
+.pricing-card-body{padding:1.25rem 1.5rem;}
+.pricing-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.pricing-row:last-child{border-bottom:none;}
+.pricing-label{font-size:0.8rem;color:var(--muted);font-weight:300;}
+.pricing-price{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:700;color:var(--red);}
+.pricing-note{background:rgba(220,30,35,0.06);border:1px solid rgba(220,30,35,0.15);border-radius:4px;padding:1rem 1.25rem;font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;margin-top:1rem;}
+.pricing-section-title{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+
+/* SUGGEST */
+.sug-wrap{max-width:560px;margin:0 auto;padding:0 2rem 4rem;}
+.sug-note{background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:1.1rem 1.25rem;margin-bottom:2rem;font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.7;}
+.sug-done{display:none;text-align:center;padding:4rem 1rem;}
+.sug-done.show{display:block;}
+.sug-done h3{font-family:'Cinzel',serif;font-size:1.1rem;margin-bottom:0.5rem;}
+.sug-done p{color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.5rem;}
+
+/* FORM */
+.fg{margin-bottom:1.2rem;}
+.fl{font-size:0.63rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.45rem;}
+.fi,.fsel,.fta{width:100%;padding:10px 13px;background:var(--bg2);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-family:'Raleway',sans-serif;font-size:0.83rem;outline:none;transition:border-color 0.2s;}
+.fi:focus,.fsel:focus,.fta:focus{border-color:rgba(255,255,255,0.18);}
+.fi::placeholder,.fta::placeholder{color:var(--muted2);}
+.fsel{appearance:none;cursor:pointer;}
+.fsel option{background:var(--bg2);}
+.fta{resize:vertical;min-height:90px;font-weight:300;}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:480px){.fr2{grid-template-columns:1fr;}}
+.cbg{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.3rem;}
+.cl{display:flex;align-items:center;gap:6px;font-size:0.76rem;color:var(--muted);cursor:pointer;font-weight:300;}
+.cl input{accent-color:var(--red);}
+.pw-w{position:relative;}
+.pw-e{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted2);cursor:pointer;font-size:0.9rem;}
+
+/* ADMIN LOGIN */
+.alp{max-width:380px;margin:4rem auto;padding:0 1.5rem;}
+.ac{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2.5rem;}
+.al-icon{font-size:2rem;margin-bottom:1rem;}
+.al-title{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:0.08em;margin-bottom:0.25rem;}
+.al-sub{font-size:0.78rem;color:var(--muted);font-weight:300;margin-bottom:2rem;}
+.err-msg{background:rgba(220,30,35,0.08);border:1px solid rgba(220,30,35,0.2);border-radius:3px;padding:8px 12px;color:#ff6b6b;font-size:0.76rem;margin-bottom:1rem;display:none;}
+.err-msg.show{display:block;}
+
+/* ADMIN PANEL */
+.ap{padding:0 2rem 4rem;max-width:1060px;margin:0 auto;}
+.ap-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-top:0.5rem;flex-wrap:wrap;gap:1rem;}
+.ap-top h2{font-family:'Cinzel',serif;font-size:1.15rem;letter-spacing:0.06em;}
+.atabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem;flex-wrap:wrap;}
+.abt{font-family:'Raleway',sans-serif;font-weight:600;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.abt.active,.abt:hover{color:var(--cream);border-bottom-color:var(--red);}
+.atab{display:none;}
+.atab.active{display:block;}
+.ath{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.att{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.08em;color:var(--muted);}
+.adl{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:3px;overflow:hidden;}
+.adi{background:var(--bg2);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background 0.2s;}
+.adi:hover{background:var(--bg3);}
+.adin{flex:1;}
+.adin-n{font-size:0.83rem;font-weight:600;margin-bottom:0.2rem;}
+.adin-m{font-size:0.73rem;color:var(--muted);font-weight:300;}
+.adi-ac{display:flex;gap:0.4rem;flex-shrink:0;}
+.sgc{background:var(--bg2);border-bottom:1px solid var(--border);padding:1.25rem;}
+.sgc:last-child{border-bottom:none;}
+.sg-meta{display:flex;justify-content:space-between;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem;}
+.sg-name{font-size:0.76rem;font-weight:600;letter-spacing:0.06em;}
+.sg-date{font-size:0.7rem;color:var(--muted);}
+.sg-phone{font-size:0.76rem;color:var(--red);font-weight:600;}
+.sg-text{font-size:0.83rem;color:var(--muted);font-style:italic;font-weight:300;margin-bottom:0.9rem;line-height:1.6;}
+.sg-ac{display:flex;gap:0.5rem;}
+.nbadge{display:inline-block;font-size:0.58rem;font-weight:700;padding:2px 6px;border-radius:10px;background:var(--red);color:#fff;margin-left:6px;vertical-align:middle;}
+
+/* MODAL */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+.mo.open{display:flex;}
+.md{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2rem;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;}
+.mdt{font-family:'Cinzel',serif;font-size:0.92rem;letter-spacing:0.08em;margin-bottom:1.75rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.mdf{display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1.75rem;padding-top:1.25rem;border-top:1px solid var(--border);}
+.pvr{display:flex;gap:0.5rem;margin-bottom:0.5rem;align-items:center;}
+.imgr{display:flex;gap:0.5rem;margin-bottom:0.5rem;align-items:center;}
+.sr{display:flex;gap:4px;margin-top:0.25rem;}
+.sb{font-size:1.4rem;cursor:pointer;color:var(--muted2);background:none;border:none;transition:color 0.15s;padding:0;line-height:1;}
+.sb.on{color:var(--red);}
+
+/* FOOTER */
+footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fbrand{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.1em;color:var(--muted);}
+.flinks{display:flex;gap:1.5rem;}
+.flink{font-size:0.7rem;color:var(--muted2);text-decoration:none;transition:color 0.2s;cursor:pointer;font-weight:300;letter-spacing:0.06em;}
+.flink:hover{color:var(--cream);}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--border);color:var(--cream);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:3px;z-index:9999;display:none;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.6);}
+.toast.show{display:block;animation:ti 0.25s ease;}
+@keyframes ti{from{opacity:0;transform:translateX(-50%) translateY(6px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+
+
+.badge-new{position:absolute;top:12px;left:12px;background:linear-gradient(135deg,#f5a623,#e8252a);color:#fff;font-family:"Raleway",sans-serif;font-weight:700;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 9px;border-radius:2px;z-index:6;}
+
+/* SIZE GUIDE */
+.sg-wrap{max-width:800px;margin:0 auto;padding:0 2rem 4rem;}
+.sg-note{background:rgba(220,30,35,0.06);border:1px solid rgba(220,30,35,0.2);border-radius:4px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:0.82rem;color:var(--muted);line-height:1.7;}
+.sg-note strong{color:var(--cream);}
+.sg-section-title{font-family:"Cinzel",serif;font-size:0.68rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+.sg-table-wrap{overflow-x:auto;margin-bottom:2rem;}
+.sg-table{width:100%;border-collapse:collapse;min-width:500px;}
+.sg-table th{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);text-align:center;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--bg2);}
+.sg-table th:first-child{text-align:left;}
+.sg-table td{padding:10px 12px;font-size:0.82rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);text-align:center;transition:background 0.2s;}
+.sg-table td:first-child{font-family:"Cinzel",serif;font-weight:700;color:var(--cream);font-size:0.85rem;text-align:left;}
+.sg-table tr:hover td{background:var(--bg2);}
+.sg-disclaimer{font-size:0.75rem;color:var(--muted2);font-style:italic;margin-top:0.75rem;font-weight:300;}
+.sg-tip{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;margin-top:1.5rem;font-size:0.82rem;color:var(--muted);line-height:1.7;}
+.sg-tip strong{color:var(--cream);}
+
+/* DRAG REORDER */
+.drag-item{cursor:grab;}
+.drag-item.dragging{opacity:0.4;cursor:grabbing;}
+.drag-over{border-top:2px solid var(--red) !important;}
+
+
+
+/* ANNOUNCEMENT BANNER */
+.announce-bar{background:var(--red);color:#fff;text-align:center;padding:8px 1rem;font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;position:fixed;top:64px;left:0;right:0;z-index:98;overflow:hidden;}
+.announce-inner{display:inline-block;white-space:nowrap;animation:ticker 20s linear infinite;}
+@keyframes ticker{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}}
+
+/* HOW TO ORDER */
+.hto-wrap{max-width:860px;margin:0 auto;padding:3rem 2rem;}
+.hto-title{font-family:"Cinzel",serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;letter-spacing:0.08em;text-align:center;margin-bottom:0.5rem;}
+.hto-sub{text-align:center;color:var(--muted);font-size:0.85rem;font-weight:300;margin-bottom:3rem;}
+.hto-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);}
+.hto-step{background:var(--bg2);padding:1.75rem 1.25rem;text-align:center;position:relative;}
+.hto-step-num{font-family:"Cinzel",serif;font-size:2.2rem;font-weight:700;color:var(--red);opacity:0.9;margin-bottom:0.5rem;line-height:1;text-shadow:0 0 20px rgba(220,30,35,0.3);}
+.hto-step-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+.hto-step-title{font-family:"Cinzel",serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:0.4rem;}
+.hto-step-text{font-size:0.78rem;color:var(--muted);line-height:1.6;font-weight:300;}
+
+/* CUSTOMER ORDERS */
+.co-carousel{overflow:hidden;position:relative;padding:0 2rem 2rem;}
+.co-track{display:flex;gap:1px;transition:transform 0.4s ease;}
+.co-slide{min-width:280px;background:var(--bg2);flex-shrink:0;border-radius:3px;overflow:hidden;}
+.co-slide img{width:100%;height:300px;object-fit:cover;display:block;}
+.co-slide-caption{padding:0.9rem 1rem;font-size:0.78rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
+.co-nav{display:flex;gap:0.5rem;justify-content:center;margin-top:0.75rem;}
+.co-nav-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:3px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+.co-nav-btn:hover{border-color:var(--red);color:var(--cream);}
+
+/* CUSTOMER ORDERS GRID PAGE */
+.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}
+.co-card{background:var(--bg);overflow:hidden;transition:background 0.2s;}
+.co-card:hover{background:var(--bg2);}
+.co-card img{width:100%;height:300px;object-fit:cover;display:block;transition:transform 0.4s;}
+.co-card:hover img{transform:scale(1.03);}
+.co-card-cap{padding:1rem 1.25rem;font-size:0.82rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
+
+/* ON HAND */
+.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);}@media(min-width:900px){.oh-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}.oh-img{height:300px;}}
+.oh-card{background:var(--bg);padding:1.25rem;display:flex;flex-direction:column;transition:background 0.2s;}
+.oh-card:hover{background:var(--bg2);}
+.oh-img{width:100%;height:220px;object-fit:contain;background:var(--bg3);border-radius:3px;margin-bottom:1rem;}
+.oh-img-placeholder{width:100%;height:220px;background:var(--bg3);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.1;margin-bottom:1rem;}
+.oh-name{font-family:"Cinzel",serif;font-size:0.83rem;font-weight:600;margin-bottom:0.25rem;}
+.oh-team{font-size:0.76rem;color:var(--muted);font-weight:300;margin-bottom:0.75rem;}
+.oh-prices{display:flex;gap:6px;margin-bottom:0.5rem;flex-wrap:wrap;}
+.oh-price-orig{font-size:0.72rem;color:var(--muted2);text-decoration:line-through;}
+.oh-price-disc{font-family:"Cinzel",serif;font-size:0.9rem;font-weight:700;color:var(--red);}
+.oh-discount-badge{background:rgba(220,30,35,0.15);border:1px solid rgba(220,30,35,0.3);color:var(--red);font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:2px;letter-spacing:0.08em;}
+.oh-sizes{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem;}
+.oh-size{font-size:0.65rem;font-weight:700;letter-spacing:0.06em;padding:4px 10px;border:1px solid var(--border);border-radius:2px;color:var(--muted);}
+.oh-size.avail{border-color:rgba(29,185,84,0.4);color:#1db954;}
+.oh-size.sold{border-color:var(--border);color:var(--muted2);text-decoration:line-through;opacity:0.4;}
+
+
+/* FLOATING BUTTONS */
+.float-wa{position:fixed;bottom:5rem;right:1.5rem;z-index:500;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);cursor:pointer;text-decoration:none;transition:all 0.2s;border:none;}
+.float-wa:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,0.55);}
+.float-top{position:fixed;bottom:9.5rem;right:1.5rem;z-index:500;width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:none;align-items:center;justify-content:center;font-size:0.9rem;color:var(--muted);cursor:pointer;transition:all 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.4);}
+.float-top:hover{border-color:var(--red);color:var(--cream);}
+.float-top.visible{display:flex;}
+
+/* RELATED KITS */
+.related-wrap{padding:2rem;border-top:1px solid var(--border);background:var(--bg);}
+.related-title{font-family:"Cinzel",serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:1.25rem;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border);}
+.related-card{background:var(--bg2);cursor:pointer;transition:background 0.2s;}
+.related-card:hover{background:var(--bg3);}
+.related-img{height:180px;overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;}
+.related-img img{width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.related-img-ph{font-size:2.5rem;opacity:0.1;}
+.related-info{padding:0.75rem 1rem;}
+.related-name{font-family:"Cinzel",serif;font-size:0.72rem;font-weight:600;margin-bottom:0.2rem;color:var(--cream);}
+.related-team{font-size:0.7rem;color:var(--muted);font-weight:300;}
+
+/* INSTAGRAM FOOTER BAR */
+.ig-footer-bar{background:var(--bg2);border-top:1px solid var(--border);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.ig-footer-bar a{display:flex;align-items:center;gap:8px;font-family:"Cinzel",serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.ig-footer-bar a:hover{color:var(--cream);}
+.ig-icon{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
+
+
+/* NEW ARRIVALS */
+.na-wrap{padding:3rem 2rem;border-top:1px solid var(--border);}
+.na-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.na-title{font-family:"Cinzel",serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:700;letter-spacing:0.08em;}
+.na-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);}@media(min-width:600px){.na-grid{grid-template-columns:repeat(3,1fr);}}
+.na-card{background:var(--bg2);cursor:pointer;transition:background 0.2s;overflow:hidden;}
+.na-card:hover{background:var(--bg3);}
+.na-img{height:240px;overflow:hidden;background:var(--bg3);position:relative;}
+.na-img img{width:100%;height:100%;object-fit:contain;background:var(--bg3);transition:transform 0.4s;}
+.na-card:hover .na-img img{transform:scale(1.04);}
+.na-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.1;}
+.na-badge{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#f5a623,#e8252a);color:#fff;font-family:"Raleway",sans-serif;font-weight:700;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 9px;border-radius:2px;}
+.na-info{padding:1rem 1.25rem;}
+.na-name{font-family:"Cinzel",serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem;color:var(--cream);}
+.na-team{font-size:0.72rem;color:var(--muted);font-weight:300;margin-bottom:0.5rem;}
+.na-price{font-family:"Cinzel",serif;font-size:0.8rem;font-weight:700;color:var(--red);}
+
+/* ABOUT US */
+.about-wrap{max-width:860px;margin:0 auto;padding:3rem 2rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:640px){.about-grid{grid-template-columns:1fr;gap:2rem;}}
+.about-logo{width:160px;height:160px;border-radius:50%;object-fit:cover;border:2px solid var(--red);display:block;margin:0 auto;}
+.about-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--red);margin-bottom:0.75rem;}
+.about-title{font-family:"Cinzel",serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:700;letter-spacing:0.06em;margin-bottom:1rem;line-height:1.2;}
+.about-text{font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:1rem;}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.about-stat-num{font-family:"Cinzel",serif;font-size:1.4rem;font-weight:700;color:var(--red);margin-bottom:0.2rem;}
+.about-stat-label{font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+
+/* TERMS */
+.terms-wrap{max-width:760px;margin:0 auto;padding:0 2rem 4rem;}
+.terms-sec{margin-bottom:2rem;}
+.terms-sec-title{font-family:"Cinzel",serif;font-size:0.78rem;letter-spacing:0.18em;color:var(--red);text-transform:uppercase;margin-bottom:0.9rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+.terms-text{font-size:0.83rem;color:var(--muted);font-weight:300;line-height:1.9;}
+.terms-text p{margin-bottom:0.75rem;}
+.terms-text ul{padding-left:1.25rem;margin-bottom:0.75rem;}
+.terms-text ul li{margin-bottom:0.4rem;}
+
+/* COUNTDOWN TIMER */
+.countdown-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 2rem;display:none;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;position:fixed;top:64px;left:0;right:0;z-index:97;}
+.countdown-bar.show{display:flex;}
+.countdown-label{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+.countdown-timer{display:flex;gap:0.75rem;align-items:center;}
+.countdown-unit{text-align:center;}
+.countdown-num{font-family:"Cinzel",serif;font-size:1.1rem;font-weight:700;color:var(--red);line-height:1;}
+.countdown-unit-label{font-size:0.55rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2);}
+.countdown-sep{font-family:"Cinzel",serif;font-size:1rem;color:var(--muted2);margin-bottom:0.5rem;}
+.countdown-cta{font-family:"Raleway",sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;background:var(--red);color:#fff;border:none;border-radius:3px;cursor:pointer;text-decoration:none;white-space:nowrap;}
+
+
+/* LIGHT MODE */
+body.light{
+  --bg:#f5f5f7;
+  --bg2:#ffffff;
+  --bg3:#ebebed;
+  --border:rgba(0,0,0,0.08);
+  --cream:#1a1a1a;
+  --muted:#666;
+  --muted2:#aaa;
+}
+body.light nav{background:rgba(245,245,247,0.97);border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .nav-brand{color:#1a1a1a;}
+body.light .nl{color:#666;}
+body.light .nl:hover,.light .nl.active{color:#1a1a1a;background:rgba(0,0,0,0.05);}
+body.light .nav-links{background:rgba(245,245,247,0.99) !important;border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .hbg span{background:#1a1a1a !important;}
+body.light .theme-toggle{color:#666;border-color:rgba(0,0,0,0.15);}
+body.light .announce-bar{background:var(--red);}
+body.light .float-wa{box-shadow:0 4px 20px rgba(37,211,102,0.3);}
+body.light .float-top{background:#fff;box-shadow:0 4px 16px rgba(0,0,0,0.15);}
+body.light .toast{box-shadow:0 8px 32px rgba(0,0,0,0.15);}
+
+/* THEME TOGGLE */
+.theme-toggle{background:none;border:1px solid var(--border);border-radius:20px;padding:5px 10px;cursor:pointer;font-size:0.75rem;color:var(--muted);transition:all 0.2s;display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.theme-toggle:hover{border-color:var(--red);color:var(--cream);}
+
+
+/* LIGHT MODE */
+body.light{
+  --bg:#f5f5f7;
+  --bg2:#ffffff;
+  --bg3:#ebebed;
+  --border:rgba(0,0,0,0.08);
+  --cream:#1a1a1a;
+  --muted:#666;
+  --muted2:#999;
+}
+body.light nav{background:rgba(245,245,247,0.97);border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .nav-brand{color:#1a1a1a;}
+body.light .nl{color:#666;}
+body.light .nl:hover,.light .nl.active{color:#1a1a1a;background:rgba(0,0,0,0.05);}
+body.light .nav-links{background:rgba(245,245,247,0.99) !important;border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .hbg span{background:#1a1a1a !important;}
+body.light .theme-toggle{color:#666;border-color:rgba(0,0,0,0.15);}
+body.light .announce-bar{background:var(--red);}
+body.light .float-wa{box-shadow:0 4px 20px rgba(37,211,102,0.35);}
+body.light .hero{background:radial-gradient(ellipse at 50% 40%,rgba(220,30,35,0.04) 0%,transparent 60%);}
+body.light .feat{background:var(--bg2);}
+body.light .feat:hover{background:var(--bg3);}
+body.light .kc{background:var(--bg2);}
+body.light .kc:hover{background:var(--bg3);}
+body.light .rc{background:var(--bg2);}
+body.light .rc:hover{background:var(--bg3);}
+body.light .pricing-card{background:var(--bg2);}
+body.light .admin-card-inner,.light .ac{background:var(--bg2);}
+
+/* SETTINGS PAGE */
+.settings-wrap{max-width:600px;margin:0 auto;padding:0 2rem 4rem;}
+.settings-group{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1.5rem;}
+.settings-group-title{font-family:"Cinzel",serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);padding:1rem 1.25rem 0.5rem;border-bottom:1px solid var(--border);}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border);gap:1rem;}
+.settings-row:last-child{border-bottom:none;}
+.settings-label{font-size:0.85rem;font-weight:500;color:var(--cream);}
+.settings-desc{font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.2rem;}
+
+/* TOGGLE SWITCH */
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:var(--muted2);border-radius:24px;cursor:pointer;transition:background 0.3s;}
+.toggle-slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform 0.3s;}
+.toggle input:checked + .toggle-slider{background:var(--red);}
+.toggle input:checked + .toggle-slider:before{transform:translateX(20px);}
+
+/* COMPACT VIEW */
+body.compact .kit-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+body.compact .kia{height:200px;}
+body.compact .gallery{height:200px;}
+body.compact .ki{padding:0.75rem;}
+body.compact .kn{font-size:0.72rem;}
+body.compact .km{font-size:0.65rem;margin-bottom:0.5rem;}
+body.compact .ksz{display:none;}
+body.compact .kao{display:none;}
+
+
+/* FADE IN ON SCROLL */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.fade-in.fade-out{opacity:0;transform:translateY(-24px);}
+
+
+
+/* KIT DETAIL PAGE */
+#page-kitdetail{padding-top:64px;}
+.kd-page-back{display:flex;align-items:center;gap:8px;padding:1rem 1.5rem;border-bottom:1px solid var(--border);cursor:pointer;font-family:"Raleway",sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
+.kd-page-back:hover{color:var(--cream);}
+.kd-page-gallery{width:100%;background:var(--bg3);}
+.kd-page-gallery img{width:100%;max-height:450px;object-fit:contain;display:block;background:var(--bg3);}
+.kd-page-gallery-track{display:flex;transition:transform 0.3s ease;}
+.kd-page-gallery-img{min-width:100%;max-height:450px;object-fit:contain;background:var(--bg3);}
+.kd-page-gallery-dots{display:flex;gap:6px;justify-content:center;padding:0.75rem 0;}
+.kd-page-body{padding:1.5rem;}
+.kd-page-badges{display:flex;gap:6px;margin-bottom:0.75rem;flex-wrap:wrap;}
+.kd-page-name{font-family:"Cinzel",serif;font-size:1.2rem;font-weight:700;letter-spacing:0.04em;color:var(--cream);margin-bottom:0.25rem;}
+.kd-page-team{font-size:0.85rem;color:var(--muted);font-weight:300;margin-bottom:1.25rem;}
+.kd-page-prices{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem;}
+.kd-page-price{font-family:"Cinzel",serif;font-size:1rem;font-weight:700;color:var(--red);background:rgba(220,30,35,0.08);border:1px solid rgba(220,30,35,0.2);padding:8px 16px;border-radius:3px;}
+.kd-page-price-label{font-size:0.65rem;color:var(--muted);font-weight:300;display:block;margin-top:2px;}
+.kd-page-section{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;margin-top:1.5rem;}
+.kd-page-sizes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:0.5rem;}
+.kd-page-size{font-size:0.78rem;font-weight:600;letter-spacing:0.06em;padding:8px 14px;border:1px solid var(--border);border-radius:3px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.kd-page-size:hover,.kd-page-size.selected{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.08);}
+.kd-page-version{font-size:0.78rem;font-weight:600;letter-spacing:0.06em;padding:8px 14px;border:1px solid var(--border);border-radius:3px;color:var(--muted);cursor:pointer;transition:all 0.2s;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.kd-page-version:hover,.kd-page-version.selected{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.08);}
+.kd-page-version-price{font-family:"Cinzel",serif;color:var(--red);font-size:0.85rem;}
+.kd-page-addons{display:flex;flex-wrap:wrap;gap:6px;}
+.kd-page-addon{font-size:0.78rem;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:5px 12px;border-radius:3px;}
+.kd-page-order-btn{display:block;text-align:center;font-family:"Raleway",sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;padding:16px;background:linear-gradient(135deg,#1db954,#128c7e);color:#fff;border:none;border-radius:6px;cursor:pointer;text-decoration:none;margin-top:1.5rem;transition:opacity 0.2s;width:100%;}
+.kd-page-order-btn:hover{opacity:0.9;}
+.kd-page-similar-title{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.kd-page-similar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1px;background:var(--border);}
+.kd-page-similar-card{background:var(--bg2);cursor:pointer;transition:background 0.2s;}
+.kd-page-similar-card:hover{background:var(--bg3);}
+.kd-page-similar-img{height:150px;overflow:hidden;background:var(--bg3);}
+.kd-page-similar-img img{width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.kd-page-similar-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.1;}
+.kd-page-similar-info{padding:0.75rem;}
+.kd-page-similar-name{font-family:"Cinzel",serif;font-size:0.7rem;font-weight:600;color:var(--cream);margin-bottom:0.15rem;}
+.kd-page-similar-team{font-size:0.65rem;color:var(--muted);font-weight:300;}
+
+/* KIT CLOSE BUTTON */
+#kitDetailClose{position:fixed;top:1rem;right:1rem;z-index:9999;background:rgba(20,20,20,0.95);border:2px solid rgba(255,255,255,0.3);color:#fff;font-size:1.1rem;width:44px;height:44px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1;box-shadow:0 2px 20px rgba(0,0,0,0.8);}
+/* KIT DETAIL MODAL */
+.kit-detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:none;align-items:flex-end;justify-content:center;}
+.kit-detail-overlay.open{display:flex;}
+.kit-detail{background:var(--bg2);border-radius:16px 16px 0 0;width:100%;max-width:680px;max-height:92vh;overflow-y:auto;padding-bottom:2rem;animation:slideUp 0.35s ease;}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.kit-detail-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;}
+.kit-detail-gallery{position:relative;height:320px;overflow:hidden;background:var(--bg3);}
+.kit-detail-gallery img{width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.kit-detail-gallery-track{display:flex;height:100%;transition:transform 0.3s ease;}
+.kit-detail-gallery-img{min-width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.kit-detail-gallery-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;}
+.kit-detail-body{padding:1.5rem;}
+.kit-detail-badges{display:flex;gap:6px;margin-bottom:0.75rem;flex-wrap:wrap;}
+.kit-detail-name{font-family:"Cinzel",serif;font-size:1.2rem;font-weight:700;letter-spacing:0.04em;color:var(--cream);margin-bottom:0.25rem;}
+.kit-detail-team{font-size:0.85rem;color:var(--muted);font-weight:300;margin-bottom:1.25rem;}
+.kit-detail-prices{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem;}
+.kit-detail-price{font-family:"Cinzel",serif;font-size:1rem;font-weight:700;color:var(--red);background:rgba(220,30,35,0.08);border:1px solid rgba(220,30,35,0.2);padding:6px 14px;border-radius:3px;}
+.kit-detail-price-label{font-size:0.65rem;color:var(--muted);font-weight:300;display:block;margin-top:2px;}
+.kit-detail-section-title{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;margin-top:1.25rem;}
+.kit-detail-sizes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.5rem;}
+.kit-detail-size{font-size:0.72rem;font-weight:600;letter-spacing:0.06em;padding:6px 12px;border:1px solid var(--border);border-radius:3px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.kit-detail-size:hover,.kit-detail-size.selected{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.08);}
+.kit-detail-addons{display:flex;flex-wrap:wrap;gap:6px;}
+.kit-detail-addon{font-size:0.72rem;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:4px 10px;border-radius:3px;}
+.kit-detail-order-btn{display:block;text-align:center;font-family:"Raleway",sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:14px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;border-radius:6px;cursor:pointer;text-decoration:none;margin-top:1.5rem;transition:opacity 0.2s;width:100%;}
+.kit-detail-order-btn:hover{opacity:0.9;}
+.kit-detail-similar-title{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.kit-detail-similar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1px;background:var(--border);}
+.kit-detail-similar-card{background:var(--bg3);cursor:pointer;transition:background 0.2s;}
+.kit-detail-similar-card:hover{background:var(--bg);}
+.kit-detail-similar-img{height:130px;overflow:hidden;}
+.kit-detail-similar-img img{width:100%;height:100%;object-fit:contain;background:var(--bg3);}
+.kit-detail-similar-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;opacity:0.1;}
+.kit-detail-similar-info{padding:0.6rem 0.75rem;}
+.kit-detail-similar-name{font-family:"Cinzel",serif;font-size:0.65rem;font-weight:600;color:var(--cream);margin-bottom:0.15rem;}
+.kit-detail-similar-team{font-size:0.62rem;color:var(--muted);font-weight:300;}
+
+/* KIT TYPE DROPDOWN GROUPS */
+.type-group-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 13px 3px;display:block;}
+</style>
+</head>
+<body>
+
+<div class="announce-bar" id="announcebar" style="display:none;">
+  <span class="announce-inner" id="announcetext"></span>
+</div>
+<div class="countdown-bar" id="countdownBar">
+  <span class="countdown-label">Import Order Closes In</span>
+  <div class="countdown-timer">
+    <div class="countdown-unit"><div class="countdown-num" id="cd-days">00</div><div class="countdown-unit-label">Days</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-hrs">00</div><div class="countdown-unit-label">Hrs</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-min">00</div><div class="countdown-unit-label">Min</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-sec">00</div><div class="countdown-unit-label">Sec</div></div>
+  </div>
+  <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27d%20like%20to%20place%20an%20order%20before%20the%20deadline." target="_blank" class="countdown-cta">Order Now</a>
+</div>
+<div style="overflow-x:hidden;">
+<nav>
+  <div class="nav-left" onclick="showPage('home')">
+    <img src="https://i.imgur.com/3BVaOIx.png" alt="JZ" class="nav-logo"/>
+    <span class="nav-brand">JerseyZone_ZA</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <button class="nl active" onclick="showPage('home')">Home</button>
+    <button class="nl" onclick="showPage('catalogue')">Catalogue</button>
+    <button class="nl" onclick="showPage('onhand')">On Hand</button>
+    <button class="nl" onclick="showPage('reviews')">Reviews</button>
+    <button class="nl" onclick="showPage('orders')">Customer Orders</button>
+    <button class="nl" onclick="showPage('pricing')">Pricing</button>
+    <button class="nl" onclick="showPage('sizeguide')">Size Guide</button>
+    <button class="nl" onclick="showPage('suggest')">Suggest a Kit</button>
+    <button class="nl" onclick="showPage('faq')">FAQ</button>
+    <button class="nl" onclick="showPage('settings')">⚙ Settings</button>
+    <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!" target="_blank" class="nl nl-wa">💬 WhatsApp</a>
+  </div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+  <button class="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="hero-logo"/>
+    <p class="hero-eye">Est. 2024 · South Africa</p>
+    <h1>JerseyZone_ZA</h1>
+    <p class="hero-slogan">Any Kit. Any Era. Fast &amp; Affordable.</p>
+    <p class="hero-tag">Premium Football Kits — Imported &amp; Local</p>
+    <div class="hero-line"></div>
+    <div class="hero-btns">
+      <button class="btn-p" onclick="showPage('catalogue')">Browse Catalogue</button>
+      <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27d%20like%20to%20place%20an%20order." target="_blank" class="btn-o">Order via WhatsApp</a>
+    </div>
+    <div class="home-reviews">
+      <p class="home-reviews-title">What our customers say</p>
+      <div class="rev-slider" id="homeRevSlider">
+        <div class="rev-track" id="homeRevTrack"></div>
+      </div>
+      <div class="rev-dots" id="homeRevDots"></div>
+      <div class="rev-arrows">
+        <button class="rev-arr" onclick="revSlide(-1)">‹</button>
+        <button class="rev-arr" onclick="revSlide(1)">›</button>
+      </div>
+    </div>
+  </div>
+  <!-- NEW ARRIVALS -->
+  <div class="na-wrap fade-in" id="newArrivalsSection">
+    <div class="na-header">
+      <h2 class="na-title">New Arrivals</h2>
+      <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('catalogue')">View All</button>
+    </div>
+    <div class="na-grid" id="naGrid"></div>
+  </div>
+
+  <div class="feats fade-in">
+    <div class="feat"><div class="feat-icon">⚽</div><div class="feat-title">Imported Kits</div><p class="feat-text">Fan, Player, Retro &amp; Special edition kits sourced directly from international suppliers.</p></div>
+    <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">Replica Kits</div><p class="feat-text">Quality replica football kits for both men and kids, available at affordable local prices.</p></div>
+    <div class="feat"><div class="feat-icon">✂️</div><div class="feat-title">Customisation</div><p class="feat-text">Personalise your imported kit with your name, number, badges and sleeve sponsors.</p></div>
+    <div class="feat"><div class="feat-icon">🔍</div><div class="feat-title">Sourcing</div><p class="feat-text">Don't see your kit? We'll do our best to source it for you at standard imported pricing.</p></div>
+    <div class="feat"><div class="feat-icon">📦</div><div class="feat-title">Delivery</div><p class="feat-text">Imported kits arrive in approximately 21 days, excluding delays. Discounts available for bulk orders.</p></div>
+    <div class="feat"><div class="feat-icon">🏷️</div><div class="feat-title">On Hand</div><p class="feat-text">Discounted kits available immediately — limited stock at reduced prices, ready for collection or fast delivery.</p></div>
+    <div class="feat"><div class="feat-icon">💬</div><div class="feat-title">WhatsApp Orders</div><p class="feat-text">No complicated checkout — simply message us on WhatsApp and we'll handle the rest.</p></div>
+    <div class="feat"><div class="feat-icon">⭐</div><div class="feat-title">Quality Guaranteed</div><p class="feat-text">Every imported kit is personally quality checked before it ships to you.</p></div>
+  </div>
+  <!-- HOW TO ORDER -->
+  <div class="hto-wrap fade-in">
+    <h2 class="hto-title">How to Order</h2>
+    <p class="hto-sub">Simple, fast and secure — straight to your door</p>
+    <div class="hto-steps">
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">01</div>
+        <div class="hto-step-icon">🔍</div>
+        <div class="hto-step-title">Browse</div>
+        <p class="hto-step-text">Find your kit in our catalogue or ask us to source one for you.</p>
+      </div>
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">02</div>
+        <div class="hto-step-icon">💬</div>
+        <div class="hto-step-title">Message Us</div>
+        <p class="hto-step-text">Tap "Order via WhatsApp" and send us your kit name and size.</p>
+      </div>
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">03</div>
+        <div class="hto-step-icon">💳</div>
+        <div class="hto-step-title">Make Payment</div>
+        <p class="hto-step-text">We'll send you banking details. Once paid, your order is secured.</p>
+      </div>
+      <div class="hto-step fade-in">
+        <div class="hto-step-num">04</div>
+        <div class="hto-step-icon">📦</div>
+        <div class="hto-step-title">Receive Your Kit</div>
+        <p class="hto-step-text">Imported kits arrive in approx. 21 days. Local kits are faster.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT US HOME SECTION -->
+  <div style="border-top:1px solid var(--border);" class="fade-in">
+    <div class="about-wrap">
+      <div class="about-grid fade-in">
+        <div>
+          <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+        </div>
+        <div>
+          <p class="about-eyebrow">Est. 2024 · Johannesburg, SA</p>
+          <h2 class="about-title">About JerseyZone_ZA</h2>
+          <p class="about-text">JerseyZone_ZA started as a small side hustle in 2024, initially selling quality local replica kits to football fans across South Africa. Towards the end of 2024, we expanded into internationally sourced imported kits — Fan, Player, Retro and Special editions — with one clear goal in mind: to be the most affordable football kit retailer in South Africa without compromising on quality.</p>
+          <p class="about-text">Based in Johannesburg, we serve customers nationwide via courier, and every order is backed by a personal quality check before it leaves our hands.</p>
+          <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('about')">Read More</button>
+          <div class="about-stats fade-in">
+            <div><div class="about-stat-num">2024</div><div class="about-stat-label">Est.</div></div>
+            <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based</div></div>
+            <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMER ORDERS CAROUSEL -->
+  <div id="homeOrdersSection" class="fade-in" style="display:none;padding:0 0 1rem;">
+    <div style="padding:0 2rem 1.25rem;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;letter-spacing:0.08em;margin-bottom:0.25rem;">Happy Customers</h2>
+        <p style="font-size:0.83rem;color:var(--muted);font-weight:300;">Real orders from real people</p>
+      </div>
+      <button class="btn-o" style="font-size:0.65rem;flex-shrink:0;" onclick="showPage('orders')">View All</button>
+    </div>
+    <div class="co-carousel">
+      <div class="co-track" id="coTrack"></div>
+    </div>
+    <div class="co-nav">
+      <button class="co-nav-btn" onclick="coSlide(-1)">‹</button>
+      <button class="co-nav-btn" onclick="coSlide(1)">›</button>
+    </div>
+  </div>
+
+  <footer>
+    <span class="fbrand">© 2024 JerseyZone_ZA</span>
+    <div class="flinks">
+      <a href="https://instagram.com/jerseyzone2_za" target="_blank" class="flink">Instagram</a>
+      <a href="https://wa.me/27710396374" target="_blank" class="flink">WhatsApp</a>
+      <span class="flink" onclick="showPage('about')">About</span>
+      <span class="flink" onclick="showPage('terms')">T&amp;Cs</span>
+      <span class="flink" onclick="showPage('admin')">Admin</span>
+    </div>
+  </footer>
+</div>
+
+<!-- CATALOGUE -->
+<div class="page" id="page-catalogue">
+  <div class="ph fade-in"><h2>Catalogue</h2><p>Browse our available kits — tap any item to order via WhatsApp</p></div>
+  <div class="fs-bar fade-in">
+    <div class="fbar">
+      <button class="fb active" onclick="setFilter('all',this)">All</button>
+      <button class="fb" onclick="setFilter('fan',this)">Fan Version</button>
+      <button class="fb" onclick="setFilter('player',this)">Player Version</button>
+      <button class="fb" onclick="setFilter('retro',this)">Retro</button>
+      <button class="fb" onclick="setFilter('replica_mens',this)">Replica</button>
+      <button class="fb" onclick="setFilter('kids_kit',this)">Kids Kits</button>
+      <button class="fb" onclick="setFilter('f1',this)">F1</button>
+      <button class="fb" onclick="setFilter('tracksuit',this)">Tracksuits</button>
+      <button class="fb" onclick="setFilter('training_set',this)">Training Sets</button>
+      <button class="fb" onclick="setFilter('windbreaker',this)">Windbreakers</button>
+      <button class="fb" onclick="setFilter('baby_grower',this)">Baby Growers</button>
+    </div>
+    <div class="sw"><span class="sico">🔍</span><input class="si" id="si" placeholder="Search kits..." oninput="renderCat()"/></div>
+  </div>
+  <div id="kitGrid" class="kit-grid fade-in"></div>
+  <div id="emptyState" class="fade-in" class="empty-state" style="display:none;">No kits found. Try a different search or filter.</div>
+  <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
+    <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Looking for a specific kit?</p>
+    <button class="btn-p" onclick="showPage('suggest')">Suggest a Kit</button>
+  </div>
+  <div class="ig-footer-bar"><a href="https://instagram.com/jerseyzone2_za" target="_blank"><span class="ig-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>Follow us @jerseyzone2_za for new stock &amp; updates</span></a></div>
+</div>
+
+<!-- REVIEWS -->
+<div class="page" id="page-reviews">
+  <div class="ph fade-in"><h2>Reviews</h2><p>What our customers are saying</p></div>
+  <div id="reviewsGrid" class="rg fade-in"></div>
+  <div id="reviewsEmpty" class="empty-state" style="display:none;">No reviews yet. Check back soon.</div>
+  <div class="ig-sec fade-in">
+    <p>Follow us on Instagram for more reviews and latest stock</p>
+    <a href="https://instagram.com/jerseyzone2_za" target="_blank" class="btn-o">@jerseyzone2_za</a>
+  </div>
+  <div class="ig-footer-bar"><a href="https://instagram.com/jerseyzone2_za" target="_blank"><span class="ig-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>Follow us @jerseyzone2_za for new stock &amp; updates</span></a></div>
+</div>
+
+<!-- PRICING -->
+<div class="page" id="page-pricing">
+  <div class="ph fade-in"><h2>Pricing</h2><p>Transparent pricing across all our kit categories</p></div>
+  <div class="pricing-wrap fade-in">
+    <div style="margin-bottom:2rem;">
+      <div class="pricing-section-title">Imported Kits</div>
+      <div class="pricing-grid fade-in">
+        <div class="pricing-card">
+          <div class="pricing-card-header"><div class="pricing-card-title">Fan &amp; Player Versions</div><div class="pricing-card-sub">Internationally sourced match kits</div></div>
+          <div class="pricing-card-body">
+            <div class="pricing-row"><span class="pricing-label">Fan Version</span><span class="pricing-price">R490</span></div>
+            <div class="pricing-row"><span class="pricing-label">Player Version</span><span class="pricing-price">R575</span></div>
+            <div class="pricing-row"><span class="pricing-label">Special Kit</span><span class="pricing-price">R575</span></div>
+          </div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-header"><div class="pricing-card-title">Retro &amp; Kids</div><div class="pricing-card-sub">Classic editions and junior kits</div></div>
+          <div class="pricing-card-body">
+            <div class="pricing-row"><span class="pricing-label">Retro Kit</span><span class="pricing-price">R575</span></div>
+            <div class="pricing-row"><span class="pricing-label">Kids Set (Current)</span><span class="pricing-price">R490</span></div>
+            <div class="pricing-row"><span class="pricing-label">Kids Set (Retro)</span><span class="pricing-price">R550</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:2rem;">
+      <div class="pricing-section-title">Local Replica Kits</div>
+      <div class="pricing-grid fade-in">
+        <div class="pricing-card">
+          <div class="pricing-card-header"><div class="pricing-card-title">Replica</div><div class="pricing-card-sub">Quality local replicas</div></div>
+          <div class="pricing-card-body">
+            <div class="pricing-row"><span class="pricing-label">Men's Shirt</span><span class="pricing-price">R230</span></div>
+            <div class="pricing-row"><span class="pricing-label">Kids Shirt + Shorts</span><span class="pricing-price">R300</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:2rem;">
+      <div class="pricing-section-title">Other Items</div>
+      <div class="pricing-grid fade-in">
+        <div class="pricing-card">
+          <div class="pricing-card-header"><div class="pricing-card-title">Clothing &amp; Accessories</div><div class="pricing-card-sub">Additional items available</div></div>
+          <div class="pricing-card-body">
+            <div class="pricing-row"><span class="pricing-label">F1 Polo</span><span class="pricing-price">R550</span></div>
+            <div class="pricing-row"><span class="pricing-label">F1 Jacket</span><span class="pricing-price">R950</span></div>
+            <div class="pricing-row"><span class="pricing-label">Football Baby Grower</span><span class="pricing-price">R500</span></div>
+            <div class="pricing-row"><span class="pricing-label">Windbreaker</span><span class="pricing-price">R900</span></div>
+            <div class="pricing-row"><span class="pricing-label">Reversible Windbreaker</span><span class="pricing-price">R1050</span></div>
+            <div class="pricing-row"><span class="pricing-label">Half-Zip Tracksuit</span><span class="pricing-price">R850</span></div>
+            <div class="pricing-row"><span class="pricing-label">Full-Zip Tracksuit</span><span class="pricing-price">R1050</span></div>
+            <div class="pricing-row"><span class="pricing-label">Training Set</span><span class="pricing-price">R750</span></div>
+          </div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-header"><div class="pricing-card-title">Kit Add-ons</div><div class="pricing-card-sub">Available on imported kits only</div></div>
+          <div class="pricing-card-body">
+            <div class="pricing-row"><span class="pricing-label">Sleeve Sponsor</span><span class="pricing-price">R20</span></div>
+            <div class="pricing-row"><span class="pricing-label">Badges</span><span class="pricing-price">R50</span></div>
+            <div class="pricing-row"><span class="pricing-label">Long Sleeve</span><span class="pricing-price">R100</span></div>
+            <div class="pricing-row"><span class="pricing-label">Custom Name &amp; Number</span><span class="pricing-price">R100</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-note">⚠ Prices are subject to change without prior notice. Kit add-ons are available on imported kits only. A small additional fee may apply for sourced kits. For the most up-to-date pricing, please contact us via WhatsApp.</div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="page" id="page-faq">
+  <div class="ph fade-in"><h2>FAQ</h2><p>Everything you need to know before ordering</p></div>
+  <div class="faq-wrap fade-in">
+    <div class="faq-sec fade-in">
+      <div class="faq-sec-title">Ordering</div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>How do I place an order?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Click "Order via WhatsApp" on any kit, or contact us directly via Instagram at <a href="https://instagram.com/jerseyzone2_za" target="_blank" style="color:var(--red);">@jerseyzone2_za</a> or on WhatsApp at 071 039 6374. Simply provide the kit name, your size, and the type (Imported or Replica). Once payment is confirmed, your order is secured.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>How long does delivery take?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Imported kits are shipped internationally and arrive in approximately 21 days, excluding any unforeseen delays. Ordering multiple imported items together qualifies for a discount as it consolidates international shipping costs.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Can you source a kit not listed in the catalogue?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Yes. Use our "Suggest a Kit" page to submit your request along with your contact number. We will do our best to source the kit for you. Please note that sourced kits are imported only, priced at standard imported rates, and a small additional fee may apply.</div></div>
+    </div>
+    <div class="faq-sec fade-in">
+      <div class="faq-sec-title">Kit Types</div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>What is the difference between Player and Fan version?</span><span class="faq-arr">▼</span></div><div class="faq-ans"><strong style="color:var(--cream);">Player Version:</strong> Constructed from high-performance, lightweight materials featuring advanced moisture-wicking technology. Slim athletic fit with heat-pressed badges for enhanced flexibility.<br/><br/><strong style="color:var(--cream);">Fan Version:</strong> Made from durable, comfortable materials with a relaxed fit. Features embroidered or stitched badges — ideal for everyday wear at a more accessible price point.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Do Replica kits include customisation options?</span><span class="faq-arr">▼</span></div><div class="faq-ans">No. Replica kits do not include any add-on customisation. All imported kits offer a fully customisable name and number option as well as selected badge additions. Certain imported kits also offer a long sleeve option, which will be indicated in the product listing.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>What does "Imported" and "Local" mean?</span><span class="faq-arr">▼</span></div><div class="faq-ans"><strong style="color:var(--cream);">Imported</strong> kits are sourced directly from international suppliers and include Fan, Player, Retro and Special edition versions. <strong style="color:var(--cream);">Local</strong> kits are quality replica versions produced locally, available for men and kids at lower price points.</div></div>
+    </div>
+    <div class="faq-sec fade-in">
+      <div class="faq-sec-title">Pricing</div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Where can I find your full pricing?</span><span class="faq-arr">▼</span></div><div class="faq-ans">All pricing is available on our dedicated <span onclick="showPage('pricing')" style="color:var(--red);cursor:pointer;text-decoration:underline;">Pricing page</span>. Prices are subject to change — for the latest pricing please contact us directly.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SUGGEST -->
+<div class="page" id="page-suggest">
+  <div class="ph fade-in"><h2>Suggest a Kit</h2><p>Can't find what you're looking for? Let us know and we'll try to source it.</p></div>
+  <div class="sug-wrap fade-in">
+    <div class="sug-done" id="sugDone">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">✓</div>
+      <h3>Suggestion Received</h3>
+      <p>We'll look into sourcing this kit and reach out to you directly if it becomes available.</p>
+      <button class="btn-o" onclick="resetSug()">Submit Another</button>
+    </div>
+    <div id="sugForm">
+      <div class="sug-note"><strong style="color:var(--cream);">Please note:</strong> Kit sourcing is available for imported kits only. Sourced kits are priced at standard imported rates and a small additional fee may apply. We will contact you directly on the number provided if the kit becomes available.</div>
+      <div class="fg"><label class="fl">Your Name *</label><input class="fi" id="sn" placeholder="e.g. Yusuf"/></div>
+      <div class="fg"><label class="fl">Contact Number *</label><input class="fi" id="sphone" placeholder="e.g. 071 234 5678" type="tel"/></div>
+      <div class="fg"><label class="fl">Kit You Are Looking For *</label><input class="fi" id="sk" placeholder="e.g. Brazil Away 2024/25"/></div>
+      <div class="fg"><label class="fl">Additional Details</label><textarea class="fta" id="sd" placeholder="Size, any other relevant details..."></textarea></div>
+      <button class="btn-p" style="width:100%;" onclick="submitSug()">Submit Request</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- SIZE GUIDE -->
+<div class="page" id="page-sizeguide">
+  <div class="ph fade-in"><h2>Size Guide</h2><p>Find your perfect fit before ordering</p></div>
+  <div class="sg-wrap fade-in">
+    <div class="sg-note">
+      <strong>Important:</strong> Player version kits are designed with a slim, athletic fit and a waist-cinching design. If you prefer a looser or more relaxed fit, we recommend sizing up by one size. Fan version kits have a more relaxed fit and follow standard sizing.
+    </div>
+    <div class="sg-section-title fade-in">Player Version — Size Chart</div>
+    <div class="sg-table-wrap fade-in">
+      <table class="sg-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Width (cm)</th>
+            <th>Length (cm)</th>
+            <th>Height (cm)</th>
+            <th>Weight (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>S</td><td>47–49</td><td>68–70</td><td>160–165</td><td>50–62</td></tr>
+          <tr><td>M</td><td>49–51</td><td>70–72</td><td>165–170</td><td>62–75</td></tr>
+          <tr><td>L</td><td>51–53</td><td>72–74</td><td>170–175</td><td>75–80</td></tr>
+          <tr><td>XL</td><td>53–55</td><td>74–76</td><td>175–180</td><td>80–85</td></tr>
+          <tr><td>XXL</td><td>55–57</td><td>76–78</td><td>180–185</td><td>85–90</td></tr>
+        </tbody>
+      </table>
+      <p class="sg-disclaimer">* All measurements are in centimetres. There may be a 2–3cm variance due to manual measurement or differing measurement methods.</p>
+    </div>
+    <div class="sg-section-title fade-in">Fan Version — Size Guide</div>
+    <div class="sg-table-wrap fade-in">
+      <table class="sg-table">
+        <thead>
+          <tr><th>Size</th><th>Chest (cm)</th><th>Length (cm)</th><th>Height (cm)</th><th>Weight (kg)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>S</td><td>48–51</td><td>68–70</td><td>163–170</td><td>50–65</td></tr>
+          <tr><td>M</td><td>51–54</td><td>70–72</td><td>168–175</td><td>56–70</td></tr>
+          <tr><td>L</td><td>54–56</td><td>72–74</td><td>173–180</td><td>62–75</td></tr>
+          <tr><td>XL</td><td>57–60</td><td>74–76</td><td>178–185</td><td>67–88</td></tr>
+          <tr><td>XXL</td><td>60–63</td><td>76–78</td><td>185–192</td><td>85–92</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sg-tip fade-in">
+      <strong>Not sure which size to order?</strong> Feel free to message us on WhatsApp with your height, weight and preferred fit — we'll recommend the best size for you.
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%20need%20help%20with%20sizing." target="_blank" class="btn-p">💬 Ask Us for Sizing Help</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+  <div class="ph fade-in"><h2>About Us</h2><p>The story behind JerseyZone_ZA</p></div>
+  <div class="about-wrap fade-in" style="padding-top:1rem;">
+    <div class="about-grid fade-in">
+      <div>
+        <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+      </div>
+      <div>
+        <p class="about-eyebrow">Est. 2024 · Johannesburg, South Africa</p>
+        <h2 class="about-title">Our Story</h2>
+        <p class="about-text">JerseyZone_ZA was founded in 2024 as a small side hustle with a simple idea — make quality football kits accessible and affordable to South African fans. We started by offering local replica kits, building a reputation for good products and reliable service.</p>
+        <p class="about-text">Towards the end of 2024, we took the next step and began sourcing internationally imported kits — Fan, Player, Retro and Special editions from clubs around the world. Our goal from day one has been to become the most affordable football kit retailer in South Africa, without ever sacrificing quality.</p>
+        <p class="about-text">Every order placed with us is personally quality-checked before it ships. We're based in Johannesburg and deliver nationwide via courier, with WhatsApp as our primary channel — keeping things personal, fast and hassle-free.</p>
+        <div class="about-stats fade-in">
+          <div><div class="about-stat-num">2024</div><div class="about-stat-label">Founded</div></div>
+          <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based In</div></div>
+          <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ig-footer-bar" style="margin-top:2rem;"><a href="https://instagram.com/jerseyzone2_za" target="_blank"><span class="ig-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span><span>Follow us @jerseyzone2_za</span></a></div>
+  </div>
+</div>
+
+<!-- TERMS PAGE -->
+<div class="page" id="page-terms">
+  <div class="ph fade-in"><h2>Terms &amp; Conditions</h2><p>Please read carefully before placing an order</p></div>
+  <div class="terms-wrap fade-in">
+    <div class="terms-sec fade-in">
+      <div class="terms-sec-title">Orders &amp; Payment</div>
+      <div class="terms-text">
+        <p>All orders are placed via WhatsApp. An order is only considered confirmed and secured once full payment has been received. JerseyZone_ZA reserves the right to cancel any unconfirmed order.</p>
+        <p>We accept payment via EFT/bank transfer only. Banking details will be provided upon order confirmation. Please use your name and order details as the payment reference.</p>
+        <p>We aim to respond to all enquiries within 24 hours. Orders placed over weekends or public holidays will be processed on the next business day.</p>
+      </div>
+    </div>
+    <div class="terms-sec fade-in">
+      <div class="terms-sec-title">Delivery</div>
+      <div class="terms-text">
+        <p>We deliver nationwide across South Africa via courier. A courier fee will be added to your order total and communicated before payment is requested.</p>
+        <p>Imported kits are shipped internationally and arrive in approximately 21 days from the date the order is placed with our supplier, excluding any unforeseen delays. JerseyZone_ZA is not liable for delays caused by customs, courier services or international shipping conditions.</p>
+        <p>Local replica kits are dispatched sooner and delivery times will be communicated at the time of order.</p>
+      </div>
+    </div>
+    <div class="terms-sec fade-in">
+      <div class="terms-sec-title">Quality Check</div>
+      <div class="terms-text">
+        <p>Every imported kit undergoes a personal quality check before it is shipped to the customer. Quality check photos are sent to the customer via WhatsApp prior to dispatch. By approving the quality check, the customer acknowledges that the item is in acceptable condition.</p>
+      </div>
+    </div>
+    <div class="terms-sec fade-in">
+      <div class="terms-sec-title">Returns &amp; Refunds</div>
+      <div class="terms-text">
+        <p><strong style="color:var(--cream);">Local Replica Kits:</strong> Returns are accepted on local replica kits only, provided the item is reported within 24 hours of receipt and is in its original condition with no signs of wear or washing.</p>
+        <p><strong style="color:var(--cream);">Imported Kits:</strong> No refunds or returns are accepted on imported kits. As quality check photos are provided and approved by the customer prior to dispatch, all imported kit sales are considered final.</p>
+        <p>JerseyZone_ZA reserves the right to assess each return request individually. To initiate a return, contact us via WhatsApp within the applicable timeframe.</p>
+      </div>
+    </div>
+    <div class="terms-sec fade-in">
+      <div class="terms-sec-title">Sourcing &amp; Pricing</div>
+      <div class="terms-text">
+        <p>All prices displayed on this website are subject to change without prior notice. The price applicable to your order will be confirmed at the time of purchase via WhatsApp.</p>
+        <p>Kit sourcing requests are for imported kits only. Sourced kits are priced at standard imported rates, and a small additional sourcing fee may apply. Sourcing requests do not guarantee availability.</p>
+        <p>Bulk order discounts are available on a case-by-case basis. Please enquire via WhatsApp for more information.</p>
+      </div>
+    </div>
+    <div class="terms-sec fade-in">
+      <div class="terms-sec-title">General</div>
+      <div class="terms-text">
+        <p>JerseyZone_ZA operates as a small independent business based in Johannesburg, South Africa. We are committed to providing quality products and honest service to every customer.</p>
+        <p>By placing an order with JerseyZone_ZA, you agree to these terms and conditions in full.</p>
+        <p>For any queries, contact us via WhatsApp at 071 039 6374 or on Instagram at <a href="https://instagram.com/jerseyzone2_za" target="_blank" style="color:var(--red);">@jerseyzone2_za</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDERS PAGE -->
+<div class="page" id="page-orders">
+  <div class="ph fade-in"><h2>Customer Orders</h2><p>Real orders from our customers — submitted by us on their behalf</p></div>
+  <div id="ordersGrid" class="co-grid fade-in"></div>
+  <div id="ordersEmpty" class="empty-state" style="display:none;">No orders posted yet. Check back soon.</div>
+</div>
+
+<!-- ON HAND -->
+<div class="page" id="page-onhand" style="overflow-y:auto;">
+  <div class="ph fade-in"><h2>On Hand</h2><p>Discounted kits available for immediate collection or delivery — limited stock, grab them while they last</p></div>
+  <div id="ohGrid" class="oh-grid fade-in" style="overflow:visible;"></div>
+  <div id="ohEmpty" class="empty-state" style="display:none;">No items currently on hand. Check back soon.</div>
+  <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
+    <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Interested in any of these items?</p>
+    <a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27m%20interested%20in%20an%20on%20hand%20item." target="_blank" class="btn-p">📲 Order via WhatsApp</a>
+  </div>
+</div>
+
+
+<!-- SETTINGS PAGE -->
+<div class="page" id="page-settings">
+  <div class="ph fade-in"><h2>Settings</h2><p>Customise your experience</p></div>
+  <div class="settings-wrap fade-in">
+    <div class="settings-group fade-in">
+      <div class="settings-group-title">Appearance</div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Light Mode</div>
+          <div class="settings-desc">Switch between dark and light theme</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggleLight" onchange="applyTheme()"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-label">Compact Catalogue</div>
+          <div class="settings-desc">Show smaller kit cards — more kits visible at once</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggleCompact" onchange="applyCompact()"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+    <p style="font-size:0.72rem;color:var(--muted);font-weight:300;text-align:center;">Your preferences are saved automatically and will be remembered next time you visit.</p>
+  </div>
+</div>
+
+
+<!-- KIT DETAIL PAGE -->
+<div class="page" id="page-kitdetail">
+  <div class="kd-page-back" onclick="goBackFromKit()">← Back</div>
+  <div class="kd-page-gallery" id="kdpGallery"></div>
+  <div class="kd-page-gallery-dots" id="kdpDots"></div>
+  <div class="kd-page-body">
+    <div class="kd-page-badges" id="kdpBadges"></div>
+    <div class="kd-page-name" id="kdpName"></div>
+    <div class="kd-page-team" id="kdpTeam"></div>
+    <div id="kdpVersionsWrap" style="display:none;">
+      <div class="kd-page-section">Select Version</div>
+      <div style="display:flex;flex-direction:column;gap:6px;" id="kdpVersions"></div>
+    </div>
+    <div class="kd-page-prices" id="kdpPrices"></div>
+    <div id="kdpSizesWrap" style="display:none;">
+      <div class="kd-page-section">Select Size</div>
+      <div class="kd-page-sizes" id="kdpSizes"></div>
+    </div>
+    <div id="kdpAddonsWrap" style="display:none;">
+      <div class="kd-page-section">Available Add-ons</div>
+      <div class="kd-page-addons" id="kdpAddons"></div>
+    </div>
+    <a id="kdpOrderBtn" href="#" target="_blank" class="kd-page-order-btn">📲 Order via WhatsApp</a>
+    <div id="kdpSimilarWrap" style="display:none;">
+      <div class="kd-page-similar-title">Similar Kits</div>
+      <div class="kd-page-similar-grid" id="kdpSimilar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="page-admin">
+  <div id="adminLogin" class="alp">
+    <div class="ac">
+      <div class="al-icon">🔐</div>
+      <div class="al-title">Admin Access</div>
+      <p class="al-sub">JerseyZone_ZA staff only</p>
+      <div class="err-msg" id="lerr">Incorrect username or password.</div>
+      <div class="fg"><label class="fl">Username</label><input class="fi" id="lu" placeholder="Username" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+      <div class="fg"><label class="fl">Password</label><div class="pw-w"><input class="fi" id="lp" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/><button class="pw-e" onclick="togglePw()">👁</button></div></div>
+      <button class="btn-p" style="width:100%;margin-top:0.5rem;" onclick="doLogin()">Login</button>
+    </div>
+  </div>
+  <div id="adminPanel" style="display:none;padding-top:1rem;">
+    <div class="ap">
+      <div class="ap-top"><h2>Admin Panel</h2><button class="btn-d" onclick="doLogout()">Logout</button></div>
+      <div class="atabs">
+        <button class="abt active" onclick="stab('kits',this)">Kits (<span id="kc">0</span>)</button>
+        <button class="abt" onclick="stab('reviews',this)">Reviews (<span id="rc">0</span>)</button>
+        <button class="abt" onclick="stab('suggestions',this)">Suggestions<span class="nbadge" id="sb" style="display:none;"></span></button>
+        <button class="abt" onclick="stab('onhand',this)">On Hand (<span id="ohc">0</span>)</button>
+        <button class="abt" onclick="stab('orders',this)">Orders (<span id="ordc">0</span>)</button>
+      </div>
+      <div class="atab active" id="tab-kits">
+        <div class="ath"><span class="att">Manage Kits</span><button class="btn-p" style="font-size:0.65rem;" onclick="openKM(null)">+ Add Kit</button></div>
+        <div class="adl" id="kl"></div>
+      </div>
+      <div class="atab" id="tab-reviews">
+        <div class="ath"><span class="att">Manage Reviews</span><button class="btn-p" style="font-size:0.65rem;" onclick="openRM(null)">+ Add Review</button></div>
+        <div class="adl" id="rl"></div>
+      </div>
+      <div class="atab" id="tab-onhand">
+        <div class="ath"><span class="att">On Hand Items</span><button class="btn-p" style="font-size:0.65rem;" onclick="openOHM(null)">+ Add Item</button></div>
+        <div class="adl" id="ohl"></div>
+      </div>
+      <div class="atab" id="tab-orders">
+        <div class="ath"><span class="att">Customer Orders</span><button class="btn-p" style="font-size:0.65rem;" onclick="openOrdM(null)">+ Add Order</button></div>
+        <div class="adl" id="ordl"></div>
+      </div>
+      <div class="atab" id="tab-suggestions">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.25rem;margin-bottom:1.5rem;">
+          <div style="font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.08em;color:var(--red);margin-bottom:0.75rem;">⏳ Import Order Deadline</div>
+          <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;">
+            <input class="fi" id="cd-input" type="datetime-local" style="flex:1;"/>
+            <button class="btn-p" style="font-size:0.65rem;flex-shrink:0;" onclick="saveCountdown()">Set</button>
+            <button class="btn-d" style="flex-shrink:0;" onclick="clearCountdown()">Clear</button>
+          </div>
+          <div style="font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.08em;color:var(--red);margin-bottom:0.75rem;">📢 Announcement Banner</div>
+          <div style="display:flex;gap:0.5rem;">
+            <input class="fi" id="ann-text" placeholder="e.g. Next import order closes 30 March — order now!" style="flex:1;"/>
+            <button class="btn-p" style="font-size:0.65rem;flex-shrink:0;" onclick="saveAnnouncement()">Update</button>
+            <button class="btn-d" style="flex-shrink:0;" onclick="clearAnnouncement()">Clear</button>
+          </div>
+        </div>
+        <div class="ath"><span class="att">Kit Sourcing Requests</span></div>
+        <div id="sl" style="border:1px solid var(--border);border-radius:3px;overflow:hidden;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ORDER MODAL -->
+<div class="mo" id="ordModal">
+  <div class="md">
+    <div class="mdt" id="ordmTitle">Add Customer Order</div>
+    <div class="fg"><label class="fl">Image URL (Imgur) *</label><input class="fi" id="ord-img" placeholder="https://i.imgur.com/..."/></div>
+    <div class="fg"><label class="fl">Caption *</label><textarea class="fta" id="ord-cap" placeholder="e.g. Yusuf rocking the Brazil away kit 🔥" style="min-height:70px;"></textarea></div>
+    <div class="mdf"><button class="btn-o" onclick="closeOrdM()">Cancel</button><button class="btn-p" onclick="saveOrd()">Save</button></div>
+  </div>
+</div>
+
+<!-- ON HAND MODAL -->
+<div class="mo" id="ohModal">
+  <div class="md">
+    <div class="mdt" id="ohmTitle">Add On Hand Item</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Kit Name *</label><input class="fi" id="oh-n" placeholder="e.g. Brazil Away 24/25"/></div>
+      <div class="fg"><label class="fl">Team</label><input class="fi" id="oh-t" placeholder="e.g. Brazil"/></div>
+    </div>
+    <div class="fg">
+      <label class="fl">Images (Imgur links)</label>
+      <div id="ohImgContainer"></div>
+      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addOHImgField()">+ Add Image</button>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Original Price (R) *</label><input class="fi" id="oh-op" type="number" placeholder="490"/></div>
+      <div class="fg"><label class="fl">Discounted Price (R)</label><input class="fi" id="oh-dp" type="number" placeholder="Leave blank if no discount"/></div>
+    </div>
+    <div class="fg">
+      <label class="fl">Sizes &amp; Availability</label>
+      <div id="ohSizes" style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.3rem;"></div>
+      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addOHSize()">+ Add Size</button>
+    </div>
+    <div class="mdf"><button class="btn-o" onclick="closeOHM()">Cancel</button><button class="btn-p" onclick="saveOH()">Save Item</button></div>
+  </div>
+</div>
+
+<!-- KIT MODAL -->
+<div class="mo" id="kitModal">
+  <div class="md">
+    <div class="mdt" id="kmTitle">Add New Kit</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Kit Name *</label><input class="fi" id="km-n" placeholder="e.g. Brazil Away 24/25"/></div>
+      <div class="fg"><label class="fl">Team *</label><input class="fi" id="km-t" placeholder="e.g. Brazil"/></div>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">League / Tournament</label><input class="fi" id="km-l" placeholder="e.g. World Cup"/></div>
+      <div class="fg">
+        <label class="fl">Kit Types (select all that apply)</label>
+        <div style="margin-top:0.5rem;">
+          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Imported</div>
+          <div class="cbg" style="margin-bottom:0.75rem;">
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="fan" onchange="onTypeChange()"/> Fan Version</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="player" onchange="onTypeChange()"/> Player Version</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="retro" onchange="onTypeChange()"/> Retro</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="f1" onchange="onTypeChange()"/> F1</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="tracksuit" onchange="onTypeChange()"/> Tracksuit</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="training_set" onchange="onTypeChange()"/> Training Set</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="windbreaker" onchange="onTypeChange()"/> Windbreaker</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="baby_grower" onchange="onTypeChange()"/> Baby Grower</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="kids_kit" onchange="onTypeChange()"/> Kids Kit</label>
+          </div>
+          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Local</div>
+          <div class="cbg">
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="replica_mens" onchange="onTypeChange()"/> Replica (Men's)</label>
+            <label class="cl"><input type="checkbox" class="km-type-cb" value="replica_kids" onchange="onTypeChange()"/> Replica (Kids)</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Images (Imgur links)</label>
+      <div id="imgContainer"></div>
+      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addImgField()">+ Add Image</button>
+    </div>
+    <div class="fg">
+      <label class="fl">Price</label>
+      <div id="pvc"></div>
+    </div>
+    <div class="fg"><label class="fl">Sizes Available</label><div class="cbg" id="szcbg"></div></div>
+    <div class="fg" id="addonsSection"><label class="fl">Add-ons Available</label><div class="cbg" id="adcbg"></div></div>
+    <div class="fg"><label class="cl"><input type="checkbox" id="km-is" checked/><span>In Stock</span></label></div>
+    <div class="mdf"><button class="btn-o" onclick="closeKM()">Cancel</button><button class="btn-p" onclick="saveKit()">Save Kit</button></div>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="mo" id="revModal">
+  <div class="md">
+    <div class="mdt" id="rmTitle">Add Review</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Customer Name *</label><input class="fi" id="rm-n" placeholder="e.g. Yusuf K."/></div>
+      <div class="fg"><label class="fl">Date</label><input class="fi" id="rm-d" placeholder="e.g. March 2025"/></div>
+    </div>
+    <div class="fg"><label class="fl">Rating</label><div class="sr" id="sr"></div></div>
+    <div class="fg"><label class="fl">Review *</label><textarea class="fta" id="rm-t" placeholder="Customer's review..."></textarea></div>
+    <div class="mdf"><button class="btn-o" onclick="closeRM()">Cancel</button><button class="btn-p" onclick="saveRev()">Save Review</button></div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL='https://mnevxsxpwpwunjlinweb.supabase.co';
+const SUPABASE_KEY='sb_publishable_5TOoSryhqUW_GtayTpgIHw_NHmnlaP5';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const ADMINS=[{u:"Uthmaan_007",p:"Ammaar2007"},{u:"JerseyzoneAdmin",p:"Ammaar2007"}];
+const WA="27710396374";
+const SIZES=["XS","S","M","L","XL","XXL","Kids S","Kids M","Kids L"];
+const ADDONS=["Custom Name & Number","Badges","Long Sleeve","Sleeve Sponsor"];
+
+// Kit type config
+const KIT_TYPES={
+  fan:{label:"Fan Version",category:"imported",price:490},
+  player:{label:"Player Version",category:"imported",price:575},
+  retro:{label:"Retro",category:"imported",price:575},
+  f1:{label:"F1",category:"imported",price:550},
+  tracksuit:{label:"Tracksuit",category:"imported",price:850},
+  training_set:{label:"Training Set",category:"imported",price:750},
+  windbreaker:{label:"Windbreaker",category:"imported",price:900},
+  baby_grower:{label:"Baby Grower",category:"imported",price:500},
+  kids_kit:{label:"Kids Kit",category:"imported",price:490},
+  replica_mens:{label:"Replica (Men's)",category:"local",price:230},
+  replica_kids:{label:"Replica (Kids)",category:"local",price:300}
+};
+
+let isAdmin=false,af="all",ekid=null,erid=null,cr=5,imgc=0;
+let allKits=[],allReviews=[],allSugs=[];
+let revIdx=0,revTimer=null;
+
+
+// ON HAND
+let allOnHand=[];
+async function loadOnHand(){
+  const{data,error}=await sb.from('on_hand').select('*').order('created_at',{ascending:false});
+  if(error){console.error(error);return;}
+  allOnHand=data||[];
+  renderOnHand();
+}
+function renderOnHand(){
+  const g=document.getElementById('ohGrid'),e=document.getElementById('ohEmpty');
+  if(!g)return;
+  if(!allOnHand.length){g.innerHTML='';e.style.display='block';return;}
+  e.style.display='none';
+  g.innerHTML=allOnHand.map(item=>{
+    const hasDiscount=item.discounted_price&&item.discounted_price<item.original_price;
+    const ohImgs=item.images&&item.images.length?item.images:(item.image?[item.image]:[]);
+    let img='';
+    if(ohImgs.length===0){img=`<div class="oh-img-placeholder">⚽</div>`;}
+    else if(ohImgs.length===1){img=`<img class="oh-img" src="${ohImgs[0]}" onerror="this.style.display='none'">`;}
+    else{
+      const ohDots=ohImgs.map((_,i)=>`<span class="gdot ${i===0?'active':''}" onclick="goSlide('oh${item.id}',${i})"></span>`).join('');
+      const ohImgsHTML=ohImgs.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join('');
+      img=`<div class="gallery" id="oh${item.id}" style="height:220px;"><div class="gallery-imgs" id="gioh${item.id}">${ohImgsHTML}</div><div class="gallery-dots">${ohDots}</div></div>`;
+    }
+    const priceHTML=hasDiscount
+      ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
+      :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
+    const sizes=(item.sizes||[]).map(s=>`<span class="oh-size ${s.available?'avail':'sold'}">${s.size}</span>`).join('');
+    return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
+  }).join('');
+}
+
+async function init(){
+  loadSettings();
+  await loadKits();
+  renderNewArrivals();
+  await loadReviews();
+  await loadSuggestions();
+  await loadOnHand();
+  await loadOrders();
+  await loadAnnouncement();
+  await loadCountdown();
+}
+
+async function loadKits(){
+  const{data,error}=await sb.from('kits').select('*').order('created_at',{ascending:false});
+  if(error){console.error(error);return;}
+  allKits=data||[];
+  renderCat();
+}
+
+async function loadReviews(){
+  const{data,error}=await sb.from('reviews').select('*').order('created_at',{ascending:false});
+  if(error){console.error(error);return;}
+  allReviews=data||[];
+  renderRev();
+  renderHomeReviews();
+}
+
+async function loadSuggestions(){
+  const{data,error}=await sb.from('suggestions').select('*').order('created_at',{ascending:false});
+  if(error){console.error(error);return;}
+  allSugs=data||[];
+}
+
+// NAV
+function showPage(p){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  document.getElementById("page-"+p).classList.add("active");
+  document.querySelectorAll(".nl").forEach(x=>x.classList.remove("active"));
+  const m={home:0,catalogue:1,onhand:2,reviews:3,orders:4,pricing:5,sizeguide:6,suggest:7,faq:8,settings:9,about:10,terms:11,kitdetail:99};
+  const b=document.querySelectorAll(".nl");
+  if(m[p]!==undefined)b[m[p]].classList.add("active");
+  document.getElementById("navLinks").classList.remove("open");
+  window.scrollTo(0,0);
+  document.body.style.overflow="";
+  document.body.style.overflowY="";
+  document.documentElement.style.overflow="";
+  document.documentElement.style.overflowY="";
+  document.body.removeAttribute("style");
+  setTimeout(initFadeIn,100);
+  if(p==="catalogue")loadKits();
+  if(p==="reviews")loadReviews();
+  if(p==="admin")renderAdmin();
+  if(p==="onhand")loadOnHand();
+  if(p==="orders"){loadOrders().then(()=>setTimeout(initFadeIn,100));}
+}
+function toggleMenu(){document.getElementById("navLinks").classList.toggle("open");}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000);}
+
+// HOME REVIEWS SLIDER
+function renderHomeReviews(){
+  const track=document.getElementById("homeRevTrack");
+  const dots=document.getElementById("homeRevDots");
+  if(!track)return;
+  if(!allReviews.length){
+    track.innerHTML='<div class="rev-slide"><p class="rev-slide-text" style="text-align:center;">No reviews yet.</p></div>';
+    dots.innerHTML="";return;
+  }
+  // Pick up to 5 random reviews
+  const pool=[...allReviews].sort(()=>Math.random()-0.5).slice(0,5);
+  track.innerHTML=pool.map(r=>`
+    <div class="rev-slide">
+      <div class="rev-slide-stars">${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</div>
+      <p class="rev-slide-text">"${r.text}"</p>
+      <div class="rev-slide-meta">${r.name} · ${r.date}</div>
+    </div>`).join("");
+  dots.innerHTML=pool.map((_,i)=>`<span class="rev-dot ${i===0?"active":""}" onclick="goRevSlide(${i})"></span>`).join("");
+  revIdx=0;
+  startRevAuto(pool.length);
+
+  // Swipe support
+  let startX=0;
+  const slider=document.getElementById("homeRevSlider");
+  slider.addEventListener("touchstart",e=>{startX=e.touches[0].clientX;},{passive:true});
+  slider.addEventListener("touchend",e=>{
+    const diff=startX-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>40)revSlide(diff>0?1:-1);
+  },{passive:true});
+}
+
+function startRevAuto(total){
+  if(revTimer)clearInterval(revTimer);
+  revTimer=setInterval(()=>revSlide(1,total),4000);
+}
+
+function revSlide(dir,total){
+  const track=document.getElementById("homeRevTrack");
+  if(!track)return;
+  const count=track.children.length;
+  revIdx=(revIdx+dir+count)%count;
+  track.style.transform=`translateX(-${revIdx*100}%)`;
+  document.querySelectorAll(".rev-dot").forEach((d,i)=>d.classList.toggle("active",i===revIdx));
+  if(revTimer)clearInterval(revTimer);
+  revTimer=setInterval(()=>revSlide(1),4000);
+}
+
+function goRevSlide(idx){
+  revIdx=idx;
+  const track=document.getElementById("homeRevTrack");
+  track.style.transform=`translateX(-${idx*100}%)`;
+  document.querySelectorAll(".rev-dot").forEach((d,i)=>d.classList.toggle("active",i===idx));
+  if(revTimer)clearInterval(revTimer);
+  revTimer=setInterval(()=>revSlide(1),4000);
+}
+
+// CATALOGUE
+function setFilter(f,b){af=f;document.querySelectorAll(".fb").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCat();}
+
+function getKitCategory(type,types){
+  // If any local type exists, show local badge; if mixed show imported
+  if(types&&types.length){
+    const hasImported=types.some(t=>!t.startsWith("replica"));
+    const hasLocal=types.some(t=>t.startsWith("replica"));
+    if(hasImported&&hasLocal)return"both";
+    if(hasLocal)return"local";
+    return"imported";
+  }
+  if(!type)return"imported";
+  if(type.startsWith("replica"))return"local";
+  return"imported";
+}
+
+function renderCat(){
+  const q=(document.getElementById("si")?.value||"").toLowerCase();
+  // Compute New In: 5 most recently added kits by created_at
+  const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  const newInIds=new Set(sorted.slice(0,5).map(k=>k.id));
+  const f=allKits.filter(j=>{
+    const matchFilter=af==="all"||(j.types||[j.type]).includes(af);
+    const matchSearch=j.name.toLowerCase().includes(q)||(j.team||"").toLowerCase().includes(q);
+    return matchFilter&&matchSearch;
+  });
+  const g=document.getElementById("kitGrid"),e=document.getElementById("emptyState");
+  if(!f.length){g.innerHTML="";e.style.display="block";return;}
+  e.style.display="none";
+  g.innerHTML=f.map(j=>{
+    const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:\n\n*${j.name}*\nType: ${KIT_TYPES[j.type]?.label||j.type}\nSize: [please specify]\n\nPlease advise on availability and payment.`);
+    const cat=getKitCategory(j.type,j.types);
+    const badgeClass=cat==="local"?"badge-local":cat==="both"?"badge-both":"badge-imported";
+    const badgeLabel=cat==="local"?"Local":cat==="both"?"Imported & Local":"Imported";
+    const isNewIn=newInIds.has(j.id);
+    const newBadge=isNewIn?'<span class="badge-new">New In</span>':'';
+    const images=j.images||[];
+    let imgHTML='';
+    if(images.length===0){
+      imgHTML=`<div class="kia"><div class="kph">⚽</div><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''} ${newBadge}</div>`;
+    } else if(images.length===1){
+      imgHTML=`<div class="kia"><img src="${images[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''}${newBadge}</div>`;
+    } else {
+      const dots=images.map((_,i)=>`<span class="gdot ${i===0?"active":""}" onclick="goSlide('g${j.id}',${i})"></span>`).join("");
+      const imgs=images.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join("");
+      imgHTML=`<div class="gallery" id="g${j.id}">
+        <div class="gallery-imgs" id="gi${j.id}">${imgs}</div>
+        <div class="gallery-dots">${dots}</div>
+        <span class="ktb ${badgeClass}">${badgeLabel}</span>
+        ${!j.in_stock?'<span class="koos">Out of Stock</span>':''}
+        ${newBadge}
+      </div>`;
+    }
+    const typeLabel=KIT_TYPES[j.type]?.label||j.type;
+    const pvs=(j.price_variants||[]).map(v=>`<span class="kpt">R${v.price} · ${v.label}</span>`).join("");
+    const ao=(j.addons||[]).length?`<div class="kao">Add-ons available: ${j.addons.join(", ")}</div>`:"";
+    const sz=(j.sizes||[]).map(s=>`<span class="ksc">${s}</span>`).join("");
+    const btn=j.in_stock?`<a href="https://wa.me/${WA}?text=${msg}" target="_blank" class="bwa">📲 Order via WhatsApp</a>`:`<span class="bwa bwa-dis">Currently Out of Stock</span>`;
+    return`<div class="kc" data-id="${j.id}" style="cursor:pointer;" onclick="openKitDetail('${j.id}','catalogue')">${imgHTML}<div class="ki"><div class="kn">${j.name}</div><div class="km">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel}</div><div class="kpv">${pvs}</div>${ao}<div class="ksz">${sz}</div></div></div>`;
+  }).join("");
+  // Init swipe on all galleries
+  f.forEach(j=>{
+    if((j.images||[]).length>1)setTimeout(()=>initGallerySwipe('g'+j.id),50);
+  });
+}
+
+// Gallery
+const galState={};
+const galTouch={};
+function initGallerySwipe(id){
+  const el=document.getElementById(id);
+  if(!el||el.dataset.swipe)return;
+  el.dataset.swipe="1";
+  el.addEventListener("touchstart",e=>{galTouch[id]=e.touches[0].clientX;},{passive:true});
+  el.addEventListener("touchend",e=>{
+    const diff=galTouch[id]-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>40)slideGallery(id,diff>0?1:-1);
+  },{passive:true});
+}
+function slideGallery(id,dir){
+  const wrap=document.getElementById("gi"+id.substring(1));
+  if(!wrap)return;
+  const total=wrap.children.length;
+  if(!galState[id])galState[id]=0;
+  galState[id]=(galState[id]+dir+total)%total;
+  wrap.style.transform=`translateX(-${galState[id]*100}%)`;
+  document.querySelectorAll(`#${id} .gdot`).forEach((d,i)=>d.classList.toggle("active",i===galState[id]));
+}
+function goSlide(id,idx){
+  const wrap=document.getElementById("gi"+id.substring(1));
+  if(!wrap)return;
+  galState[id]=idx;
+  wrap.style.transform=`translateX(-${idx*100}%)`;
+  document.querySelectorAll(`#${id} .gdot`).forEach((d,i)=>d.classList.toggle("active",i===idx));
+}
+
+// REVIEWS
+function renderRev(){
+  const g=document.getElementById("reviewsGrid"),e=document.getElementById("reviewsEmpty");
+  if(!allReviews.length){g.innerHTML="";e.style.display="block";return;}
+  e.style.display="none";
+  g.innerHTML=allReviews.map(r=>`<div class="rc"><div class="rs">${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</div><p class="rt">"${r.text}"</p><div class="rm"><span>${r.name}</span><span>${r.date}</span></div></div>`).join("");
+}
+
+// FAQ
+function tfaq(el){const a=el.nextElementSibling,ch=el.querySelector(".faq-arr");a.classList.toggle("o");ch.classList.toggle("o");}
+
+// SUGGEST
+async function submitSug(){
+  const name=document.getElementById("sn").value.trim();
+  const phone=document.getElementById("sphone").value.trim();
+  const kit=document.getElementById("sk").value.trim();
+  if(!name){toast("⚠ Please enter your name.");return;}
+  if(!phone){toast("⚠ Please enter your contact number.");return;}
+  if(!kit){toast("⚠ Please enter the kit you are looking for.");return;}
+  const det=document.getElementById("sd").value.trim();
+  const{error}=await sb.from('suggestions').insert([{name,phone,text:kit+(det?" — "+det:""),date:new Date().toLocaleDateString("en-ZA")}]);
+  if(error){toast("Error submitting. Please try again.");return;}
+  document.getElementById("sugForm").style.display="none";
+  document.getElementById("sugDone").classList.add("show");
+  toast("✓ Request submitted successfully.");
+  await loadSuggestions();
+}
+function resetSug(){["sn","sphone","sk","sd"].forEach(id=>document.getElementById(id).value="");document.getElementById("sugForm").style.display="block";document.getElementById("sugDone").classList.remove("show");}
+
+// AUTH
+function doLogin(){
+  const u=document.getElementById("lu").value,p=document.getElementById("lp").value;
+  if(ADMINS.find(a=>a.u===u&&a.p===p)){
+    isAdmin=true;document.getElementById("adminLogin").style.display="none";document.getElementById("adminPanel").style.display="block";
+    toast("✓ Logged in as "+u);loadSuggestions().then(()=>renderAdmin());
+  }else{document.getElementById("lerr").classList.add("show");}
+}
+function doLogout(){isAdmin=false;document.getElementById("adminLogin").style.display="block";document.getElementById("adminPanel").style.display="none";document.getElementById("lu").value="";document.getElementById("lp").value="";document.getElementById("lerr").classList.remove("show");showPage("home");}
+function togglePw(){const i=document.getElementById("lp");i.type=i.type==="password"?"text":"password";}
+
+// ADMIN RENDER
+function renderAdmin(){
+  if(!isAdmin)return;
+  document.getElementById("kc").textContent=allKits.length;
+  document.getElementById("rc").textContent=allReviews.length;
+  const badge=document.getElementById("sb");badge.textContent=allSugs.length;badge.style.display=allSugs.length?"inline-block":"none";
+  document.getElementById("kl").innerHTML=!allKits.length?'<div class="empty-state">No kits yet. Click "+ Add Kit" to get started.</div>':allKits.map(j=>{
+    const cat=getKitCategory(j.type,j.types);
+    const typeLabel=(j.types||[j.type]).map(t=>KIT_TYPES[t]?.label||t).join(", ");
+    return`<div class="adi drag-item" draggable="true" ondragstart="onDragStart(event,'${j.id}')" ondrageend="onDragEnd(event)" ondragover="onDragOver(event,'${j.id}')" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'${j.id}')" ondragend="onDragEnd(event)">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex:1;">
+        <span style="color:var(--muted2);font-size:1rem;cursor:grab;">⠿</span>
+        <div class="adin"><div class="adin-n">${j.name} <span class="ktb ${cat==="local"?"badge-local":cat==="both"?"badge-both":"badge-imported"}" style="position:static;font-size:0.55rem;">${cat==="local"?"Local":cat==="both"?"Imported & Local":"Imported"}</span></div><div class="adin-m">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel} · ${j.in_stock?"In Stock":"Out of Stock"}</div></div>
+      </div>
+      <div class="adi-ac"><button class="btn-g" onclick="openKM('${j.id}')">Edit</button><button class="btn-d" onclick="delKit('${j.id}')">Delete</button></div>
+    </div>`;
+  }).join("");
+  document.getElementById("rl").innerHTML=!allReviews.length?'<div class="empty-state">No reviews yet.</div>':allReviews.map(r=>`<div class="adi"><div class="adin"><div class="adin-n">${"★".repeat(r.rating)} · ${r.name}</div><div class="adin-m" style="font-style:italic;">"${r.text.slice(0,60)}${r.text.length>60?"...":""}" · ${r.date}</div></div><div class="adi-ac"><button class="btn-g" onclick="openRM('${r.id}')">Edit</button><button class="btn-d" onclick="delRev('${r.id}')">Delete</button></div></div>`).join("");
+  renderOrdersAdmin();
+  renderOnHandAdmin();
+  document.getElementById("sl").innerHTML=!allSugs.length?'<div class="empty-state">No sourcing requests yet.</div>':allSugs.map(s=>`<div class="sgc"><div class="sg-meta"><span class="sg-name">${s.name}</span><span class="sg-phone">📞 ${s.phone||"No number provided"}</span><span class="sg-date">${s.date}</span></div><p class="sg-text">"${s.text}"</p><div class="sg-ac"><a href="https://wa.me/${(s.phone||"").replace(/\D/g,"")}" target="_blank" class="btn-p" style="font-size:0.62rem;padding:7px 13px;text-decoration:none;">📲 Call/WhatsApp</a><button class="btn-d" onclick="delSug('${s.id}')">Dismiss</button></div></div>`).join("");
+}
+function stab(t,b){document.querySelectorAll(".atab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".abt").forEach(x=>x.classList.remove("active"));document.getElementById("tab-"+t).classList.add("active");b.classList.add("active");}
+
+// KIT MODAL
+function onTypeChange(){
+  const selected=Array.from(document.querySelectorAll(".km-type-cb:checked")).map(cb=>cb.value);
+  const pvc=document.getElementById("pvc");
+  // Get existing prices to preserve user edits
+  const existing={};
+  document.querySelectorAll("#pvc .pvr").forEach(r=>{
+    const lbl=r.querySelector("[data-l]").value;
+    const pr=r.querySelector("[data-p]").value;
+    existing[lbl]=pr;
+  });
+  if(selected.length===0){pvc.innerHTML="";return;}
+  pvc.innerHTML=selected.map(type=>{
+    const cfg=KIT_TYPES[type];
+    const existingPrice=existing[cfg.label]||cfg.price;
+    return`<div class="pvr"><input class="fi" style="flex:2;" value="${cfg.label}" data-l readonly/><input class="fi" style="flex:1;" type="number" placeholder="R" value="${existingPrice}" data-p data-type="${type}"/></div>`;
+  }).join("");
+  // Show addons if any imported type selected
+  const hasImported=selected.some(t=>KIT_TYPES[t]?.category==="imported");
+  document.getElementById("addonsSection").style.display=hasImported?"block":"none";
+}
+
+function openKM(id){
+  ekid=id;const k=id?allKits.find(j=>j.id==id):null;
+  document.getElementById("kmTitle").textContent=k?"Edit Kit":"Add New Kit";
+  document.getElementById("km-n").value=k?.name||"";
+  document.getElementById("km-t").value=k?.team||"";
+  document.getElementById("km-l").value=k?.league||"";
+  // Handle types as array
+  const types=k?.types||( k?.type ? [k.type] : [] );
+  document.querySelectorAll(".km-type-cb").forEach(cb=>{
+    cb.checked=types.includes(cb.value);
+  });
+  document.getElementById("km-is").checked=k?k.in_stock:true;
+  const ic=document.getElementById("imgContainer");ic.innerHTML="";imgc=0;
+  (k?.images||[""]).forEach(url=>addImgField(url));
+  // Set prices from existing or defaults
+  if(k && k.price_variants && k.price_variants.length){
+    document.getElementById("pvc").innerHTML=k.price_variants.map(v=>`<div class="pvr"><input class="fi" style="flex:2;" value="${v.label}" data-l readonly/><input class="fi" style="flex:1;" type="number" value="${v.price}" data-p/></div>`).join("");
+    const hasImported=types.some(t=>KIT_TYPES[t]?.category==="imported");
+    document.getElementById("addonsSection").style.display=hasImported?"block":"none";
+  } else {
+    onTypeChange();
+  }
+  document.getElementById("szcbg").innerHTML=SIZES.map(s=>`<label class="cl"><input type="checkbox" value="${s}" ${k?.sizes?.includes(s)?"checked":""}/>${s}</label>`).join("");
+  document.getElementById("adcbg").innerHTML=ADDONS.map(a=>`<label class="cl"><input type="checkbox" value="${a}" ${k?.addons?.includes(a)?"checked":""}/>${a}</label>`).join("");
+  document.getElementById("kitModal").classList.add("open");
+}
+function addImgField(url=""){
+  const id=imgc++;const d=document.createElement("div");d.className="imgr";d.id="img"+id;
+  d.innerHTML=`<input class="fi" placeholder="https://i.imgur.com/..." value="${url}" data-img/><button class="btn-d" style="padding:6px 10px;flex-shrink:0;" onclick="document.getElementById('img${id}').remove()">✕</button>`;
+  document.getElementById("imgContainer").appendChild(d);
+}
+function closeKM(){document.getElementById("kitModal").classList.remove("open");}
+async function saveKit(){
+  const n=document.getElementById("km-n").value.trim(),t=document.getElementById("km-t").value.trim();
+  if(!n||!t){toast("⚠ Kit name and team are required.");return;}
+  const images=Array.from(document.querySelectorAll("#imgContainer [data-img]")).map(i=>i.value.trim()).filter(Boolean);
+  const pvs=Array.from(document.querySelectorAll("#pvc .pvr")).map(r=>({label:r.querySelector("[data-l]").value,price:+r.querySelector("[data-p]").value}));
+  const sz=Array.from(document.querySelectorAll("#szcbg input:checked")).map(i=>i.value);
+  const ao=Array.from(document.querySelectorAll("#adcbg input:checked")).map(i=>i.value);
+  const types=Array.from(document.querySelectorAll(".km-type-cb:checked")).map(cb=>cb.value);
+  if(!types.length){toast("⚠ Please select at least one kit type.");return;}
+  // Primary type is first selected (for badge display)
+  const type=types[0];
+  const kit={name:n,team:t,league:document.getElementById("km-l").value.trim(),type,types,in_stock:document.getElementById("km-is").checked,images,price_variants:pvs,sizes:sz,addons:ao};
+  let error;
+  if(ekid){({error}=await sb.from('kits').update(kit).eq('id',ekid));toast("✓ Kit updated.");}
+  else{({error}=await sb.from('kits').insert([kit]));toast("✓ Kit added.");}
+  if(error){toast("Error saving kit. Please try again.");console.error(error);return;}
+  closeKM();await loadKits();renderAdmin();
+}
+async function delKit(id){if(!confirm("Delete this kit?"))return;await sb.from('kits').delete().eq('id',id);toast("Kit deleted.");await loadKits();renderAdmin();}
+
+// REVIEW MODAL
+function openRM(id){
+  erid=id;const r=id?allReviews.find(x=>x.id==id):null;
+  document.getElementById("rmTitle").textContent=r?"Edit Review":"Add Review";
+  document.getElementById("rm-n").value=r?.name||"";
+  document.getElementById("rm-d").value=r?.date||new Date().toLocaleDateString("en-ZA");
+  document.getElementById("rm-t").value=r?.text||"";
+  cr=r?.rating||5;renderStars();document.getElementById("revModal").classList.add("open");
+}
+function renderStars(){document.getElementById("sr").innerHTML=[1,2,3,4,5].map(n=>`<button class="sb ${cr>=n?"on":""}" onclick="setStar(${n})">★</button>`).join("");}
+function setStar(n){cr=n;renderStars();}
+function closeRM(){document.getElementById("revModal").classList.remove("open");}
+async function saveRev(){
+  const n=document.getElementById("rm-n").value.trim(),t=document.getElementById("rm-t").value.trim();
+  if(!n||!t){toast("⚠ Name and review text are required.");return;}
+  const rev={name:n,text:t,rating:cr,date:document.getElementById("rm-d").value.trim()};
+  let error;
+  if(erid){({error}=await sb.from('reviews').update(rev).eq('id',erid));toast("✓ Review updated.");}
+  else{({error}=await sb.from('reviews').insert([rev]));toast("✓ Review added.");}
+  if(error){toast("Error saving review.");return;}
+  closeRM();await loadReviews();renderAdmin();
+}
+async function delRev(id){if(!confirm("Delete this review?"))return;await sb.from('reviews').delete().eq('id',id);toast("Review deleted.");await loadReviews();renderAdmin();}
+async function delSug(id){await sb.from('suggestions').delete().eq('id',id);toast("Request dismissed.");await loadSuggestions();renderAdmin();}
+
+
+
+
+// CUSTOMER ORDERS
+let allOrders=[];
+let coIdx=0;
+async function loadOrders(){
+  const{data,error}=await sb.from('orders').select('*').order('created_at',{ascending:false});
+  if(error){console.error(error);return;}
+  allOrders=data||[];
+  renderOrdersCarousel();
+  renderOrdersGrid();
+  renderOrdersAdmin();
+}
+function renderOrdersCarousel(){
+  const track=document.getElementById('coTrack');
+  const section=document.getElementById('homeOrdersSection');
+  if(!track)return;
+  if(!allOrders.length){if(section)section.style.display='none';return;}
+  if(section)section.style.display='block';
+  track.innerHTML=allOrders.map(o=>`<div class="co-slide"><img src="${o.image}" onerror="this.parentElement.style.display='none'"/><div class="co-slide-caption">${o.caption}</div></div>`).join('');
+  coIdx=0;
+  // Touch swipe
+  const car=track.parentElement;
+  let sx=0;
+  car.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  car.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40)coSlide(d>0?1:-1);},{passive:true});
+}
+function coSlide(dir){
+  const track=document.getElementById('coTrack');
+  if(!track)return;
+  const total=track.children.length;
+  coIdx=(coIdx+dir+total)%total;
+  const slideW=track.children[0]?.offsetWidth||280;
+  track.style.transform=`translateX(-${coIdx*(slideW+1)}px)`;
+}
+function renderOrdersGrid(){
+  const g=document.getElementById('ordersGrid'),e=document.getElementById('ordersEmpty');
+  if(!g)return;
+  if(!allOrders.length){g.innerHTML='';if(e)e.style.display='block';return;}
+  if(e)e.style.display='none';
+  g.innerHTML=allOrders.map(o=>`<div class="co-card"><img src="${o.image}" onerror="this.style.display='none'"/><div class="co-card-cap">${o.caption}</div></div>`).join('');
+}
+function renderOrdersAdmin(){
+  const count=allOrders.length;
+  const el=document.getElementById('ordc');
+  if(el)el.textContent=count;
+  const list=document.getElementById('ordl');
+  if(!list)return;
+  list.innerHTML=!count?'<div class="empty-state">No orders posted yet.</div>':allOrders.map(o=>`<div class="adi"><div class="adin"><div class="adin-n" style="display:flex;align-items:center;gap:0.75rem;"><img src="${o.image}" style="width:40px;height:40px;object-fit:cover;border-radius:3px;" onerror="this.style.display='none'"/><span>${o.caption.slice(0,60)}${o.caption.length>60?'...':''}</span></div></div><div class="adi-ac"><button class="btn-d" onclick="delOrd('${o.id}')">Remove</button></div></div>`).join('');
+}
+let eordid=null;
+function openOrdM(id){
+  eordid=id;
+  document.getElementById('ordmTitle').textContent=id?'Edit Order':'Add Customer Order';
+  const item=id?allOrders.find(x=>x.id==id):null;
+  document.getElementById('ord-img').value=item?.image||'';
+  document.getElementById('ord-cap').value=item?.caption||'';
+  document.getElementById('ordModal').classList.add('open');
+}
+function closeOrdM(){document.getElementById('ordModal').classList.remove('open');}
+async function saveOrd(){
+  const img=document.getElementById('ord-img').value.trim();
+  const cap=document.getElementById('ord-cap').value.trim();
+  if(!img||!cap){toast('⚠ Image and caption required.');return;}
+  const{error}=await sb.from('orders').insert([{image:img,caption:cap}]);
+  if(error){toast('Error saving.');console.error(error);return;}
+  toast('✓ Order added.');
+  closeOrdM();await loadOrders();
+}
+async function delOrd(id){if(!confirm('Remove this order?'))return;await sb.from('orders').delete().eq('id',id);toast('Removed.');await loadOrders();}
+
+// ANNOUNCEMENT BANNER
+function adjustPagePadding(){
+  const nav=64;
+  const ann=document.getElementById('announcebar');
+  const cd=document.getElementById('countdownBar');
+  const annVisible=ann&&ann.style.display!=='none';
+  const cdVisible=cd&&cd.style.display==='flex';
+  const annH=annVisible?ann.offsetHeight:0;
+  const cdH=cdVisible?cd.offsetHeight:0;
+  // When both show, stack them
+  if(annVisible) ann.style.top=(64+cdH)+'px';
+  else if(ann) ann.style.top='64px';
+  const extra=annH+cdH;
+  document.querySelectorAll('.page').forEach(p=>{
+    p.style.paddingTop=(nav+extra+8)+'px';
+  });
+}
+async function loadAnnouncement(){
+  // Show from cache instantly
+  const cached=localStorage.getItem('jz_announcement');
+  if(cached){
+    document.getElementById('announcetext').textContent=cached+' · '+cached+' · '+cached;
+    document.getElementById('announcebar').style.display='block';
+    setTimeout(adjustPagePadding,50);
+  }
+  // Sync with Supabase
+  try{
+    const{data}=await sb.from('settings').select('value').eq('key','announcement').maybeSingle();
+    if(data&&data.value){
+      localStorage.setItem('jz_announcement',data.value);
+      document.getElementById('announcetext').textContent=data.value+' · '+data.value+' · '+data.value;
+      document.getElementById('announcebar').style.display='block';
+      setTimeout(adjustPagePadding,50);
+    } else if(data===null){
+      localStorage.removeItem('jz_announcement');
+      document.getElementById('announcebar').style.display='none';
+      setTimeout(adjustPagePadding,50);
+    }
+    // If undefined (network error) keep showing cached
+  }catch(e){}
+}
+
+
+
+// NEW ARRIVALS
+function renderNewArrivals(){
+  const grid=document.getElementById('naGrid');
+  if(!grid||!allKits.length)return;
+  const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  const latest=sorted.slice(0,6);
+  grid.innerHTML=latest.map(j=>{
+    const img=j.images&&j.images[0]?`<img src="${j.images[0]}" onerror="this.style.display='none'"/>`:`<div class="na-img-ph">⚽</div>`;
+    const price=j.price_variants&&j.price_variants[0]?`R${j.price_variants[0].price}`:'';
+    const typeLabel=(j.types||[j.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
+    const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:
+
+*${j.name}*
+Type: ${typeLabel}
+Size: [please specify]
+
+Please advise on availability and payment.`);
+    return`<div class="na-card" onclick="openKitDetail('${j.id}','catalogue')" style="cursor:pointer;">
+      <div class="na-img"><span class="na-badge">New In</span>${img}</div>
+      <div class="na-info">
+        <div class="na-name">${j.name}</div>
+        <div class="na-team">${j.team||''} · ${typeLabel}</div>
+        <div class="na-price">${price}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// COUNTDOWN TIMER
+let countdownInterval=null;
+async function loadCountdown(){
+  const cached=localStorage.getItem('jz_countdown');
+  if(cached){
+    const d=new Date(cached);
+    if(d>new Date()){startCountdown(d);}
+    else{localStorage.removeItem('jz_countdown');}
+  }
+  try{
+    const{data}=await sb.from('settings').select('value').eq('key','countdown_date').maybeSingle();
+      if(data&&data.value){
+      localStorage.setItem('jz_countdown',data.value);
+      startCountdown(new Date(data.value));
+    } else if(data===null&&!cached){
+          document.getElementById('countdownBar').style.display='none';
+    }
+  }catch(e){}
+}
+function startCountdown(targetDate){
+  const bar=document.getElementById('countdownBar');
+  if(!bar)return;
+  if(countdownInterval)clearInterval(countdownInterval);
+  // Show bar immediately if date is in future
+  if(targetDate>new Date()){
+    bar.style.display='flex';
+    setTimeout(adjustPagePadding,50);
+  }
+  function tick(){
+    const now=new Date();
+    const diff=targetDate-now;
+    if(diff<=0){
+      bar.style.display='none';
+      clearInterval(countdownInterval);
+      return;
+    }
+    bar.style.display='flex';
+  setTimeout(adjustPagePadding,50);
+    const days=Math.floor(diff/86400000);
+    const hrs=Math.floor((diff%86400000)/3600000);
+    const min=Math.floor((diff%3600000)/60000);
+    const sec=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent=String(days).padStart(2,'0');
+    document.getElementById('cd-hrs').textContent=String(hrs).padStart(2,'0');
+    document.getElementById('cd-min').textContent=String(min).padStart(2,'0');
+    document.getElementById('cd-sec').textContent=String(sec).padStart(2,'0');
+  }
+  tick();
+  countdownInterval=setInterval(tick,1000);
+}
+
+
+// THEME & SETTINGS
+function applyTheme(){
+  const isLight=document.getElementById('toggleLight')?.checked;
+  document.body.classList.toggle('light', isLight);
+  localStorage.setItem('jz_theme', isLight?'light':'dark');
+  updateThemeUI(isLight);
+}
+function applyCompact(){
+  const isCompact=document.getElementById('toggleCompact')?.checked;
+  document.body.classList.toggle('compact', isCompact);
+  localStorage.setItem('jz_compact', isCompact?'1':'0');
+}
+function loadSettings(){
+  const theme=localStorage.getItem('jz_theme')||'light';
+  const compact=localStorage.getItem('jz_compact')||'0';
+  const isLight=theme==='light';
+  const isCompact=compact==='1';
+  document.body.classList.toggle('light', isLight);
+  document.body.classList.toggle('compact', isCompact);
+  const tl=document.getElementById('toggleLight');
+  const tc=document.getElementById('toggleCompact');
+  if(tl)tl.checked=isLight;
+  if(tc)tc.checked=isCompact;
+  updateThemeUI(isLight);
+}
+
+
+// FADE IN ON SCROLL
+function initFadeIn(){
+  const els=document.querySelectorAll('.fade-in');
+  if(!els.length)return;
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        // Fade in when entering viewport
+        e.target.classList.remove('fade-out');
+        e.target.classList.add('visible');
+      } else {
+        // Fade out when leaving viewport
+        const rect=e.target.getBoundingClientRect();
+        if(rect.top<0){
+          // Element scrolled above viewport - fade out upward
+          e.target.classList.add('fade-out');
+        } else {
+          // Element below viewport - reset to fade-in state
+          e.target.classList.remove('visible');
+          e.target.classList.remove('fade-out');
+        }
+      }
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(el=>{
+    // Reset all first
+    el.classList.remove('visible','fade-out');
+    obs.observe(el);
+  });
+}
+
+// RELATED KITS
+function showRelated(kitId, team, typesStr){
+  document.querySelectorAll('.related-wrap').forEach(el=>el.remove());
+  const types=typesStr.split(',').filter(Boolean);
+  const related=allKits.filter(k=>{
+    if(k.id==kitId)return false;
+    const sameTeam=team&&k.team&&k.team.toLowerCase()===team.toLowerCase();
+    const kTypes=(k.types||[k.type]);
+    const sameType=types.some(t=>kTypes.includes(t));
+    return sameTeam||sameType;
+  }).slice(0,6);
+  if(!related.length)return;
+  const relHTML=related.map(k=>{
+    const img=k.images&&k.images[0]?`<img src="${k.images[0]}" onerror="this.style.display='none'"/>`:`<div class="related-img-ph">⚽</div>`;
+    const typeLabel=(k.types||[k.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
+    return`<div class="related-card" onclick="showRelated('${k.id}','${k.team||''}','${(k.types||[k.type]).join(',')}');window.scrollTo({top:0,behavior:'smooth'})"><div class="related-img">${img}</div><div class="related-info"><div class="related-name">${k.name}</div><div class="related-team">${k.team||''} · ${typeLabel}</div></div></div>`;
+  }).join('');
+  const wrap=document.createElement('div');
+  wrap.className='related-wrap';
+  wrap.innerHTML=`<div class="related-title">You May Also Like</div><div class="related-grid">${relHTML}</div>`;
+  const card=document.querySelector(`.kc[data-id="${kitId}"]`);
+  if(card)card.insertAdjacentElement('afterend',wrap);
+}
+
+
+
+let kitDetailPreviousPage='catalogue';
+function goBackFromKit(){
+  showPage(kitDetailPreviousPage);
+}
+
+// KIT DETAIL PAGE
+let kdpGalIdx=0;
+let kdpSelectedSize='';
+
+function openKitDetail(kitId, fromPage){
+  const kit=allKits.find(k=>k.id==kitId);
+  if(!kit)return;
+  kitDetailPreviousPage=fromPage||'catalogue';
+  kdpSelectedSize='';
+  window._kdpSelectedVersion='';
+  window._kdpSelectedPrice=0;
+  const WA_NUM='27710396374';
+
+  // Gallery
+  const gallery=document.getElementById('kdpGallery');
+  const dotsContainer=document.getElementById('kdpDots');
+  const images=kit.images||[];
+  kdpGalIdx=0;
+  gallery.innerHTML='';
+  dotsContainer.innerHTML='';
+
+  if(images.length===0){
+    gallery.innerHTML='<div style="height:280px;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.1;">⚽</div>';
+  } else if(images.length===1){
+    const im=document.createElement('img');
+    im.src=images[0];im.style.cssText='width:100%;max-height:450px;object-fit:contain;display:block;background:var(--bg3);';
+    im.setAttribute('onerror','this.style.display="none"');
+    gallery.appendChild(im);
+  } else {
+    const track=document.createElement('div');
+    track.className='kd-page-gallery-track';track.id='kdpTrack';
+    images.forEach(src=>{
+      const im=document.createElement('img');
+      im.className='kd-page-gallery-img';im.src=src;
+      im.setAttribute('onerror','this.style.display="none"');
+      track.appendChild(im);
+    });
+    gallery.appendChild(track);
+    images.forEach((_,i)=>{
+      const d=document.createElement('span');
+      d.className='gdot'+(i===0?' active':'');
+      d.onclick=()=>kdpGoSlide(i);
+      dotsContainer.appendChild(d);
+    });
+    // Touch swipe
+    let sx=0;
+    gallery.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+    gallery.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40){kdpGalIdx=(kdpGalIdx+(d>0?1:-1)+images.length)%images.length;kdpGoSlide(kdpGalIdx);}},{passive:true});
+  }
+
+  // Badges
+  const cat=getKitCategory(kit.type,kit.types);
+  const badgeLabel=cat==='local'?'Local':cat==='both'?'Imported & Local':'Imported';
+  const badgeClass=cat==='local'?'badge-local':cat==='both'?'badge-both':'badge-imported';
+  document.getElementById('kdpBadges').innerHTML='<span class="ktb '+badgeClass+'" style="position:static;font-size:0.65rem;">'+badgeLabel+'</span>';
+
+  // Name & team
+  document.getElementById('kdpName').textContent=kit.name;
+  document.getElementById('kdpTeam').textContent=(kit.team||'')+(kit.league?' · '+kit.league:'');
+
+  // Versions / Price variants
+  const pvs=kit.price_variants||[];
+  const versionsWrap=document.getElementById('kdpVersionsWrap');
+  const versionsContainer=document.getElementById('kdpVersions');
+  if(pvs.length>1){
+    versionsWrap.style.display='block';
+    document.getElementById('kdpPrices').innerHTML='';
+    versionsContainer.innerHTML='';
+    pvs.forEach((v,i)=>{
+      const el=document.createElement('div');
+      el.className='kd-page-version'+(i===0?' selected':'');
+      el.innerHTML='<span>'+v.label+'</span><span class="kd-page-version-price">R'+v.price+'</span>';
+      el.onclick=()=>kdpSelectVersion(el,v.label,v.price);
+      versionsContainer.appendChild(el);
+    });
+    // Set initial selected version
+    window._kdpSelectedVersion=pvs[0].label;
+    window._kdpSelectedPrice=pvs[0].price;
+  } else {
+    versionsWrap.style.display='none';
+    document.getElementById('kdpPrices').innerHTML=pvs.map(v=>'<div class="kd-page-price">R'+v.price+'<span class="kd-page-price-label">'+v.label+'</span></div>').join('');
+    window._kdpSelectedVersion=pvs[0]?.label||'';
+    window._kdpSelectedPrice=pvs[0]?.price||0;
+  }
+
+  // Sizes
+  const sizes=kit.sizes||[];
+  const sizesWrap=document.getElementById('kdpSizesWrap');
+  if(sizes.length){
+    sizesWrap.style.display='block';
+    document.getElementById('kdpSizes').innerHTML=sizes.map(s=>'<div class="kd-page-size" onclick="kdpSelectSize(this,this.textContent)">'+s+'</div>').join('');
+  } else { sizesWrap.style.display='none'; }
+
+  // Addons
+  const addons=kit.addons||[];
+  const addonsWrap=document.getElementById('kdpAddonsWrap');
+  if(addons.length){
+    addonsWrap.style.display='block';
+    document.getElementById('kdpAddons').innerHTML=addons.map(a=>'<span class="kd-page-addon">'+a+'</span>').join('');
+  } else { addonsWrap.style.display='none'; }
+
+  // Order button
+  const typeLabel=(kit.types||[kit.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
+  const updateBtn=()=>{
+    const versionStr=window._kdpSelectedVersion?'\nVersion: '+window._kdpSelectedVersion:'';
+    const sizeStr=kdpSelectedSize?'\nSize: '+kdpSelectedSize:'\nSize: [please specify]';
+    const priceStr=window._kdpSelectedPrice?'\nPrice: R'+window._kdpSelectedPrice:'';
+    const msg=encodeURIComponent('Hi JerseyZone_ZA! I\'d like to order:\n\n*'+kit.name+'*'+versionStr+sizeStr+priceStr+'\n\nPlease advise on availability and payment.');
+    document.getElementById('kdpOrderBtn').href='https://wa.me/'+WA_NUM+'?text='+msg;
+  };
+  updateBtn();
+  window._kdpUpdateBtn=updateBtn;
+
+  // Similar kits
+  const similar=allKits.filter(k=>k.id!=kit.id&&k.team&&kit.team&&k.team.toLowerCase()===kit.team.toLowerCase()).slice(0,6);
+  const simWrap=document.getElementById('kdpSimilarWrap');
+  if(similar.length){
+    simWrap.style.display='block';
+    document.getElementById('kdpSimilar').innerHTML=similar.map(k=>{
+      const img=k.images&&k.images[0]?'<img src="'+k.images[0]+'" style="width:100%;height:100%;object-fit:contain;">':'<div class="kd-page-similar-ph">⚽</div>';
+      const card=document.createElement('div');card.className='kd-page-similar-card';card.onclick=()=>openKitDetail(k.id,'kitdetail');card.innerHTML='<div class="kd-page-similar-img">'+img+'</div><div class="kd-page-similar-info"><div class="kd-page-similar-name">'+k.name+'</div><div class="kd-page-similar-team">'+(k.team||'')+'</div></div>';return card.outerHTML;
+    }).join('');
+  } else { simWrap.style.display='none'; }
+
+  showPage('kitdetail');
+  window.scrollTo(0,0);
+}
+
+function kdpGoSlide(idx){
+  const track=document.getElementById('kdpTrack');
+  if(!track)return;
+  kdpGalIdx=idx;
+  track.style.transform='translateX(-'+idx*100+'%)';
+  document.querySelectorAll('#kdpDots .gdot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+
+function kdpSelectVersion(el,label,price){
+  window._kdpSelectedVersion=label;
+  window._kdpSelectedPrice=price;
+  document.querySelectorAll('.kd-page-version').forEach(v=>v.classList.remove('selected'));
+  el.classList.add('selected');
+  if(window._kdpUpdateBtn)window._kdpUpdateBtn();
+}
+function kdpSelectSize(el,size){
+  kdpSelectedSize=size;
+  document.querySelectorAll('.kd-page-size').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+  if(window._kdpUpdateBtn)window._kdpUpdateBtn();
+}
+
+
+function closeKitDetail(){
+  document.getElementById('kitDetailOverlay').classList.remove('open');
+  document.body.style.overflow='';
+  document.body.style.overflowY='';
+  document.documentElement.style.overflow='';
+  const cb=document.getElementById('kitDetailClose');
+  if(cb)cb.style.display='none';
+}
+
+
+
+// ON HAND DETAIL
+function openOHDetail(itemId){
+  const item=allOnHand.find(x=>x.id==itemId);
+  if(!item)return;
+  const WA_NUM='27710396374';
+  kitDetailPreviousPage='onhand';
+
+  // Gallery
+  const gallery=document.getElementById('kdpGallery');
+  const dotsContainer=document.getElementById('kdpDots');
+  const images=(item.images&&item.images.length)?item.images:(item.image?[item.image]:[]);
+  gallery.innerHTML='';
+  dotsContainer.innerHTML='';
+  kdpGalIdx=0;
+
+  if(!images.length){
+    gallery.innerHTML='<div style="height:280px;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.1;">⚽</div>';
+  } else if(images.length===1){
+    const im=document.createElement('img');
+    im.src=images[0];
+    im.style.cssText='width:100%;max-height:450px;object-fit:contain;display:block;background:var(--bg3);';
+    im.setAttribute('onerror','this.style.display="none"');
+    gallery.appendChild(im);
+  } else {
+    const track=document.createElement('div');
+    track.className='kd-page-gallery-track';track.id='kdpTrack';
+    images.forEach(src=>{
+      const im=document.createElement('img');
+      im.className='kd-page-gallery-img';im.src=src;
+      im.setAttribute('onerror','this.style.display="none"');
+      track.appendChild(im);
+    });
+    gallery.appendChild(track);
+    images.forEach((_,i)=>{
+      const d=document.createElement('span');
+      d.className='gdot'+(i===0?' active':'');
+      d.onclick=()=>kdpGoSlide(i);
+      dotsContainer.appendChild(d);
+    });
+    let sx=0;
+    gallery.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+    gallery.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40){kdpGalIdx=(kdpGalIdx+(d>0?1:-1)+images.length)%images.length;kdpGoSlide(kdpGalIdx);}},{passive:true});
+  }
+
+  // Badge
+  const hasDisc=item.discounted_price&&item.discounted_price<item.original_price;
+  document.getElementById('kdpBadges').innerHTML='<span class="ktb badge-local" style="position:static;font-size:0.65rem;">On Hand</span>'+(hasDisc?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">Sale</span>':'');
+  document.getElementById('kdpName').textContent=item.name;
+  document.getElementById('kdpTeam').textContent=item.team||'';
+
+  // No versions for on hand
+  document.getElementById('kdpVersionsWrap').style.display='none';
+
+  // Price
+  document.getElementById('kdpPrices').innerHTML=hasDisc
+    ?'<div class="kd-page-price" style="text-decoration:line-through;color:var(--muted);font-size:0.8rem;">R'+item.original_price+'</div><div class="kd-page-price">R'+item.discounted_price+'<span class="kd-page-price-label">Discounted</span></div>'
+    :'<div class="kd-page-price">R'+item.original_price+'</div>';
+
+  // Sizes
+  const sizes=item.sizes||[];
+  const sizesWrap=document.getElementById('kdpSizesWrap');
+  if(sizes.length){
+    sizesWrap.style.display='block';
+    const szDiv=document.getElementById('kdpSizes');szDiv.innerHTML='';
+    sizes.forEach(s=>{
+      const el=document.createElement('div');
+      el.className='kd-page-size'+(s.available?'':' bwa-dis');
+      el.textContent=s.size+(s.available?'':' (Sold)');
+      if(s.available)el.onclick=()=>kdpSelectSize(el,s.size);
+      szDiv.appendChild(el);
+    });
+  } else { sizesWrap.style.display='none'; }
+
+  document.getElementById('kdpAddonsWrap').style.display='none';
+  document.getElementById('kdpSimilarWrap').style.display='none';
+
+  // Order button
+  const price=hasDisc?item.discounted_price:item.original_price;
+  const msg=encodeURIComponent('Hi JerseyZone_ZA! I would like to order an On Hand item:\n\n*'+item.name+'*\nPrice: R'+price+'\n\nPlease advise on availability and payment.');
+  document.getElementById('kdpOrderBtn').href='https://wa.me/'+WA_NUM+'?text='+msg;
+  window._kdpUpdateBtn=null;
+
+  showPage('kitdetail');
+  window.scrollTo(0,0);
+}
+
+// ON HAND ADMIN// ON HAND ADMIN
+let eohid=null,ohSizeCount=0;
+function openOHM(id){
+  eohid=id;
+  const item=id?allOnHand.find(x=>x.id==id):null;
+  document.getElementById("ohmTitle").textContent=item?"Edit Item":"Add On Hand Item";
+  document.getElementById("oh-n").value=item?.name||"";
+  document.getElementById("oh-t").value=item?.team||"";
+  const ohic=document.getElementById("ohImgContainer");
+  if(ohic){ohic.innerHTML="";ohImgCount=0;(item?.images||(item?.image?[item.image]:[""])).forEach(url=>addOHImgField(url));}
+  document.getElementById("oh-op").value=item?.original_price||"";
+  document.getElementById("oh-dp").value=item?.discounted_price||"";
+  const sc=document.getElementById("ohSizes");sc.innerHTML="";ohSizeCount=0;
+  (item?.sizes||[{size:"S",available:true},{size:"M",available:true},{size:"L",available:true},{size:"XL",available:true}]).forEach(s=>addOHSize(s.size,s.available));
+  document.getElementById("ohModal").classList.add("open");
+}
+let ohImgCount=0;
+function addOHImgField(url=''){
+  const id=ohImgCount++;
+  const d=document.createElement('div');
+  d.className='imgr';d.id='ohimg'+id;
+  d.innerHTML=`<input class="fi" placeholder="https://i.imgur.com/..." value="${url}" data-ohimg/><button class="btn-d" style="padding:6px 10px;flex-shrink:0;" onclick="document.getElementById('ohimg${id}').remove()">✕</button>`;
+  document.getElementById('ohImgContainer').appendChild(d);
+}
+function addOHSize(size="",available=true){
+  const id=ohSizeCount++;
+  const d=document.createElement("div");
+  d.style.cssText="display:flex;gap:0.5rem;align-items:center;";
+  d.id="ohs"+id;
+  d.innerHTML=`<select class="fsel" style="flex:1;" data-sz>
+    <option value="XS" ${size==="XS"?"selected":""}>XS</option>
+    <option value="S" ${size==="S"?"selected":""}>S</option>
+    <option value="M" ${size==="M"?"selected":""}>M</option>
+    <option value="L" ${size==="L"?"selected":""}>L</option>
+    <option value="XL" ${size==="XL"?"selected":""}>XL</option>
+    <option value="XXL" ${size==="XXL"?"selected":""}>XXL</option>
+    <option value="Kids S" ${size==="Kids S"?"selected":""}>Kids S</option>
+    <option value="Kids M" ${size==="Kids M"?"selected":""}>Kids M</option>
+    <option value="Kids L" ${size==="Kids L"?"selected":""}>Kids L</option>
+  </select>
+  <label class="cl"><input type="checkbox" data-av ${available?"checked":""}/><span>Available</span></label>
+  <button class="btn-d" style="padding:5px 9px;flex-shrink:0;" onclick="document.getElementById('ohs${id}').remove()">✕</button>`;
+  document.getElementById("ohSizes").appendChild(d);
+}
+function closeOHM(){document.getElementById("ohModal").classList.remove("open");}
+async function saveOH(){
+  const name=document.getElementById("oh-n").value.trim();
+  const op=document.getElementById("oh-op").value;
+  if(!name||!op){toast("⚠ Name and original price required.");return;}
+  const sizes=Array.from(document.querySelectorAll("#ohSizes > div")).map(d=>({
+    size:d.querySelector("[data-sz]").value,
+    available:d.querySelector("[data-av]").checked
+  }));
+  const item={
+    name,
+    team:document.getElementById("oh-t").value.trim(),
+    images:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean),
+    image:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean)[0]||"",
+    original_price:+op,
+    discounted_price:document.getElementById("oh-dp").value?+document.getElementById("oh-dp").value:null,
+    sizes
+  };
+  let error;
+  if(eohid){({error}=await sb.from("on_hand").update(item).eq("id",eohid));toast("✓ Item updated.");}
+  else{({error}=await sb.from("on_hand").insert([item]));toast("✓ Item added.");}
+  if(error){toast("Error saving item.");console.error(error);return;}
+  closeOHM();await loadOnHand();renderOnHandAdmin();
+}
+async function delOH(id){if(!confirm("Remove this item?"))return;await sb.from("on_hand").delete().eq("id",id);toast("Item removed.");await loadOnHand();renderOnHandAdmin();}
+function renderOnHandAdmin(){
+  document.getElementById("ohc").textContent=allOnHand.length;
+  document.getElementById("ohl").innerHTML=!allOnHand.length?'<div class="empty-state">No on hand items yet.</div>':allOnHand.map(item=>{
+    const hasDisc=item.discounted_price&&item.discounted_price<item.original_price;
+    return`<div class="adi"><div class="adin"><div class="adin-n">${item.name}${hasDisc?` <span style="background:rgba(220,30,35,0.15);border:1px solid rgba(220,30,35,0.3);color:var(--red);font-size:0.55rem;padding:2px 6px;border-radius:2px;font-weight:700;">SALE</span>`:''}</div><div class="adin-m">${item.team?item.team+" · ":""}R${item.original_price}${hasDisc?" → R"+item.discounted_price:""} · ${(item.sizes||[]).filter(s=>s.available).map(s=>s.size).join(", ")||"No sizes"}</div></div><div class="adi-ac"><button class="btn-g" onclick="openOHM('${item.id}')">Edit</button><button class="btn-d" onclick="delOH('${item.id}')">Remove</button></div></div>`;
+  }).join("");
+}
+
+// DRAG TO REORDER KITS
+let dragSrcId=null;
+function onDragStart(e,id){dragSrcId=id;e.currentTarget.classList.add("dragging");}
+function onDragEnd(e){e.currentTarget.classList.remove("dragging");document.querySelectorAll(".drag-over").forEach(el=>el.classList.remove("drag-over"));}
+function onDragOver(e,id){e.preventDefault();if(id!==dragSrcId){e.currentTarget.classList.add("drag-over");}}
+function onDragLeave(e){e.currentTarget.classList.remove("drag-over");}
+async function onDrop(e,targetId){
+  e.currentTarget.classList.remove("drag-over");
+  if(!dragSrcId||dragSrcId===targetId)return;
+  const srcIdx=allKits.findIndex(k=>k.id==dragSrcId);
+  const tgtIdx=allKits.findIndex(k=>k.id==targetId);
+  if(srcIdx<0||tgtIdx<0)return;
+  const reordered=[...allKits];
+  const [moved]=reordered.splice(srcIdx,1);
+  reordered.splice(tgtIdx,0,moved);
+  // Update sort_order in supabase
+  const updates=reordered.map((k,i)=>sb.from("kits").update({sort_order:i}).eq("id",k.id));
+  await Promise.all(updates);
+  allKits=reordered;
+  renderAdmin();
+  toast("✓ Kit order updated.");
+}
+
+document.getElementById("kitModal").addEventListener("click",e=>{if(e.target===document.getElementById("kitModal"))closeKM();});
+document.getElementById("ohModal").addEventListener("click",e=>{if(e.target===document.getElementById("ohModal"))closeOHM();});
+document.getElementById("ordModal").addEventListener("click",e=>{if(e.target===document.getElementById("ordModal"))closeOrdM();});
+document.getElementById("revModal").addEventListener("click",e=>{if(e.target===document.getElementById("revModal"))closeRM();});
+async function saveCountdown(){
+  const val=document.getElementById('cd-input').value;
+  if(!val){toast('⚠ Please select a date and time.');return;}
+  await sb.from('settings').upsert([{key:'countdown_date',value:val}],{onConflict:'key'});
+  localStorage.setItem('jz_countdown',val);
+  startCountdown(new Date(val));
+  toast('✓ Countdown set.');
+}
+async function clearCountdown(){
+  await sb.from('settings').delete().eq('key','countdown_date');
+  if(countdownInterval)clearInterval(countdownInterval);
+  document.getElementById('countdownBar').style.display='none';
+  document.getElementById('cd-input').value='';
+  toast('Countdown cleared.');
+}
+async function saveAnnouncement(){
+  const val=document.getElementById('ann-text').value.trim();
+  if(!val){toast('⚠ Enter announcement text.');return;}
+  await sb.from('settings').upsert([{key:'announcement',value:val}],{onConflict:'key'});
+  localStorage.setItem('jz_announcement',val);
+  document.getElementById('announcebar').style.display='block';
+  document.getElementById('announcetext').textContent=val+' · '+val+' · '+val;
+  adjustPagePadding();
+  toast('✓ Announcement updated.');
+}
+async function clearAnnouncement(){
+  await sb.from('settings').delete().eq('key','announcement');
+  document.getElementById('announcebar').style.display='none';
+  document.getElementById('ann-text').value='';
+  adjustPagePadding();
+  toast('Announcement cleared.');
+}
+
+// THEME TOGGLE
+function updateThemeUI(isLight){
+  // Update nav button
+  const btn=document.getElementById('themeToggle');
+  if(btn)btn.innerHTML=isLight?'🌙 Dark':'☀️ Light';
+  // Sync settings slider
+  const slider=document.getElementById('toggleLight');
+  if(slider)slider.checked=isLight;
+}
+function toggleTheme(){
+  const isLight=document.body.classList.toggle('light');
+  updateThemeUI(isLight);
+  try{localStorage.setItem('jz_theme',isLight?'light':'dark');}catch{}
+}
+function initTheme(){
+  try{
+    const saved=localStorage.getItem('jz_theme')||'light';
+    const isLight=saved==='light';
+    document.body.classList.toggle('light',isLight);
+    updateThemeUI(isLight);
+  }catch{}
+}
+
+initTheme();
+initFadeIn();
+window.addEventListener('scroll',()=>{
+  const btn=document.getElementById('backToTop');
+  if(btn)btn.classList.toggle('visible',window.scrollY>400);
+});
+renderStars();
+init();
+</script>
+
+
+<!-- KIT DETAIL MODAL -->
+<div class="kit-detail-overlay" id="kitDetailOverlay" onclick="if(event.target===this)closeKitDetail()">
+  <div class="kit-detail" id="kitDetailPanel">
+    <div class="kit-detail-handle"></div>
+    <div class="kit-detail-gallery" id="kdGallery"></div>
+    <div class="kit-detail-body">
+      <div class="kit-detail-badges" id="kdBadges"></div>
+      <div class="kit-detail-name" id="kdName"></div>
+      <div class="kit-detail-team" id="kdTeam"></div>
+      <div class="kit-detail-prices" id="kdPrices"></div>
+      <div id="kdSizesWrap" style="display:none;">
+        <div class="kit-detail-section-title">Select Size</div>
+        <div class="kit-detail-sizes" id="kdSizes"></div>
+      </div>
+      <div id="kdAddonsWrap" style="display:none;">
+        <div class="kit-detail-section-title">Available Add-ons</div>
+        <div class="kit-detail-addons" id="kdAddons"></div>
+      </div>
+      <a id="kdOrderBtn" href="#" target="_blank" class="kit-detail-order-btn">📲 Order via WhatsApp</a>
+      <div id="kdSimilarWrap" style="display:none;">
+        <div class="kit-detail-similar-title">Similar Kits</div>
+        <div class="kit-detail-similar-grid" id="kdSimilar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSE BUTTON (always on top) -->
+<button id="kitDetailClose" onclick="closeKitDetail()">✕</button>
+
+<!-- FLOATING BUTTONS -->
+<a href="https://wa.me/27710396374?text=Hi%20JerseyZone_ZA!%20I%27d%20like%20to%20enquire." target="_blank" class="float-wa" title="Chat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.563 4.14 1.538 5.878L.057 23.5a.5.5 0 0 0 .61.61l5.764-1.481A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.512-5.236-1.4l-.374-.217-3.878.997.999-3.79-.24-.389A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+<button class="float-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+</div>
+</body>
+</html>
