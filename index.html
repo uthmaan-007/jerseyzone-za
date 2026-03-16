@@ -41,7 +41,7 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .btn-g:hover{background:rgba(201,168,76,0.1);}
 
 /* HERO */
-.hero{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem 2rem;background:radial-gradient(ellipse at 50% 40%,rgba(220,30,35,0.05) 0%,transparent 60%);}
+.hero{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem 2rem;background:radial-gradient(ellipse at 50% 40%,rgba(220,30,35,0.05) 0%,transparent 60%);}@media(min-width:900px){.hero{min-height:auto;padding:4rem 2rem;}}
 .hero-logo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid var(--red);margin-bottom:1rem;animation:pulse 4s ease-in-out infinite;}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(220,30,35,0.25),0 0 30px rgba(220,30,35,0.1);}50%{box-shadow:0 0 0 8px rgba(220,30,35,0),0 0 50px rgba(220,30,35,0.2);}}
 .hero-eye{font-size:0.62rem;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
@@ -49,7 +49,7 @@ nav{position:fixed;top:0;transition:top 0.3s;left:0;right:0;z-index:100;height:6
 .hero-slogan{font-size:0.85rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;}
 .hero-tag{font-size:0.9rem;font-weight:300;color:var(--muted);letter-spacing:0.08em;margin-bottom:2.5rem;}
 .hero-line{width:40px;height:1px;background:var(--red);margin:0 auto 2.5rem;}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;}
 
 /* REVIEWS SLIDER ON HOME */
 .home-reviews{width:100%;max-width:700px;margin:0 auto;padding:0 1rem;position:relative;}
@@ -288,7 +288,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 @keyframes ticker{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}}
 
 /* HOW TO ORDER */
-.hto-wrap{max-width:860px;margin:0 auto;padding:3rem 2rem;}
+.hto-wrap{max-width:860px;margin:0 auto;padding:2rem;}
 .hto-title{font-family:"Cinzel",serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;letter-spacing:0.08em;text-align:center;margin-bottom:0.5rem;}
 .hto-sub{text-align:center;color:var(--muted);font-size:0.85rem;font-weight:300;margin-bottom:3rem;}
 .hto-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);}
@@ -362,7 +362,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 
 
 /* NEW ARRIVALS */
-.na-wrap{padding:3rem 2rem;border-top:1px solid var(--border);}
+.na-wrap{padding:2rem;border-top:1px solid var(--border);}
 .na-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
 .na-title{font-family:"Cinzel",serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:700;letter-spacing:0.08em;}
 .na-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);}@media(min-width:600px){.na-grid{grid-template-columns:repeat(3,1fr);}}
@@ -379,7 +379,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .na-price{font-family:"Cinzel",serif;font-size:0.8rem;font-weight:700;color:var(--red);}
 
 /* ABOUT US */
-.about-wrap{max-width:860px;margin:0 auto;padding:3rem 2rem;}
+.about-wrap{max-width:860px;margin:0 auto;padding:2rem;}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
 @media(max-width:640px){.about-grid{grid-template-columns:1fr;gap:2rem;}}
 .about-logo{width:160px;height:160px;border-radius:50%;object-fit:cover;border:2px solid var(--red);display:block;margin:0 auto;}
@@ -486,6 +486,10 @@ body.light .admin-card-inner,.light .ac{background:var(--bg2);}
 
 /* COMPACT VIEW */
 body.compact .kit-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+body.compact .oh-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+body.compact .oh-img{height:160px;}
+body.compact .oh-name{font-size:0.72rem;}
+body.compact .oh-prices{font-size:0.7rem;}
 body.compact .kia{height:200px;}
 body.compact .gallery{height:200px;}
 body.compact .ki{padding:0.75rem;}
@@ -578,6 +582,39 @@ body.compact .kao{display:none;}
 .kit-detail-similar-info{padding:0.6rem 0.75rem;}
 .kit-detail-similar-name{font-family:"Cinzel",serif;font-size:0.65rem;font-weight:600;color:var(--cream);margin-bottom:0.15rem;}
 .kit-detail-similar-team{font-size:0.62rem;color:var(--muted);font-weight:300;}
+
+
+/* FILTER PANEL */
+.filter-panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:none;backdrop-filter:blur(3px);}
+.filter-panel-overlay.open{display:block;}
+.filter-panel{position:fixed;right:0;top:0;bottom:0;width:300px;max-width:85vw;background:var(--bg2);border-left:1px solid var(--border);z-index:201;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s ease;display:flex;flex-direction:column;}
+.filter-panel.open{transform:translateX(0);}
+.filter-panel-header{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg2);z-index:5;}
+.filter-panel-title{font-family:"Cinzel",serif;font-size:0.85rem;letter-spacing:0.1em;}
+.filter-panel-close{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:0;}
+.filter-panel-body{padding:1.25rem;flex:1;}
+.filter-section{margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:1.5rem;}
+.filter-section:last-child{border-bottom:none;}
+.filter-section-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:0.5rem 0;font-family:"Cinzel",serif;font-size:0.75rem;letter-spacing:0.08em;color:var(--cream);user-select:none;}
+.filter-section-arr{color:var(--muted2);font-size:0.65rem;transition:transform 0.3s;}
+.filter-section-arr.open{transform:rotate(180deg);}
+.filter-options{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.75rem;display:none;}
+.filter-options.open{display:flex;}
+.filter-chip{font-family:"Raleway",sans-serif;font-weight:600;font-size:0.65rem;letter-spacing:0.08em;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
+.filter-chip.active{background:var(--red);border-color:var(--red);color:#fff;}
+.filter-panel-footer{padding:1.25rem;border-top:1px solid var(--border);display:flex;gap:0.75rem;position:sticky;bottom:0;background:var(--bg2);}
+.filter-btn-trigger{display:flex;align-items:center;gap:6px;font-family:"Raleway",sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);border-radius:4px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.filter-btn-trigger:hover,.filter-btn-trigger.has-filters{border-color:var(--red);color:var(--cream);}
+.filter-active-count{background:var(--red);color:#fff;font-size:0.6rem;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:2px;}
+
+
+/* PAGINATION */
+.pagination{display:flex;justify-content:center;align-items:center;gap:6px;padding:2rem;flex-wrap:wrap;}
+.pag-btn{font-family:"Cinzel",serif;font-size:0.68rem;font-weight:600;padding:8px 14px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;border-radius:3px;transition:all 0.2s;min-width:38px;}
+.pag-btn:hover{border-color:var(--red);color:var(--cream);}
+.pag-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+.pag-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.pag-info{font-size:0.68rem;color:var(--muted);font-weight:300;padding:0 0.5rem;}
 
 /* KIT TYPE DROPDOWN GROUPS */
 .type-group-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 13px 3px;display:block;}
@@ -759,22 +796,17 @@ body.compact .kao{display:none;}
 <div class="page" id="page-catalogue">
   <div class="ph fade-in"><h2>Catalogue</h2><p>Browse our available kits — tap any item to order via WhatsApp</p></div>
   <div class="fs-bar fade-in">
-    <div class="fbar">
-      <button class="fb active" onclick="setFilter('all',this)">All</button>
-      <button class="fb" onclick="setFilter('fan',this)">Fan Version</button>
-      <button class="fb" onclick="setFilter('player',this)">Player Version</button>
-      <button class="fb" onclick="setFilter('retro',this)">Retro</button>
-      <button class="fb" onclick="setFilter('replica_mens',this)">Replica</button>
-      <button class="fb" onclick="setFilter('kids_kit',this)">Kids Kits</button>
-      <button class="fb" onclick="setFilter('f1',this)">F1</button>
-      <button class="fb" onclick="setFilter('tracksuit',this)">Tracksuits</button>
-      <button class="fb" onclick="setFilter('training_set',this)">Training Sets</button>
-      <button class="fb" onclick="setFilter('windbreaker',this)">Windbreakers</button>
-      <button class="fb" onclick="setFilter('baby_grower',this)">Baby Growers</button>
+    <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+      <button class="filter-btn-trigger" id="filterTrigger" onclick="openFilterPanel()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        Filters <span id="filterCount" class="filter-active-count" style="display:none;"></span>
+      </button>
+      <button class="fb active" id="filterAllBtn" onclick="clearAllFilters()">All</button>
     </div>
-    <div class="sw"><span class="sico">🔍</span><input class="si" id="si" placeholder="Search kits..." oninput="renderCat()"/></div>
+    <div class="sw"><span class="sico">🔍</span><input class="si" id="si" placeholder="Search by team, league or kit name..." oninput="renderCat()"/></div>
   </div>
   <div id="kitGrid" class="kit-grid fade-in"></div>
+  <div class="pagination" id="catPagination"></div>
   <div id="emptyState" class="fade-in" class="empty-state" style="display:none;">No kits found. Try a different search or filter.</div>
   <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
     <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Looking for a specific kit?</p>
@@ -883,6 +915,20 @@ body.compact .kao{display:none;}
       <div class="faq-sec-title">Pricing</div>
       <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Where can I find your full pricing?</span><span class="faq-arr">▼</span></div><div class="faq-ans">All pricing is available on our dedicated <span onclick="showPage('pricing')" style="color:var(--red);cursor:pointer;text-decoration:underline;">Pricing page</span>. Prices are subject to change — for the latest pricing please contact us directly.</div></div>
     </div>
+    <div class="faq-sec fade-in">
+      <div class="faq-sec-title">Orders &amp; Delivery</div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Can I cancel my order?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Yes — you can cancel your order before it has been placed with our supplier. Once placed with the supplier, cancellations are no longer possible. Contact us immediately via WhatsApp if you need to cancel.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Can I order in bulk?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Yes — the more you order, the bigger the discount. Discounts start from 3 kits. Contact us via WhatsApp for a bulk order quote.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>How do I track my order?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Once your order has been dispatched, contact us via WhatsApp for a delivery update. We'll provide the latest information available from our courier.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Do you ship internationally?</span><span class="faq-arr">▼</span></div><div class="faq-ans">No — we currently deliver within South Africa only, nationwide via courier.</div></div>
+    </div>
+    <div class="faq-sec fade-in">
+      <div class="faq-sec-title">Kits &amp; Sizing</div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>What sizes do you stock?</span><span class="faq-arr">▼</span></div><div class="faq-ans">We stock sizes S through XXL for adults, and Kids S, Kids M and Kids L for junior kits. Availability varies per kit — contact us via WhatsApp to confirm your size is available.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Do kids kits come with shorts?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Yes — all kids kits include both a shirt and shorts as a set.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>How do I care for my kit?</span><span class="faq-arr">▼</span></div><div class="faq-ans">Hand wash or machine wash on a light/gentle setting. Always wash inside out. Do not iron directly on any badges, prints or sponsors. Air dry while inside out to avoid damage to prints and sponsors.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)"><span>Do you offer exchanges?</span><span class="faq-arr">▼</span></div><div class="faq-ans">No — we do not offer exchanges. Please use our size guide and WhatsApp us before ordering if unsure about sizing. We're happy to recommend the right size.</div></div>
+    </div>
   </div>
 </div>
 
@@ -898,7 +944,7 @@ body.compact .kao{display:none;}
     </div>
     <div id="sugForm">
       <div class="sug-note"><strong style="color:var(--cream);">Please note:</strong> Kit sourcing is available for imported kits only. Sourced kits are priced at standard imported rates and a small additional fee may apply. We will contact you directly on the number provided if the kit becomes available.</div>
-      <div class="fg"><label class="fl">Your Name *</label><input class="fi" id="sn" placeholder="e.g. Yusuf"/></div>
+      <div class="fg"><label class="fl">Your Name *</label><input class="fi" id="sn" placeholder="e.g. Uthmaan"/></div>
       <div class="fg"><label class="fl">Contact Number *</label><input class="fi" id="sphone" placeholder="e.g. 071 234 5678" type="tel"/></div>
       <div class="fg"><label class="fl">Kit You Are Looking For *</label><input class="fi" id="sk" placeholder="e.g. Brazil Away 2024/25"/></div>
       <div class="fg"><label class="fl">Additional Details</label><textarea class="fta" id="sd" placeholder="Size, any other relevant details..."></textarea></div>
@@ -913,7 +959,7 @@ body.compact .kao{display:none;}
   <div class="ph fade-in"><h2>Size Guide</h2><p>Find your perfect fit before ordering</p></div>
   <div class="sg-wrap fade-in">
     <div class="sg-note">
-      <strong>Important:</strong> Player version kits are designed with a slim, athletic fit and a waist-cinching design. If you prefer a looser or more relaxed fit, we recommend sizing up by one size. Fan version kits have a more relaxed fit and follow standard sizing.
+      <strong>Important:</strong> Player version kits have a slim athletic fit — if you prefer a looser feel, size up. Fan version kits have a relaxed fit and follow standard sizing. Chest measurements are taken across the widest point of the chest. ⭐ Use your height and weight as a guide if unsure — WhatsApp us and we'll recommend the right size.
     </div>
     <div class="sg-section-title fade-in">Player Version — Size Chart</div>
     <div class="sg-table-wrap fade-in">
@@ -921,7 +967,7 @@ body.compact .kao{display:none;}
         <thead>
           <tr>
             <th>Size</th>
-            <th>Width (cm)</th>
+            <th>Chest (cm)</th>
             <th>Length (cm)</th>
             <th>Height (cm)</th>
             <th>Weight (kg)</th>
@@ -1020,7 +1066,8 @@ body.compact .kao{display:none;}
       <div class="terms-text">
         <p><strong style="color:var(--cream);">Local Replica Kits:</strong> Returns are accepted on local replica kits only, provided the item is reported within 24 hours of receipt and is in its original condition with no signs of wear or washing.</p>
         <p><strong style="color:var(--cream);">Imported Kits:</strong> No refunds or returns are accepted on imported kits. As quality check photos are provided and approved by the customer prior to dispatch, all imported kit sales are considered final.</p>
-        <p>JerseyZone_ZA reserves the right to assess each return request individually. To initiate a return, contact us via WhatsApp within the applicable timeframe.</p>
+        <p>For imported kits, once payment has been received, the buyer has 1–2 days to request a refund — or until the import deadline, whichever comes first. This is because orders are placed with our supplier immediately upon payment or close to the deadline. After this window, refunds cannot be processed.</p>
+        <p>JerseyZone_ZA reserves the right to assess each return request individually. To initiate a return or refund, contact us via WhatsApp within the applicable timeframe.</p>
       </div>
     </div>
     <div class="terms-sec fade-in">
@@ -1049,10 +1096,67 @@ body.compact .kao{display:none;}
   <div id="ordersEmpty" class="empty-state" style="display:none;">No orders posted yet. Check back soon.</div>
 </div>
 
+
+<!-- ON HAND FILTER PANEL -->
+<div class="filter-panel-overlay" id="ohFilterOverlay" onclick="closeOHFilterPanel()"></div>
+<div class="filter-panel" id="ohFilterPanel">
+  <div class="filter-panel-header">
+    <span class="filter-panel-title">Filters</span>
+    <button class="filter-panel-close" onclick="closeOHFilterPanel()">✕</button>
+  </div>
+  <div class="filter-panel-body">
+    <div class="filter-section">
+      <div class="filter-section-q" onclick="toggleFilterSection(this)">
+        <span>League</span><span class="filter-section-arr">▼</span>
+      </div>
+      <div class="filter-options" id="ohfilter-league">
+        <button class="filter-chip" data-filter="ohleague" data-value="La Liga" onclick="toggleOHFilterChip(this)">La Liga</button>
+        <button class="filter-chip" data-filter="ohleague" data-value="Premier League" onclick="toggleOHFilterChip(this)">Premier League</button>
+        <button class="filter-chip" data-filter="ohleague" data-value="Ligue 1" onclick="toggleOHFilterChip(this)">Ligue 1</button>
+        <button class="filter-chip" data-filter="ohleague" data-value="Bundesliga" onclick="toggleOHFilterChip(this)">Bundesliga</button>
+        <button class="filter-chip" data-filter="ohleague" data-value="Serie A" onclick="toggleOHFilterChip(this)">Serie A</button>
+        <button class="filter-chip" data-filter="ohleague" data-value="International" onclick="toggleOHFilterChip(this)">International</button>
+        <button class="filter-chip" data-filter="ohleague" data-value="Other" onclick="toggleOHFilterChip(this)">Other</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-q" onclick="toggleFilterSection(this)">
+        <span>Type</span><span class="filter-section-arr">▼</span>
+      </div>
+      <div class="filter-options" id="ohfilter-type">
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Shirt" onclick="toggleOHFilterChip(this)">Shirt</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Shorts" onclick="toggleOHFilterChip(this)">Shorts</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Full Kit" onclick="toggleOHFilterChip(this)">Full Kit</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Training Set" onclick="toggleOHFilterChip(this)">Training Set</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Windbreaker" onclick="toggleOHFilterChip(this)">Windbreaker</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Tracksuit Half Zip" onclick="toggleOHFilterChip(this)">Tracksuit Half Zip</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Tracksuit Full Zip" onclick="toggleOHFilterChip(this)">Tracksuit Full Zip</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="Baby Grower" onclick="toggleOHFilterChip(this)">Baby Grower</button>
+        <button class="filter-chip" data-filter="ohitemtype" data-value="F1" onclick="toggleOHFilterChip(this)">F1</button>
+      </div>
+    </div>
+  </div>
+  <div class="filter-panel-footer">
+    <button class="btn-o" style="flex:1;font-size:0.68rem;" onclick="clearOHFilters()">Clear All</button>
+    <button class="btn-p" style="flex:1;font-size:0.68rem;" onclick="applyOHFilters()">Apply</button>
+  </div>
+</div>
+
 <!-- ON HAND -->
 <div class="page" id="page-onhand" style="overflow-y:auto;">
   <div class="ph fade-in"><h2>On Hand</h2><p>Discounted kits available for immediate collection or delivery — limited stock, grab them while they last</p></div>
+  <div class="fs-bar">
+    <div style="display:flex;gap:0.75rem;align-items:center;">
+      <button class="filter-btn-trigger" id="ohFilterTrigger" onclick="openOHFilterPanel()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        Filters <span id="ohFilterCount" class="filter-active-count" style="display:none;"></span>
+      </button>
+      <button class="fb active" id="ohFilterAllBtn" onclick="clearOHFilters()">All</button>
+    </div>
+    <div class="sw"><span class="sico">🔍</span><input class="si" id="ohsi" placeholder="Search on hand..." oninput="renderOnHand()"/></div>
+  </div>
   <div id="ohGrid" class="oh-grid fade-in" style="overflow:visible;"></div>
+  <div class="pagination" id="ohPagination"></div>
   <div id="ohEmpty" class="empty-state" style="display:none;">No items currently on hand. Check back soon.</div>
   <div style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--border);">
     <p style="color:var(--muted);font-size:0.83rem;font-weight:300;margin-bottom:1.25rem;">Interested in any of these items?</p>
@@ -1093,6 +1197,63 @@ body.compact .kao{display:none;}
 </div>
 
 
+
+<!-- FILTER PANEL -->
+<div class="filter-panel-overlay" id="filterOverlay" onclick="closeFilterPanel()"></div>
+<div class="filter-panel" id="filterPanel">
+  <div class="filter-panel-header">
+    <span class="filter-panel-title">Filters</span>
+    <button class="filter-panel-close" onclick="closeFilterPanel()">✕</button>
+  </div>
+  <div class="filter-panel-body">
+    <div class="filter-section">
+      <div class="filter-section-q" onclick="toggleFilterSection(this)">
+        <span>Quality</span><span class="filter-section-arr">▼</span>
+      </div>
+      <div class="filter-options" id="filter-quality">
+        <button class="filter-chip" data-filter="quality" data-value="replica" onclick="toggleFilterChip(this)">Replica</button>
+        <button class="filter-chip" data-filter="quality" data-value="fan" onclick="toggleFilterChip(this)">Fan</button>
+        <button class="filter-chip" data-filter="quality" data-value="player" onclick="toggleFilterChip(this)">Player</button>
+        <button class="filter-chip" data-filter="quality" data-value="retro" onclick="toggleFilterChip(this)">Retro</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-q" onclick="toggleFilterSection(this)">
+        <span>League</span><span class="filter-section-arr">▼</span>
+      </div>
+      <div class="filter-options" id="filter-league">
+        <button class="filter-chip" data-filter="league" data-value="La Liga" onclick="toggleFilterChip(this)">La Liga</button>
+        <button class="filter-chip" data-filter="league" data-value="Premier League" onclick="toggleFilterChip(this)">Premier League</button>
+        <button class="filter-chip" data-filter="league" data-value="Ligue 1" onclick="toggleFilterChip(this)">Ligue 1</button>
+        <button class="filter-chip" data-filter="league" data-value="Bundesliga" onclick="toggleFilterChip(this)">Bundesliga</button>
+        <button class="filter-chip" data-filter="league" data-value="Serie A" onclick="toggleFilterChip(this)">Serie A</button>
+        <button class="filter-chip" data-filter="league" data-value="International" onclick="toggleFilterChip(this)">International</button>
+        <button class="filter-chip" data-filter="league" data-value="Other" onclick="toggleFilterChip(this)">Other</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-section-q" onclick="toggleFilterSection(this)">
+        <span>Type</span><span class="filter-section-arr">▼</span>
+      </div>
+      <div class="filter-options" id="filter-type">
+        <button class="filter-chip" data-filter="itemtype" data-value="Shirt" onclick="toggleFilterChip(this)">Shirt</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="Shorts" onclick="toggleFilterChip(this)">Shorts</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="Full Kit" onclick="toggleFilterChip(this)">Full Kit</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="Training Set" onclick="toggleFilterChip(this)">Training Set</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="Windbreaker" onclick="toggleFilterChip(this)">Windbreaker</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="Tracksuit Half Zip" onclick="toggleFilterChip(this)">Tracksuit Half Zip</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="Tracksuit Full Zip" onclick="toggleFilterChip(this)">Tracksuit Full Zip</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="Baby Grower" onclick="toggleFilterChip(this)">Baby Grower</button>
+        <button class="filter-chip" data-filter="itemtype" data-value="F1" onclick="toggleFilterChip(this)">F1</button>
+      </div>
+    </div>
+  </div>
+  <div class="filter-panel-footer">
+    <button class="btn-o" style="flex:1;font-size:0.68rem;" onclick="clearAllFilters()">Clear All</button>
+    <button class="btn-p" style="flex:1;font-size:0.68rem;" onclick="applyFilters()">Apply</button>
+  </div>
+</div>
+
 <!-- KIT DETAIL PAGE -->
 <div class="page" id="page-kitdetail">
   <div class="kd-page-back" onclick="goBackFromKit()">← Back</div>
@@ -1110,6 +1271,10 @@ body.compact .kao{display:none;}
     <div id="kdpSizesWrap" style="display:none;">
       <div class="kd-page-section">Select Size</div>
       <div class="kd-page-sizes" id="kdpSizes"></div>
+    </div>
+    <div id="kdpBadgesWrap" style="display:none;">
+      <div class="kd-page-section">Available Badges</div>
+      <div class="kd-page-addons" id="kdpBadgesList"></div>
     </div>
     <div id="kdpAddonsWrap" style="display:none;">
       <div class="kd-page-section">Available Add-ons</div>
@@ -1204,6 +1369,34 @@ body.compact .kao{display:none;}
       <div class="fg"><label class="fl">Kit Name *</label><input class="fi" id="oh-n" placeholder="e.g. Brazil Away 24/25"/></div>
       <div class="fg"><label class="fl">Team</label><input class="fi" id="oh-t" placeholder="e.g. Brazil"/></div>
     </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">League</label>
+        <select class="fsel" id="oh-league">
+          <option value="">Select League</option>
+          <option value="Premier League">Premier League</option>
+          <option value="La Liga">La Liga</option>
+          <option value="Serie A">Serie A</option>
+          <option value="Bundesliga">Bundesliga</option>
+          <option value="Ligue 1">Ligue 1</option>
+          <option value="International">International</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Item Type</label>
+        <select class="fsel" id="oh-type">
+          <option value="">Select Type</option>
+          <option value="Shirt">Shirt</option>
+          <option value="Shorts">Shorts</option>
+          <option value="Full Kit">Full Kit</option>
+          <option value="Training Set">Training Set</option>
+          <option value="Windbreaker">Windbreaker</option>
+          <option value="Tracksuit Half Zip">Tracksuit Half Zip</option>
+          <option value="Tracksuit Full Zip">Tracksuit Full Zip</option>
+          <option value="Baby Grower">Baby Grower</option>
+          <option value="F1">F1</option>
+        </select>
+      </div>
+    </div>
     <div class="fg">
       <label class="fl">Images (Imgur links)</label>
       <div id="ohImgContainer"></div>
@@ -1231,7 +1424,32 @@ body.compact .kao{display:none;}
       <div class="fg"><label class="fl">Team *</label><input class="fi" id="km-t" placeholder="e.g. Brazil"/></div>
     </div>
     <div class="fr2">
-      <div class="fg"><label class="fl">League / Tournament</label><input class="fi" id="km-l" placeholder="e.g. World Cup"/></div>
+      <div class="fg"><label class="fl">League</label>
+        <select class="fsel" id="km-l">
+          <option value="">Select League</option>
+          <option value="Premier League">Premier League</option>
+          <option value="La Liga">La Liga</option>
+          <option value="Serie A">Serie A</option>
+          <option value="Bundesliga">Bundesliga</option>
+          <option value="Ligue 1">Ligue 1</option>
+          <option value="International">International</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Item Type</label>
+        <select class="fsel" id="km-it">
+          <option value="">Select Type</option>
+          <option value="Shirt">Shirt</option>
+          <option value="Shorts">Shorts</option>
+          <option value="Full Kit">Full Kit</option>
+          <option value="Training Set">Training Set</option>
+          <option value="Windbreaker">Windbreaker</option>
+          <option value="Tracksuit Half Zip">Tracksuit Half Zip</option>
+          <option value="Tracksuit Full Zip">Tracksuit Full Zip</option>
+          <option value="Baby Grower">Baby Grower</option>
+          <option value="F1">F1</option>
+        </select>
+      </div>
       <div class="fg">
         <label class="fl">Kit Types (select all that apply)</label>
         <div style="margin-top:0.5rem;">
@@ -1265,6 +1483,7 @@ body.compact .kao{display:none;}
       <div id="pvc"></div>
     </div>
     <div class="fg"><label class="fl">Sizes Available</label><div class="cbg" id="szcbg"></div></div>
+    <div class="fg"><label class="fl">Badges Available <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(comma separated)</span></label><input class="fi" id="km-badges" placeholder="e.g. UCL Badge, Player Badge, World Cup Badge"/></div>
     <div class="fg" id="addonsSection"><label class="fl">Add-ons Available</label><div class="cbg" id="adcbg"></div></div>
     <div class="fg"><label class="cl"><input type="checkbox" id="km-is" checked/><span>In Stock</span></label></div>
     <div class="mdf"><button class="btn-o" onclick="closeKM()">Cancel</button><button class="btn-p" onclick="saveKit()">Save Kit</button></div>
@@ -1293,6 +1512,8 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const ADMINS=[{u:"Uthmaan_007",p:"Ammaar2007"},{u:"JerseyzoneAdmin",p:"Ammaar2007"}];
 const WA="27710396374";
 const SIZES=["XS","S","M","L","XL","XXL","Kids S","Kids M","Kids L"];
+const LEAGUES=["La Liga","Premier League","Ligue 1","Bundesliga","Serie A","International","Other"];
+const KIT_ITEM_TYPES=["Shirt","Shorts","Full Kit","Training Set","Windbreaker","Tracksuit Half Zip","Tracksuit Full Zip","Baby Grower","F1"];
 const ADDONS=["Custom Name & Number","Badges","Long Sleeve","Sleeve Sponsor"];
 
 // Kit type config
@@ -1326,9 +1547,21 @@ async function loadOnHand(){
 function renderOnHand(){
   const g=document.getElementById('ohGrid'),e=document.getElementById('ohEmpty');
   if(!g)return;
-  if(!allOnHand.length){g.innerHTML='';e.style.display='block';return;}
+  const q=(document.getElementById('ohsi')?.value||'').toLowerCase();
+  const filtered=allOnHand.filter(item=>{
+    const matchSearch=!q||item.name.toLowerCase().includes(q)||(item.team||'').toLowerCase().includes(q);
+    const leagueMatch=activeOHFilters.ohleague.length===0||activeOHFilters.ohleague.includes(item.league);
+    const typeMatch=activeOHFilters.ohitemtype.length===0||activeOHFilters.ohitemtype.includes(item.item_type);
+    return matchSearch&&leagueMatch&&typeMatch;
+  });
+  if(!filtered.length){g.innerHTML='';e.style.display='block';return;}
   e.style.display='none';
-  g.innerHTML=allOnHand.map(item=>{
+  ohPage=ohPage||1;
+  const totalOH=filtered.length;
+  const startOH=(ohPage-1)*PAGE_SIZE;
+  const paginatedOH=filtered.slice(startOH,startOH+PAGE_SIZE);
+  renderPagination('ohPagination',ohPage,totalOH,'goToOHPage');
+  g.innerHTML=paginatedOH.map(item=>{
     const hasDiscount=item.discounted_price&&item.discounted_price<item.original_price;
     const ohImgs=item.images&&item.images.length?item.images:(item.image?[item.image]:[]);
     let img='';
@@ -1337,7 +1570,7 @@ function renderOnHand(){
     else{
       const ohDots=ohImgs.map((_,i)=>`<span class="gdot ${i===0?'active':''}" onclick="goSlide('oh${item.id}',${i})"></span>`).join('');
       const ohImgsHTML=ohImgs.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join('');
-      img=`<div class="gallery" id="oh${item.id}" style="height:220px;"><div class="gallery-imgs" id="gioh${item.id}">${ohImgsHTML}</div><div class="gallery-dots">${ohDots}</div></div>`;
+      img=`<div class="gallery" id="oh${item.id}" style="height:220px;"><div class="gallery-imgs" id="gioh${item.id}">${ohImgsHTML}</div><div class="gallery-dots">${ohDots}</div><button class="gallery-prev" onclick="event.stopPropagation();slideGallery('oh${item.id}',-1)">‹</button><button class="gallery-next" onclick="event.stopPropagation();slideGallery('oh${item.id}',1)">›</button></div>`;
     }
     const priceHTML=hasDiscount
       ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
@@ -1462,7 +1695,66 @@ function goRevSlide(idx){
 }
 
 // CATALOGUE
-function setFilter(f,b){af=f;document.querySelectorAll(".fb").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCat();}
+// Active filters state
+let activeFilters={quality:[],league:[],itemtype:[]};
+
+function openFilterPanel(){
+  document.getElementById('filterPanel').classList.add('open');
+  document.getElementById('filterOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeFilterPanel(){
+  document.getElementById('filterPanel').classList.remove('open');
+  document.getElementById('filterOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function toggleFilterSection(el){
+  const opts=el.nextElementSibling;
+  const arr=el.querySelector('.filter-section-arr');
+  opts.classList.toggle('open');
+  arr.classList.toggle('open');
+}
+function toggleFilterChip(el){
+  el.classList.toggle('active');
+  updateFilterCount();
+}
+function updateFilterCount(){
+  const count=document.querySelectorAll('.filter-chip.active').length;
+  const badge=document.getElementById('filterCount');
+  const trigger=document.getElementById('filterTrigger');
+  if(count>0){
+    badge.textContent=count;badge.style.display='inline-block';
+    trigger.classList.add('has-filters');
+  } else {
+    badge.style.display='none';
+    trigger.classList.remove('has-filters');
+  }
+}
+function applyFilters(){
+  catPage=1;
+  activeFilters={quality:[],league:[],itemtype:[]};
+  document.querySelectorAll('.filter-chip.active').forEach(chip=>{
+    const f=chip.dataset.filter;
+    const v=chip.dataset.value;
+    if(activeFilters[f])activeFilters[f].push(v);
+  });
+  closeFilterPanel();
+  renderCat();
+  // Update All button
+  const allBtn=document.getElementById('filterAllBtn');
+  const hasFilters=Object.values(activeFilters).some(a=>a.length>0);
+  if(allBtn)allBtn.classList.toggle('active',!hasFilters);
+}
+function clearAllFilters(){
+  catPage=1;
+  activeFilters={quality:[],league:[],itemtype:[]};
+  document.querySelectorAll('.filter-chip.active').forEach(c=>c.classList.remove('active'));
+  updateFilterCount();
+  const allBtn=document.getElementById('filterAllBtn');
+  if(allBtn)allBtn.classList.add('active');
+  renderCat();
+}
+function setFilter(f,b){clearAllFilters();}
 
 function getKitCategory(type,types){
   // If any local type exists, show local badge; if mixed show imported
@@ -1484,9 +1776,20 @@ function renderCat(){
   const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   const newInIds=new Set(sorted.slice(0,5).map(k=>k.id));
   const f=allKits.filter(j=>{
-    const matchFilter=af==="all"||(j.types||[j.type]).includes(af);
     const matchSearch=j.name.toLowerCase().includes(q)||(j.team||"").toLowerCase().includes(q);
-    return matchFilter&&matchSearch;
+    // Quality filter
+    const qualityMatch=activeFilters.quality.length===0||
+      activeFilters.quality.some(qf=>{
+        if(qf==='replica')return(j.types||[j.type]).some(t=>t.startsWith('replica'));
+        return(j.types||[j.type]).includes(qf);
+      });
+    // League filter
+    const leagueMatch=activeFilters.league.length===0||
+      activeFilters.league.includes(j.league);
+    // Type filter
+    const typeMatch=activeFilters.itemtype.length===0||
+      activeFilters.itemtype.includes(j.item_type);
+    return matchSearch&&qualityMatch&&leagueMatch&&typeMatch;
   });
   const g=document.getElementById("kitGrid"),e=document.getElementById("emptyState");
   if(!f.length){g.innerHTML="";e.style.display="block";return;}
@@ -1510,6 +1813,8 @@ function renderCat(){
       imgHTML=`<div class="gallery" id="g${j.id}">
         <div class="gallery-imgs" id="gi${j.id}">${imgs}</div>
         <div class="gallery-dots">${dots}</div>
+        <button class="gallery-prev" onclick="event.stopPropagation();slideGallery('g${j.id}',-1)">‹</button>
+        <button class="gallery-next" onclick="event.stopPropagation();slideGallery('g${j.id}',1)">›</button>
         <span class="ktb ${badgeClass}">${badgeLabel}</span>
         ${!j.in_stock?'<span class="koos">Out of Stock</span>':''}
         ${newBadge}
@@ -1687,7 +1992,9 @@ async function saveKit(){
   if(!types.length){toast("⚠ Please select at least one kit type.");return;}
   // Primary type is first selected (for badge display)
   const type=types[0];
-  const kit={name:n,team:t,league:document.getElementById("km-l").value.trim(),type,types,in_stock:document.getElementById("km-is").checked,images,price_variants:pvs,sizes:sz,addons:ao};
+  const badgesRaw=document.getElementById("km-badges")?.value.trim()||"";
+  const badges=badgesRaw?badgesRaw.split(",").map(b=>b.trim()).filter(Boolean):[];
+  const kit={name:n,team:t,league:document.getElementById("km-l").value,item_type:document.getElementById("km-it")?.value||"",badges,type,types,in_stock:document.getElementById("km-is").checked,images,price_variants:pvs,sizes:sz,addons:ao};
   let error;
   if(ekid){({error}=await sb.from('kits').update(kit).eq('id',ekid));toast("✓ Kit updated.");}
   else{({error}=await sb.from('kits').insert([kit]));toast("✓ Kit added.");}
@@ -1845,7 +2152,7 @@ function renderNewArrivals(){
   const latest=sorted.slice(0,6);
   grid.innerHTML=latest.map(j=>{
     const img=j.images&&j.images[0]?`<img src="${j.images[0]}" onerror="this.style.display='none'"/>`:`<div class="na-img-ph">⚽</div>`;
-    const price=j.price_variants&&j.price_variants[0]?`R${j.price_variants[0].price}`:'';
+    const price=j.price_variants&&j.price_variants.length?j.price_variants.map(v=>'R'+v.price+' '+v.label).join(' · '):'';
     const typeLabel=(j.types||[j.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
     const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:
 
@@ -2099,6 +2406,16 @@ function openKitDetail(kitId, fromPage){
     document.getElementById('kdpSizes').innerHTML=sizes.map(s=>'<div class="kd-page-size" onclick="kdpSelectSize(this,this.textContent)">'+s+'</div>').join('');
   } else { sizesWrap.style.display='none'; }
 
+  // Badges
+  const badges=kit.badges||[];
+  const badgesWrap=document.getElementById('kdpBadgesWrap');
+  if(badgesWrap){
+    if(badges.length){
+      badgesWrap.style.display='block';
+      document.getElementById('kdpBadgesList').innerHTML=badges.map(b=>'<span class="kd-page-addon">'+b+'</span>').join('');
+    } else { badgesWrap.style.display='none'; }
+  }
+
   // Addons
   const addons=kit.addons||[];
   const addonsWrap=document.getElementById('kdpAddonsWrap');
@@ -2167,6 +2484,89 @@ function closeKitDetail(){
 }
 
 
+
+
+
+// PAGINATION
+const PAGE_SIZE=20;
+let catPage=1;
+let ohPage=1;
+
+function renderPagination(containerId, currentPage, totalItems, onPageChange){
+  const total=Math.ceil(totalItems/PAGE_SIZE);
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  if(total<=1){el.innerHTML='';return;}
+  let html='';
+  html+='<button class="pag-btn" onclick="'+onPageChange+'('+(currentPage-1)+')" '+(currentPage<=1?'disabled':'')+'>‹ Prev</button>';
+  // Show max 5 page buttons
+  let start=Math.max(1,currentPage-2);
+  let end=Math.min(total,start+4);
+  start=Math.max(1,end-4);
+  if(start>1)html+='<button class="pag-btn" onclick="'+onPageChange+'(1)">1</button>'+(start>2?'<span class="pag-info">...</span>':'');
+  for(let i=start;i<=end;i++){
+    html+='<button class="pag-btn'+(i===currentPage?' active':'')+'" onclick="'+onPageChange+'('+i+')">'+i+'</button>';
+  }
+  if(end<total)html+=(end<total-1?'<span class="pag-info">...</span>':'')+'<button class="pag-btn" onclick="'+onPageChange+'('+total+')">'+total+'</button>';
+  html+='<button class="pag-btn" onclick="'+onPageChange+'('+(currentPage+1)+')" '+(currentPage>=total?'disabled':'')+'>Next ›</button>';
+  html+='<span class="pag-info">'+((currentPage-1)*PAGE_SIZE+1)+'-'+Math.min(currentPage*PAGE_SIZE,totalItems)+' of '+totalItems+'</span>';
+  el.innerHTML=html;
+}
+function goToPage(p){
+  catPage=p;
+  renderCat();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goToOHPage(p){
+  ohPage=p;
+  renderOnHand();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ON HAND FILTERS
+let activeOHFilters={ohleague:[],ohitemtype:[]};
+function openOHFilterPanel(){
+  document.getElementById('ohFilterPanel').classList.add('open');
+  document.getElementById('ohFilterOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeOHFilterPanel(){
+  document.getElementById('ohFilterPanel').classList.remove('open');
+  document.getElementById('ohFilterOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function toggleOHFilterChip(el){
+  el.classList.toggle('active');
+}
+function applyOHFilters(){
+  ohPage=1;
+  activeOHFilters={ohleague:[],ohitemtype:[]};
+  document.querySelectorAll('#ohFilterPanel .filter-chip.active').forEach(chip=>{
+    const f=chip.dataset.filter;
+    const v=chip.dataset.value;
+    if(activeOHFilters[f])activeOHFilters[f].push(v);
+  });
+  closeOHFilterPanel();
+  renderOnHand();
+  const count=Object.values(activeOHFilters).flat().length;
+  const badge=document.getElementById('ohFilterCount');
+  const trigger=document.getElementById('ohFilterTrigger');
+  if(badge){badge.textContent=count;badge.style.display=count?'inline-block':'none';}
+  if(trigger)trigger.classList.toggle('has-filters',count>0);
+  const allBtn=document.getElementById('ohFilterAllBtn');
+  if(allBtn)allBtn.classList.toggle('active',count===0);
+}
+function clearOHFilters(){
+  activeOHFilters={ohleague:[],ohitemtype:[]};
+  document.querySelectorAll('#ohFilterPanel .filter-chip.active').forEach(c=>c.classList.remove('active'));
+  const badge=document.getElementById('ohFilterCount');
+  if(badge)badge.style.display='none';
+  const trigger=document.getElementById('ohFilterTrigger');
+  if(trigger)trigger.classList.remove('has-filters');
+  const allBtn=document.getElementById('ohFilterAllBtn');
+  if(allBtn)allBtn.classList.add('active');
+  renderOnHand();
+}
 
 // ON HAND DETAIL
 function openOHDetail(itemId){
@@ -2262,6 +2662,8 @@ function openOHM(id){
   document.getElementById("ohmTitle").textContent=item?"Edit Item":"Add On Hand Item";
   document.getElementById("oh-n").value=item?.name||"";
   document.getElementById("oh-t").value=item?.team||"";
+  const ohLEl=document.getElementById("oh-league");if(ohLEl)ohLEl.value=item?.league||"";
+  const ohTEl=document.getElementById("oh-type");if(ohTEl)ohTEl.value=item?.item_type||"";
   const ohic=document.getElementById("ohImgContainer");
   if(ohic){ohic.innerHTML="";ohImgCount=0;(item?.images||(item?.image?[item.image]:[""])).forEach(url=>addOHImgField(url));}
   document.getElementById("oh-op").value=item?.original_price||"";
@@ -2310,6 +2712,8 @@ async function saveOH(){
   const item={
     name,
     team:document.getElementById("oh-t").value.trim(),
+    league:document.getElementById("oh-league")?.value||'',
+    item_type:document.getElementById("oh-type")?.value||'',
     images:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean),
     image:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean)[0]||"",
     original_price:+op,
