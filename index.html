@@ -1570,7 +1570,7 @@ async function loadOnHand(){
   if(error){console.error(error);return;}
   allOnHand=data||[];
   renderOnHand();
-  setTimeout(()=>{const g=document.getElementById('ohGrid');if(g){g.classList.add('visible');g.classList.remove('fade-in');}},50);
+  setTimeout(()=>{const g=document.getElementById('ohGrid');if(g){g.classList.add('fade-in');g.classList.add('visible');}},50);
 }
 function renderOnHand(){
   const g=document.getElementById('ohGrid'),e=document.getElementById('ohEmpty');
@@ -1628,7 +1628,7 @@ async function loadKits(){
   if(error){console.error(error);return;}
   allKits=data||[];
   renderCat();
-  setTimeout(()=>{const g=document.getElementById('kitGrid');if(g){g.classList.add('visible');g.classList.remove('fade-in');}},50);
+  setTimeout(()=>{const g=document.getElementById('kitGrid');if(g){g.classList.add('fade-in');g.classList.add('visible');}},50);
 }
 
 async function loadReviews(){
@@ -2336,13 +2336,13 @@ function initFadeIn(){
         e.target.classList.remove('fade-out');
         e.target.classList.add('visible');
       } else {
-        // Fade out when leaving viewport
+        // Fade out when leaving viewport - but never hide kitGrid or ohGrid
+        const id=e.target.id;
+        if(id==='kitGrid'||id==='ohGrid')return;
         const rect=e.target.getBoundingClientRect();
         if(rect.top<0){
-          // Element scrolled above viewport - fade out upward
           e.target.classList.add('fade-out');
         } else {
-          // Element below viewport - reset to fade-in state
           e.target.classList.remove('visible');
           e.target.classList.remove('fade-out');
         }
