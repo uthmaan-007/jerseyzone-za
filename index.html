@@ -1570,7 +1570,7 @@ async function loadOnHand(){
   if(error){console.error(error);return;}
   allOnHand=data||[];
   renderOnHand();
-  setTimeout(()=>{const g=document.getElementById('ohGrid');if(g)g.classList.add('visible');},50);
+  setTimeout(()=>{const g=document.getElementById('ohGrid');if(g){g.classList.add('visible');g.classList.remove('fade-in');}},50);
 }
 function renderOnHand(){
   const g=document.getElementById('ohGrid'),e=document.getElementById('ohEmpty');
@@ -1628,7 +1628,7 @@ async function loadKits(){
   if(error){console.error(error);return;}
   allKits=data||[];
   renderCat();
-  setTimeout(()=>{const g=document.getElementById('kitGrid');if(g)g.classList.add('visible');},50);
+  setTimeout(()=>{const g=document.getElementById('kitGrid');if(g){g.classList.add('visible');g.classList.remove('fade-in');}},50);
 }
 
 async function loadReviews(){
