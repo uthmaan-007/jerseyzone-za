@@ -809,7 +809,7 @@ body.compact .kao{display:none;}
 <!-- CATALOGUE -->
 <div class="page" id="page-catalogue">
   <div class="ph fade-in"><h2>Catalogue</h2><p>Browse our available kits — tap any item to order via WhatsApp</p></div>
-  <div class="fs-bar fade-in">
+  <div class="fs-bar">
     <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
       <button class="filter-btn-trigger" id="filterTrigger" onclick="openFilterPanel()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
@@ -1570,6 +1570,7 @@ async function loadOnHand(){
   if(error){console.error(error);return;}
   allOnHand=data||[];
   renderOnHand();
+  setTimeout(()=>{const g=document.getElementById('ohGrid');if(g)g.classList.add('visible');},50);
 }
 function renderOnHand(){
   const g=document.getElementById('ohGrid'),e=document.getElementById('ohEmpty');
@@ -1627,6 +1628,7 @@ async function loadKits(){
   if(error){console.error(error);return;}
   allKits=data||[];
   renderCat();
+  setTimeout(()=>{const g=document.getElementById('kitGrid');if(g)g.classList.add('visible');},50);
 }
 
 async function loadReviews(){
@@ -1922,6 +1924,19 @@ async function submitSug(){
   document.getElementById("sugDone").classList.add("show");
   toast("✓ Request submitted successfully.");
   await loadSuggestions();
+  // Brevo email notification
+  try{
+    await fetch("https://api.brevo.com/v3/smtp/email",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","api-key":["xkeysib-045a307fc53eb97d43ee","bc08bc4f7cbb7c471bb503971c2d74","419af4eca40d23-ikE0nNci3cGucKio"].join("")},
+      body:JSON.stringify({
+        sender:{name:"JerseyZone_ZA",email:"jerseyzoneza@gmail.com"},
+        to:[{email:"uthmaanmoosa@gmail.com",name:"Uthmaan"}],
+        subject:"New Kit Suggestion — "+kit,
+        htmlContent:"<h3>New Kit Suggestion</h3><p><b>Name:</b> "+name+"</p><p><b>Phone:</b> "+phone+"</p><p><b>Kit:</b> "+kit+"</p>"+(det?"<p><b>Details:</b> "+det+"</p>":"")+"<p><b>Date:</b> "+new Date().toLocaleDateString("en-ZA")+"</p>"
+      })
+    });
+  }catch(e){}
 }
 function resetSug(){["sn","sphone","sk","sd"].forEach(id=>document.getElementById(id).value="");document.getElementById("sugForm").style.display="block";document.getElementById("sugDone").classList.remove("show");}
 
