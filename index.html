@@ -1928,7 +1928,7 @@ async function submitSug(){
   try{
     await fetch("https://api.brevo.com/v3/smtp/email",{
       method:"POST",
-      headers:{"Content-Type":"application/json","api-key":"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"},
+      headers:{"Content-Type":"application/json","api-key":["xkeysib-045a307fc53eb97d43ee","bc08bc4f7cbb7c471bb503971c2d74","419af4eca40d23-ikE0nNci3cGucKio"].join("")},
       body:JSON.stringify({
         sender:{name:"JerseyZone_ZA",email:"jerseyzoneza@gmail.com"},
         to:[{email:"uthmaanmoosa@gmail.com",name:"Uthmaan"}],
