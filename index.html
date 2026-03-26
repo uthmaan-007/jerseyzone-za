@@ -4,6 +4,15 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>JerseyZone_ZA</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/3BVaOIx.png"/>
+<link rel="apple-touch-icon" href="https://i.imgur.com/3BVaOIx.png"/>
+<meta name="description" content="JerseyZone_ZA — Johannesburg's home for premium imported football kits. Fan, Player, Retro and Special editions from clubs worldwide, delivered nationwide. Quality you can feel, prices that make sense."/>
+<meta property="og:title" content="JerseyZone_ZA — Premium Football Kits"/>
+<meta property="og:description" content="JerseyZone_ZA — Johannesburg's home for premium imported football kits. Fan, Player, Retro and Special editions from clubs worldwide, delivered nationwide."/>
+<meta property="og:image" content="https://i.imgur.com/3BVaOIx.png"/>
+<meta property="og:url" content="https://jerseyzone.co.za"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -632,6 +641,11 @@ body.compact .kao{display:none;}
 
 /* KIT TYPE DROPDOWN GROUPS */
 .type-group-label{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 13px 3px;display:block;}
+.admin-sport-btns,.admin-type-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.4rem;}
+.admin-sport-btn,.admin-type-btn{font-family:'Raleway',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.07em;padding:7px 14px;border:1px solid var(--border);border-radius:3px;background:var(--bg3);color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.admin-sport-btn:hover,.admin-type-btn:hover{border-color:var(--red);color:var(--cream);}
+.admin-sport-btn.active,.admin-type-btn.active{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.1);}
+.sort-chip.active{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.1);}
 </style>
 </head>
 <body>
@@ -655,7 +669,7 @@ body.compact .kao{display:none;}
 <div style="overflow-x:hidden;">
 <nav>
   <div class="nav-left" onclick="showPage('home')">
-    <img src="https://i.imgur.com/3BVaOIx.png" alt="JZ" class="nav-logo"/>
+    <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JZ" class="nav-logo"/>
     <span class="nav-brand">JerseyZone_ZA</span>
   </div>
   <div class="nav-links" id="navLinks">
@@ -680,7 +694,7 @@ body.compact .kao{display:none;}
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="hero-logo"/>
+    <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="hero-logo"/>
     <p class="hero-eye">Est. 2024 · South Africa</p>
     <h1>JerseyZone_ZA</h1>
     <p class="hero-slogan">Any Kit. Any Era. Fast &amp; Affordable.</p>
@@ -758,13 +772,13 @@ body.compact .kao{display:none;}
     <div class="about-wrap">
       <div class="about-grid fade-in">
         <div>
-          <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+          <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
         </div>
         <div>
           <p class="about-eyebrow">Est. 2024 · Johannesburg, SA</p>
           <h2 class="about-title">About JerseyZone_ZA</h2>
-          <p class="about-text">JerseyZone_ZA started as a small side hustle in 2024, initially selling quality local replica kits to football fans across South Africa. Towards the end of 2024, we expanded into internationally sourced imported kits — Fan, Player, Retro and Special editions — with one clear goal in mind: to be the most affordable football kit retailer in South Africa without compromising on quality.</p>
-          <p class="about-text">Based in Johannesburg, we serve customers nationwide via courier, and every order is backed by a personal quality check before it leaves our hands.</p>
+          <p class="about-text">JerseyZone_ZA is a Johannesburg-based football kit retailer built on one idea — South African fans deserve access to premium kits at prices that actually make sense. We stock Fan, Player, Retro and Special edition imported kits from clubs around the world, alongside local options.</p>
+          <p class="about-text">Every order is personally quality-checked before it ships. Order via WhatsApp, we deliver nationwide — simple, personal, no hassle.</p>
           <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('about')">Read More</button>
           <div class="about-stats fade-in">
             <div><div class="about-stat-num">2024</div><div class="about-stat-label">Est.</div></div>
@@ -1012,6 +1026,25 @@ body.compact .kao{display:none;}
         </tbody>
       </table>
     </div>
+    <div class="sg-section-title fade-in">Kids Size Chart</div>
+    <div class="sg-table-wrap fade-in">
+      <p style="font-size:0.78rem;color:var(--muted);font-weight:300;margin-bottom:1.25rem;">All sizes listed are for kit sets (shirt + shorts). For overweight children, we recommend sizing up.</p>
+      <table class="sg-table">
+        <thead>
+          <tr><th>Size</th><th>Age</th><th>Height (cm)</th><th>Chest (cm)</th><th>Clothing Length (cm)</th><th>Pants Length (cm)</th><th>Est. Weight (kg)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>16</strong></td><td>2–3 yrs</td><td>95–105</td><td>32</td><td>43</td><td>32</td><td>12–14</td></tr>
+          <tr><td><strong>18</strong></td><td>3–4 yrs</td><td>105–115</td><td>34</td><td>47</td><td>34</td><td>14–16</td></tr>
+          <tr><td><strong>20</strong></td><td>4–5 yrs</td><td>115–125</td><td>36</td><td>50</td><td>36</td><td>16–18</td></tr>
+          <tr><td><strong>22</strong></td><td>6–7 yrs</td><td>125–135</td><td>38</td><td>53</td><td>38</td><td>20–23</td></tr>
+          <tr><td><strong>24</strong></td><td>8–9 yrs</td><td>135–145</td><td>40</td><td>56</td><td>39</td><td>25–28</td></tr>
+          <tr><td><strong>26</strong></td><td>10–11 yrs</td><td>145–155</td><td>42</td><td>58</td><td>40</td><td>30–35</td></tr>
+          <tr><td><strong>28</strong></td><td>12–13 yrs</td><td>155–165</td><td>44</td><td>61</td><td>43</td><td>37–45</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.75rem;">Measurements may vary by 2–4cm. If unsure, WhatsApp us and we will help you choose the right size.</p>
+    </div>
     <div class="sg-tip fade-in">
       <strong>Not sure which size to order?</strong> Feel free to message us on WhatsApp with your height, weight and preferred fit — we'll recommend the best size for you.
     </div>
@@ -1030,14 +1063,15 @@ body.compact .kao{display:none;}
   <div class="about-wrap fade-in" style="padding-top:1rem;">
     <div class="about-grid fade-in">
       <div>
-        <img src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+        <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
       </div>
       <div>
         <p class="about-eyebrow">Est. 2024 · Johannesburg, South Africa</p>
         <h2 class="about-title">Our Story</h2>
-        <p class="about-text">JerseyZone_ZA was founded in 2024 as a small side hustle with a simple idea — make quality football kits accessible and affordable to South African fans. We started by offering local replica kits, building a reputation for good products and reliable service.</p>
-        <p class="about-text">Towards the end of 2024, we took the next step and began sourcing internationally imported kits — Fan, Player, Retro and Special editions from clubs around the world. Our goal from day one has been to become the most affordable football kit retailer in South Africa, without ever sacrificing quality.</p>
-        <p class="about-text">Every order placed with us is personally quality-checked before it ships. We're based in Johannesburg and deliver nationwide via courier, with WhatsApp as our primary channel — keeping things personal, fast and hassle-free.</p>
+        <p class="about-text">JerseyZone_ZA started in 2024 with a straightforward mission — give South African football fans access to the kits they love, at prices that don't feel like a punishment. What began as a small side hustle has grown into a proper operation, built on good products, honest service and a genuine love for the game.</p>
+        <p class="about-text">We carry a wide range of imported kits — Fan, Player, Retro and Special editions from clubs across every major league — as well as local options for those who want something closer to home. Every product we list is something we stand behind. If it doesn't meet the standard, it doesn't get listed.</p>
+        <p class="about-text">Based in Johannesburg, we ship nationwide via courier and keep ordering simple — straight through WhatsApp, no accounts, no checkout friction. Every order gets a personal quality check before it leaves our hands, because we'd rather take the extra minute than have you open a box and be disappointed.</p>
+        <p class="about-text">We're still growing, but the goal stays the same: be the most affordable premium kit retailer in South Africa, without ever cutting corners on quality.</p>
         <div class="about-stats fade-in">
           <div><div class="about-stat-num">2024</div><div class="about-stat-label">Founded</div></div>
           <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based In</div></div>
@@ -1111,7 +1145,7 @@ body.compact .kao{display:none;}
 </div>
 
 
-<!-- ON HAND FILTER PANEL -->
+<!-- OH FILTER PANEL -->
 <div class="filter-panel-overlay" id="ohFilterOverlay" onclick="closeOHFilterPanel()"></div>
 <div class="filter-panel" id="ohFilterPanel">
   <div class="filter-panel-header">
@@ -1120,34 +1154,113 @@ body.compact .kao{display:none;}
   </div>
   <div class="filter-panel-body">
     <div class="filter-section">
-      <div class="filter-section-q" onclick="toggleFilterSection(this)">
-        <span>League</span><span class="filter-section-arr">▼</span>
-      </div>
-      <div class="filter-options" id="ohfilter-league">
-        <button class="filter-chip" data-filter="ohleague" data-value="La Liga" onclick="toggleOHFilterChip(this)">La Liga</button>
-        <button class="filter-chip" data-filter="ohleague" data-value="Premier League" onclick="toggleOHFilterChip(this)">Premier League</button>
-        <button class="filter-chip" data-filter="ohleague" data-value="Ligue 1" onclick="toggleOHFilterChip(this)">Ligue 1</button>
-        <button class="filter-chip" data-filter="ohleague" data-value="Bundesliga" onclick="toggleOHFilterChip(this)">Bundesliga</button>
-        <button class="filter-chip" data-filter="ohleague" data-value="Serie A" onclick="toggleOHFilterChip(this)">Serie A</button>
-        <button class="filter-chip" data-filter="ohleague" data-value="International" onclick="toggleOHFilterChip(this)">International</button>
-        <button class="filter-chip" data-filter="ohleague" data-value="Other" onclick="toggleOHFilterChip(this)">Other</button>
+      <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Sort By</span><span class="filter-section-arr">▼</span></div>
+      <div class="filter-options" id="oh-sort-options">
+        <button class="filter-chip sort-chip active" data-sort="recent" onclick="setOHSort('recent',this)">Most Recent</button>
+        <button class="filter-chip sort-chip" data-sort="price_asc" onclick="setOHSort('price_asc',this)">Price: Low to High</button>
+        <button class="filter-chip sort-chip" data-sort="price_desc" onclick="setOHSort('price_desc',this)">Price: High to Low</button>
+        <button class="filter-chip sort-chip" data-sort="alpha" onclick="setOHSort('alpha',this)">Alphabetical</button>
+        <button class="filter-chip sort-chip" data-sort="league" onclick="setOHSort('league',this)">By League</button>
       </div>
     </div>
     <div class="filter-section">
-      <div class="filter-section-q" onclick="toggleFilterSection(this)">
-        <span>Type</span><span class="filter-section-arr">▼</span>
+      <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Sport</span><span class="filter-section-arr">▼</span></div>
+      <div class="filter-options" id="oh-sport-selector">
+        <button class="filter-chip" data-filter="oh-sport-select" data-value="Football" onclick="selectOHSport('Football',this)">Football</button>
+        <button class="filter-chip" data-filter="oh-sport-select" data-value="F1" onclick="selectOHSport('F1',this)">F1</button>
+        <button class="filter-chip" data-filter="oh-sport-select" data-value="Rugby" onclick="selectOHSport('Rugby',this)">Rugby</button>
+        <button class="filter-chip" data-filter="oh-sport-select" data-value="NBA" onclick="selectOHSport('NBA',this)">NBA</button>
+        <button class="filter-chip" data-filter="oh-sport-select" data-value="More" onclick="selectOHSport('More',this)">More</button>
       </div>
-      <div class="filter-options" id="ohfilter-type">
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Shirt" onclick="toggleOHFilterChip(this)">Shirt</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Shorts" onclick="toggleOHFilterChip(this)">Shorts</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Full Kit" onclick="toggleOHFilterChip(this)">Full Kit</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Training Set" onclick="toggleOHFilterChip(this)">Training Set</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Windbreaker" onclick="toggleOHFilterChip(this)">Windbreaker</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Tracksuit Half Zip" onclick="toggleOHFilterChip(this)">Tracksuit Half Zip</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Tracksuit Full Zip" onclick="toggleOHFilterChip(this)">Tracksuit Full Zip</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="Baby Grower" onclick="toggleOHFilterChip(this)">Baby Grower</button>
-        <button class="filter-chip" data-filter="ohitemtype" data-value="F1" onclick="toggleOHFilterChip(this)">F1</button>
-      </div>
+    </div>
+    <div id="oh-sport-sub-filters">
+        <div id="oh-football-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Shirt" onclick="ohTypeChip(this)">Shirt</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Shorts" onclick="ohTypeChip(this)">Shorts</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Full Kit" onclick="ohTypeChip(this)">Full Kit</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Kids Full Kit" onclick="ohTypeChip(this)">Kids Full Kit</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Training Set" onclick="ohTypeChip(this)">Training Set</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Windbreaker" onclick="ohTypeChip(this)">Windbreaker</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Tracksuit" onclick="ohTypeChip(this)">Tracksuit</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Baby Grower" onclick="ohTypeChip(this)">Baby Grower</button>
+            </div>
+          </div>
+          <div class="filter-section" id="oh-quality-section" style="display:none;">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Quality</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-quality" data-value="Fan Version" onclick="toggleOHChip(this)">Fan Version</button>
+              <button class="filter-chip" data-filter="oh-quality" data-value="Player Version" onclick="toggleOHChip(this)">Player Version</button>
+              <button class="filter-chip" data-filter="oh-quality" data-value="Retro" onclick="toggleOHChip(this)">Retro</button>
+              <button class="filter-chip" data-filter="oh-quality" data-value="Special Edition" onclick="toggleOHChip(this)">Special Edition</button>
+              <button class="filter-chip" data-filter="oh-quality" data-value="Replica" onclick="toggleOHChip(this)">Replica</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>League</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-league" data-value="Premier League" onclick="toggleOHChip(this)">Premier League</button>
+              <button class="filter-chip" data-filter="oh-league" data-value="La Liga" onclick="toggleOHChip(this)">La Liga</button>
+              <button class="filter-chip" data-filter="oh-league" data-value="Serie A" onclick="toggleOHChip(this)">Serie A</button>
+              <button class="filter-chip" data-filter="oh-league" data-value="Bundesliga" onclick="toggleOHChip(this)">Bundesliga</button>
+              <button class="filter-chip" data-filter="oh-league" data-value="Ligue 1" onclick="toggleOHChip(this)">Ligue 1</button>
+              <button class="filter-chip" data-filter="oh-league" data-value="International" onclick="toggleOHChip(this)">International</button>
+              <button class="filter-chip" data-filter="oh-league" data-value="Other" onclick="toggleOHChip(this)">Other</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-size" data-value="S" onclick="toggleOHChip(this)">S</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="M" onclick="toggleOHChip(this)">M</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="L" onclick="toggleOHChip(this)">L</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XL" onclick="toggleOHChip(this)">XL</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XXL" onclick="toggleOHChip(this)">XXL</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="16 (2-3y)" onclick="toggleOHChip(this)">16 (2-3y)</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="18 (3-4y)" onclick="toggleOHChip(this)">18 (3-4y)</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="20 (4-5y)" onclick="toggleOHChip(this)">20 (4-5y)</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="22 (6-7y)" onclick="toggleOHChip(this)">22 (6-7y)</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="24 (8-9y)" onclick="toggleOHChip(this)">24 (8-9y)</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="26 (10-11y)" onclick="toggleOHChip(this)">26 (10-11y)</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="28 (12-13y)" onclick="toggleOHChip(this)">28 (12-13y)</button>
+            </div>
+          </div>
+        </div>
+        <div id="oh-f1-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Shirt" onclick="toggleOHChip(this)">Shirt</button>
+              <button class="filter-chip" data-filter="oh-itemtype" data-value="Jacket" onclick="toggleOHChip(this)">Jacket</button>
+            </div>
+          </div>
+        </div>
+        <div id="oh-rugby-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-sport" data-value="Rugby" onclick="toggleOHChip(this)">Show All Rugby</button>
+            </div>
+          </div>
+        </div>
+        <div id="oh-nba-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-sport" data-value="NBA" onclick="toggleOHChip(this)">Show All NBA</button>
+            </div>
+          </div>
+        </div>
+        <div id="oh-more-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-sport" data-value="More" onclick="toggleOHChip(this)">Show All Other Sports</button>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
   <div class="filter-panel-footer">
@@ -1212,7 +1325,7 @@ body.compact .kao{display:none;}
 
 
 
-<!-- FILTER PANEL -->
+<!-- CAT FILTER PANEL -->
 <div class="filter-panel-overlay" id="filterOverlay" onclick="closeFilterPanel()"></div>
 <div class="filter-panel" id="filterPanel">
   <div class="filter-panel-header">
@@ -1221,45 +1334,113 @@ body.compact .kao{display:none;}
   </div>
   <div class="filter-panel-body">
     <div class="filter-section">
-      <div class="filter-section-q" onclick="toggleFilterSection(this)">
-        <span>Quality</span><span class="filter-section-arr">▼</span>
-      </div>
-      <div class="filter-options" id="filter-quality">
-        <button class="filter-chip" data-filter="quality" data-value="replica" onclick="toggleFilterChip(this)">Replica</button>
-        <button class="filter-chip" data-filter="quality" data-value="fan" onclick="toggleFilterChip(this)">Fan</button>
-        <button class="filter-chip" data-filter="quality" data-value="player" onclick="toggleFilterChip(this)">Player</button>
-        <button class="filter-chip" data-filter="quality" data-value="retro" onclick="toggleFilterChip(this)">Retro</button>
-      </div>
-    </div>
-    <div class="filter-section">
-      <div class="filter-section-q" onclick="toggleFilterSection(this)">
-        <span>League</span><span class="filter-section-arr">▼</span>
-      </div>
-      <div class="filter-options" id="filter-league">
-        <button class="filter-chip" data-filter="league" data-value="La Liga" onclick="toggleFilterChip(this)">La Liga</button>
-        <button class="filter-chip" data-filter="league" data-value="Premier League" onclick="toggleFilterChip(this)">Premier League</button>
-        <button class="filter-chip" data-filter="league" data-value="Ligue 1" onclick="toggleFilterChip(this)">Ligue 1</button>
-        <button class="filter-chip" data-filter="league" data-value="Bundesliga" onclick="toggleFilterChip(this)">Bundesliga</button>
-        <button class="filter-chip" data-filter="league" data-value="Serie A" onclick="toggleFilterChip(this)">Serie A</button>
-        <button class="filter-chip" data-filter="league" data-value="International" onclick="toggleFilterChip(this)">International</button>
-        <button class="filter-chip" data-filter="league" data-value="Other" onclick="toggleFilterChip(this)">Other</button>
+      <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Sort By</span><span class="filter-section-arr">▼</span></div>
+      <div class="filter-options" id="cat-sort-options">
+        <button class="filter-chip sort-chip active" data-sort="recent" onclick="setCatSort('recent',this)">Most Recent</button>
+        <button class="filter-chip sort-chip" data-sort="price_asc" onclick="setCatSort('price_asc',this)">Price: Low to High</button>
+        <button class="filter-chip sort-chip" data-sort="price_desc" onclick="setCatSort('price_desc',this)">Price: High to Low</button>
+        <button class="filter-chip sort-chip" data-sort="alpha" onclick="setCatSort('alpha',this)">Alphabetical</button>
+        <button class="filter-chip sort-chip" data-sort="league" onclick="setCatSort('league',this)">By League</button>
       </div>
     </div>
     <div class="filter-section">
-      <div class="filter-section-q" onclick="toggleFilterSection(this)">
-        <span>Type</span><span class="filter-section-arr">▼</span>
+      <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Sport</span><span class="filter-section-arr">▼</span></div>
+      <div class="filter-options" id="cat-sport-selector">
+        <button class="filter-chip" data-filter="cat-sport-select" data-value="Football" onclick="selectCatSport('Football',this)">Football</button>
+        <button class="filter-chip" data-filter="cat-sport-select" data-value="F1" onclick="selectCatSport('F1',this)">F1</button>
+        <button class="filter-chip" data-filter="cat-sport-select" data-value="Rugby" onclick="selectCatSport('Rugby',this)">Rugby</button>
+        <button class="filter-chip" data-filter="cat-sport-select" data-value="NBA" onclick="selectCatSport('NBA',this)">NBA</button>
+        <button class="filter-chip" data-filter="cat-sport-select" data-value="More" onclick="selectCatSport('More',this)">More</button>
       </div>
-      <div class="filter-options" id="filter-type">
-        <button class="filter-chip" data-filter="itemtype" data-value="Shirt" onclick="toggleFilterChip(this)">Shirt</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="Shorts" onclick="toggleFilterChip(this)">Shorts</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="Full Kit" onclick="toggleFilterChip(this)">Full Kit</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="Training Set" onclick="toggleFilterChip(this)">Training Set</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="Windbreaker" onclick="toggleFilterChip(this)">Windbreaker</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="Tracksuit Half Zip" onclick="toggleFilterChip(this)">Tracksuit Half Zip</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="Tracksuit Full Zip" onclick="toggleFilterChip(this)">Tracksuit Full Zip</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="Baby Grower" onclick="toggleFilterChip(this)">Baby Grower</button>
-        <button class="filter-chip" data-filter="itemtype" data-value="F1" onclick="toggleFilterChip(this)">F1</button>
-      </div>
+    </div>
+    <div id="cat-sport-sub-filters">
+        <div id="cat-football-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Shirt" onclick="catTypeChip(this)">Shirt</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Shorts" onclick="catTypeChip(this)">Shorts</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Full Kit" onclick="catTypeChip(this)">Full Kit</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Kids Full Kit" onclick="catTypeChip(this)">Kids Full Kit</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Training Set" onclick="catTypeChip(this)">Training Set</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Windbreaker" onclick="catTypeChip(this)">Windbreaker</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Tracksuit" onclick="catTypeChip(this)">Tracksuit</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Baby Grower" onclick="catTypeChip(this)">Baby Grower</button>
+            </div>
+          </div>
+          <div class="filter-section" id="cat-quality-section" style="display:none;">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Quality</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-quality" data-value="Fan Version" onclick="toggleCatChip(this)">Fan Version</button>
+              <button class="filter-chip" data-filter="cat-quality" data-value="Player Version" onclick="toggleCatChip(this)">Player Version</button>
+              <button class="filter-chip" data-filter="cat-quality" data-value="Retro" onclick="toggleCatChip(this)">Retro</button>
+              <button class="filter-chip" data-filter="cat-quality" data-value="Special Edition" onclick="toggleCatChip(this)">Special Edition</button>
+              <button class="filter-chip" data-filter="cat-quality" data-value="Replica" onclick="toggleCatChip(this)">Replica</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>League</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-league" data-value="Premier League" onclick="toggleCatChip(this)">Premier League</button>
+              <button class="filter-chip" data-filter="cat-league" data-value="La Liga" onclick="toggleCatChip(this)">La Liga</button>
+              <button class="filter-chip" data-filter="cat-league" data-value="Serie A" onclick="toggleCatChip(this)">Serie A</button>
+              <button class="filter-chip" data-filter="cat-league" data-value="Bundesliga" onclick="toggleCatChip(this)">Bundesliga</button>
+              <button class="filter-chip" data-filter="cat-league" data-value="Ligue 1" onclick="toggleCatChip(this)">Ligue 1</button>
+              <button class="filter-chip" data-filter="cat-league" data-value="International" onclick="toggleCatChip(this)">International</button>
+              <button class="filter-chip" data-filter="cat-league" data-value="Other" onclick="toggleCatChip(this)">Other</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-size" data-value="S" onclick="toggleCatChip(this)">S</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="M" onclick="toggleCatChip(this)">M</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="L" onclick="toggleCatChip(this)">L</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XL" onclick="toggleCatChip(this)">XL</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XXL" onclick="toggleCatChip(this)">XXL</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="16 (2-3y)" onclick="toggleCatChip(this)">16 (2-3y)</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="18 (3-4y)" onclick="toggleCatChip(this)">18 (3-4y)</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="20 (4-5y)" onclick="toggleCatChip(this)">20 (4-5y)</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="22 (6-7y)" onclick="toggleCatChip(this)">22 (6-7y)</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="24 (8-9y)" onclick="toggleCatChip(this)">24 (8-9y)</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="26 (10-11y)" onclick="toggleCatChip(this)">26 (10-11y)</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="28 (12-13y)" onclick="toggleCatChip(this)">28 (12-13y)</button>
+            </div>
+          </div>
+        </div>
+        <div id="cat-f1-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Shirt" onclick="toggleCatChip(this)">Shirt</button>
+              <button class="filter-chip" data-filter="cat-itemtype" data-value="Jacket" onclick="toggleCatChip(this)">Jacket</button>
+            </div>
+          </div>
+        </div>
+        <div id="cat-rugby-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-sport" data-value="Rugby" onclick="toggleCatChip(this)">Show All Rugby</button>
+            </div>
+          </div>
+        </div>
+        <div id="cat-nba-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-sport" data-value="NBA" onclick="toggleCatChip(this)">Show All NBA</button>
+            </div>
+          </div>
+        </div>
+        <div id="cat-more-filters" style="display:none;">
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-sport" data-value="More" onclick="toggleCatChip(this)">Show All Other Sports</button>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
   <div class="filter-panel-footer">
@@ -1377,39 +1558,45 @@ body.compact .kao{display:none;}
 
 <!-- ON HAND MODAL -->
 <div class="mo" id="ohModal">
-  <div class="md">
+  <div class="md" style="max-width:640px;">
     <div class="mdt" id="ohmTitle">Add On Hand Item</div>
     <div class="fr2">
       <div class="fg"><label class="fl">Kit Name *</label><input class="fi" id="oh-n" placeholder="e.g. Brazil Away 24/25"/></div>
       <div class="fg"><label class="fl">Team</label><input class="fi" id="oh-t" placeholder="e.g. Brazil"/></div>
     </div>
-    <div class="fr2">
-      <div class="fg"><label class="fl">League</label>
-        <select class="fsel" id="oh-league">
-          <option value="">Select League</option>
-          <option value="Premier League">Premier League</option>
-          <option value="La Liga">La Liga</option>
-          <option value="Serie A">Serie A</option>
-          <option value="Bundesliga">Bundesliga</option>
-          <option value="Ligue 1">Ligue 1</option>
-          <option value="International">International</option>
-          <option value="Other">Other</option>
-        </select>
+    <div class="fg">
+      <label class="fl">Sport *</label>
+      <div class="admin-sport-btns" id="oh-sport-btns">
+        <button type="button" class="admin-sport-btn" data-sport="Football" onclick="ohSelectSport('Football',this)">Football</button>
+        <button type="button" class="admin-sport-btn" data-sport="F1" onclick="ohSelectSport('F1',this)">F1</button>
+        <button type="button" class="admin-sport-btn" data-sport="NBA" onclick="ohSelectSport('NBA',this)">NBA</button>
+        <button type="button" class="admin-sport-btn" data-sport="Rugby" onclick="ohSelectSport('Rugby',this)">Rugby</button>
+        <button type="button" class="admin-sport-btn" data-sport="More" onclick="ohSelectSport('More',this)">More</button>
       </div>
-      <div class="fg"><label class="fl">Item Type</label>
-        <select class="fsel" id="oh-type">
-          <option value="">Select Type</option>
-          <option value="Shirt">Shirt</option>
-          <option value="Shorts">Shorts</option>
-          <option value="Full Kit">Full Kit</option>
-          <option value="Training Set">Training Set</option>
-          <option value="Windbreaker">Windbreaker</option>
-          <option value="Tracksuit Half Zip">Tracksuit Half Zip</option>
-          <option value="Tracksuit Full Zip">Tracksuit Full Zip</option>
-          <option value="Baby Grower">Baby Grower</option>
-          <option value="F1">F1</option>
-        </select>
-      </div>
+      <input type="hidden" id="oh-sport"/>
+    </div>
+    <div class="fg" id="oh-type-section" style="display:none;">
+      <label class="fl">Type *</label>
+      <div class="admin-type-btns" id="oh-type-btns"></div>
+      <input type="hidden" id="oh-item-type"/>
+    </div>
+    <div class="fg" id="oh-league-section" style="display:none;">
+      <label class="fl">League</label>
+      <select class="fsel" id="oh-league">
+        <option value="">Select League</option>
+        <option value="Premier League">Premier League</option>
+        <option value="La Liga">La Liga</option>
+        <option value="Serie A">Serie A</option>
+        <option value="Bundesliga">Bundesliga</option>
+        <option value="Ligue 1">Ligue 1</option>
+        <option value="International">International</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="fg" id="oh-version-section" style="display:none;">
+      <label class="fl">Version</label>
+      <div class="admin-type-btns" id="oh-version-btns"></div>
+      <input type="hidden" id="oh-version"/>
     </div>
     <div class="fg">
       <label class="fl">Images (Imgur links)</label>
@@ -1417,88 +1604,78 @@ body.compact .kao{display:none;}
       <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addOHImgField()">+ Add Image</button>
     </div>
     <div class="fr2">
-      <div class="fg"><label class="fl">Version</label>
-        <select class="fsel" id="oh-version">
-          <option value="">Select Version</option>
-          <option value="Fan Version">Fan Version</option>
-          <option value="Player Version">Player Version</option>
-          <option value="Retro">Retro</option>
-          <option value="Special">Special</option>
-          <option value="Replica">Replica</option>
-        </select>
-      </div>
-      <div class="fg"><label class="fl">Addons Applied <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(what's already on the kit)</span></label>
-        <input class="fi" id="oh-addons" placeholder="e.g. Custom Name & Number, UCL Badge"/>
-      </div>
       <div class="fg"><label class="fl">Original Price (R) *</label><input class="fi" id="oh-op" type="number" placeholder="490"/></div>
       <div class="fg"><label class="fl">Discounted Price (R)</label><input class="fi" id="oh-dp" type="number" placeholder="Leave blank if no discount"/></div>
     </div>
     <div class="fg">
       <label class="fl">Sizes &amp; Availability</label>
-      <div id="ohSizes" style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.3rem;"></div>
-      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addOHSize()">+ Add Size</button>
+      <div id="oh-sizes-container">
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+          <select class="fsel" id="oh-size-select" style="flex:1;">
+            <option value="">Select Size</option>
+            <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+            <option>16 (2-3y)</option><option>18 (3-4y)</option><option>20 (4-5y)</option>
+            <option>22 (6-7y)</option><option>24 (8-9y)</option><option>26 (10-11y)</option><option>28 (12-13y)</option>
+            <option>0-6 Months</option><option>6-12 Months</option>
+          </select>
+          <select class="fsel" id="oh-size-avail" style="width:120px;">
+            <option value="true">Available</option>
+            <option value="false">Sold Out</option>
+          </select>
+          <button class="btn-o" style="padding:8px 12px;font-size:0.65rem;" onclick="addOHSizeRow()">Add</button>
+        </div>
+        <div id="oh-sizes-list"></div>
+      </div>
     </div>
+    <div class="fg">
+      <label class="fl">Addons Applied <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(already on the kit)</span></label>
+      <input class="fi" id="oh-addons" placeholder="e.g. Custom Name &amp; Number, UCL Badge"/>
+    </div>
+    <div class="fg"><label class="cl"><input type="checkbox" id="oh-instock" checked/><span>In Stock</span></label></div>
     <div class="mdf"><button class="btn-o" onclick="closeOHM()">Cancel</button><button class="btn-p" onclick="saveOH()">Save Item</button></div>
   </div>
 </div>
 
 <!-- KIT MODAL -->
 <div class="mo" id="kitModal">
-  <div class="md">
+  <div class="md" style="max-width:640px;">
     <div class="mdt" id="kmTitle">Add New Kit</div>
     <div class="fr2">
       <div class="fg"><label class="fl">Kit Name *</label><input class="fi" id="km-n" placeholder="e.g. Brazil Away 24/25"/></div>
       <div class="fg"><label class="fl">Team *</label><input class="fi" id="km-t" placeholder="e.g. Brazil"/></div>
     </div>
-    <div class="fr2">
-      <div class="fg"><label class="fl">League</label>
-        <select class="fsel" id="km-l">
-          <option value="">Select League</option>
-          <option value="Premier League">Premier League</option>
-          <option value="La Liga">La Liga</option>
-          <option value="Serie A">Serie A</option>
-          <option value="Bundesliga">Bundesliga</option>
-          <option value="Ligue 1">Ligue 1</option>
-          <option value="International">International</option>
-          <option value="Other">Other</option>
-        </select>
+    <div class="fg">
+      <label class="fl">Sport *</label>
+      <div class="admin-sport-btns" id="km-sport-btns">
+        <button type="button" class="admin-sport-btn" data-sport="Football" onclick="kmSelectSport('Football',this)">Football</button>
+        <button type="button" class="admin-sport-btn" data-sport="F1" onclick="kmSelectSport('F1',this)">F1</button>
+        <button type="button" class="admin-sport-btn" data-sport="NBA" onclick="kmSelectSport('NBA',this)">NBA</button>
+        <button type="button" class="admin-sport-btn" data-sport="Rugby" onclick="kmSelectSport('Rugby',this)">Rugby</button>
+        <button type="button" class="admin-sport-btn" data-sport="More" onclick="kmSelectSport('More',this)">More</button>
       </div>
-      <div class="fg"><label class="fl">Item Type</label>
-        <select class="fsel" id="km-it">
-          <option value="">Select Type</option>
-          <option value="Shirt">Shirt</option>
-          <option value="Shorts">Shorts</option>
-          <option value="Full Kit">Full Kit</option>
-          <option value="Training Set">Training Set</option>
-          <option value="Windbreaker">Windbreaker</option>
-          <option value="Tracksuit Half Zip">Tracksuit Half Zip</option>
-          <option value="Tracksuit Full Zip">Tracksuit Full Zip</option>
-          <option value="Baby Grower">Baby Grower</option>
-          <option value="F1">F1</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label class="fl">Kit Types (select all that apply)</label>
-        <div style="margin-top:0.5rem;">
-          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Imported</div>
-          <div class="cbg" style="margin-bottom:0.75rem;">
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="fan" onchange="onTypeChange()"/> Fan Version</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="player" onchange="onTypeChange()"/> Player Version</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="retro" onchange="onTypeChange()"/> Retro</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="f1" onchange="onTypeChange()"/> F1</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="tracksuit" onchange="onTypeChange()"/> Tracksuit</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="training_set" onchange="onTypeChange()"/> Training Set</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="windbreaker" onchange="onTypeChange()"/> Windbreaker</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="baby_grower" onchange="onTypeChange()"/> Baby Grower</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="kids_kit" onchange="onTypeChange()"/> Kids Kit</label>
-          </div>
-          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Local</div>
-          <div class="cbg">
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="replica_mens" onchange="onTypeChange()"/> Replica (Men's)</label>
-            <label class="cl"><input type="checkbox" class="km-type-cb" value="replica_kids" onchange="onTypeChange()"/> Replica (Kids)</label>
-          </div>
-        </div>
-      </div>
+      <input type="hidden" id="km-sport"/>
+    </div>
+    <div class="fg" id="km-type-section" style="display:none;">
+      <label class="fl">Type *</label>
+      <div class="admin-type-btns" id="km-type-btns"></div>
+      <input type="hidden" id="km-item-type"/>
+    </div>
+    <div class="fg" id="km-league-section" style="display:none;">
+      <label class="fl">League</label>
+      <select class="fsel" id="km-l">
+        <option value="">Select League</option>
+        <option value="Premier League">Premier League</option>
+        <option value="La Liga">La Liga</option>
+        <option value="Serie A">Serie A</option>
+        <option value="Bundesliga">Bundesliga</option>
+        <option value="Ligue 1">Ligue 1</option>
+        <option value="International">International</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="fg" id="km-version-section" style="display:none;">
+      <label class="fl">Version <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(select all that apply)</span></label>
+      <div class="cbg" id="km-version-btns"></div>
     </div>
     <div class="fg">
       <label class="fl">Images (Imgur links)</label>
@@ -1506,12 +1683,46 @@ body.compact .kao{display:none;}
       <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addImgField()">+ Add Image</button>
     </div>
     <div class="fg">
-      <label class="fl">Price</label>
+      <label class="fl">Price Variants</label>
       <div id="pvc"></div>
+      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addPV()">+ Add Variant</button>
     </div>
-    <div class="fg"><label class="fl">Sizes Available</label><div class="cbg" id="szcbg"></div></div>
-    <div class="fg"><label class="fl">Badges Available <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(comma separated)</span></label><input class="fi" id="km-badges" placeholder="e.g. UCL Badge, Player Badge, World Cup Badge"/></div>
-    <div class="fg" id="addonsSection"><label class="fl">Add-ons Available</label><div class="cbg" id="adcbg"></div></div>
+    <div class="fg">
+      <label class="fl">Sizes Available</label>
+      <div id="km-sizes-wrap">
+        <div class="cbg" id="km-sizes-standard">
+          <label class="cl"><input type="checkbox" value="S" data-km-size/>S</label>
+          <label class="cl"><input type="checkbox" value="M" data-km-size/>M</label>
+          <label class="cl"><input type="checkbox" value="L" data-km-size/>L</label>
+          <label class="cl"><input type="checkbox" value="XL" data-km-size/>XL</label>
+          <label class="cl"><input type="checkbox" value="XXL" data-km-size/>XXL</label>
+          <label class="cl"><input type="checkbox" value="16 (2-3y)" data-km-size/>16 (2-3y)</label>
+          <label class="cl"><input type="checkbox" value="18 (3-4y)" data-km-size/>18 (3-4y)</label>
+          <label class="cl"><input type="checkbox" value="20 (4-5y)" data-km-size/>20 (4-5y)</label>
+          <label class="cl"><input type="checkbox" value="22 (6-7y)" data-km-size/>22 (6-7y)</label>
+          <label class="cl"><input type="checkbox" value="24 (8-9y)" data-km-size/>24 (8-9y)</label>
+          <label class="cl"><input type="checkbox" value="26 (10-11y)" data-km-size/>26 (10-11y)</label>
+          <label class="cl"><input type="checkbox" value="28 (12-13y)" data-km-size/>28 (12-13y)</label>
+        </div>
+        <div class="cbg" id="km-sizes-bg" style="display:none;">
+          <label class="cl"><input type="checkbox" value="0-6 Months" data-km-size/>0-6 Months</label>
+          <label class="cl"><input type="checkbox" value="6-12 Months" data-km-size/>6-12 Months</label>
+        </div>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Badges Available <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(comma separated)</span></label>
+      <input class="fi" id="km-badges" placeholder="e.g. UCL Badge, Player Badge, World Cup Badge"/>
+    </div>
+    <div class="fg" id="km-addons-section">
+      <label class="fl">Add-ons Available</label>
+      <div class="cbg">
+        <label class="cl"><input type="checkbox" value="Custom Name &amp; Number" data-km-addon/>Custom Name &amp; Number</label>
+        <label class="cl"><input type="checkbox" value="Badges" data-km-addon/>Badges</label>
+        <label class="cl"><input type="checkbox" value="Long Sleeve" data-km-addon/>Long Sleeve</label>
+        <label class="cl"><input type="checkbox" value="Sleeve Sponsor" data-km-addon/>Sleeve Sponsor</label>
+      </div>
+    </div>
     <div class="fg"><label class="cl"><input type="checkbox" id="km-is" checked/><span>In Stock</span></label></div>
     <div class="mdf"><button class="btn-o" onclick="closeKM()">Cancel</button><button class="btn-p" onclick="saveKit()">Save Kit</button></div>
   </div>
@@ -1572,41 +1783,59 @@ async function loadOnHand(){
   renderOnHand();
   setTimeout(()=>{const g=document.getElementById('ohGrid');if(g){g.classList.add('fade-in');g.classList.add('visible');}},50);
 }
+function sortOHItems(arr,mode){
+  const s=[...arr];
+  if(mode==='price_asc'){s.sort((a,b)=>(a.discounted_price||a.original_price)-(b.discounted_price||b.original_price));}
+  else if(mode==='price_desc'){s.sort((a,b)=>(b.discounted_price||b.original_price)-(a.discounted_price||a.original_price));}
+  else if(mode==='alpha'){s.sort((a,b)=>a.name.localeCompare(b.name));}
+  else if(mode==='league'){s.sort((a,b)=>(a.league||'').localeCompare(b.league||''));}
+  else{s.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));}
+  return s;
+}
 function renderOnHand(){
   const g=document.getElementById('ohGrid'),e=document.getElementById('ohEmpty');
   if(!g)return;
   const q=(document.getElementById('ohsi')?.value||'').toLowerCase();
   const filtered=allOnHand.filter(item=>{
     const matchSearch=!q||item.name.toLowerCase().includes(q)||(item.team||'').toLowerCase().includes(q);
-    const leagueMatch=activeOHFilters.ohleague.length===0||activeOHFilters.ohleague.includes(item.league);
-    const typeMatch=activeOHFilters.ohitemtype.length===0||activeOHFilters.ohitemtype.includes(item.item_type);
-    return matchSearch&&leagueMatch&&typeMatch;
+    const sportMatch=activeOHFilters.sport.length===0||activeOHFilters.sport.includes(item.sport||'Football');
+    const typeMatch=activeOHFilters.itemtype.length===0||
+      activeOHFilters.itemtype.some(t=>
+        (item.item_type||'').toLowerCase()===t.toLowerCase()
+      );
+    const qualityMatch=activeOHFilters.quality.length===0||
+      activeOHFilters.quality.some(q=>(item.version||'').toLowerCase().includes(q.toLowerCase()));
+    const leagueMatch=activeOHFilters.league.length===0||activeOHFilters.league.includes(item.league);
+    const sizeMatch=activeOHFilters.size.length===0||
+      activeOHFilters.size.some(s=>(item.sizes||[]).some(sz=>sz.size===s&&sz.available));
+    return matchSearch&&sportMatch&&typeMatch&&qualityMatch&&leagueMatch&&sizeMatch;
   });
   if(!filtered.length){g.innerHTML='';e.style.display='block';return;}
   e.style.display='none';
   ohPage=ohPage||1;
-  const totalOH=filtered.length;
+  const sortedOH=sortOHItems(filtered,ohSortMode);
+  const totalOH=sortedOH.length;
   const startOH=(ohPage-1)*PAGE_SIZE;
-  const paginatedOH=filtered.slice(startOH,startOH+PAGE_SIZE);
+  const paginatedOH=sortedOH.slice(startOH,startOH+PAGE_SIZE);
   renderPagination('ohPagination',ohPage,totalOH,'goToOHPage');
   g.innerHTML=paginatedOH.map(item=>{
     const hasDiscount=item.discounted_price&&item.discounted_price<item.original_price;
     const ohImgs=item.images&&item.images.length?item.images:(item.image?[item.image]:[]);
     let img='';
     if(ohImgs.length===0){img=`<div class="oh-img-placeholder">⚽</div>`;}
-    else if(ohImgs.length===1){img=`<img class="oh-img" src="${ohImgs[0]}" onerror="this.style.display='none'">`;}
+    else if(ohImgs.length===1){img=`<img referrerpolicy="no-referrer" class="oh-img" src="${ohImgs[0]}" style="pointer-events:none;" onerror="this.style.display='none'">`;}
     else{
       const ohDots=ohImgs.map((_,i)=>`<span class="gdot ${i===0?'active':''}" onclick="goSlide('oh${item.id}',${i})"></span>`).join('');
-      const ohImgsHTML=ohImgs.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join('');
-      img=`<div class="gallery" id="oh${item.id}" style="height:340px;"><div class="gallery-imgs" id="gioh${item.id}">${ohImgsHTML}</div><div class="gallery-dots">${ohDots}</div><button class="gallery-prev" onclick="event.stopPropagation();slideGallery('oh${item.id}',-1)">‹</button><button class="gallery-next" onclick="event.stopPropagation();slideGallery('oh${item.id}',1)">›</button></div>`;
+      const ohImgsHTML=ohImgs.map(src=>`<img referrerpolicy="no-referrer" class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join('');
+      img=`<div class="gallery" id="oh${item.id}" style="height:340px;" onclick="openOHDetail('${item.id}')"><div class="gallery-imgs" id="gioh${item.id}" style="pointer-events:none;">${ohImgsHTML}</div><div class="gallery-dots" style="pointer-events:none;">${ohDots}</div><button class="gallery-prev" onclick="event.stopPropagation();slideGallery('oh${item.id}',-1)">‹</button><button class="gallery-next" onclick="event.stopPropagation();slideGallery('oh${item.id}',1)">›</button></div>`;
     }
     const priceHTML=hasDiscount
       ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
       :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
     const sizes=(item.sizes||[]).map(s=>`<span class="oh-size ${s.available?'avail':'sold'}">${s.size}</span>`).join('');
-    const versionBadge=item.version?`<span class="kpt" style="margin-bottom:0.4rem;">${item.version}</span>`:'\`';
+    const versionBadge=item.version?`<span class="kpt" style="margin-bottom:0.4rem;">${item.version}</span>`:'';
     const addonsBadge=(item.addons_applied||[]).length?`<div class="kao">Addons: ${item.addons_applied.join(", ")}</div>`:'';
-    return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;"><div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div>`;
+    return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;cursor:pointer;" onclick="openOHDetail('${item.id}')"><div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div></div>`;
   }).join('');
 }
 
@@ -1652,7 +1881,7 @@ function showPage(p){
   document.querySelectorAll(".nl").forEach(x=>x.classList.remove("active"));
   const m={home:0,catalogue:1,onhand:2,reviews:3,orders:4,pricing:5,sizeguide:6,suggest:7,faq:8,settings:9,about:10,terms:11,kitdetail:99};
   const b=document.querySelectorAll(".nl");
-  if(m[p]!==undefined)b[m[p]].classList.add("active");
+  if(m[p]!==undefined&&b[m[p]])b[m[p]].classList.add("active");
   document.getElementById("navLinks").classList.remove("open");
   window.scrollTo(0,0);
   document.body.style.overflow="";
@@ -1728,7 +1957,9 @@ function goRevSlide(idx){
 
 // CATALOGUE
 // Active filters state
-let activeFilters={quality:[],league:[],itemtype:[]};
+// ── CATALOGUE FILTER STATE ──
+let activeFilters={itemtype:[],league:[],size:[],sport:[],quality:[]};
+let catSortMode='recent';
 
 function openFilterPanel(){
   document.getElementById('filterPanel').classList.add('open');
@@ -1746,41 +1977,100 @@ function toggleFilterSection(el){
   opts.classList.toggle('open');
   arr.classList.toggle('open');
 }
-function toggleFilterChip(el){
+function toggleCatChip(el){el.classList.toggle('active');}
+function toggleFilterChip(el){el.classList.toggle('active');}
+// Type chip with Quality section show/hide
+const QUALITY_TYPES=['Shirt','Full Kit','Kids Full Kit'];
+function catTypeChip(el){
   el.classList.toggle('active');
-  updateFilterCount();
+  const activeTypes=Array.from(document.querySelectorAll('#cat-football-filters [data-filter="cat-itemtype"].active'));
+  const anyQualType=activeTypes.some(b=>QUALITY_TYPES.includes(b.dataset.value));
+  const qs=document.getElementById('cat-quality-section');
+  if(qs){qs.style.display=anyQualType?'block':'none';}
+  if(!anyQualType){document.querySelectorAll('[data-filter="cat-quality"].active').forEach(b=>b.classList.remove('active'));}
+  // Hide size if only Baby Grower selected
+  const onlyBG=activeTypes.length>0&&activeTypes.every(b=>b.dataset.value==='Baby Grower');
+  const sizeSection=document.querySelector('#cat-football-filters .filter-section:last-child');
+  if(sizeSection){sizeSection.style.display=onlyBG?'none':'block';}
 }
-function updateFilterCount(){
-  const count=document.querySelectorAll('.filter-chip.active').length;
-  const badge=document.getElementById('filterCount');
-  const trigger=document.getElementById('filterTrigger');
-  if(count>0){
-    badge.textContent=count;badge.style.display='inline-block';
-    trigger.classList.add('has-filters');
-  } else {
-    badge.style.display='none';
-    trigger.classList.remove('has-filters');
+function ohTypeChip(el){
+  el.classList.toggle('active');
+  const activeTypes=Array.from(document.querySelectorAll('#oh-football-filters [data-filter="oh-itemtype"].active'));
+  const anyQualType=activeTypes.some(b=>QUALITY_TYPES.includes(b.dataset.value));
+  const qs=document.getElementById('oh-quality-section');
+  if(qs){qs.style.display=anyQualType?'block':'none';}
+  if(!anyQualType){document.querySelectorAll('[data-filter="oh-quality"].active').forEach(b=>b.classList.remove('active'));}
+  // Hide size if only Baby Grower selected
+  const onlyBG=activeTypes.length>0&&activeTypes.every(b=>b.dataset.value==='Baby Grower');
+  const sizeSection=document.querySelector('#oh-football-filters .filter-section:last-child');
+  if(sizeSection){sizeSection.style.display=onlyBG?'none':'block';}
+}
+
+function setCatSort(mode,el){
+  catSortMode=mode;
+  document.querySelectorAll('#cat-sort-options .sort-chip').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+}
+
+function selectCatSport(sport,el){
+  const allSportBtns=document.querySelectorAll('#cat-sport-selector .filter-chip');
+  const wasActive=el.classList.contains('active');
+  // Clear all sub-filter chips first
+  document.querySelectorAll('#filterPanel .filter-chip.active:not(.sort-chip)').forEach(b=>{
+    if(!b.closest('#cat-sport-selector'))b.classList.remove('active');
+  });
+  const cqs=document.getElementById('cat-quality-section');if(cqs)cqs.style.display='none';
+  allSportBtns.forEach(b=>b.classList.remove('active'));
+  ['cat-football-filters','cat-f1-filters','cat-rugby-filters','cat-nba-filters','cat-more-filters'].forEach(id=>{
+    const el2=document.getElementById(id);if(el2)el2.style.display='none';
+  });
+  if(!wasActive){
+    el.classList.add('active');
+    const map={Football:'cat-football-filters',F1:'cat-f1-filters',Rugby:'cat-rugby-filters',NBA:'cat-nba-filters',More:'cat-more-filters'};
+    const target=document.getElementById(map[sport]);
+    if(target)target.style.display='block';
   }
 }
+
+function updateFilterCount(){
+  const count=document.querySelectorAll('#filterPanel .filter-chip.active:not(.sort-chip)').length;
+  const badge=document.getElementById('filterCount');
+  const trigger=document.getElementById('filterTrigger');
+  if(count>0){badge.textContent=count;badge.style.display='inline-block';trigger.classList.add('has-filters');}
+  else{badge.style.display='none';trigger.classList.remove('has-filters');}
+}
+
 function applyFilters(){
   catPage=1;
-  activeFilters={quality:[],league:[],itemtype:[]};
-  document.querySelectorAll('.filter-chip.active').forEach(chip=>{
+  activeFilters={itemtype:[],league:[],size:[],sport:[],quality:[]};
+  document.querySelectorAll('#filterPanel .filter-chip.active:not(.sort-chip)').forEach(chip=>{
     const f=chip.dataset.filter;
     const v=chip.dataset.value;
-    if(activeFilters[f])activeFilters[f].push(v);
+    if(f==='cat-itemtype')activeFilters.itemtype.push(v);
+    else if(f==='cat-league')activeFilters.league.push(v);
+    else if(f==='cat-size')activeFilters.size.push(v);
+    else if(f==='cat-sport'||f==='cat-sport-select')activeFilters.sport.push(v);
+    else if(f==='cat-quality')activeFilters.quality.push(v);
   });
   closeFilterPanel();
   renderCat();
-  // Update All button
+  updateFilterCount();
   const allBtn=document.getElementById('filterAllBtn');
   const hasFilters=Object.values(activeFilters).some(a=>a.length>0);
   if(allBtn)allBtn.classList.toggle('active',!hasFilters);
 }
+
 function clearAllFilters(){
   catPage=1;
-  activeFilters={quality:[],league:[],itemtype:[]};
-  document.querySelectorAll('.filter-chip.active').forEach(c=>c.classList.remove('active'));
+  activeFilters={itemtype:[],league:[],size:[],sport:[],quality:[]};
+  catSortMode='recent';
+  const cqs=document.getElementById('cat-quality-section');if(cqs)cqs.style.display='none';
+  document.querySelectorAll('#filterPanel .filter-chip.active').forEach(c=>c.classList.remove('active'));
+  const firstSort=document.querySelector('#cat-sort-options .sort-chip');
+  if(firstSort)firstSort.classList.add('active');
+  ['cat-football-filters','cat-f1-filters','cat-rugby-filters','cat-nba-filters','cat-more-filters'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
   updateFilterCount();
   const allBtn=document.getElementById('filterAllBtn');
   if(allBtn)allBtn.classList.add('active');
@@ -1802,31 +2092,47 @@ function getKitCategory(type,types){
   return"imported";
 }
 
+function sortKits(arr,mode){
+  const s=[...arr];
+  if(mode==='price_asc'){s.sort((a,b)=>{const pa=(a.price_variants||[{price:0}])[0].price;const pb=(b.price_variants||[{price:0}])[0].price;return pa-pb;});}
+  else if(mode==='price_desc'){s.sort((a,b)=>{const pa=(a.price_variants||[{price:0}])[0].price;const pb=(b.price_variants||[{price:0}])[0].price;return pb-pa;});}
+  else if(mode==='alpha'){s.sort((a,b)=>a.name.localeCompare(b.name));}
+  else if(mode==='league'){s.sort((a,b)=>(a.league||'').localeCompare(b.league||''));}
+  else{s.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));}
+  return s;
+}
 function renderCat(){
   const q=(document.getElementById("si")?.value||"").toLowerCase();
-  // Compute New In: 5 most recently added kits by created_at
-  const sorted=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
-  const newInIds=new Set(sorted.slice(0,5).map(k=>k.id));
+  const byDate=[...allKits].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  const newInIds=new Set(byDate.slice(0,5).map(k=>k.id));
   const f=allKits.filter(j=>{
     const matchSearch=j.name.toLowerCase().includes(q)||(j.team||"").toLowerCase().includes(q);
-    // Quality filter
-    const qualityMatch=activeFilters.quality.length===0||
-      activeFilters.quality.some(qf=>{
-        if(qf==='replica')return(j.types||[j.type]).some(t=>t.startsWith('replica'));
-        return(j.types||[j.type]).includes(qf);
-      });
-    // League filter
-    const leagueMatch=activeFilters.league.length===0||
-      activeFilters.league.includes(j.league);
-    // Type filter
+    // Sport filter
+    const sportMatch=activeFilters.sport.length===0||activeFilters.sport.includes(j.sport||'Football');
+    // Type/itemtype filter — matches item_type or version
     const typeMatch=activeFilters.itemtype.length===0||
-      activeFilters.itemtype.includes(j.item_type);
-    return matchSearch&&qualityMatch&&leagueMatch&&typeMatch;
+      activeFilters.itemtype.some(t=>
+        (j.item_type||'').toLowerCase()===t.toLowerCase()
+      );
+    // Quality filter (version field)
+    const qualityMatch=activeFilters.quality.length===0||
+      activeFilters.quality.some(q=>(j.version||'').toLowerCase().includes(q.toLowerCase()));
+    // League filter
+    const leagueMatch=activeFilters.league.length===0||activeFilters.league.includes(j.league);
+    // Size filter
+    const sizeMatch=activeFilters.size.length===0||
+      activeFilters.size.some(s=>(j.sizes||[]).includes(s));
+    return matchSearch&&sportMatch&&typeMatch&&qualityMatch&&leagueMatch&&sizeMatch;
   });
   const g=document.getElementById("kitGrid"),e=document.getElementById("emptyState");
   if(!f.length){g.innerHTML="";e.style.display="block";return;}
   e.style.display="none";
-  g.innerHTML=f.map(j=>{
+  const sorted=sortKits(f,catSortMode);
+  if(!catPage)catPage=1;
+  renderPagination('catPagination',catPage,sorted.length,'goToPage');
+  const PAGE_SIZE_CAT=20;
+  const paginated=sorted.slice((catPage-1)*PAGE_SIZE_CAT,catPage*PAGE_SIZE_CAT);
+  g.innerHTML=paginated.map(j=>{
     const msg=encodeURIComponent(`Hi JerseyZone_ZA! I'd like to order:\n\n*${j.name}*\nType: ${KIT_TYPES[j.type]?.label||j.type}\nSize: [please specify]\n\nPlease advise on availability and payment.`);
     const cat=getKitCategory(j.type,j.types);
     const badgeClass=cat==="local"?"badge-local":cat==="both"?"badge-both":"badge-imported";
@@ -1838,10 +2144,10 @@ function renderCat(){
     if(images.length===0){
       imgHTML=`<div class="kia"><div class="kph">⚽</div><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''} ${newBadge}</div>`;
     } else if(images.length===1){
-      imgHTML=`<div class="kia"><img src="${images[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''}${newBadge}</div>`;
+      imgHTML=`<div class="kia"><img referrerpolicy="no-referrer" src="${images[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/><span class="ktb ${badgeClass}">${badgeLabel}</span>${!j.in_stock?'<span class="koos">Out of Stock</span>':''}${newBadge}</div>`;
     } else {
       const dots=images.map((_,i)=>`<span class="gdot ${i===0?"active":""}" onclick="goSlide('g${j.id}',${i})"></span>`).join("");
-      const imgs=images.map(src=>`<img class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join("");
+      const imgs=images.map(src=>`<img referrerpolicy="no-referrer" class="gallery-img" src="${src}" onerror="this.style.display='none'"/>`).join("");
       imgHTML=`<div class="gallery" id="g${j.id}">
         <div class="gallery-imgs" id="gi${j.id}">${imgs}</div>
         <div class="gallery-dots">${dots}</div>
@@ -1860,7 +2166,7 @@ function renderCat(){
     return`<div class="kc" data-id="${j.id}" style="cursor:pointer;" onclick="openKitDetail('${j.id}','catalogue')">${imgHTML}<div class="ki"><div class="kn">${j.name}</div><div class="km">${j.team||""}${j.league?" · "+j.league:""} · ${typeLabel}</div><div class="kpv">${pvs}</div>${ao}<div class="ksz">${sz}</div></div></div>`;
   }).join("");
   // Init swipe on all galleries
-  f.forEach(j=>{
+  paginated.forEach(j=>{
     if((j.images||[]).length>1)setTimeout(()=>initGallerySwipe('g'+j.id),50);
   });
 }
@@ -1976,77 +2282,153 @@ function renderAdmin(){
 function stab(t,b){document.querySelectorAll(".atab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".abt").forEach(x=>x.classList.remove("active"));document.getElementById("tab-"+t).classList.add("active");b.classList.add("active");}
 
 // KIT MODAL
-function onTypeChange(){
-  const selected=Array.from(document.querySelectorAll(".km-type-cb:checked")).map(cb=>cb.value);
-  const pvc=document.getElementById("pvc");
-  // Get existing prices to preserve user edits
-  const existing={};
-  document.querySelectorAll("#pvc .pvr").forEach(r=>{
-    const lbl=r.querySelector("[data-l]").value;
-    const pr=r.querySelector("[data-p]").value;
-    existing[lbl]=pr;
-  });
-  if(selected.length===0){pvc.innerHTML="";return;}
-  pvc.innerHTML=selected.map(type=>{
-    const cfg=KIT_TYPES[type];
-    const existingPrice=existing[cfg.label]||cfg.price;
-    return`<div class="pvr"><input class="fi" style="flex:2;" value="${cfg.label}" data-l readonly/><input class="fi" style="flex:1;" type="number" placeholder="R" value="${existingPrice}" data-p data-type="${type}"/></div>`;
-  }).join("");
-  // Show addons if any imported type selected
-  const hasImported=selected.some(t=>KIT_TYPES[t]?.category==="imported");
-  document.getElementById("addonsSection").style.display=hasImported?"block":"none";
+// ── KIT ADMIN SPORT/TYPE/VERSION FLOW ──
+const KM_TYPES_BY_SPORT={
+  Football:['Shirt','Shorts','Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower','Kids Full Kit'],
+  F1:['Shirt','Jacket'],
+  NBA:['Jersey','Shorts'],
+  Rugby:['Jersey','Shorts'],
+  More:['Shirt','Jersey','Other']
+};
+const KM_VERSIONS=['Fan Version','Player Version','Retro','Special','Replica'];
+const TYPES_WITH_VERSION=['Shirt','Full Kit','Kids Full Kit','Jersey'];
+const TYPES_WITH_LEAGUE=['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower'];
+
+let kmPVCount=0;
+function addPV(label='',price=''){
+  const id=kmPVCount++;
+  const d=document.createElement('div');
+  d.className='pvr';d.id='pv'+id;
+  d.innerHTML=`<input class="fi" style="flex:2;" placeholder="e.g. Fan Version" value="${label}" data-l/><input class="fi" style="flex:1;" type="number" placeholder="R490" value="${price}" data-p/><button class="btn-d" style="padding:6px 10px;flex-shrink:0;" onclick="document.getElementById('pv${id}').remove()">✕</button>`;
+  document.getElementById('pvc').appendChild(d);
 }
+
+function kmSelectSport(sport,el){
+  document.querySelectorAll('#km-sport-btns .admin-sport-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('km-sport').value=sport;
+  // Populate type buttons
+  const types=KM_TYPES_BY_SPORT[sport]||KM_TYPES_BY_SPORT.More;
+  const tbtns=document.getElementById('km-type-btns');
+  tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="kmSelectType('${t}',this)">${t}</button>`).join('');
+  document.getElementById('km-type-section').style.display='block';
+  document.getElementById('km-league-section').style.display='none';
+  document.getElementById('km-version-section').style.display='none';
+  document.getElementById('km-item-type').value='';
+}
+
+function kmSelectType(type,el){
+  document.querySelectorAll('#km-type-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('km-item-type').value=type;
+  // Baby Grower has fixed sizes — hide size section entirely
+  const isBG=type==='Baby Grower';
+  const sizesFG=document.querySelector('#km-sizes-wrap')?.closest('.fg');
+  if(sizesFG)sizesFG.style.display=isBG?'none':'block';
+  // Show league if applicable
+  document.getElementById('km-league-section').style.display=TYPES_WITH_LEAGUE.includes(type)?'block':'none';
+  // Show version if applicable
+  if(TYPES_WITH_VERSION.includes(type)){
+    const vbtns=document.getElementById('km-version-btns');
+    vbtns.innerHTML=KM_VERSIONS.map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version/>${v}</label>`).join('');
+    document.getElementById('km-version-section').style.display='block';
+  } else {
+    document.getElementById('km-version-section').style.display='none';
+    document.getElementById('km-quality').value='';
+  }
+}
+
+function kmSelectVersion(ver,el){} // replaced by checkboxes
 
 function openKM(id){
   ekid=id;const k=id?allKits.find(j=>j.id==id):null;
-  document.getElementById("kmTitle").textContent=k?"Edit Kit":"Add New Kit";
-  document.getElementById("km-n").value=k?.name||"";
-  document.getElementById("km-t").value=k?.team||"";
-  document.getElementById("km-l").value=k?.league||"";
-  // Handle types as array
-  const types=k?.types||( k?.type ? [k.type] : [] );
-  document.querySelectorAll(".km-type-cb").forEach(cb=>{
-    cb.checked=types.includes(cb.value);
-  });
-  document.getElementById("km-is").checked=k?k.in_stock:true;
-  const ic=document.getElementById("imgContainer");ic.innerHTML="";imgc=0;
-  (k?.images||[""]).forEach(url=>addImgField(url));
-  // Set prices from existing or defaults
-  if(k && k.price_variants && k.price_variants.length){
-    document.getElementById("pvc").innerHTML=k.price_variants.map(v=>`<div class="pvr"><input class="fi" style="flex:2;" value="${v.label}" data-l readonly/><input class="fi" style="flex:1;" type="number" value="${v.price}" data-p/></div>`).join("");
-    const hasImported=types.some(t=>KIT_TYPES[t]?.category==="imported");
-    document.getElementById("addonsSection").style.display=hasImported?"block":"none";
+  document.getElementById('kmTitle').textContent=k?'Edit Kit':'Add New Kit';
+  document.getElementById('km-n').value=k?.name||'';
+  document.getElementById('km-t').value=k?.team||'';
+  document.getElementById('km-is').checked=k?k.in_stock:true;
+  kmPVCount=0;
+  document.getElementById('pvc').innerHTML='';
+  // Images
+  const ic=document.getElementById('imgContainer');ic.innerHTML='';imgc=0;
+  (k?.images||['']).forEach(url=>addImgField(url));
+  // Price variants
+  if(k?.price_variants?.length){
+    k.price_variants.forEach(v=>addPV(v.label,v.price));
   } else {
-    onTypeChange();
+    addPV('Fan Version',490);
   }
-  document.getElementById("szcbg").innerHTML=SIZES.map(s=>`<label class="cl"><input type="checkbox" value="${s}" ${k?.sizes?.includes(s)?"checked":""}/>${s}</label>`).join("");
-  document.getElementById("adcbg").innerHTML=ADDONS.map(a=>`<label class="cl"><input type="checkbox" value="${a}" ${k?.addons?.includes(a)?"checked":""}/>${a}</label>`).join("");
-  document.getElementById("kitModal").classList.add("open");
+  // Sizes
+  const km_sizes=document.querySelectorAll('[data-km-size]');
+  km_sizes.forEach(cb=>{cb.checked=k?.sizes?.includes(cb.value)||false;});
+  // Addons
+  document.querySelectorAll('[data-km-addon]').forEach(cb=>{cb.checked=k?.addons?.includes(cb.value)||false;});
+  // Badges
+  const badgesEl=document.getElementById('km-badges');if(badgesEl)badgesEl.value=(k?.badges||[]).join(', ');
+  // Sport/type/version — if editing pre-populate
+  document.getElementById('km-sport').value=k?.sport||'';
+  document.getElementById('km-item-type').value=k?.item_type||'';
+  // version checkboxes populated after type buttons render
+  // Reset sport buttons
+  document.querySelectorAll('#km-sport-btns .admin-sport-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.sport===(k?.sport||''));
+  });
+  if(k?.sport){
+    const sport=k.sport;
+    const types=KM_TYPES_BY_SPORT[sport]||KM_TYPES_BY_SPORT.More;
+    const tbtns=document.getElementById('km-type-btns');
+    tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="kmSelectType('${t}',this)">${t}</button>`).join('');
+    document.getElementById('km-type-section').style.display='block';
+    if(k?.item_type){
+      document.querySelectorAll('#km-type-btns .admin-type-btn').forEach(b=>{b.classList.toggle('active',b.dataset.val===k.item_type);});
+      document.getElementById('km-league-section').style.display=TYPES_WITH_LEAGUE.includes(k.item_type)?'block':'none';
+      document.getElementById('km-l').value=k?.league||'';
+      if(TYPES_WITH_VERSION.includes(k.item_type)){
+        const vbtns=document.getElementById('km-version-btns');
+        vbtns.innerHTML=KM_VERSIONS.map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version/>${v}</label>`).join('');
+        document.getElementById('km-version-section').style.display='block';
+        const existingVers=(k.version?k.version.split(',').map(v=>v.trim()):[]);
+        document.querySelectorAll('[data-km-version]').forEach(cb=>{cb.checked=existingVers.includes(cb.value);});
+      }
+    }
+  } else {
+    document.getElementById('km-type-section').style.display='none';
+    document.getElementById('km-league-section').style.display='none';
+    document.getElementById('km-version-section').style.display='none';
+  }
+  document.getElementById('kitModal').classList.add('open');
 }
-function addImgField(url=""){
-  const id=imgc++;const d=document.createElement("div");d.className="imgr";d.id="img"+id;
+
+function addImgField(url=''){
+  const id=imgc++;const d=document.createElement('div');d.className='imgr';d.id='img'+id;
   d.innerHTML=`<input class="fi" placeholder="https://i.imgur.com/..." value="${url}" data-img/><button class="btn-d" style="padding:6px 10px;flex-shrink:0;" onclick="document.getElementById('img${id}').remove()">✕</button>`;
-  document.getElementById("imgContainer").appendChild(d);
+  document.getElementById('imgContainer').appendChild(d);
 }
-function closeKM(){document.getElementById("kitModal").classList.remove("open");}
+function closeKM(){document.getElementById('kitModal').classList.remove('open');}
+
 async function saveKit(){
-  const n=document.getElementById("km-n").value.trim(),t=document.getElementById("km-t").value.trim();
-  if(!n||!t){toast("⚠ Kit name and team are required.");return;}
-  const images=Array.from(document.querySelectorAll("#imgContainer [data-img]")).map(i=>i.value.trim()).filter(Boolean);
-  const pvs=Array.from(document.querySelectorAll("#pvc .pvr")).map(r=>({label:r.querySelector("[data-l]").value,price:+r.querySelector("[data-p]").value}));
-  const sz=Array.from(document.querySelectorAll("#szcbg input:checked")).map(i=>i.value);
-  const ao=Array.from(document.querySelectorAll("#adcbg input:checked")).map(i=>i.value);
-  const types=Array.from(document.querySelectorAll(".km-type-cb:checked")).map(cb=>cb.value);
-  if(!types.length){toast("⚠ Please select at least one kit type.");return;}
-  // Primary type is first selected (for badge display)
-  const type=types[0];
-  const badgesRaw=document.getElementById("km-badges")?.value.trim()||"";
-  const badges=badgesRaw?badgesRaw.split(",").map(b=>b.trim()).filter(Boolean):[];
-  const kit={name:n,team:t,league:document.getElementById("km-l").value,item_type:document.getElementById("km-it")?.value||"",badges,type,types,in_stock:document.getElementById("km-is").checked,images,price_variants:pvs,sizes:sz,addons:ao};
+  const n=document.getElementById('km-n').value.trim(),t=document.getElementById('km-t').value.trim();
+  if(!n||!t){toast('⚠ Kit name and team are required.');return;}
+  const sport=document.getElementById('km-sport').value;
+  const item_type=document.getElementById('km-item-type').value;
+  if(!sport){toast('⚠ Please select a sport.');return;}
+  if(!item_type){toast('⚠ Please select a type.');return;}
+  const version=Array.from(document.querySelectorAll('[data-km-version]:checked')).map(cb=>cb.value).join(', ');
+  const league=document.getElementById('km-l')?.value||'';
+  const images=Array.from(document.querySelectorAll('#imgContainer [data-img]')).map(i=>i.value.trim()).filter(Boolean);
+  const pvs=Array.from(document.querySelectorAll('#pvc .pvr')).map(r=>({label:r.querySelector('[data-l]').value,price:+r.querySelector('[data-p]').value}));
+  const isBGType=item_type==='Baby Grower';
+  const sz=isBGType?['0-6 Months','6-12 Months']:Array.from(document.querySelectorAll('[data-km-size]:checked')).map(i=>i.value);
+  const ao=Array.from(document.querySelectorAll('[data-km-addon]:checked')).map(i=>i.value);
+  const badgesRaw=document.getElementById('km-badges')?.value.trim()||'';
+  const badges=badgesRaw?badgesRaw.split(',').map(b=>b.trim()).filter(Boolean):[];
+  // Derive legacy type/types fields for compatibility
+  const typeMap={Football:{Shirt:'fan',Shorts:'fan','Full Kit':'fan','Training Set':'training_set',Windbreaker:'windbreaker',Tracksuit:'tracksuit','Baby Grower':'baby_grower','Kids Full Kit':'kids_kit'},F1:{Shirt:'f1',Jacket:'f1'},NBA:{Jersey:'fan',Shorts:'fan'},Rugby:{Jersey:'fan',Shorts:'fan'},More:{Shirt:'fan',Jersey:'fan',Other:'fan'}};
+  const legacyType=typeMap[sport]?.[item_type]||'fan';
+  const kit={name:n,team:t,league,sport,item_type,version,badges,type:legacyType,types:[legacyType],in_stock:document.getElementById('km-is').checked,images,price_variants:pvs,sizes:sz,addons:ao};
   let error;
-  if(ekid){({error}=await sb.from('kits').update(kit).eq('id',ekid));toast("✓ Kit updated.");}
-  else{({error}=await sb.from('kits').insert([kit]));toast("✓ Kit added.");}
-  if(error){toast("Error saving kit. Please try again.");console.error(error);return;}
+  if(ekid){({error}=await sb.from('kits').update(kit).eq('id',ekid));toast('✓ Kit updated.');}
+  else{({error}=await sb.from('kits').insert([kit]));toast('✓ Kit added.');}
+  if(error){toast('Error saving kit. Please try again.');console.error(error);return;}
   closeKM();await loadKits();renderAdmin();
 }
 async function delKit(id){if(!confirm("Delete this kit?"))return;await sb.from('kits').delete().eq('id',id);toast("Kit deleted.");await loadKits();renderAdmin();}
@@ -2096,7 +2478,7 @@ function renderOrdersCarousel(){
   if(!track)return;
   if(!allOrders.length){if(section)section.style.display='none';return;}
   if(section)section.style.display='block';
-  track.innerHTML=allOrders.map(o=>`<div class="co-slide"><img src="${o.image}" onerror="this.parentElement.style.display='none'"/><div class="co-slide-caption">${o.caption}</div></div>`).join('');
+  track.innerHTML=allOrders.map(o=>`<div class="co-slide"><img referrerpolicy="no-referrer" src="${o.image}" onerror="this.parentElement.style.display='none'"/><div class="co-slide-caption">${o.caption}</div></div>`).join('');
   coIdx=0;
   // Touch swipe
   const car=track.parentElement;
@@ -2117,7 +2499,7 @@ function renderOrdersGrid(){
   if(!g)return;
   if(!allOrders.length){g.innerHTML='';if(e)e.style.display='block';return;}
   if(e)e.style.display='none';
-  g.innerHTML=allOrders.map(o=>`<div class="co-card"><img src="${o.image}" onerror="this.style.display='none'"/><div class="co-card-cap">${o.caption}</div></div>`).join('');
+  g.innerHTML=allOrders.map(o=>`<div class="co-card"><img referrerpolicy="no-referrer" src="${o.image}" onerror="this.style.display='none'"/><div class="co-card-cap">${o.caption}</div></div>`).join('');
 }
 function renderOrdersAdmin(){
   const count=allOrders.length;
@@ -2125,7 +2507,7 @@ function renderOrdersAdmin(){
   if(el)el.textContent=count;
   const list=document.getElementById('ordl');
   if(!list)return;
-  list.innerHTML=!count?'<div class="empty-state">No orders posted yet.</div>':allOrders.map(o=>`<div class="adi"><div class="adin"><div class="adin-n" style="display:flex;align-items:center;gap:0.75rem;"><img src="${o.image}" style="width:40px;height:40px;object-fit:cover;border-radius:3px;" onerror="this.style.display='none'"/><span>${o.caption.slice(0,60)}${o.caption.length>60?'...':''}</span></div></div><div class="adi-ac"><button class="btn-d" onclick="delOrd('${o.id}')">Remove</button></div></div>`).join('');
+  list.innerHTML=!count?'<div class="empty-state">No orders posted yet.</div>':allOrders.map(o=>`<div class="adi"><div class="adin"><div class="adin-n" style="display:flex;align-items:center;gap:0.75rem;"><img referrerpolicy="no-referrer" src="${o.image}" style="width:40px;height:40px;object-fit:cover;border-radius:3px;" onerror="this.style.display='none'"/><span>${o.caption.slice(0,60)}${o.caption.length>60?'...':''}</span></div></div><div class="adi-ac"><button class="btn-d" onclick="delOrd('${o.id}')">Remove</button></div></div>`).join('');
 }
 let eordid=null;
 function openOrdM(id){
@@ -2202,9 +2584,9 @@ function renderNewArrivals(){
     const naImgs=j.images&&j.images.length?j.images:[];
     let img='';
     if(!naImgs.length){img='<div class="na-img-ph">⚽</div>';}
-    else if(naImgs.length===1){img=`<img src="${naImgs[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/>`;}
+    else if(naImgs.length===1){img=`<img referrerpolicy="no-referrer" src="${naImgs[0]}" style="width:100%;height:100%;object-fit:contain;background:var(--bg3);" onerror="this.style.display='none'"/>`;}
     else{
-      const slides=naImgs.map(src=>`<img class="na-img-slide" src="${src}" onerror="this.style.display='none'"/>`).join('');
+      const slides=naImgs.map(src=>`<img referrerpolicy="no-referrer" class="na-img-slide" src="${src}" onerror="this.style.display='none'"/>`).join('');
       img=`<div class="na-img-track" id="nat${j.id}">${slides}</div>`;
     }
     const price=j.price_variants&&j.price_variants.length?j.price_variants.map(v=>`<span class="kpt">R${v.price} · ${v.label}</span>`).join(''):'';
@@ -2369,7 +2751,7 @@ function showRelated(kitId, team, typesStr){
   }).slice(0,6);
   if(!related.length)return;
   const relHTML=related.map(k=>{
-    const img=k.images&&k.images[0]?`<img src="${k.images[0]}" onerror="this.style.display='none'"/>`:`<div class="related-img-ph">⚽</div>`;
+    const img=k.images&&k.images[0]?`<img referrerpolicy="no-referrer" src="${k.images[0]}" onerror="this.style.display='none'"/>`:`<div class="related-img-ph">⚽</div>`;
     const typeLabel=(k.types||[k.type]).map(t=>KIT_TYPES[t]?.label||t).join(', ');
     return`<div class="related-card" onclick="showRelated('${k.id}','${k.team||''}','${(k.types||[k.type]).join(',')}');window.scrollTo({top:0,behavior:'smooth'})"><div class="related-img">${img}</div><div class="related-info"><div class="related-name">${k.name}</div><div class="related-team">${k.team||''} · ${typeLabel}</div></div></div>`;
   }).join('');
@@ -2524,10 +2906,12 @@ function openKitDetail(kitId, fromPage){
   const simWrap=document.getElementById('kdpSimilarWrap');
   if(similar.length){
     simWrap.style.display='block';
-    document.getElementById('kdpSimilar').innerHTML=similar.map(k=>{
-      const img=k.images&&k.images[0]?'<img src="'+k.images[0]+'" style="width:100%;height:100%;object-fit:contain;">':'<div class="kd-page-similar-ph">⚽</div>';
-      const card=document.createElement('div');card.className='kd-page-similar-card';card.onclick=()=>openKitDetail(k.id,'kitdetail');card.innerHTML='<div class="kd-page-similar-img">'+img+'</div><div class="kd-page-similar-info"><div class="kd-page-similar-name">'+k.name+'</div><div class="kd-page-similar-team">'+(k.team||'')+'</div></div>';return card.outerHTML;
+    const simGrid=document.getElementById('kdpSimilar');
+    simGrid.innerHTML=similar.map(k=>{
+      const img=k.images&&k.images[0]?'<img referrerpolicy="no-referrer" src="'+k.images[0]+'" style="width:100%;height:100%;object-fit:contain;pointer-events:none;">':'<div class="kd-page-similar-ph">⚽</div>';
+      return '<div class="kd-page-similar-card" data-kitid="'+k.id+'" style="cursor:pointer;"><div class="kd-page-similar-img">'+img+'</div><div class="kd-page-similar-info"><div class="kd-page-similar-name">'+k.name+'</div><div class="kd-page-similar-team">'+(k.team||'')+'</div></div></div>';
     }).join('');
+    simGrid.onclick=function(e){const card=e.target.closest('[data-kitid]');if(card)openKitDetail(card.dataset.kitid,'kitdetail');};
   } else { simWrap.style.display='none'; }
 
   showPage('kitdetail');
@@ -2607,7 +2991,10 @@ function goToOHPage(p){
 }
 
 // ON HAND FILTERS
-let activeOHFilters={ohleague:[],ohitemtype:[]};
+// ── ON HAND FILTER STATE ──
+let activeOHFilters={itemtype:[],league:[],size:[],sport:[],quality:[]};
+let ohSortMode='recent';
+
 function openOHFilterPanel(){
   document.getElementById('ohFilterPanel').classList.add('open');
   document.getElementById('ohFilterOverlay').classList.add('open');
@@ -2618,16 +3005,46 @@ function closeOHFilterPanel(){
   document.getElementById('ohFilterOverlay').classList.remove('open');
   document.body.style.overflow='';
 }
-function toggleOHFilterChip(el){
-  el.classList.toggle('active');
+function toggleOHFilterChip(el){el.classList.toggle('active');}
+function toggleOHChip(el){el.classList.toggle('active');}
+
+function setOHSort(mode,el){
+  ohSortMode=mode;
+  document.querySelectorAll('#oh-sort-options .sort-chip').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
 }
+
+function selectOHSport(sport,el){
+  const allSportBtns=document.querySelectorAll('#oh-sport-selector .filter-chip');
+  const wasActive=el.classList.contains('active');
+  // Clear all sub-filter chips first
+  document.querySelectorAll('#ohFilterPanel .filter-chip.active:not(.sort-chip)').forEach(b=>{
+    if(!b.closest('#oh-sport-selector'))b.classList.remove('active');
+  });
+  const oqs=document.getElementById('oh-quality-section');if(oqs)oqs.style.display='none';
+  allSportBtns.forEach(b=>b.classList.remove('active'));
+  ['oh-football-filters','oh-f1-filters','oh-rugby-filters','oh-nba-filters','oh-more-filters'].forEach(id=>{
+    const el2=document.getElementById(id);if(el2)el2.style.display='none';
+  });
+  if(!wasActive){
+    el.classList.add('active');
+    const map={Football:'oh-football-filters',F1:'oh-f1-filters',Rugby:'oh-rugby-filters',NBA:'oh-nba-filters',More:'oh-more-filters'};
+    const target=document.getElementById(map[sport]);
+    if(target)target.style.display='block';
+  }
+}
+
 function applyOHFilters(){
   ohPage=1;
-  activeOHFilters={ohleague:[],ohitemtype:[]};
-  document.querySelectorAll('#ohFilterPanel .filter-chip.active').forEach(chip=>{
+  activeOHFilters={itemtype:[],league:[],size:[],sport:[]};
+  document.querySelectorAll('#ohFilterPanel .filter-chip.active:not(.sort-chip)').forEach(chip=>{
     const f=chip.dataset.filter;
     const v=chip.dataset.value;
-    if(activeOHFilters[f])activeOHFilters[f].push(v);
+    if(f==='oh-itemtype')activeOHFilters.itemtype.push(v);
+    else if(f==='oh-league')activeOHFilters.league.push(v);
+    else if(f==='oh-size')activeOHFilters.size.push(v);
+    else if(f==='oh-sport'||f==='oh-sport-select')activeOHFilters.sport.push(v);
+    else if(f==='oh-quality')activeOHFilters.quality.push(v);
   });
   closeOHFilterPanel();
   renderOnHand();
@@ -2640,8 +3057,15 @@ function applyOHFilters(){
   if(allBtn)allBtn.classList.toggle('active',count===0);
 }
 function clearOHFilters(){
-  activeOHFilters={ohleague:[],ohitemtype:[]};
+  activeOHFilters={itemtype:[],league:[],size:[],sport:[],quality:[]};
+  ohSortMode='recent';
+  const oqs=document.getElementById('oh-quality-section');if(oqs)oqs.style.display='none';
   document.querySelectorAll('#ohFilterPanel .filter-chip.active').forEach(c=>c.classList.remove('active'));
+  const firstSort=document.querySelector('#oh-sort-options .sort-chip');
+  if(firstSort)firstSort.classList.add('active');
+  ['oh-football-filters','oh-f1-filters','oh-rugby-filters','oh-nba-filters','oh-more-filters'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
   const badge=document.getElementById('ohFilterCount');
   if(badge)badge.style.display='none';
   const trigger=document.getElementById('ohFilterTrigger');
@@ -2703,10 +3127,11 @@ function openOHDetail(itemId){
     gallery.appendChild(nbOH);
   }
 
-  // Badge
+  // Badge — always reset kdpBadgesWrap so catalogue badge does not bleed through
   const hasDisc=item.discounted_price&&item.discounted_price<item.original_price;
   const vBadge=item.version?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">'+item.version+'</span>':'';
   document.getElementById('kdpBadges').innerHTML='<span class="ktb badge-local" style="position:static;font-size:0.65rem;">On Hand</span>'+vBadge+(hasDisc?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">Sale</span>':'');
+  const kdpBW=document.getElementById('kdpBadgesWrap');if(kdpBW)kdpBW.style.display='none';
   document.getElementById('kdpName').textContent=item.name;
   document.getElementById('kdpTeam').textContent=item.team||'';
 
@@ -2752,26 +3177,109 @@ function openOHDetail(itemId){
 }
 
 // ON HAND ADMIN// ON HAND ADMIN
-let eohid=null,ohSizeCount=0;
+// ── ON HAND ADMIN SPORT/TYPE/VERSION FLOW ──
+const OH_TYPES_BY_SPORT={
+  Football:['Shirt','Shorts','Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower','Kids Full Kit'],
+  F1:['Shirt','Jacket'],
+  NBA:['Jersey','Shorts'],
+  Rugby:['Jersey','Shorts'],
+  More:['Shirt','Jersey','Other']
+};
+const OH_VERSIONS=['Fan Version','Player Version','Retro','Special','Replica'];
+
+let eohid=null,ohImgCount=0;
+
+function ohSelectSport(sport,el){
+  document.querySelectorAll('#oh-sport-btns .admin-sport-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('oh-sport').value=sport;
+  const types=OH_TYPES_BY_SPORT[sport]||OH_TYPES_BY_SPORT.More;
+  const tbtns=document.getElementById('oh-type-btns');
+  tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="ohSelectType('${t}',this)">${t}</button>`).join('');
+  document.getElementById('oh-type-section').style.display='block';
+  document.getElementById('oh-league-section').style.display='none';
+  document.getElementById('oh-version-section').style.display='none';
+  document.getElementById('oh-item-type').value='';
+}
+
+function ohSelectType(type,el){
+  document.querySelectorAll('#oh-type-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('oh-item-type').value=type;
+  const leagueTypes=['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower'];
+  document.getElementById('oh-league-section').style.display=leagueTypes.includes(type)?'block':'none';
+  // Baby Grower has fixed sizes — hide sizes section entirely
+  const isBG=type==='Baby Grower';
+  const ohSizesContainer=document.getElementById('oh-sizes-container')?.closest('.fg');
+  if(ohSizesContainer)ohSizesContainer.style.display=isBG?'none':'block';
+  const versionTypes=['Shirt','Full Kit','Kids Full Kit','Jersey'];
+  if(versionTypes.includes(type)){
+    const vbtns=document.getElementById('oh-version-btns');
+    vbtns.innerHTML=OH_VERSIONS.map(v=>`<button type="button" class="admin-type-btn" data-val="${v}" onclick="ohSelectVersion('${v}',this)">${v}</button>`).join('');
+    document.getElementById('oh-version-section').style.display='block';
+    document.getElementById('oh-version').value='';
+  } else {
+    document.getElementById('oh-version-section').style.display='none';
+    document.getElementById('oh-version').value='';
+  }
+}
+
+function ohSelectVersion(ver,el){
+  document.querySelectorAll('#oh-version-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('oh-version').value=ver;
+}
+
 function openOHM(id){
   eohid=id;
   const item=id?allOnHand.find(x=>x.id==id):null;
-  document.getElementById("ohmTitle").textContent=item?"Edit Item":"Add On Hand Item";
-  document.getElementById("oh-n").value=item?.name||"";
-  document.getElementById("oh-t").value=item?.team||"";
-  const ohLEl=document.getElementById("oh-league");if(ohLEl)ohLEl.value=item?.league||"";
-  const ohTEl=document.getElementById("oh-type");if(ohTEl)ohTEl.value=item?.item_type||"";
-  const ohVEl=document.getElementById("oh-version");if(ohVEl)ohVEl.value=item?.version||"";
-  const ohAEl=document.getElementById("oh-addons");if(ohAEl)ohAEl.value=(item?.addons_applied||[]).join(", ");
-  const ohic=document.getElementById("ohImgContainer");
-  if(ohic){ohic.innerHTML="";ohImgCount=0;(item?.images||(item?.image?[item.image]:[""])).forEach(url=>addOHImgField(url));}
-  document.getElementById("oh-op").value=item?.original_price||"";
-  document.getElementById("oh-dp").value=item?.discounted_price||"";
-  const sc=document.getElementById("ohSizes");sc.innerHTML="";ohSizeCount=0;
-  (item?.sizes||[{size:"S",available:true},{size:"M",available:true},{size:"L",available:true},{size:"XL",available:true}]).forEach(s=>addOHSize(s.size,s.available));
-  document.getElementById("ohModal").classList.add("open");
+  document.getElementById('ohmTitle').textContent=item?'Edit Item':'Add On Hand Item';
+  document.getElementById('oh-n').value=item?.name||'';
+  document.getElementById('oh-t').value=item?.team||'';
+  document.getElementById('oh-op').value=item?.original_price||'';
+  document.getElementById('oh-dp').value=item?.discounted_price||'';
+  document.getElementById('oh-addons').value=(item?.addons_applied||[]).join(', ');
+  const instockEl=document.getElementById('oh-instock');if(instockEl)instockEl.checked=item?item.in_stock!==false:true;
+  // Images
+  const ohic=document.getElementById('ohImgContainer');
+  ohic.innerHTML='';ohImgCount=0;
+  (item?.images||(item?.image?[item.image]:[''])).forEach(url=>addOHImgField(url));
+  // Sizes list
+  const sl=document.getElementById('oh-sizes-list');sl.innerHTML='';
+  (item?.sizes||[]).forEach(s=>renderOHSizeTag(s.size,s.available));
+  // Sport/type/version pre-populate for edit
+  document.getElementById('oh-sport').value=item?.sport||'';
+  document.getElementById('oh-item-type').value=item?.item_type||'';
+  document.getElementById('oh-version').value=item?.version||'';
+  document.querySelectorAll('#oh-sport-btns .admin-sport-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.sport===(item?.sport||''));
+  });
+  if(item?.sport){
+    const types=OH_TYPES_BY_SPORT[item.sport]||OH_TYPES_BY_SPORT.More;
+    const tbtns=document.getElementById('oh-type-btns');
+    tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="ohSelectType('${t}',this)">${t}</button>`).join('');
+    document.getElementById('oh-type-section').style.display='block';
+    if(item?.item_type){
+      document.querySelectorAll('#oh-type-btns .admin-type-btn').forEach(b=>{b.classList.toggle('active',b.dataset.val===item.item_type);});
+      const leagueTypes=['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower'];
+      document.getElementById('oh-league-section').style.display=leagueTypes.includes(item.item_type)?'block':'none';
+      const ohLeagueEl=document.getElementById('oh-league');if(ohLeagueEl)ohLeagueEl.value=item.league||'';
+      const versionTypes=['Shirt','Full Kit','Kids Full Kit','Jersey'];
+      if(versionTypes.includes(item.item_type)){
+        const vbtns=document.getElementById('oh-version-btns');
+        vbtns.innerHTML=OH_VERSIONS.map(v=>`<button type="button" class="admin-type-btn" data-val="${v}" onclick="ohSelectVersion('${v}',this)">${v}</button>`).join('');
+        document.getElementById('oh-version-section').style.display='block';
+        document.querySelectorAll('#oh-version-btns .admin-type-btn').forEach(b=>{b.classList.toggle('active',b.dataset.val===item.version);});
+      }
+    }
+  } else {
+    document.getElementById('oh-type-section').style.display='none';
+    document.getElementById('oh-league-section').style.display='none';
+    document.getElementById('oh-version-section').style.display='none';
+  }
+  document.getElementById('ohModal').classList.add('open');
 }
-let ohImgCount=0;
+
 function addOHImgField(url=''){
   const id=ohImgCount++;
   const d=document.createElement('div');
@@ -2779,52 +3287,57 @@ function addOHImgField(url=''){
   d.innerHTML=`<input class="fi" placeholder="https://i.imgur.com/..." value="${url}" data-ohimg/><button class="btn-d" style="padding:6px 10px;flex-shrink:0;" onclick="document.getElementById('ohimg${id}').remove()">✕</button>`;
   document.getElementById('ohImgContainer').appendChild(d);
 }
-function addOHSize(size="",available=true){
-  const id=ohSizeCount++;
-  const d=document.createElement("div");
-  d.style.cssText="display:flex;gap:0.5rem;align-items:center;";
-  d.id="ohs"+id;
-  d.innerHTML=`<select class="fsel" style="flex:1;" data-sz>
-    <option value="XS" ${size==="XS"?"selected":""}>XS</option>
-    <option value="S" ${size==="S"?"selected":""}>S</option>
-    <option value="M" ${size==="M"?"selected":""}>M</option>
-    <option value="L" ${size==="L"?"selected":""}>L</option>
-    <option value="XL" ${size==="XL"?"selected":""}>XL</option>
-    <option value="XXL" ${size==="XXL"?"selected":""}>XXL</option>
-    <option value="Kids S" ${size==="Kids S"?"selected":""}>Kids S</option>
-    <option value="Kids M" ${size==="Kids M"?"selected":""}>Kids M</option>
-    <option value="Kids L" ${size==="Kids L"?"selected":""}>Kids L</option>
-  </select>
-  <label class="cl"><input type="checkbox" data-av ${available?"checked":""}/><span>Available</span></label>
-  <button class="btn-d" style="padding:5px 9px;flex-shrink:0;" onclick="document.getElementById('ohs${id}').remove()">✕</button>`;
-  document.getElementById("ohSizes").appendChild(d);
+
+function renderOHSizeTag(size,available){
+  const sl=document.getElementById('oh-sizes-list');
+  const tag=document.createElement('span');
+  tag.style.cssText='display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:4px 10px;font-size:0.72rem;margin:3px;';
+  tag.innerHTML=`${size} <span style="color:${available?'var(--red)':'var(--muted)'};">${available?'Available':'Sold Out'}</span> <button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.8rem;padding:0 2px;">✕</button>`;
+  tag.dataset.size=size;tag.dataset.avail=available;
+  sl.appendChild(tag);
 }
-function closeOHM(){document.getElementById("ohModal").classList.remove("open");}
+
+function addOHSizeRow(){
+  const sel=document.getElementById('oh-size-select');
+  const avail=document.getElementById('oh-size-avail').value==='true';
+  const size=sel.value;
+  if(!size){toast('⚠ Select a size first.');return;}
+  renderOHSizeTag(size,avail);
+  sel.value='';
+}
+
+function closeOHM(){document.getElementById('ohModal').classList.remove('open');}
+
 async function saveOH(){
-  const name=document.getElementById("oh-n").value.trim();
-  const op=document.getElementById("oh-op").value;
-  if(!name||!op){toast("⚠ Name and original price required.");return;}
-  const sizes=Array.from(document.querySelectorAll("#ohSizes > div")).map(d=>({
-    size:d.querySelector("[data-sz]").value,
-    available:d.querySelector("[data-av]").checked
+  const name=document.getElementById('oh-n').value.trim();
+  const op=document.getElementById('oh-op').value;
+  if(!name||!op){toast('⚠ Name and original price required.');return;}
+  const sport=document.getElementById('oh-sport').value;
+  const item_type=document.getElementById('oh-item-type').value;
+  const isBGItem=item_type==='Baby Grower';
+  const sizes=isBGItem?[{size:'0-6 Months',available:true},{size:'6-12 Months',available:true}]:Array.from(document.querySelectorAll('#oh-sizes-list span[data-size]')).map(tag=>({
+    size:tag.dataset.size,available:tag.dataset.avail==='true'
   }));
+  const images=Array.from(document.querySelectorAll('#ohImgContainer [data-ohimg]')).map(i=>i.value.trim()).filter(Boolean);
   const item={
     name,
-    team:document.getElementById("oh-t").value.trim(),
-    league:document.getElementById("oh-league")?.value||'',
-    item_type:document.getElementById("oh-type")?.value||'',
-    version:document.getElementById("oh-version")?.value||'',
-    addons_applied:document.getElementById("oh-addons")?.value.trim()?document.getElementById("oh-addons").value.split(',').map(a=>a.trim()).filter(Boolean):[],
-    images:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean),
-    image:Array.from(document.querySelectorAll("#ohImgContainer [data-ohimg]")).map(i=>i.value.trim()).filter(Boolean)[0]||"",
+    team:document.getElementById('oh-t').value.trim(),
+    sport,
+    item_type,
+    league:document.getElementById('oh-league')?.value||'',
+    version:document.getElementById('oh-version').value||'',
+    addons_applied:document.getElementById('oh-addons').value.trim()?document.getElementById('oh-addons').value.split(',').map(a=>a.trim()).filter(Boolean):[],
+    images,
+    image:images[0]||'',
     original_price:+op,
-    discounted_price:document.getElementById("oh-dp").value?+document.getElementById("oh-dp").value:null,
+    discounted_price:document.getElementById('oh-dp').value?+document.getElementById('oh-dp').value:null,
+    in_stock:document.getElementById('oh-instock')?.checked!==false,
     sizes
   };
   let error;
-  if(eohid){({error}=await sb.from("on_hand").update(item).eq("id",eohid));toast("✓ Item updated.");}
-  else{({error}=await sb.from("on_hand").insert([item]));toast("✓ Item added.");}
-  if(error){toast("Error saving item.");console.error(error);return;}
+  if(eohid){({error}=await sb.from('on_hand').update(item).eq('id',eohid));toast('✓ Item updated.');}
+  else{({error}=await sb.from('on_hand').insert([item]));toast('✓ Item added.');}
+  if(error){toast('Error saving item.');console.error(error);return;}
   closeOHM();await loadOnHand();renderOnHandAdmin();
 }
 async function delOH(id){if(!confirm("Remove this item?"))return;await sb.from("on_hand").delete().eq("id",id);toast("Item removed.");await loadOnHand();renderOnHandAdmin();}
