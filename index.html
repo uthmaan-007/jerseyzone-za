@@ -1616,6 +1616,7 @@ body.compact .kao{display:none;}
             <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
             <option>16 (2-3y)</option><option>18 (3-4y)</option><option>20 (4-5y)</option>
             <option>22 (6-7y)</option><option>24 (8-9y)</option><option>26 (10-11y)</option><option>28 (12-13y)</option>
+            <option>0-6 Months</option><option>6-12 Months</option>
           </select>
           <select class="fsel" id="oh-size-avail" style="width:120px;">
             <option value="true">Available</option>
@@ -1688,19 +1689,25 @@ body.compact .kao{display:none;}
     </div>
     <div class="fg">
       <label class="fl">Sizes Available</label>
-      <div class="cbg" id="km-sizes">
-        <label class="cl"><input type="checkbox" value="S" data-km-size/>S</label>
-        <label class="cl"><input type="checkbox" value="M" data-km-size/>M</label>
-        <label class="cl"><input type="checkbox" value="L" data-km-size/>L</label>
-        <label class="cl"><input type="checkbox" value="XL" data-km-size/>XL</label>
-        <label class="cl"><input type="checkbox" value="XXL" data-km-size/>XXL</label>
-        <label class="cl"><input type="checkbox" value="16 (2-3y)" data-km-size/>16 (2-3y)</label>
-        <label class="cl"><input type="checkbox" value="18 (3-4y)" data-km-size/>18 (3-4y)</label>
-        <label class="cl"><input type="checkbox" value="20 (4-5y)" data-km-size/>20 (4-5y)</label>
-        <label class="cl"><input type="checkbox" value="22 (6-7y)" data-km-size/>22 (6-7y)</label>
-        <label class="cl"><input type="checkbox" value="24 (8-9y)" data-km-size/>24 (8-9y)</label>
-        <label class="cl"><input type="checkbox" value="26 (10-11y)" data-km-size/>26 (10-11y)</label>
-        <label class="cl"><input type="checkbox" value="28 (12-13y)" data-km-size/>28 (12-13y)</label>
+      <div id="km-sizes-wrap">
+        <div class="cbg" id="km-sizes-standard">
+          <label class="cl"><input type="checkbox" value="S" data-km-size/>S</label>
+          <label class="cl"><input type="checkbox" value="M" data-km-size/>M</label>
+          <label class="cl"><input type="checkbox" value="L" data-km-size/>L</label>
+          <label class="cl"><input type="checkbox" value="XL" data-km-size/>XL</label>
+          <label class="cl"><input type="checkbox" value="XXL" data-km-size/>XXL</label>
+          <label class="cl"><input type="checkbox" value="16 (2-3y)" data-km-size/>16 (2-3y)</label>
+          <label class="cl"><input type="checkbox" value="18 (3-4y)" data-km-size/>18 (3-4y)</label>
+          <label class="cl"><input type="checkbox" value="20 (4-5y)" data-km-size/>20 (4-5y)</label>
+          <label class="cl"><input type="checkbox" value="22 (6-7y)" data-km-size/>22 (6-7y)</label>
+          <label class="cl"><input type="checkbox" value="24 (8-9y)" data-km-size/>24 (8-9y)</label>
+          <label class="cl"><input type="checkbox" value="26 (10-11y)" data-km-size/>26 (10-11y)</label>
+          <label class="cl"><input type="checkbox" value="28 (12-13y)" data-km-size/>28 (12-13y)</label>
+        </div>
+        <div class="cbg" id="km-sizes-bg" style="display:none;">
+          <label class="cl"><input type="checkbox" value="0-6 Months" data-km-size/>0-6 Months</label>
+          <label class="cl"><input type="checkbox" value="6-12 Months" data-km-size/>6-12 Months</label>
+        </div>
       </div>
     </div>
     <div class="fg">
@@ -1826,7 +1833,7 @@ function renderOnHand(){
       ?`<div class="oh-prices"><span class="oh-price-orig">R${item.original_price}</span><span class="oh-price-disc">R${item.discounted_price}</span><span class="oh-discount-badge">SALE</span></div>`
       :`<div class="oh-prices"><span class="oh-price-disc">R${item.original_price}</span></div>`;
     const sizes=(item.sizes||[]).map(s=>`<span class="oh-size ${s.available?'avail':'sold'}">${s.size}</span>`).join('');
-    const versionBadge=item.version?`<span class="kpt" style="margin-bottom:0.4rem;">${item.version}</span>`:'\`';
+    const versionBadge=item.version?`<span class="kpt" style="margin-bottom:0.4rem;">${item.version}</span>`:'';
     const addonsBadge=(item.addons_applied||[]).length?`<div class="kao">Addons: ${item.addons_applied.join(", ")}</div>`:'';
     return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;cursor:pointer;" onclick="openOHDetail('${item.id}')"><div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div></div>`;
   }).join('');
@@ -1976,19 +1983,27 @@ function toggleFilterChip(el){el.classList.toggle('active');}
 const QUALITY_TYPES=['Shirt','Full Kit','Kids Full Kit'];
 function catTypeChip(el){
   el.classList.toggle('active');
-  const anyQualType=Array.from(document.querySelectorAll('#cat-football-filters [data-filter="cat-itemtype"].active'))
-    .some(b=>QUALITY_TYPES.includes(b.dataset.value));
+  const activeTypes=Array.from(document.querySelectorAll('#cat-football-filters [data-filter="cat-itemtype"].active'));
+  const anyQualType=activeTypes.some(b=>QUALITY_TYPES.includes(b.dataset.value));
   const qs=document.getElementById('cat-quality-section');
   if(qs){qs.style.display=anyQualType?'block':'none';}
   if(!anyQualType){document.querySelectorAll('[data-filter="cat-quality"].active').forEach(b=>b.classList.remove('active'));}
+  // Hide size if only Baby Grower selected
+  const onlyBG=activeTypes.length>0&&activeTypes.every(b=>b.dataset.value==='Baby Grower');
+  const sizeSection=document.querySelector('#cat-football-filters .filter-section:last-child');
+  if(sizeSection){sizeSection.style.display=onlyBG?'none':'block';}
 }
 function ohTypeChip(el){
   el.classList.toggle('active');
-  const anyQualType=Array.from(document.querySelectorAll('#oh-football-filters [data-filter="oh-itemtype"].active'))
-    .some(b=>QUALITY_TYPES.includes(b.dataset.value));
+  const activeTypes=Array.from(document.querySelectorAll('#oh-football-filters [data-filter="oh-itemtype"].active'));
+  const anyQualType=activeTypes.some(b=>QUALITY_TYPES.includes(b.dataset.value));
   const qs=document.getElementById('oh-quality-section');
   if(qs){qs.style.display=anyQualType?'block':'none';}
   if(!anyQualType){document.querySelectorAll('[data-filter="oh-quality"].active').forEach(b=>b.classList.remove('active'));}
+  // Hide size if only Baby Grower selected
+  const onlyBG=activeTypes.length>0&&activeTypes.every(b=>b.dataset.value==='Baby Grower');
+  const sizeSection=document.querySelector('#oh-football-filters .filter-section:last-child');
+  if(sizeSection){sizeSection.style.display=onlyBG?'none':'block';}
 }
 
 function setCatSort(mode,el){
@@ -1998,9 +2013,13 @@ function setCatSort(mode,el){
 }
 
 function selectCatSport(sport,el){
-  // toggle sport selection
   const allSportBtns=document.querySelectorAll('#cat-sport-selector .filter-chip');
   const wasActive=el.classList.contains('active');
+  // Clear all sub-filter chips first
+  document.querySelectorAll('#filterPanel .filter-chip.active:not(.sort-chip)').forEach(b=>{
+    if(!b.closest('#cat-sport-selector'))b.classList.remove('active');
+  });
+  const cqs=document.getElementById('cat-quality-section');if(cqs)cqs.style.display='none';
   allSportBtns.forEach(b=>b.classList.remove('active'));
   ['cat-football-filters','cat-f1-filters','cat-rugby-filters','cat-nba-filters','cat-more-filters'].forEach(id=>{
     const el2=document.getElementById(id);if(el2)el2.style.display='none';
@@ -2030,7 +2049,7 @@ function applyFilters(){
     if(f==='cat-itemtype')activeFilters.itemtype.push(v);
     else if(f==='cat-league')activeFilters.league.push(v);
     else if(f==='cat-size')activeFilters.size.push(v);
-    else if(f==='cat-sport')activeFilters.sport.push(v);
+    else if(f==='cat-sport'||f==='cat-sport-select')activeFilters.sport.push(v);
     else if(f==='cat-quality')activeFilters.quality.push(v);
   });
   closeFilterPanel();
@@ -2302,6 +2321,10 @@ function kmSelectType(type,el){
   document.querySelectorAll('#km-type-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('km-item-type').value=type;
+  // Baby Grower has fixed sizes — hide size section entirely
+  const isBG=type==='Baby Grower';
+  const sizesFG=document.querySelector('#km-sizes-wrap')?.closest('.fg');
+  if(sizesFG)sizesFG.style.display=isBG?'none':'block';
   // Show league if applicable
   document.getElementById('km-league-section').style.display=TYPES_WITH_LEAGUE.includes(type)?'block':'none';
   // Show version if applicable
@@ -2393,7 +2416,8 @@ async function saveKit(){
   const league=document.getElementById('km-l')?.value||'';
   const images=Array.from(document.querySelectorAll('#imgContainer [data-img]')).map(i=>i.value.trim()).filter(Boolean);
   const pvs=Array.from(document.querySelectorAll('#pvc .pvr')).map(r=>({label:r.querySelector('[data-l]').value,price:+r.querySelector('[data-p]').value}));
-  const sz=Array.from(document.querySelectorAll('[data-km-size]:checked')).map(i=>i.value);
+  const isBGType=item_type==='Baby Grower';
+  const sz=isBGType?['0-6 Months','6-12 Months']:Array.from(document.querySelectorAll('[data-km-size]:checked')).map(i=>i.value);
   const ao=Array.from(document.querySelectorAll('[data-km-addon]:checked')).map(i=>i.value);
   const badgesRaw=document.getElementById('km-badges')?.value.trim()||'';
   const badges=badgesRaw?badgesRaw.split(',').map(b=>b.trim()).filter(Boolean):[];
@@ -2882,10 +2906,12 @@ function openKitDetail(kitId, fromPage){
   const simWrap=document.getElementById('kdpSimilarWrap');
   if(similar.length){
     simWrap.style.display='block';
-    document.getElementById('kdpSimilar').innerHTML=similar.map(k=>{
+    const simGrid=document.getElementById('kdpSimilar');
+    simGrid.innerHTML=similar.map(k=>{
       const img=k.images&&k.images[0]?'<img referrerpolicy="no-referrer" src="'+k.images[0]+'" style="width:100%;height:100%;object-fit:contain;pointer-events:none;">':'<div class="kd-page-similar-ph">⚽</div>';
-      return '<div class="kd-page-similar-card" onclick="openKitDetail('+JSON.stringify(k.id)+',\'kitdetail\')"><div class="kd-page-similar-img">'+img+'</div><div class="kd-page-similar-info"><div class="kd-page-similar-name">'+k.name+'</div><div class="kd-page-similar-team">'+(k.team||'')+'</div></div></div>';
+      return '<div class="kd-page-similar-card" data-kitid="'+k.id+'" style="cursor:pointer;"><div class="kd-page-similar-img">'+img+'</div><div class="kd-page-similar-info"><div class="kd-page-similar-name">'+k.name+'</div><div class="kd-page-similar-team">'+(k.team||'')+'</div></div></div>';
     }).join('');
+    simGrid.onclick=function(e){const card=e.target.closest('[data-kitid]');if(card)openKitDetail(card.dataset.kitid,'kitdetail');};
   } else { simWrap.style.display='none'; }
 
   showPage('kitdetail');
@@ -2991,6 +3017,11 @@ function setOHSort(mode,el){
 function selectOHSport(sport,el){
   const allSportBtns=document.querySelectorAll('#oh-sport-selector .filter-chip');
   const wasActive=el.classList.contains('active');
+  // Clear all sub-filter chips first
+  document.querySelectorAll('#ohFilterPanel .filter-chip.active:not(.sort-chip)').forEach(b=>{
+    if(!b.closest('#oh-sport-selector'))b.classList.remove('active');
+  });
+  const oqs=document.getElementById('oh-quality-section');if(oqs)oqs.style.display='none';
   allSportBtns.forEach(b=>b.classList.remove('active'));
   ['oh-football-filters','oh-f1-filters','oh-rugby-filters','oh-nba-filters','oh-more-filters'].forEach(id=>{
     const el2=document.getElementById(id);if(el2)el2.style.display='none';
@@ -3012,7 +3043,7 @@ function applyOHFilters(){
     if(f==='oh-itemtype')activeOHFilters.itemtype.push(v);
     else if(f==='oh-league')activeOHFilters.league.push(v);
     else if(f==='oh-size')activeOHFilters.size.push(v);
-    else if(f==='oh-sport')activeOHFilters.sport.push(v);
+    else if(f==='oh-sport'||f==='oh-sport-select')activeOHFilters.sport.push(v);
     else if(f==='oh-quality')activeOHFilters.quality.push(v);
   });
   closeOHFilterPanel();
@@ -3096,7 +3127,7 @@ function openOHDetail(itemId){
     gallery.appendChild(nbOH);
   }
 
-  // Badge — always reset kdpBadgesWrap so catalogue badge doesn't bleed through
+  // Badge — always reset kdpBadgesWrap so catalogue badge does not bleed through
   const hasDisc=item.discounted_price&&item.discounted_price<item.original_price;
   const vBadge=item.version?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">'+item.version+'</span>':'';
   document.getElementById('kdpBadges').innerHTML='<span class="ktb badge-local" style="position:static;font-size:0.65rem;">On Hand</span>'+vBadge+(hasDisc?'<span class="ktb badge-imported" style="position:static;font-size:0.65rem;margin-left:4px;">Sale</span>':'');
@@ -3177,6 +3208,10 @@ function ohSelectType(type,el){
   document.getElementById('oh-item-type').value=type;
   const leagueTypes=['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower'];
   document.getElementById('oh-league-section').style.display=leagueTypes.includes(type)?'block':'none';
+  // Baby Grower has fixed sizes — hide sizes section entirely
+  const isBG=type==='Baby Grower';
+  const ohSizesContainer=document.getElementById('oh-sizes-container')?.closest('.fg');
+  if(ohSizesContainer)ohSizesContainer.style.display=isBG?'none':'block';
   const versionTypes=['Shirt','Full Kit','Kids Full Kit','Jersey'];
   if(versionTypes.includes(type)){
     const vbtns=document.getElementById('oh-version-btns');
@@ -3279,7 +3314,8 @@ async function saveOH(){
   if(!name||!op){toast('⚠ Name and original price required.');return;}
   const sport=document.getElementById('oh-sport').value;
   const item_type=document.getElementById('oh-item-type').value;
-  const sizes=Array.from(document.querySelectorAll('#oh-sizes-list span[data-size]')).map(tag=>({
+  const isBGItem=item_type==='Baby Grower';
+  const sizes=isBGItem?[{size:'0-6 Months',available:true},{size:'6-12 Months',available:true}]:Array.from(document.querySelectorAll('#oh-sizes-list span[data-size]')).map(tag=>({
     size:tag.dataset.size,available:tag.dataset.avail==='true'
   }));
   const images=Array.from(document.querySelectorAll('#ohImgContainer [data-ohimg]')).map(i=>i.value.trim()).filter(Boolean);
