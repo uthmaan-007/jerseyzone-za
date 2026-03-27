@@ -2414,6 +2414,8 @@ const KM_TYPES_BY_SPORT={
   Rugby:['Show All Rugby'],
   More:['Show All']
 };
+const KM_VERSIONS=['Fan Version','Player Version','Retro','Special Edition','Replica'];
+const KM_KIDS_VERSIONS=['Imported','Local','Retro'];
 // Types that use version checkboxes (Football only)
 const TYPES_WITH_VERSION=['Shirt','Full Kit','Kids Full Kit'];
 // Types that use a style sub-selector (sets price)
@@ -2584,7 +2586,8 @@ function openKM(id){
       document.getElementById('km-l').value=k?.league||'';
       if(TYPES_WITH_VERSION.includes(k.item_type)){
         const vbtns=document.getElementById('km-version-btns');
-        vbtns.innerHTML=KM_VERSIONS.map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version onchange="kmUpdateVersionPrices()"/>${v}</label>`).join('');
+        const priceTable=k.item_type==='Kids Full Kit'?KIDS_VERSION_PRICES:VERSION_PRICES;
+        vbtns.innerHTML=Object.keys(priceTable).map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version onchange="kmUpdateVersionPrices()"/>${v}</label>`).join('');
         document.getElementById('km-version-section').style.display='block';
         const existingVers=(k.version?k.version.split(',').map(v=>v.trim()):[]);
         document.querySelectorAll('[data-km-version]').forEach(cb=>{cb.checked=existingVers.includes(cb.value);});
