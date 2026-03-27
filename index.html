@@ -4,12 +4,46 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>JerseyZone_ZA</title>
-<link rel="icon" type="image/png" href="https://i.imgur.com/3BVaOIx.png"/>
-<link rel="apple-touch-icon" href="https://i.imgur.com/3BVaOIx.png"/>
-<meta name="description" content="JerseyZone_ZA — Johannesburg's home for premium imported football kits. Fan, Player, Retro and Special editions from clubs worldwide, delivered nationwide. Quality you can feel, prices that make sense."/>
+<link rel="apple-touch-icon" href="https://i.imghippo.com/files/KRq9667UDc.png"/>
+<script>
+(function(){
+  const img=new Image();
+  img.crossOrigin='anonymous';
+  img.onload=function(){
+    try{
+      const c=document.createElement('canvas');c.width=128;c.height=128;
+      const ctx=c.getContext('2d');
+      ctx.beginPath();ctx.arc(64,64,64,0,Math.PI*2);ctx.closePath();ctx.clip();
+      ctx.drawImage(img,0,0,128,128);
+      const link=document.getElementById('favicon-link')||document.createElement('link');
+      link.id='favicon-link';link.type='image/png';link.rel='icon';link.href=c.toDataURL('image/png');
+      document.head.appendChild(link);
+    }catch(e){}
+  };
+  img.onerror=function(){
+    // fallback: load without crossOrigin
+    const img2=new Image();
+    img2.onload=function(){
+      try{
+        const c=document.createElement('canvas');c.width=128;c.height=128;
+        const ctx=c.getContext('2d');
+        ctx.beginPath();ctx.arc(64,64,64,0,Math.PI*2);ctx.closePath();ctx.clip();
+        ctx.drawImage(img2,0,0,128,128);
+        const link=document.getElementById('favicon-link')||document.createElement('link');
+        link.id='favicon-link';link.type='image/png';link.rel='icon';link.href=c.toDataURL('image/png');
+        document.head.appendChild(link);
+      }catch(e){}
+    };
+    img2.src='https://i.imghippo.com/files/KRq9667UDc.png';
+  };
+  img.src='https://i.imghippo.com/files/KRq9667UDc.png?'+Date.now();
+})();
+</script>
+<link id="favicon-link" rel="icon" type="image/png" href="https://i.imghippo.com/files/KRq9667UDc.png"/>
+<meta name="description" content="JerseyZone_ZA — Premium football kits delivered across South Africa. Fan, Player, Retro and Special editions from clubs worldwide. Order via WhatsApp, nationwide delivery."/>
 <meta property="og:title" content="JerseyZone_ZA — Premium Football Kits"/>
 <meta property="og:description" content="JerseyZone_ZA — Johannesburg's home for premium imported football kits. Fan, Player, Retro and Special editions from clubs worldwide, delivered nationwide."/>
-<meta property="og:image" content="https://i.imgur.com/3BVaOIx.png"/>
+<meta property="og:image" content="https://i.imghippo.com/files/KRq9667UDc.png"/>
 <meta property="og:url" content="https://jerseyzone.co.za"/>
 <meta property="og:type" content="website"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -326,7 +360,7 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .co-card-cap{padding:1rem 1.25rem;font-size:0.82rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
 
 /* ON HAND */
-.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}
+.oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}@media(min-width:900px){.oh-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}.oh-img{height:420px;}}
 .oh-card{background:var(--bg);display:flex;flex-direction:column;transition:background 0.2s;}
 .oh-card:hover{background:var(--bg2);}
 .oh-img{width:100%;height:340px;object-fit:contain;background:var(--bg3);margin-bottom:0;}
@@ -669,7 +703,7 @@ body.compact .kao{display:none;}
 <div style="overflow-x:hidden;">
 <nav>
   <div class="nav-left" onclick="showPage('home')">
-    <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JZ" class="nav-logo"/>
+    <img referrerpolicy="no-referrer" src="https://i.imghippo.com/files/KRq9667UDc.png" alt="JZ" class="nav-logo"/>
     <span class="nav-brand">JerseyZone_ZA</span>
   </div>
   <div class="nav-links" id="navLinks">
@@ -694,7 +728,7 @@ body.compact .kao{display:none;}
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="hero-logo"/>
+    <img referrerpolicy="no-referrer" src="https://i.imghippo.com/files/KRq9667UDc.png" alt="JerseyZone_ZA" class="hero-logo"/>
     <p class="hero-eye">Est. 2024 · South Africa</p>
     <h1>JerseyZone_ZA</h1>
     <p class="hero-slogan">Any Kit. Any Era. Fast &amp; Affordable.</p>
@@ -772,7 +806,7 @@ body.compact .kao{display:none;}
     <div class="about-wrap">
       <div class="about-grid fade-in">
         <div>
-          <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+          <img referrerpolicy="no-referrer" src="https://i.imghippo.com/files/KRq9667UDc.png" alt="JerseyZone_ZA" class="about-logo"/>
         </div>
         <div>
           <p class="about-eyebrow">Est. 2024 · Johannesburg, SA</p>
@@ -1063,7 +1097,7 @@ body.compact .kao{display:none;}
   <div class="about-wrap fade-in" style="padding-top:1rem;">
     <div class="about-grid fade-in">
       <div>
-        <img referrerpolicy="no-referrer" src="https://i.imgur.com/3BVaOIx.png" alt="JerseyZone_ZA" class="about-logo"/>
+        <img referrerpolicy="no-referrer" src="https://i.imghippo.com/files/KRq9667UDc.png" alt="JerseyZone_ZA" class="about-logo"/>
       </div>
       <div>
         <p class="about-eyebrow">Est. 2024 · Johannesburg, South Africa</p>
@@ -1236,12 +1270,32 @@ body.compact .kao{display:none;}
               <button class="filter-chip" data-filter="oh-itemtype" data-value="Jacket" onclick="toggleOHChip(this)">Jacket</button>
             </div>
           </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-size" data-value="S" onclick="toggleOHChip(this)">S</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="M" onclick="toggleOHChip(this)">M</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="L" onclick="toggleOHChip(this)">L</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XL" onclick="toggleOHChip(this)">XL</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XXL" onclick="toggleOHChip(this)">XXL</button>
+            </div>
+          </div>
         </div>
         <div id="oh-rugby-filters" style="display:none;">
           <div class="filter-section">
             <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
             <div class="filter-options">
               <button class="filter-chip" data-filter="oh-sport" data-value="Rugby" onclick="toggleOHChip(this)">Show All Rugby</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-size" data-value="S" onclick="toggleOHChip(this)">S</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="M" onclick="toggleOHChip(this)">M</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="L" onclick="toggleOHChip(this)">L</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XL" onclick="toggleOHChip(this)">XL</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XXL" onclick="toggleOHChip(this)">XXL</button>
             </div>
           </div>
         </div>
@@ -1252,12 +1306,32 @@ body.compact .kao{display:none;}
               <button class="filter-chip" data-filter="oh-sport" data-value="NBA" onclick="toggleOHChip(this)">Show All NBA</button>
             </div>
           </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-size" data-value="S" onclick="toggleOHChip(this)">S</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="M" onclick="toggleOHChip(this)">M</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="L" onclick="toggleOHChip(this)">L</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XL" onclick="toggleOHChip(this)">XL</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XXL" onclick="toggleOHChip(this)">XXL</button>
+            </div>
+          </div>
         </div>
         <div id="oh-more-filters" style="display:none;">
           <div class="filter-section">
             <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
             <div class="filter-options">
               <button class="filter-chip" data-filter="oh-sport" data-value="More" onclick="toggleOHChip(this)">Show All Other Sports</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="oh-size" data-value="S" onclick="toggleOHChip(this)">S</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="M" onclick="toggleOHChip(this)">M</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="L" onclick="toggleOHChip(this)">L</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XL" onclick="toggleOHChip(this)">XL</button>
+              <button class="filter-chip" data-filter="oh-size" data-value="XXL" onclick="toggleOHChip(this)">XXL</button>
             </div>
           </div>
         </div>
@@ -1416,12 +1490,32 @@ body.compact .kao{display:none;}
               <button class="filter-chip" data-filter="cat-itemtype" data-value="Jacket" onclick="toggleCatChip(this)">Jacket</button>
             </div>
           </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-size" data-value="S" onclick="toggleCatChip(this)">S</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="M" onclick="toggleCatChip(this)">M</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="L" onclick="toggleCatChip(this)">L</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XL" onclick="toggleCatChip(this)">XL</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XXL" onclick="toggleCatChip(this)">XXL</button>
+            </div>
+          </div>
         </div>
         <div id="cat-rugby-filters" style="display:none;">
           <div class="filter-section">
             <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
             <div class="filter-options">
               <button class="filter-chip" data-filter="cat-sport" data-value="Rugby" onclick="toggleCatChip(this)">Show All Rugby</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-size" data-value="S" onclick="toggleCatChip(this)">S</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="M" onclick="toggleCatChip(this)">M</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="L" onclick="toggleCatChip(this)">L</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XL" onclick="toggleCatChip(this)">XL</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XXL" onclick="toggleCatChip(this)">XXL</button>
             </div>
           </div>
         </div>
@@ -1432,12 +1526,32 @@ body.compact .kao{display:none;}
               <button class="filter-chip" data-filter="cat-sport" data-value="NBA" onclick="toggleCatChip(this)">Show All NBA</button>
             </div>
           </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-size" data-value="S" onclick="toggleCatChip(this)">S</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="M" onclick="toggleCatChip(this)">M</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="L" onclick="toggleCatChip(this)">L</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XL" onclick="toggleCatChip(this)">XL</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XXL" onclick="toggleCatChip(this)">XXL</button>
+            </div>
+          </div>
         </div>
         <div id="cat-more-filters" style="display:none;">
           <div class="filter-section">
             <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Type</span><span class="filter-section-arr">▼</span></div>
             <div class="filter-options">
               <button class="filter-chip" data-filter="cat-sport" data-value="More" onclick="toggleCatChip(this)">Show All Other Sports</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-q" onclick="toggleFilterSection(this)"><span>Size</span><span class="filter-section-arr">▼</span></div>
+            <div class="filter-options">
+              <button class="filter-chip" data-filter="cat-size" data-value="S" onclick="toggleCatChip(this)">S</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="M" onclick="toggleCatChip(this)">M</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="L" onclick="toggleCatChip(this)">L</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XL" onclick="toggleCatChip(this)">XL</button>
+              <button class="filter-chip" data-filter="cat-size" data-value="XXL" onclick="toggleCatChip(this)">XXL</button>
             </div>
           </div>
         </div>
@@ -1598,6 +1712,11 @@ body.compact .kao{display:none;}
       <div class="admin-type-btns" id="oh-version-btns"></div>
       <input type="hidden" id="oh-version"/>
     </div>
+    <div class="fg" id="oh-style-section" style="display:none;">
+      <label class="fl">Style</label>
+      <div class="admin-type-btns" id="oh-style-btns"></div>
+      <input type="hidden" id="oh-style"/>
+    </div>
     <div class="fg">
       <label class="fl">Images (Imgur links)</label>
       <div id="ohImgContainer"></div>
@@ -1676,6 +1795,11 @@ body.compact .kao{display:none;}
     <div class="fg" id="km-version-section" style="display:none;">
       <label class="fl">Version <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(select all that apply)</span></label>
       <div class="cbg" id="km-version-btns"></div>
+    </div>
+    <div class="fg" id="km-style-section" style="display:none;">
+      <label class="fl">Style</label>
+      <div class="admin-type-btns" id="km-style-btns"></div>
+      <input type="hidden" id="km-style"/>
     </div>
     <div class="fg">
       <label class="fl">Images (Imgur links)</label>
@@ -2286,13 +2410,29 @@ function stab(t,b){document.querySelectorAll(".atab").forEach(x=>x.classList.rem
 const KM_TYPES_BY_SPORT={
   Football:['Shirt','Shorts','Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower','Kids Full Kit'],
   F1:['Shirt','Jacket'],
-  NBA:['Jersey','Shorts'],
-  Rugby:['Jersey','Shorts'],
-  More:['Shirt','Jersey','Other']
+  NBA:['Show All NBA'],
+  Rugby:['Show All Rugby'],
+  More:['Show All']
 };
-const KM_VERSIONS=['Fan Version','Player Version','Retro','Special','Replica'];
-const TYPES_WITH_VERSION=['Shirt','Full Kit','Kids Full Kit','Jersey'];
-const TYPES_WITH_LEAGUE=['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower'];
+// Types that use version checkboxes (Football only)
+const TYPES_WITH_VERSION=['Shirt','Full Kit','Kids Full Kit'];
+// Types that use a style sub-selector (sets price)
+const TYPES_WITH_STYLE={
+  Windbreaker:[{label:'Normal',price:900},{label:'Reversible',price:1050}],
+  Tracksuit:[{label:'Half Zip',price:850},{label:'Full Zip',price:1050}]
+};
+// Types with league selector (Football only)
+const TYPES_WITH_LEAGUE=['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit'];
+// Default single prices for non-version Football types
+const TYPE_DEFAULT_PRICES={
+  Shorts:300,'Training Set':750,'Baby Grower':500
+};
+// Football version prices
+const VERSION_PRICES={'Fan Version':490,'Player Version':575,'Retro':575,'Special Edition':575,'Replica':230};
+// F1 type prices
+const F1_TYPE_PRICES={Shirt:550,Jacket:950};
+// Kids Full Kit version prices
+const KIDS_VERSION_PRICES={'Imported':490,'Local':300,'Retro':550};
 
 let kmPVCount=0;
 function addPV(label='',price=''){
@@ -2307,38 +2447,98 @@ function kmSelectSport(sport,el){
   document.querySelectorAll('#km-sport-btns .admin-sport-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('km-sport').value=sport;
-  // Populate type buttons
   const types=KM_TYPES_BY_SPORT[sport]||KM_TYPES_BY_SPORT.More;
   const tbtns=document.getElementById('km-type-btns');
-  tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="kmSelectType('${t}',this)">${t}</button>`).join('');
-  document.getElementById('km-type-section').style.display='block';
-  document.getElementById('km-league-section').style.display='none';
-  document.getElementById('km-version-section').style.display='none';
-  document.getElementById('km-item-type').value='';
+  // NBA/Rugby/More: single button that auto-selects
+  const isSingleSelect=['NBA','Rugby','More'].includes(sport);
+  if(isSingleSelect){
+    tbtns.innerHTML=`<button type="button" class="admin-type-btn active" data-val="${types[0]}" onclick="">${types[0]}</button>`;
+    document.getElementById('km-item-type').value=types[0];
+    document.getElementById('km-type-section').style.display='block';
+    document.getElementById('km-league-section').style.display='none';
+    document.getElementById('km-version-section').style.display='none';
+    document.getElementById('km-style-section').style.display='none';
+    document.getElementById('pvc').innerHTML='';
+  } else {
+    tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="kmSelectType('${t}',this)">${t}</button>`).join('');
+    document.getElementById('km-type-section').style.display='block';
+    document.getElementById('km-league-section').style.display='none';
+    document.getElementById('km-version-section').style.display='none';
+    document.getElementById('km-style-section').style.display='none';
+    document.getElementById('km-item-type').value='';
+    document.getElementById('pvc').innerHTML='';
+  }
 }
 
 function kmSelectType(type,el){
   document.querySelectorAll('#km-type-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('km-item-type').value=type;
-  // Baby Grower has fixed sizes — hide size section entirely
+  // Baby Grower — hide sizes
   const isBG=type==='Baby Grower';
   const sizesFG=document.querySelector('#km-sizes-wrap')?.closest('.fg');
   if(sizesFG)sizesFG.style.display=isBG?'none':'block';
-  // Show league if applicable
-  document.getElementById('km-league-section').style.display=TYPES_WITH_LEAGUE.includes(type)?'block':'none';
-  // Show version if applicable
-  if(TYPES_WITH_VERSION.includes(type)){
-    const vbtns=document.getElementById('km-version-btns');
-    vbtns.innerHTML=KM_VERSIONS.map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version/>${v}</label>`).join('');
-    document.getElementById('km-version-section').style.display='block';
-  } else {
+  // League (Football only)
+  const sport=document.getElementById('km-sport').value;
+  document.getElementById('km-league-section').style.display=(TYPES_WITH_LEAGUE.includes(type)&&sport==='Football')?'block':'none';
+  // Style (Windbreaker/Tracksuit — Football only)
+  const styleOpts=TYPES_WITH_STYLE[type];
+  if(styleOpts&&sport==='Football'){
+    const sbtns=document.getElementById('km-style-btns');
+    sbtns.innerHTML=styleOpts.map(s=>`<button type="button" class="admin-type-btn" data-val="${s.label}" onclick="kmSelectStyle('${s.label}',${s.price},this)">${s.label}</button>`).join('');
+    document.getElementById('km-style-section').style.display='block';
+    document.getElementById('km-style').value='';
     document.getElementById('km-version-section').style.display='none';
-    document.getElementById('km-quality').value='';
+    document.getElementById('pvc').innerHTML='';
+  } else {
+    document.getElementById('km-style-section').style.display='none';
+    document.getElementById('km-style').value='';
+    // Version selector — Football Shirt/Full Kit/Kids Full Kit only
+    if(TYPES_WITH_VERSION.includes(type)&&sport==='Football'){
+      const vbtns=document.getElementById('km-version-btns');
+      const priceTable=type==='Kids Full Kit'?KIDS_VERSION_PRICES:VERSION_PRICES;
+      vbtns.innerHTML=Object.keys(priceTable).map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version onchange="kmUpdateVersionPrices()"/>${v}</label>`).join('');
+      document.getElementById('km-version-section').style.display='block';
+      document.getElementById('km-quality').value='';
+      document.getElementById('pvc').innerHTML='';
+    } else if(sport==='F1'){
+      document.getElementById('km-version-section').style.display='none';
+      document.getElementById('pvc').innerHTML='';
+      addPV(type,F1_TYPE_PRICES[type]||550);
+    } else {
+      document.getElementById('km-version-section').style.display='none';
+      document.getElementById('pvc').innerHTML='';
+      addPV(type,TYPE_DEFAULT_PRICES[type]||490);
+    }
   }
+}
+function kmSelectStyle(label,price,el){
+  document.querySelectorAll('#km-style-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('km-style').value=label;
+  document.getElementById('pvc').innerHTML='';
+  addPV(label,price);
 }
 
 function kmSelectVersion(ver,el){} // replaced by checkboxes
+function kmUpdateVersionPrices(){
+  const checked=Array.from(document.querySelectorAll('[data-km-version]:checked')).map(cb=>cb.value);
+  const pvc=document.getElementById('pvc');
+  if(!checked.length){pvc.innerHTML='';return;}
+  const existing={};
+  document.querySelectorAll('#pvc .pvr').forEach(r=>{
+    const lbl=r.querySelector('[data-l]').value;
+    const pr=r.querySelector('[data-p]').value;
+    existing[lbl]=pr;
+  });
+  const type=document.getElementById('km-item-type').value;
+  const priceTable=type==='Kids Full Kit'?KIDS_VERSION_PRICES:VERSION_PRICES;
+  pvc.innerHTML='';
+  checked.forEach(v=>{
+    const price=existing[v]||priceTable[v]||490;
+    addPV(v,price);
+  });
+}
 
 function openKM(id){
   ekid=id;const k=id?allKits.find(j=>j.id==id):null;
@@ -2384,7 +2584,7 @@ function openKM(id){
       document.getElementById('km-l').value=k?.league||'';
       if(TYPES_WITH_VERSION.includes(k.item_type)){
         const vbtns=document.getElementById('km-version-btns');
-        vbtns.innerHTML=KM_VERSIONS.map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version/>${v}</label>`).join('');
+        vbtns.innerHTML=KM_VERSIONS.map(v=>`<label class="cl"><input type="checkbox" value="${v}" data-km-version onchange="kmUpdateVersionPrices()"/>${v}</label>`).join('');
         document.getElementById('km-version-section').style.display='block';
         const existingVers=(k.version?k.version.split(',').map(v=>v.trim()):[]);
         document.querySelectorAll('[data-km-version]').forEach(cb=>{cb.checked=existingVers.includes(cb.value);});
@@ -3181,11 +3381,12 @@ function openOHDetail(itemId){
 const OH_TYPES_BY_SPORT={
   Football:['Shirt','Shorts','Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower','Kids Full Kit'],
   F1:['Shirt','Jacket'],
-  NBA:['Jersey','Shorts'],
-  Rugby:['Jersey','Shorts'],
-  More:['Shirt','Jersey','Other']
+  NBA:['Show All NBA'],
+  Rugby:['Show All Rugby'],
+  More:['Show All']
 };
-const OH_VERSIONS=['Fan Version','Player Version','Retro','Special','Replica'];
+const OH_VERSIONS=['Fan Version','Player Version','Retro','Special Edition','Replica'];
+const OH_KIDS_VERSIONS=['Imported','Local','Retro'];
 
 let eohid=null,ohImgCount=0;
 
@@ -3195,33 +3396,58 @@ function ohSelectSport(sport,el){
   document.getElementById('oh-sport').value=sport;
   const types=OH_TYPES_BY_SPORT[sport]||OH_TYPES_BY_SPORT.More;
   const tbtns=document.getElementById('oh-type-btns');
-  tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="ohSelectType('${t}',this)">${t}</button>`).join('');
+  const isSingle=['NBA','Rugby','More'].includes(sport);
+  if(isSingle){
+    tbtns.innerHTML=`<button type="button" class="admin-type-btn active" data-val="${types[0]}">${types[0]}</button>`;
+    document.getElementById('oh-item-type').value=types[0];
+  } else {
+    tbtns.innerHTML=types.map(t=>`<button type="button" class="admin-type-btn" data-val="${t}" onclick="ohSelectType('${t}',this)">${t}</button>`).join('');
+    document.getElementById('oh-item-type').value='';
+  }
   document.getElementById('oh-type-section').style.display='block';
   document.getElementById('oh-league-section').style.display='none';
   document.getElementById('oh-version-section').style.display='none';
-  document.getElementById('oh-item-type').value='';
 }
 
 function ohSelectType(type,el){
   document.querySelectorAll('#oh-type-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('oh-item-type').value=type;
-  const leagueTypes=['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower'];
-  document.getElementById('oh-league-section').style.display=leagueTypes.includes(type)?'block':'none';
-  // Baby Grower has fixed sizes — hide sizes section entirely
+  const sport=document.getElementById('oh-sport').value;
+  // Baby Grower — hide sizes
   const isBG=type==='Baby Grower';
   const ohSizesContainer=document.getElementById('oh-sizes-container')?.closest('.fg');
   if(ohSizesContainer)ohSizesContainer.style.display=isBG?'none':'block';
-  const versionTypes=['Shirt','Full Kit','Kids Full Kit','Jersey'];
-  if(versionTypes.includes(type)){
+  // League — Football only
+  document.getElementById('oh-league-section').style.display=(TYPES_WITH_LEAGUE.includes(type)&&sport==='Football')?'block':'none';
+  // Version — Football Shirt/Full Kit/Kids Full Kit only
+  const versionTypes=['Shirt','Full Kit','Kids Full Kit'];
+  if(versionTypes.includes(type)&&sport==='Football'){
     const vbtns=document.getElementById('oh-version-btns');
-    vbtns.innerHTML=OH_VERSIONS.map(v=>`<button type="button" class="admin-type-btn" data-val="${v}" onclick="ohSelectVersion('${v}',this)">${v}</button>`).join('');
+    const vers=type==='Kids Full Kit'?OH_KIDS_VERSIONS:OH_VERSIONS;
+    vbtns.innerHTML=vers.map(v=>`<button type="button" class="admin-type-btn" data-val="${v}" onclick="ohSelectVersion('${v}',this)">${v}</button>`).join('');
     document.getElementById('oh-version-section').style.display='block';
     document.getElementById('oh-version').value='';
   } else {
     document.getElementById('oh-version-section').style.display='none';
     document.getElementById('oh-version').value='';
+    // Windbreaker/Tracksuit style
+    const ohStyleOpts=TYPES_WITH_STYLE[type];
+    if(ohStyleOpts&&sport==='Football'){
+      const sbtns=document.getElementById('oh-style-btns');
+      if(sbtns)sbtns.innerHTML=ohStyleOpts.map(s=>`<button type="button" class="admin-type-btn" data-val="${s.label}" onclick="ohSelectStyle('${s.label}',this)">${s.label}</button>`).join('');
+      const ss=document.getElementById('oh-style-section');if(ss)ss.style.display='block';
+      document.getElementById('oh-style').value='';
+    } else {
+      const ss=document.getElementById('oh-style-section');if(ss)ss.style.display='none';
+      document.getElementById('oh-style').value='';
+    }
   }
+}
+function ohSelectStyle(label,el){
+  document.querySelectorAll('#oh-style-btns .admin-type-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('oh-style').value=label;
 }
 
 function ohSelectVersion(ver,el){
@@ -3325,7 +3551,7 @@ async function saveOH(){
     sport,
     item_type,
     league:document.getElementById('oh-league')?.value||'',
-    version:document.getElementById('oh-version').value||'',
+    version:document.getElementById('oh-version').value||document.getElementById('oh-style')?.value||'',
     addons_applied:document.getElementById('oh-addons').value.trim()?document.getElementById('oh-addons').value.split(',').map(a=>a.trim()).filter(Boolean):[],
     images,
     image:images[0]||'',
