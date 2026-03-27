@@ -351,13 +351,25 @@ footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-cont
 .co-nav-btn:hover{border-color:var(--red);color:var(--cream);}
 
 /* CUSTOMER ORDERS GRID PAGE */
-.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}
+.co-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1px;
+  background:var(--border);
+}
+
+/* ✅ ADDED: force 4 columns on desktop */
+@media (min-width: 900px){
+  .co-grid{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .co-card{background:var(--bg);overflow:hidden;transition:background 0.2s;}
 .co-card:hover{background:var(--bg2);}
 .co-card img{width:100%;height:300px;object-fit:contain;display:block;transition:transform 0.4s;background:var(--bg);}
 .co-card:hover img{transform:scale(1.03);}
 .co-card-cap{padding:1rem 1.25rem;font-size:0.82rem;color:var(--muted);font-weight:300;font-style:italic;line-height:1.5;}
-
 /* ON HAND */
 .oh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);}@media(min-width:900px){.oh-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}.oh-img{height:420px;}}
 .oh-card{background:var(--bg);display:flex;flex-direction:column;transition:background 0.2s;}
