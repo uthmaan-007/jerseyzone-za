@@ -780,89 +780,115 @@ body.compact .kao{display:none;}
     <div class="feat"><div class="feat-icon">💬</div><div class="feat-title">WhatsApp Orders</div><p class="feat-text">No complicated checkout — simply message us on WhatsApp and we'll handle the rest.</p></div>
     <div class="feat"><div class="feat-icon">⭐</div><div class="feat-title">Quality Guaranteed</div><p class="feat-text">Every imported kit is personally quality checked before it ships to you.</p></div>
   </div>
-  <!-- HOW TO ORDER -->
-  <div class="hto-wrap fade-in">
-    <h2 class="hto-title">How to Order</h2>
-    <p class="hto-sub">Simple, fast and secure — straight to your door</p>
-    <div class="hto-steps">
-      <div class="hto-step fade-in">
-        <div class="hto-step-num">01</div>
-        <div class="hto-step-icon">🔍</div>
-        <div class="hto-step-title">Browse</div>
-        <p class="hto-step-text">Find your kit in our catalogue or ask us to source one for you.</p>
-      </div>
-      <div class="hto-step fade-in">
-        <div class="hto-step-num">02</div>
-        <div class="hto-step-icon">💬</div>
-        <div class="hto-step-title">Message Us</div>
-        <p class="hto-step-text">Tap "Order via WhatsApp" and send us your kit name and size.</p>
-      </div>
-      <div class="hto-step fade-in">
-        <div class="hto-step-num">03</div>
-        <div class="hto-step-icon">💳</div>
-        <div class="hto-step-title">Make Payment</div>
-        <p class="hto-step-text">We'll send you banking details. Once paid, your order is secured.</p>
-      </div>
-      <div class="hto-step fade-in">
-        <div class="hto-step-num">04</div>
-        <div class="hto-step-icon">📦</div>
-        <div class="hto-step-title">Receive Your Kit</div>
-        <p class="hto-step-text">Imported kits arrive in approx. 21 days. Local kits are faster.</p>
-      </div>
+  <!-- FEATURES (keep your existing features section above this) -->
+
+
+<!-- CUSTOMER ORDERS CAROUSEL (MOVED UP) -->
+<div id="homeOrdersSection" class="fade-in" style="display:none;padding:2rem 0 1rem;">
+  <div style="padding:0 2rem 1.25rem;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;letter-spacing:0.08em;margin-bottom:0.25rem;">Happy Customers</h2>
+      <p style="font-size:0.83rem;color:var(--muted);font-weight:300;">Real orders from real people</p>
     </div>
+    <button class="btn-o" style="font-size:0.65rem;flex-shrink:0;" onclick="showPage('orders')">View All</button>
   </div>
 
-  <!-- ABOUT US HOME SECTION -->
-  <div style="border-top:1px solid var(--border);" class="fade-in">
-    <div class="about-wrap">
-      <div class="about-grid fade-in">
-        <div>
-          <img referrerpolicy="no-referrer" src="https://i.imghippo.com/files/KRq9667UDc.png" alt="JerseyZone_ZA" class="about-logo"/>
-        </div>
-        <div>
-          <p class="about-eyebrow">Est. 2024 · Johannesburg, SA</p>
-          <h2 class="about-title">About JerseyZone_ZA</h2>
-          <p class="about-text">JerseyZone_ZA is a Johannesburg-based football kit retailer built on one idea — South African fans deserve access to premium kits at prices that actually make sense. We stock Fan, Player, Retro and Special edition imported kits from clubs around the world, alongside local options.</p>
-          <p class="about-text">Every order is personally quality-checked before it ships. Order via WhatsApp, we deliver nationwide — simple, personal, no hassle.</p>
-          <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('about')">Read More</button>
-          <div class="about-stats fade-in">
-            <div><div class="about-stat-num">2024</div><div class="about-stat-label">Est.</div></div>
-            <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based</div></div>
-            <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="co-carousel">
+    <div class="co-track" id="coTrack"></div>
   </div>
 
-  <!-- CUSTOMER ORDERS CAROUSEL -->
-  <div id="homeOrdersSection" class="fade-in" style="display:none;padding:0 0 1rem;">
-    <div style="padding:0 2rem 1.25rem;display:flex;justify-content:space-between;align-items:center;">
+  <div class="co-nav">
+    <button class="co-nav-btn" onclick="coSlide(-1)">‹</button>
+    <button class="co-nav-btn" onclick="coSlide(1)">›</button>
+  </div>
+</div>
+
+
+<!-- HOW TO ORDER -->
+<div class="hto-wrap fade-in">
+  <h2 class="hto-title">How to Order</h2>
+  <p class="hto-sub">Simple, fast and secure — straight to your door</p>
+
+  <div class="hto-steps">
+    <div class="hto-step fade-in">
+      <div class="hto-step-num">01</div>
+      <div class="hto-step-icon">🔍</div>
+      <div class="hto-step-title">Browse</div>
+      <p class="hto-step-text">Find your kit in our catalogue or ask us to source one for you.</p>
+    </div>
+
+    <div class="hto-step fade-in">
+      <div class="hto-step-num">02</div>
+      <div class="hto-step-icon">💬</div>
+      <div class="hto-step-title">Message Us</div>
+      <p class="hto-step-text">Tap "Order via WhatsApp" and send us your kit name and size.</p>
+    </div>
+
+    <div class="hto-step fade-in">
+      <div class="hto-step-num">03</div>
+      <div class="hto-step-icon">💳</div>
+      <div class="hto-step-title">Make Payment</div>
+      <p class="hto-step-text">We'll send you banking details. Once paid, your order is secured.</p>
+    </div>
+
+    <div class="hto-step fade-in">
+      <div class="hto-step-num">04</div>
+      <div class="hto-step-icon">📦</div>
+      <div class="hto-step-title">Receive Your Kit</div>
+      <p class="hto-step-text">Imported kits arrive in approx. 21 days. Local kits are faster.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ABOUT US HOME SECTION -->
+<div style="border-top:1px solid var(--border);" class="fade-in">
+  <div class="about-wrap">
+    <div class="about-grid fade-in">
+
       <div>
-        <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;letter-spacing:0.08em;margin-bottom:0.25rem;">Happy Customers</h2>
-        <p style="font-size:0.83rem;color:var(--muted);font-weight:300;">Real orders from real people</p>
+        <img referrerpolicy="no-referrer" src="https://i.imghippo.com/files/KRq9667UDc.png" alt="JerseyZone_ZA" class="about-logo"/>
       </div>
-      <button class="btn-o" style="font-size:0.65rem;flex-shrink:0;" onclick="showPage('orders')">View All</button>
-    </div>
-    <div class="co-carousel">
-      <div class="co-track" id="coTrack"></div>
-    </div>
-    <div class="co-nav">
-      <button class="co-nav-btn" onclick="coSlide(-1)">‹</button>
-      <button class="co-nav-btn" onclick="coSlide(1)">›</button>
+
+      <div>
+        <p class="about-eyebrow">Est. 2024 · Johannesburg, SA</p>
+        <h2 class="about-title">About JerseyZone_ZA</h2>
+
+        <p class="about-text">
+          JerseyZone_ZA is a Johannesburg-based football kit retailer built on one idea — South African fans deserve access to premium kits at prices that actually make sense. We stock Fan, Player, Retro and Special edition imported kits from clubs around the world, alongside local options.
+        </p>
+
+        <p class="about-text">
+          Every order is personally quality-checked before it ships. Order via WhatsApp, we deliver nationwide — simple, personal, no hassle.
+        </p>
+
+        <button class="btn-o" style="font-size:0.65rem;" onclick="showPage('about')">
+          Read More
+        </button>
+
+        <div class="about-stats fade-in">
+          <div><div class="about-stat-num">2024</div><div class="about-stat-label">Est.</div></div>
+          <div><div class="about-stat-num">JHB</div><div class="about-stat-label">Based</div></div>
+          <div><div class="about-stat-num">🇿🇦</div><div class="about-stat-label">Nationwide</div></div>
+        </div>
+      </div>
+
     </div>
   </div>
+</div>
 
-  <footer>
-    <span class="fbrand">© 2024 JerseyZone_ZA</span>
-    <div class="flinks">
-      <a href="https://instagram.com/jerseyzone2_za" target="_blank" class="flink">Instagram</a>
-      <a href="https://wa.me/27710396374" target="_blank" class="flink">WhatsApp</a>
-      <span class="flink" onclick="showPage('about')">About</span>
-      <span class="flink" onclick="showPage('terms')">T&amp;Cs</span>
-      <span class="flink" onclick="showPage('admin')">Admin</span>
-    </div>
-  </footer>
+
+<footer>
+  <span class="fbrand">© 2024 JerseyZone_ZA</span>
+
+  <div class="flinks">
+    <a href="https://instagram.com/jerseyzone2_za" target="_blank" class="flink">Instagram</a>
+    <a href="https://wa.me/27710396374" target="_blank" class="flink">WhatsApp</a>
+    <span class="flink" onclick="showPage('about')">About</span>
+    <span class="flink" onclick="showPage('terms')">T&amp;Cs</span>
+    <span class="flink" onclick="showPage('admin')">Admin</span>
+  </div>
+</footer>
 </div>
 
 <!-- CATALOGUE -->
