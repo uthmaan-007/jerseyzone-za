@@ -615,6 +615,18 @@ body.compact .kao{display:none;}
 .kd-page-similar-info{padding:0.75rem;}
 .kd-page-similar-name{font-family:"Cinzel",serif;font-size:0.7rem;font-weight:600;color:var(--cream);margin-bottom:0.15rem;}
 .kd-page-similar-team{font-size:0.65rem;color:var(--muted);font-weight:300;}
+/* SIZE CHART IN KIT DETAIL */
+.kd-size-chart-btn{font-family:"Raleway",sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:10px 14px;border:1px solid var(--border);border-radius:3px;background:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:0.75rem;}
+.kd-size-chart-btn:hover{border-color:var(--red);color:var(--cream);}
+.kd-size-chart-btn .arr{transition:transform 0.2s;font-size:0.7rem;}
+.kd-size-chart-btn.open .arr{transform:rotate(180deg);}
+.kd-size-chart-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.kd-size-chart-content.open{max-height:1000px;}
+.kd-size-chart-wrap{padding:1rem 0 0.5rem;border-bottom:1px solid var(--border);}
+.kd-size-chart-table{width:100%;border-collapse:collapse;margin-bottom:1rem;}
+.kd-size-chart-table th{font-family:"Cinzel",serif;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:8px 6px;border-bottom:1px solid var(--border);text-align:left;font-weight:600;}
+.kd-size-chart-table td{font-size:0.75rem;color:var(--cream);padding:10px 6px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.kd-size-chart-note{font-size:0.68rem;color:var(--muted);font-weight:300;line-height:1.6;margin-top:0.5rem;font-style:italic;}
 
 /* KIT CLOSE BUTTON */
 #kitDetailClose{position:fixed;top:1rem;right:1rem;z-index:9999;background:rgba(20,20,20,0.95);border:2px solid rgba(255,255,255,0.3);color:#fff;font-size:1.1rem;width:44px;height:44px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1;box-shadow:0 2px 20px rgba(0,0,0,0.8);}
@@ -973,7 +985,7 @@ body.compact .kao{display:none;}
       <div class="pricing-section-title">Other Items</div>
       <div class="pricing-grid fade-in">
         <div class="pricing-card">
-          <div class="pricing-card-header"><div class="pricing-card-title">Clothing &amp; Accessories</div><div class="pricing-card-sub">Additional imported items available</div></div>
+          <div class="pricing-card-header"><div class="pricing-card-title">Clothing &amp; Accessories</div><div class="pricing-card-sub">Additional items available</div></div>
           <div class="pricing-card-body">
             <div class="pricing-row"><span class="pricing-label">F1 Polo</span><span class="pricing-price">R550</span></div>
             <div class="pricing-row"><span class="pricing-label">F1 Jacket</span><span class="pricing-price">R950</span></div>
@@ -1623,6 +1635,7 @@ body.compact .kao{display:none;}
     <div id="kdpSizesWrap" style="display:none;">
       <div class="kd-page-section">Select Size</div>
       <div class="kd-page-sizes" id="kdpSizes"></div>
+      <div id="kdpSizeChart"></div>
     </div>
     <div id="kdpBadgesWrap" style="display:none;">
       <div class="kd-page-section">Available Badges</div>
@@ -1778,7 +1791,7 @@ body.compact .kao{display:none;}
             <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
             <option>16 (2-3y)</option><option>18 (3-4y)</option><option>20 (4-5y)</option>
             <option>22 (6-7y)</option><option>24 (8-9y)</option><option>26 (10-11y)</option><option>28 (12-13y)</option>
-            <option>0-6 Months</option><option>6-12 Months</option>
+            <option>9M</option><option>12M</option>
           </select>
           <select class="fsel" id="oh-size-avail" style="width:120px;">
             <option value="true">Available</option>
@@ -1872,8 +1885,8 @@ body.compact .kao{display:none;}
           <label class="cl"><input type="checkbox" value="28 (12-13y)" data-km-size/>28 (12-13y)</label>
         </div>
         <div class="cbg" id="km-sizes-bg" style="display:none;">
-          <label class="cl"><input type="checkbox" value="0-6 Months" data-km-size/>0-6 Months</label>
-          <label class="cl"><input type="checkbox" value="6-12 Months" data-km-size/>6-12 Months</label>
+          <label class="cl"><input type="checkbox" value="9M" data-km-size/>9M (6-12 months)</label>
+          <label class="cl"><input type="checkbox" value="12M" data-km-size/>12M (12-18 months)</label>
         </div>
       </div>
     </div>
@@ -2004,6 +2017,10 @@ function renderOnHand(){
     const addonsBadge=(item.addons_applied||[]).length?`<div class="kao">Addons: ${item.addons_applied.join(", ")}</div>`:'';
     return`<div class="oh-card" style="cursor:pointer;" onclick="openOHDetail('${item.id}')">${img}<div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;cursor:pointer;" onclick="openOHDetail('${item.id}')"><div class="oh-name">${item.name}</div><div class="oh-team">${item.team||''}</div>${priceHTML}<div class="oh-sizes">${sizes}</div></div></div>`;
   }).join('');
+  // Init swipe on all galleries
+  paginatedOH.forEach(item=>{
+    if((item.images||[]).length>1||(item.image&&!item.images))setTimeout(()=>initGallerySwipe('oh'+item.id),50);
+  });
 }
 
 async function init(){
@@ -2663,7 +2680,7 @@ async function saveKit(){
   const images=Array.from(document.querySelectorAll('#imgContainer [data-img]')).map(i=>i.value.trim()).filter(Boolean);
   const pvs=Array.from(document.querySelectorAll('#pvc .pvr')).map(r=>({label:r.querySelector('[data-l]').value,price:+r.querySelector('[data-p]').value}));
   const isBGType=item_type==='Baby Grower';
-  const sz=isBGType?['0-6 Months','6-12 Months']:Array.from(document.querySelectorAll('[data-km-size]:checked')).map(i=>i.value);
+  const sz=isBGType?['9M','12M']:Array.from(document.querySelectorAll('[data-km-size]:checked')).map(i=>i.value);
   const ao=Array.from(document.querySelectorAll('[data-km-addon]:checked')).map(i=>i.value);
   const badgesRaw=document.getElementById('km-badges')?.value.trim()||'';
   const badges=badgesRaw?badgesRaw.split(',').map(b=>b.trim()).filter(Boolean):[];
@@ -2997,14 +3014,259 @@ function showRelated(kitId, team, typesStr){
 
 
 
+
+
 let kitDetailPreviousPage='catalogue';
 function goBackFromKit(){
   showPage(kitDetailPreviousPage);
 }
 
+// SIZE CHART DATA
+const SIZE_CHARTS={
+  'shirt_player':{
+    title:'Player Version — Size Chart',
+    headers:['Size','Chest (cm)','Length (cm)','Height (cm)','Weight (kg)'],
+    rows:[
+      ['S','47-49','68-70','160-165','50-62'],
+      ['M','49-51','70-72','165-170','62-75'],
+      ['L','51-53','72-74','170-175','75-80'],
+      ['XL','53-55','74-76','175-180','80-85'],
+      ['XXL','55-57','76-78','180-185','85-90']
+    ],
+    note:'Player version kits have a slim athletic fit — if you prefer a looser feel, size up. All measurements in cm. There may be a 2-3cm variance.'
+  },
+  'shirt_fan':{
+    title:'Fan Version — Size Chart',
+    headers:['Size','Chest (cm)','Length (cm)','Height (cm)','Weight (kg)'],
+    rows:[
+      ['S','48-51','68-70','163-170','50-65'],
+      ['M','51-54','70-72','168-175','56-70'],
+      ['L','54-56','72-74','173-180','62-75'],
+      ['XL','57-60','74-76','178-185','67-88'],
+      ['XXL','60-63','76-78','185-192','85-92']
+    ],
+    note:'Fan version kits have a relaxed fit and follow standard sizing. All measurements in cm.'
+  },
+  'kids':{
+    title:'Kids Size Chart',
+    headers:['Size','Age','Height (cm)','Chest (cm)','Clothing Length (cm)','Pants Length (cm)','Est. Weight (kg)'],
+    rows:[
+      ['16','2-3 yrs','95-105','32','43','32','12-14'],
+      ['18','3-4 yrs','105-115','34','47','34','14-16'],
+      ['20','4-5 yrs','115-125','36','50','36','16-18'],
+      ['22','6-7 yrs','125-135','38','53','38','20-23'],
+      ['24','8-9 yrs','135-145','40','56','39','25-28'],
+      ['26','10-11 yrs','145-155','42','58','40','30-35'],
+      ['28','12-13 yrs','155-165','44','61','43','37-45']
+    ],
+    note:'All sizes listed are for kit sets (shirt + shorts). For overweight children, we recommend sizing up. Measurements may vary by 2-4cm.'
+  },
+  'f1_shirt':{
+    title:'F1 Shirt Size Chart',
+    headers:['Size','Height (cm)','Weight (kg)','Chest (cm)','Length (cm)'],
+    rows:[
+      ['S','165-170','100-130','52','71'],
+      ['M','170-175','130-150','54','73'],
+      ['L','175-180','150-170','56','75'],
+      ['XL','180-185','170-190','58','77'],
+      ['XXL','185-190','190-210','60','79']
+    ],
+    note:'Plus sizes available on special request. There may be a 1-3cm error in manual measurement.'
+  },
+  'f1_jacket':{
+    title:'F1 Jacket Size Chart',
+    headers:['Size','Length (cm)','Bust (cm)','Sleeve Length (cm)','Shoulder Width (cm)'],
+    rows:[
+      ['M','66','120','56','53'],
+      ['L','68.5','126','58.5','56'],
+      ['XL','71','132','61','58.5'],
+      ['XXL','73.5','136','63.5','61']
+    ],
+    note:'Product dimensions are measured manually and there may be a 1-3cm error.'
+  },
+  'shorts':{
+    title:'Football Shorts Size Chart',
+    headers:['Size','Pants Length (cm)','Waist (cm)','Hip (cm)','Thigh (cm)','Hem (cm)','Height (cm)'],
+    rows:[
+      ['S','40','62','100','62','29','150-159'],
+      ['M','42','64','104','64','30','160-169'],
+      ['L','44','66','108','66','31','170-179'],
+      ['XL','46','68','112','68','32','180-189'],
+      ['2XL','48','70','126','70','33','190-195']
+    ],
+    note:'All measurements in cm.'
+  },
+  'windbreaker':{
+    title:'Windbreaker Size Chart',
+    headers:['Size','Length (cm)','Chest (cm)','Height (cm)','Weight (kg)'],
+    rows:[
+      ['S','68','108','160-170','50-60'],
+      ['M','70','112','170-175','60-70'],
+      ['L','74','116','175-180','70-75'],
+      ['XL','76','120','180-185','75-80'],
+      ['2XL','78','124','185-190','80-90']
+    ],
+    note:'All measurements in cm and kg.'
+  },
+  'tracksuit':{
+    title:'Tracksuit Size Chart - Tops',
+    headers:['Size','Chest (cm)','Length (cm)','Sleeve Length (cm)','Height (cm)','Weight (kg)'],
+    rows:[
+      ['S','49','68','74','160-170','55-65'],
+      ['M','51','70','76','165-175','60-75'],
+      ['L','53','72','78','175-180','75-85'],
+      ['XL','55','74','80','180-185','80-90'],
+      ['XXL','57','76','82','185-190','90-95']
+    ],
+    note:'Size chart for long sleeved training clothes tops.',
+    extraTable:{
+      title:'Tracksuit Size Chart - Pants',
+      headers:['Size','Hipline (cm)','Waistline (cm)','Pants Length (cm)','Height (cm)','Weight (kg)'],
+      rows:[
+        ['S','50','29','96','160-170','55-65'],
+        ['M','52','30.5','98','165-175','60-75'],
+        ['L','54','32','100','175-180','75-85'],
+        ['XL','56','33.5','102','180-185','80-90'],
+        ['XXL','58','35','104','185-190','90-95']
+      ]
+    }
+  },
+  'baby_grower':{
+    title:'Baby Grower Size Chart',
+    headers:['Size','Length (cm)','Weight (kg)','Recommended Age'],
+    rows:[
+      ['9M','67-72','7.5-9.8','6-12 months'],
+      ['12M','72-78','9.8-11.1','12-18 months']
+    ],
+    note:'Note: Babies weighing over 6.8 kg need to choose size 12M. There is a 1-3cm error in manual measurement, and the size is for reference only.'
+  }
+};
+
+function getSizeChartForKit(sport,itemType){
+  const s=sport?.toLowerCase();
+  const t=itemType?.toLowerCase();
+  if(s==='f1'){
+    if(t==='shirt')return SIZE_CHARTS.f1_shirt;
+    if(t==='jacket')return SIZE_CHARTS.f1_jacket;
+  }
+  if(s==='football'){
+    if(t==='shirt')return{multi:true,charts:['shirt_fan','shirt_player']};
+    if(t==='shorts')return SIZE_CHARTS.shorts;
+    if(t==='windbreaker')return SIZE_CHARTS.windbreaker;
+    if(t==='tracksuit')return SIZE_CHARTS.tracksuit;
+    if(t==='baby grower')return SIZE_CHARTS.baby_grower;
+    if(t==='kids full kit')return SIZE_CHARTS.kids;
+    // For Full Kit and Training Set, return both shirt and shorts
+    if(t==='full kit'||t==='training set'){
+      return{multi:true,charts:['shirt_fan','shirt_player',SIZE_CHARTS.shorts]};
+    }
+  }
+  // For More/Other sports - use generic basic sizing
+  if(s==='more'){
+    return{
+      title:'Standard Size Chart',
+      headers:['Size','Chest (cm)','Length (cm)','Height (cm)'],
+      rows:[
+        ['S','48-51','68-70','163-170'],
+        ['M','51-54','70-72','168-175'],
+        ['L','54-56','72-74','173-180'],
+        ['XL','57-60','74-76','178-185'],
+        ['XXL','60-63','76-78','185-192']
+      ],
+      note:'Standard sizing. Measurements may vary by 2-3cm.'
+    };
+  }
+  return null;
+}
+
+function renderSizeChart(chart,selectedVersion){
+  if(!chart)return'';
+  if(chart.multi){
+    // Multi-chart (Shirt only OR Full Kit / Training Set)
+    let html='<div class="kd-size-chart-wrap">';
+    if(chart.charts.length===2){
+      // Just Shirt (Fan + Player)
+      // Filter based on selectedVersion if provided
+      if(selectedVersion){
+        const sv=selectedVersion.toLowerCase();
+        if(sv.includes('fan')){
+          html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+        } else if(sv.includes('player')){
+          html+=renderSingleChart(SIZE_CHARTS.shirt_player);
+        } else if(sv.includes('retro')||sv.includes('special')||sv.includes('replica')){
+          // Show Fan chart for Retro/Special/Replica
+          html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+        } else {
+          // Default: show both
+          html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+          html+='<div style="margin-top:1.5rem;"></div>';
+          html+=renderSingleChart(SIZE_CHARTS.shirt_player);
+        }
+      } else {
+        // No version selected: show both
+        html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+        html+='<div style="margin-top:1.5rem;"></div>';
+        html+=renderSingleChart(SIZE_CHARTS.shirt_player);
+      }
+    } else {
+      // Full Kit / Training Set (Shirt + Shorts)
+      html+='<div style="font-family:\'Cinzel\',serif;font-size:0.72rem;letter-spacing:0.08em;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;">Shirt Sizing</div>';
+      // Filter shirt charts based on selectedVersion
+      if(selectedVersion){
+        const sv=selectedVersion.toLowerCase();
+        if(sv.includes('fan')){
+          html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+        } else if(sv.includes('player')){
+          html+=renderSingleChart(SIZE_CHARTS.shirt_player);
+        } else if(sv.includes('retro')||sv.includes('special')||sv.includes('replica')){
+          html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+        } else {
+          html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+          html+='<div style="margin-top:1.5rem;"></div>';
+          html+=renderSingleChart(SIZE_CHARTS.shirt_player);
+        }
+      } else {
+        html+=renderSingleChart(SIZE_CHARTS.shirt_fan);
+        html+='<div style="margin-top:1.5rem;"></div>';
+        html+=renderSingleChart(SIZE_CHARTS.shirt_player);
+      }
+      html+='<div style="margin-top:2rem;border-top:1px solid var(--border);padding-top:1.5rem;"></div>';
+      html+=renderSingleChart(chart.charts[2]); // Shorts chart
+    }
+    html+='</div>';
+    return html;
+  }
+  return'<div class="kd-size-chart-wrap">'+renderSingleChart(chart)+'</div>';
+}
+
+function renderSingleChart(chart){
+  let html='<div style="font-family:\'Cinzel\',serif;font-size:0.75rem;letter-spacing:0.06em;color:var(--cream);margin-bottom:0.75rem;">'+chart.title+'</div>';
+  html+='<div style="overflow-x:auto;"><table class="kd-size-chart-table"><thead><tr>';
+  chart.headers.forEach(h=>html+='<th>'+h+'</th>');
+  html+='</tr></thead><tbody>';
+  chart.rows.forEach(row=>{
+    html+='<tr>';
+    row.forEach(cell=>html+='<td>'+cell+'</td>');
+    html+='</tr>';
+  });
+  html+='</tbody></table></div>';
+  if(chart.note)html+='<div class="kd-size-chart-note">'+chart.note+'</div>';
+  if(chart.extraTable){
+    html+='<div style="margin-top:1.5rem;">'+renderSingleChart(chart.extraTable)+'</div>';
+  }
+  return html;
+}
+
+function toggleSizeChart(btnEl){
+  const content=btnEl.nextElementSibling;
+  btnEl.classList.toggle('open');
+  content.classList.toggle('open');
+}
+
 // KIT DETAIL PAGE
 let kdpGalIdx=0;
 let kdpSelectedSize='';
+let kdpCurrentChart=null;
 
 function openKitDetail(kitId, fromPage){
   const kit=allKits.find(k=>k.id==kitId);
@@ -3102,7 +3364,20 @@ function openKitDetail(kitId, fromPage){
   if(sizes.length){
     sizesWrap.style.display='block';
     document.getElementById('kdpSizes').innerHTML=sizes.map(s=>'<div class="kd-page-size" onclick="kdpSelectSize(this,this.textContent)">'+s+'</div>').join('');
-  } else { sizesWrap.style.display='none'; }
+    // Size Chart
+    const itemType=(kit.types&&kit.types[0])||kit.type||kit.item_type;
+    const chart=getSizeChartForKit(kit.sport,itemType);
+    kdpCurrentChart=chart;
+    const chartContainer=document.getElementById('kdpSizeChart');
+    if(chart){
+      const chartHTML=renderSizeChart(chart);
+      chartContainer.innerHTML='<button class="kd-size-chart-btn" onclick="toggleSizeChart(this)"><span>View Size Chart</span><span class="arr">▼</span></button><div class="kd-size-chart-content">'+chartHTML+'</div>';
+    } else {
+      chartContainer.innerHTML='';
+    }
+  } else { 
+    sizesWrap.style.display='none'; 
+  }
 
   // Badges
   const badges=kit.badges||[];
@@ -3164,6 +3439,14 @@ function kdpSelectVersion(el,label,price){
   window._kdpSelectedPrice=price;
   document.querySelectorAll('.kd-page-version').forEach(v=>v.classList.remove('selected'));
   el.classList.add('selected');
+  // Re-render size chart with selected version
+  if(kdpCurrentChart){
+    const chartContainer=document.getElementById('kdpSizeChart');
+    if(chartContainer&&kdpCurrentChart){
+      const chartHTML=renderSizeChart(kdpCurrentChart,label);
+      chartContainer.innerHTML='<button class="kd-size-chart-btn" onclick="toggleSizeChart(this)"><span>View Size Chart</span><span class="arr">▼</span></button><div class="kd-size-chart-content">'+chartHTML+'</div>';
+    }
+  }
   if(window._kdpUpdateBtn)window._kdpUpdateBtn();
 }
 function kdpSelectSize(el,size){
@@ -3269,7 +3552,7 @@ function selectOHSport(sport,el){
 
 function applyOHFilters(){
   ohPage=1;
-  activeOHFilters={itemtype:[],league:[],size:[],sport:[]};
+  activeOHFilters={itemtype:[],league:[],size:[],sport:[],quality:[]};
   document.querySelectorAll('#ohFilterPanel .filter-chip.active:not(.sort-chip)').forEach(chip=>{
     const f=chip.dataset.filter;
     const v=chip.dataset.value;
@@ -3389,6 +3672,15 @@ function openOHDetail(itemId){
       if(s.available)el.onclick=()=>kdpSelectSize(el,s.size);
       szDiv.appendChild(el);
     });
+    // Size Chart
+    const chart=getSizeChartForKit(item.sport,item.item_type);
+    const chartContainer=document.getElementById('kdpSizeChart');
+    if(chart){
+      const chartHTML=renderSizeChart(chart,item.version);
+      chartContainer.innerHTML='<button class="kd-size-chart-btn" onclick="toggleSizeChart(this)"><span>View Size Chart</span><span class="arr">▼</span></button><div class="kd-size-chart-content">'+chartHTML+'</div>';
+    } else {
+      chartContainer.innerHTML='';
+    }
   } else { sizesWrap.style.display='none'; }
 
   const ohAddons=item.addons_applied||[];
@@ -3574,7 +3866,7 @@ async function saveOH(){
   const sport=document.getElementById('oh-sport').value;
   const item_type=document.getElementById('oh-item-type').value;
   const isBGItem=item_type==='Baby Grower';
-  const sizes=isBGItem?[{size:'0-6 Months',available:true},{size:'6-12 Months',available:true}]:Array.from(document.querySelectorAll('#oh-sizes-list span[data-size]')).map(tag=>({
+  const sizes=isBGItem?[{size:'9M',available:true},{size:'12M',available:true}]:Array.from(document.querySelectorAll('#oh-sizes-list span[data-size]')).map(tag=>({
     size:tag.dataset.size,available:tag.dataset.avail==='true'
   }));
   const images=Array.from(document.querySelectorAll('#ohImgContainer [data-ohimg]')).map(i=>i.value.trim()).filter(Boolean);
