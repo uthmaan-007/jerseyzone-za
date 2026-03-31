@@ -3365,12 +3365,15 @@ function openKitDetail(kitId, fromPage){
     sizesWrap.style.display='block';
     document.getElementById('kdpSizes').innerHTML=sizes.map(s=>'<div class="kd-page-size" onclick="kdpSelectSize(this,this.textContent)">'+s+'</div>').join('');
     // Size Chart
-    const itemType=(kit.types&&kit.types[0])||kit.type||kit.item_type;
-    const chart=getSizeChartForKit(kit.sport,itemType);
+    const itemType=kit.item_type;
+    const sport=kit.sport||'Football';
+    const chart=getSizeChartForKit(sport,itemType);
     kdpCurrentChart=chart;
     const chartContainer=document.getElementById('kdpSizeChart');
     if(chart){
-      const chartHTML=renderSizeChart(chart);
+      // If only 1 version, pass it to filter the chart; if multiple versions, show all initially
+      const selectedVer=(pvs.length===1)?window._kdpSelectedVersion:null;
+      const chartHTML=renderSizeChart(chart,selectedVer);
       chartContainer.innerHTML='<button class="kd-size-chart-btn" onclick="toggleSizeChart(this)"><span>View Size Chart</span><span class="arr">▼</span></button><div class="kd-size-chart-content">'+chartHTML+'</div>';
     } else {
       chartContainer.innerHTML='';
