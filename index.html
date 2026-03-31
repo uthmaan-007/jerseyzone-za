@@ -2449,18 +2449,22 @@ function clearAllFilters(){
 }
 function setFilter(f,b){clearAllFilters();}
 
-function getKitCategory(type,types){
-  // If any local type exists, show local badge; if mixed show imported
-  if(types&&types.length){
-    const hasImported=types.some(t=>!t.startsWith("replica"));
-    const hasLocal=types.some(t=>t.startsWith("replica"));
-    if(hasImported&&hasLocal)return"both";
-    if(hasLocal)return"local";
-    return"imported";
+function getKitCategory(type, types){
+  // ensure types is always an array
+  const arr = Array.isArray(types) ? types : (type ? [type] : []);
+
+  if(arr.length){
+    const hasImported = arr.some(t => !t.startsWith("replica"));
+    const hasLocal = arr.some(t => t.startsWith("replica"));
+
+    if(hasImported && hasLocal) return "both";
+    if(hasLocal) return "local";
+    return "imported";
   }
-  if(!type)return"imported";
-  if(type.startsWith("replica"))return"local";
-  return"imported";
+
+  if(!type) return "imported";
+  if(type.startsWith("replica")) return "local";
+  return "imported";
 }
 
 function sortKits(arr,mode){
