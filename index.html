@@ -721,6 +721,28 @@ body.compact .kao{display:none;}
 .admin-sport-btn:hover,.admin-type-btn:hover{border-color:var(--red);color:var(--cream);}
 .admin-sport-btn.active,.admin-type-btn.active{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.1);}
 .sort-chip.active{border-color:var(--red);color:var(--cream);background:rgba(220,30,35,0.1);}
+
+/* THIS IS FOOTBALL */
+.tif-hero{padding:2rem;text-align:center;margin-bottom:2rem;}
+.tif-ig-btn{display:inline-flex;align-items:center;gap:10px;font-family:'Raleway',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;padding:14px 28px;background:linear-gradient(135deg,#E1306C,#C13584,#833AB4);color:#fff;border:none;border-radius:4px;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 15px rgba(225,48,108,0.3);}
+.tif-ig-btn:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(225,48,108,0.45);}
+.tif-ig-btn svg{flex-shrink:0;}
+.tif-gallery{padding:1.5rem;display:grid;gap:2rem;max-width:1400px;margin:0 auto;}
+@media(min-width:768px){.tif-gallery{grid-template-columns:repeat(3,1fr);}}
+.tif-item{cursor:pointer;transition:transform 0.3s,opacity 0.3s;border-radius:4px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);}
+.tif-item:hover{transform:translateY(-4px);border-color:rgba(220,30,35,0.4);}
+.tif-item-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--bg3);}
+.tif-item-caption{padding:1rem;font-size:0.8rem;line-height:1.5;color:var(--cream);font-weight:300;}
+
+/* TIF KIT DETAIL MODAL */
+.tif-kd-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem;animation:fadeIn 0.2s;}
+.tif-kd-overlay.active{display:flex;}
+.tif-kd-content{background:var(--bg);border:1px solid var(--border);border-radius:6px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto;position:relative;}
+.tif-kd-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:var(--muted);transition:all 0.2s;z-index:10;}
+.tif-kd-close:hover{background:var(--red);color:#fff;border-color:var(--red);}
+.tif-kd-gallery{position:relative;width:100%;background:var(--bg3);border-bottom:1px solid var(--border);}
+.tif-kd-info{padding:2rem;}
+@media(max-width:768px){.tif-kd-info{padding:1.5rem;}}
 </style>
 </head>
 <body>
@@ -751,6 +773,7 @@ body.compact .kao{display:none;}
     <button class="nl active" onclick="showPage('home')">Home</button>
     <button class="nl" onclick="showPage('catalogue')">Catalogue</button>
     <button class="nl" onclick="showPage('onhand')">On Hand</button>
+    <button class="nl" onclick="showPage('thisisfootball')">This is Football</button>
     <button class="nl" onclick="showPage('reviews')">Reviews</button>
     <button class="nl" onclick="showPage('orders')">Customer Orders</button>
     <button class="nl" onclick="showPage('pricing')">Pricing</button>
@@ -1420,6 +1443,18 @@ body.compact .kao{display:none;}
   </div>
 </div>
 
+<!-- THIS IS FOOTBALL -->
+<div class="page" id="page-thisisfootball">
+  <div class="ph fade-in"><h2>This is Football</h2><p id="tifWeeklyTitle">Loading weekly moment...</p></div>
+  <div class="tif-hero fade-in" id="tifHero" style="display:none;">
+    <button class="tif-ig-btn" id="tifIgBtn" onclick="openTifIgLink()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <span>Witness the Moment</span>
+    </button>
+  </div>
+  <div class="tif-gallery fade-in" id="tifGallery"></div>
+  <div id="tifEmpty" class="empty-state" style="display:none;">No weekly moment available yet. Check back soon.</div>
+</div>
 
 <!-- SETTINGS PAGE -->
 <div class="page" id="page-settings">
@@ -1675,6 +1710,7 @@ body.compact .kao{display:none;}
         <button class="abt" onclick="stab('suggestions',this)">Suggestions<span class="nbadge" id="sb" style="display:none;"></span></button>
         <button class="abt" onclick="stab('onhand',this)">On Hand (<span id="ohc">0</span>)</button>
         <button class="abt" onclick="stab('orders',this)">Orders (<span id="ordc">0</span>)</button>
+        <button class="abt" onclick="stab('thisisfootball',this)">This is Football</button>
       </div>
       <div class="atab active" id="tab-kits">
         <div class="ath"><span class="att">Manage Kits</span><button class="btn-p" style="font-size:0.65rem;" onclick="openKM(null)">+ Add Kit</button></div>
@@ -1709,6 +1745,10 @@ body.compact .kao{display:none;}
         </div>
         <div class="ath"><span class="att">Kit Sourcing Requests</span></div>
         <div id="sl" style="border:1px solid var(--border);border-radius:3px;overflow:hidden;"></div>
+      </div>
+      <div class="atab" id="tab-thisisfootball">
+        <div class="ath"><span class="att">This is Football — Weekly Moment</span><button class="btn-p" style="font-size:0.65rem;" onclick="openTIFM()">Edit Weekly Content</button></div>
+        <div id="tifPreview" style="padding:1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:4px;"></div>
       </div>
     </div>
   </div>
@@ -1922,6 +1962,152 @@ body.compact .kao{display:none;}
   </div>
 </div>
 
+<!-- THIS IS FOOTBALL MODAL -->
+<div class="mo" id="tifModal">
+  <div class="md" style="max-width:720px;max-height:90vh;overflow-y:auto;">
+    <div class="mdt">Edit This is Football</div>
+    
+    <!-- Weekly Moment Title -->
+    <div class="fg">
+      <label class="fl">Weekly Moment Title *</label>
+      <input class="fi" id="tif-title" placeholder="e.g. Ronaldo's Bicycle Kick vs Juventus"/>
+    </div>
+    
+    <!-- Instagram Link -->
+    <div class="fg">
+      <label class="fl">Instagram Link *</label>
+      <input class="fi" id="tif-ig" placeholder="https://www.instagram.com/reel/ABC123/"/>
+    </div>
+    
+    <!-- Images Section -->
+    <div class="fg">
+      <label class="fl">Gallery Images</label>
+      <div id="tifImagesContainer"></div>
+      <button class="btn-o" style="font-size:0.62rem;padding:6px 13px;margin-top:0.5rem;" onclick="addTifImage()">+ Add Image</button>
+    </div>
+    
+    <!-- Kit Setup Section -->
+    <div style="border-top:1px solid var(--border);margin-top:1.5rem;padding-top:1.5rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.08em;color:var(--red);margin-bottom:1rem;">⚽ Kit Details</div>
+      
+      <!-- Sport Selection -->
+      <div class="fg">
+        <label class="fl">Sport *</label>
+        <div id="tif-sport-btns" class="sel-btns"></div>
+      </div>
+      
+      <!-- Type Selection -->
+      <div class="fg" id="tif-type-wrap" style="display:none;">
+        <label class="fl">Type *</label>
+        <div id="tif-type-btns" class="sel-btns"></div>
+      </div>
+      
+      <!-- League Selection -->
+      <div class="fg" id="tif-league-wrap" style="display:none;">
+        <label class="fl">League</label>
+        <div id="tif-league-btns" class="sel-btns"></div>
+      </div>
+      
+      <!-- Version Selection (multi-select) -->
+      <div class="fg" id="tif-version-wrap" style="display:none;">
+        <label class="fl">Version(s)</label>
+        <div class="cbg" id="tif-version-checks"></div>
+      </div>
+      
+      <div class="fr2">
+        <div class="fg">
+          <label class="fl">Kit Name *</label>
+          <input class="fi" id="tif-kit-name" placeholder="e.g. Real Madrid Home 24/25"/>
+        </div>
+        <div class="fg">
+          <label class="fl">Team</label>
+          <input class="fi" id="tif-kit-team" placeholder="e.g. Real Madrid"/>
+        </div>
+      </div>
+      
+      <!-- Sizes -->
+      <div class="fg">
+        <label class="fl">Sizes Available</label>
+        <div id="tif-sizes-wrap">
+          <div class="cbg" id="tif-sizes-standard">
+            <label class="cl"><input type="checkbox" value="S" data-tif-size/>S</label>
+            <label class="cl"><input type="checkbox" value="M" data-tif-size/>M</label>
+            <label class="cl"><input type="checkbox" value="L" data-tif-size/>L</label>
+            <label class="cl"><input type="checkbox" value="XL" data-tif-size/>XL</label>
+            <label class="cl"><input type="checkbox" value="XXL" data-tif-size/>XXL</label>
+            <label class="cl"><input type="checkbox" value="16 (2-3y)" data-tif-size/>16 (2-3y)</label>
+            <label class="cl"><input type="checkbox" value="18 (3-4y)" data-tif-size/>18 (3-4y)</label>
+            <label class="cl"><input type="checkbox" value="20 (4-5y)" data-tif-size/>20 (4-5y)</label>
+            <label class="cl"><input type="checkbox" value="22 (6-7y)" data-tif-size/>22 (6-7y)</label>
+            <label class="cl"><input type="checkbox" value="24 (8-9y)" data-tif-size/>24 (8-9y)</label>
+            <label class="cl"><input type="checkbox" value="26 (10-11y)" data-tif-size/>26 (10-11y)</label>
+            <label class="cl"><input type="checkbox" value="28 (12-13y)" data-tif-size/>28 (12-13y)</label>
+          </div>
+          <div class="cbg" id="tif-sizes-bg" style="display:none;">
+            <label class="cl"><input type="checkbox" value="9M" data-tif-size/>9M (6-12 months)</label>
+            <label class="cl"><input type="checkbox" value="12M" data-tif-size/>12M (12-18 months)</label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Badges -->
+      <div class="fg">
+        <label class="fl">Badges Available <span style="font-weight:300;font-size:0.72rem;color:var(--muted);">(comma separated)</span></label>
+        <input class="fi" id="tif-kit-badges" placeholder="e.g. UCL Badge, Player Badge"/>
+      </div>
+      
+      <!-- Add-ons -->
+      <div class="fg" id="tif-addons-section">
+        <label class="fl">Add-ons Available</label>
+        <div class="cbg">
+          <label class="cl"><input type="checkbox" value="Custom Name &amp; Number" data-tif-addon/>Custom Name &amp; Number</label>
+          <label class="cl"><input type="checkbox" value="Badges" data-tif-addon/>Badges</label>
+          <label class="cl"><input type="checkbox" value="Long Sleeve" data-tif-addon/>Long Sleeve</label>
+          <label class="cl"><input type="checkbox" value="Sleeve Sponsor" data-tif-addon/>Sleeve Sponsor</label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mdf">
+      <button class="btn-o" onclick="closeTIFM()">Cancel</button>
+      <button class="btn-p" onclick="saveTIF()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- THIS IS FOOTBALL KIT DETAIL MODAL -->
+<div class="tif-kd-overlay" id="tifKdOverlay" onclick="if(event.target===this)closeTifKitDetail()">
+  <div class="tif-kd-content">
+    <button class="tif-kd-close" onclick="closeTifKitDetail()">×</button>
+    <div class="tif-kd-gallery" id="tifKdGallery"></div>
+    <div class="kd-page-gallery-dots" id="tifKdDots"></div>
+    <div class="tif-kd-info">
+      <div class="kd-page-badges" id="tifKdBadges"></div>
+      <div class="kd-page-name" id="tifKdName"></div>
+      <div class="kd-page-team" id="tifKdTeam"></div>
+      <div id="tifKdVersionsWrap" style="display:none;">
+        <div class="kd-page-section">Select Version</div>
+        <div style="display:flex;flex-direction:column;gap:6px;" id="tifKdVersions"></div>
+      </div>
+      <div class="kd-page-prices" id="tifKdPrices"></div>
+      <div id="tifKdSizesWrap" style="display:none;">
+        <div class="kd-page-section">Select Size</div>
+        <div class="kd-page-sizes" id="tifKdSizes"></div>
+        <div id="tifKdSizeChart"></div>
+      </div>
+      <div id="tifKdBadgesWrap" style="display:none;">
+        <div class="kd-page-section">Available Badges</div>
+        <div class="kd-page-addons" id="tifKdBadgesList"></div>
+      </div>
+      <div id="tifKdAddonsWrap" style="display:none;">
+        <div class="kd-page-section">Available Add-ons</div>
+        <div class="kd-page-addons" id="tifKdAddons"></div>
+      </div>
+      <a id="tifKdOrderBtn" href="#" target="_blank" class="kd-page-order-btn">📲 Order via WhatsApp</a>
+    </div>
+  </div>
+</div>
+
 <script>
 const SUPABASE_URL='https://mnevxsxpwpwunjlinweb.supabase.co';
 const SUPABASE_KEY='sb_publishable_5TOoSryhqUW_GtayTpgIHw_NHmnlaP5';
@@ -2063,7 +2249,7 @@ function showPage(p){
   document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
   document.getElementById("page-"+p).classList.add("active");
   document.querySelectorAll(".nl").forEach(x=>x.classList.remove("active"));
-  const m={home:0,catalogue:1,onhand:2,reviews:3,orders:4,pricing:5,sizeguide:6,suggest:7,faq:8,settings:9,about:10,terms:11,kitdetail:99};
+  const m={home:0,catalogue:1,onhand:2,thisisfootball:3,reviews:4,orders:5,pricing:6,sizeguide:7,suggest:8,faq:9,settings:10,about:11,terms:12,kitdetail:99};
   const b=document.querySelectorAll(".nl");
   if(m[p]!==undefined&&b[m[p]])b[m[p]].classList.add("active");
   document.getElementById("navLinks").classList.remove("open");
@@ -2079,6 +2265,7 @@ function showPage(p){
   if(p==="admin")renderAdmin();
   if(p==="onhand")loadOnHand();
   if(p==="orders"){loadOrders().then(()=>setTimeout(initFadeIn,100));}
+  if(p==="thisisfootball")loadTIF();
 }
 function toggleMenu(){document.getElementById("navLinks").classList.toggle("open");}
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000);}
@@ -2463,7 +2650,7 @@ function renderAdmin(){
   renderOnHandAdmin();
   document.getElementById("sl").innerHTML=!allSugs.length?'<div class="empty-state">No sourcing requests yet.</div>':allSugs.map(s=>`<div class="sgc"><div class="sg-meta"><span class="sg-name">${s.name}</span><span class="sg-phone">📞 ${s.phone||"No number provided"}</span><span class="sg-date">${s.date}</span></div><p class="sg-text">"${s.text}"</p><div class="sg-ac"><a href="https://wa.me/${(s.phone||"").replace(/\D/g,"")}" target="_blank" class="btn-p" style="font-size:0.62rem;padding:7px 13px;text-decoration:none;">📲 Call/WhatsApp</a><button class="btn-d" onclick="delSug('${s.id}')">Dismiss</button></div></div>`).join("");
 }
-function stab(t,b){document.querySelectorAll(".atab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".abt").forEach(x=>x.classList.remove("active"));document.getElementById("tab-"+t).classList.add("active");b.classList.add("active");}
+function stab(t,b){document.querySelectorAll(".atab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".abt").forEach(x=>x.classList.remove("active"));document.getElementById("tab-"+t).classList.add("active");b.classList.add("active");if(t==='thisisfootball')loadTIFAdmin();}
 
 // KIT MODAL
 // ── KIT ADMIN SPORT/TYPE/VERSION FLOW ──
@@ -3993,6 +4180,593 @@ window.addEventListener('scroll',()=>{
   if(btn)btn.classList.toggle('visible',window.scrollY>400);
 });
 renderStars();
+
+// ============================================
+// THIS IS FOOTBALL - JAVASCRIPT FUNCTIONS
+// ============================================
+
+let tifData = null;
+let tifCurrentImageIndex = 0;
+let tifSelectedSize = '';
+let tifSelectedVersion = '';
+let tifSelectedPrice = 0;
+
+// Load TIF data from database
+async function loadTIF(){
+  const {data,error} = await sb.from('this_is_football').select('*').limit(1).single();
+  if(error){
+    console.error('TIF load error:',error);
+    document.getElementById('tifHero').style.display='none';
+    document.getElementById('tifGallery').innerHTML='';
+    document.getElementById('tifEmpty').style.display='block';
+    document.getElementById('tifWeeklyTitle').textContent='No weekly moment available yet';
+    return;
+  }
+  tifData = data;
+  renderTIF();
+}
+
+// Render TIF page
+function renderTIF(){
+  if(!tifData){
+    document.getElementById('tifHero').style.display='none';
+    document.getElementById('tifGallery').innerHTML='';
+    document.getElementById('tifEmpty').style.display='block';
+    document.getElementById('tifWeeklyTitle').textContent='No weekly moment available yet';
+    return;
+  }
+  
+  // Update title
+  document.getElementById('tifWeeklyTitle').textContent = tifData.weekly_title || 'This week\'s football moment';
+  
+  // Show hero with Instagram button
+  document.getElementById('tifHero').style.display='block';
+  document.getElementById('tifEmpty').style.display='none';
+  
+  // Render gallery
+  const gallery = document.getElementById('tifGallery');
+  const images = tifData.images || [];
+  
+  if(images.length === 0){
+    gallery.innerHTML = '';
+    document.getElementById('tifEmpty').style.display='block';
+    return;
+  }
+  
+  gallery.innerHTML = images.map((img,idx)=>{
+    return `<div class="tif-item" onclick="openTifKitDetail()">
+      <img referrerpolicy="no-referrer" src="${img.url}" alt="${img.caption||''}" class="tif-item-img" onerror="this.style.display='none'"/>
+      <div class="tif-item-caption">${img.caption||''}</div>
+    </div>`;
+  }).join('');
+}
+
+// Open Instagram link
+function openTifIgLink(){
+  if(tifData && tifData.instagram_link){
+    window.open(tifData.instagram_link, '_blank');
+  }
+}
+
+// Open TIF kit detail modal
+function openTifKitDetail(){
+  if(!tifData || !tifData.kit) return;
+  
+  const kit = tifData.kit;
+  tifCurrentImageIndex = 0;
+  tifSelectedSize = '';
+  tifSelectedVersion = '';
+  tifSelectedPrice = 0;
+  
+  const overlay = document.getElementById('tifKdOverlay');
+  const gallery = document.getElementById('tifKdGallery');
+  const dotsContainer = document.getElementById('tifKdDots');
+  const images = tifData.images || [];
+  
+  // Gallery setup
+  gallery.innerHTML = '';
+  dotsContainer.innerHTML = '';
+  
+  if(images.length === 0){
+    gallery.innerHTML='<div style="height:280px;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.1;">⚽</div>';
+  } else if(images.length === 1){
+    const im = document.createElement('img');
+    im.src = images[0].url;
+    im.style.cssText='width:100%;max-height:450px;object-fit:contain;display:block;background:var(--bg3);';
+    im.setAttribute('referrerpolicy','no-referrer');
+    im.setAttribute('onerror','this.style.display="none"');
+    gallery.appendChild(im);
+  } else {
+    const track = document.createElement('div');
+    track.className = 'kd-page-gallery-track';
+    track.id = 'tifKdTrack';
+    images.forEach(img=>{
+      const im = document.createElement('img');
+      im.className = 'kd-page-gallery-img';
+      im.src = img.url;
+      im.setAttribute('referrerpolicy','no-referrer');
+      im.setAttribute('onerror','this.style.display="none"');
+      track.appendChild(im);
+    });
+    gallery.appendChild(track);
+    
+    images.forEach((_,i)=>{
+      const d = document.createElement('span');
+      d.className = 'gdot'+(i===0?' active':'');
+      d.onclick = ()=>tifGoSlide(i);
+      dotsContainer.appendChild(d);
+    });
+    
+    // Prev/Next buttons
+    const prevBtn = document.createElement('button');
+    prevBtn.className='kd-page-gallery-prev';
+    prevBtn.innerHTML='‹';
+    prevBtn.onclick=()=>tifGoSlide((tifCurrentImageIndex-1+images.length)%images.length);
+    const nextBtn = document.createElement('button');
+    nextBtn.className='kd-page-gallery-next';
+    nextBtn.innerHTML='›';
+    nextBtn.onclick=()=>tifGoSlide((tifCurrentImageIndex+1)%images.length);
+    gallery.appendChild(prevBtn);
+    gallery.appendChild(nextBtn);
+    
+    // Touch swipe
+    let sx=0;
+    gallery.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+    gallery.addEventListener('touchend',e=>{
+      const d=sx-e.changedTouches[0].clientX;
+      if(Math.abs(d)>80){
+        tifCurrentImageIndex=(tifCurrentImageIndex+(d>0?1:-1)+images.length)%images.length;
+        tifGoSlide(tifCurrentImageIndex);
+      }
+    },{passive:true});
+  }
+  
+  // Badges
+  const cat = getKitCategory(kit.item_type, kit.item_type);
+  const badgeLabel = cat==='local'?'Local':cat==='both'?'Imported & Local':'Imported';
+  const badgeClass = cat==='local'?'badge-local':cat==='both'?'badge-both':'badge-imported';
+  document.getElementById('tifKdBadges').innerHTML='<span class="ktb '+badgeClass+'" style="position:static;font-size:0.65rem;">'+badgeLabel+'</span>';
+  
+  // Name & Team
+  document.getElementById('tifKdName').textContent = kit.name || '';
+  document.getElementById('tifKdTeam').textContent = (kit.team||'')+(kit.league?' · '+kit.league:'');
+  
+  // Versions / Price variants
+  const pvs = kit.price_variants || [];
+  const versionsWrap = document.getElementById('tifKdVersionsWrap');
+  const versionsContainer = document.getElementById('tifKdVersions');
+  
+  if(pvs.length > 1){
+    versionsWrap.style.display='block';
+    document.getElementById('tifKdPrices').innerHTML='';
+    versionsContainer.innerHTML='';
+    pvs.forEach((v,i)=>{
+      const el = document.createElement('div');
+      el.className='kd-page-version'+(i===0?' selected':'');
+      el.innerHTML='<span>'+v.label+'</span><span class="kd-page-version-price">R'+v.price+'</span>';
+      el.onclick=()=>tifSelectVersion(el,v.label,v.price);
+      versionsContainer.appendChild(el);
+    });
+    tifSelectedVersion = pvs[0].label;
+    tifSelectedPrice = pvs[0].price;
+  } else {
+    versionsWrap.style.display='none';
+    document.getElementById('tifKdPrices').innerHTML=pvs.map(v=>'<div class="kd-page-price">R'+v.price+'<span class="kd-page-price-label">'+v.label+'</span></div>').join('');
+    tifSelectedVersion = pvs[0]?.label||'';
+    tifSelectedPrice = pvs[0]?.price||0;
+  }
+  
+  // Sizes
+  const sizes = kit.sizes || [];
+  const sizesWrap = document.getElementById('tifKdSizesWrap');
+  if(sizes.length){
+    sizesWrap.style.display='block';
+    document.getElementById('tifKdSizes').innerHTML=sizes.map(s=>'<div class="kd-page-size" onclick="tifSelectSize(this,\''+s+'\')">'+s+'</div>').join('');
+    
+    // Size Chart
+    const itemType = kit.item_type;
+    const sport = kit.sport || 'Football';
+    const chart = getSizeChartForKit(sport, itemType);
+    const chartContainer = document.getElementById('tifKdSizeChart');
+    if(chart){
+      const selectedVer = (pvs.length===1)?tifSelectedVersion:null;
+      const chartHTML = renderSizeChart(chart, selectedVer);
+      chartContainer.innerHTML='<button class="kd-size-chart-btn" onclick="toggleSizeChart(this)"><span>View Size Chart</span><span class="arr">▼</span></button><div class="kd-size-chart-content">'+chartHTML+'</div>';
+    } else {
+      chartContainer.innerHTML='';
+    }
+  } else {
+    sizesWrap.style.display='none';
+  }
+  
+  // Badges
+  const badges = kit.badges || [];
+  const badgesWrap = document.getElementById('tifKdBadgesWrap');
+  if(badges.length){
+    badgesWrap.style.display='block';
+    document.getElementById('tifKdBadgesList').innerHTML=badges.map(b=>'<span class="kd-page-addon">'+b+'</span>').join('');
+  } else {
+    badgesWrap.style.display='none';
+  }
+  
+  // Addons
+  const addons = kit.addons || [];
+  const addonsWrap = document.getElementById('tifKdAddonsWrap');
+  if(addons.length){
+    addonsWrap.style.display='block';
+    document.getElementById('tifKdAddons').innerHTML=addons.map(a=>'<span class="kd-page-addon">'+a+'</span>').join('');
+  } else {
+    addonsWrap.style.display='none';
+  }
+  
+  // WhatsApp order button
+  updateTifWhatsAppLink();
+  
+  overlay.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+
+function closeTifKitDetail(){
+  document.getElementById('tifKdOverlay').classList.remove('active');
+  document.body.style.overflow='';
+}
+
+function tifGoSlide(idx){
+  tifCurrentImageIndex = idx;
+  const track = document.getElementById('tifKdTrack');
+  if(track){
+    track.style.transform = `translateX(-${idx*100}%)`;
+    document.querySelectorAll('#tifKdDots .gdot').forEach((d,i)=>{
+      d.classList.toggle('active', i===idx);
+    });
+  }
+}
+
+function tifSelectVersion(el, label, price){
+  document.querySelectorAll('#tifKdVersions .kd-page-version').forEach(v=>v.classList.remove('selected'));
+  el.classList.add('selected');
+  tifSelectedVersion = label;
+  tifSelectedPrice = price;
+  updateTifWhatsAppLink();
+  
+  // Update size chart filter if multi-version
+  if(tifData && tifData.kit && tifData.kit.price_variants && tifData.kit.price_variants.length > 1){
+    const chart = getSizeChartForKit(tifData.kit.sport||'Football', tifData.kit.item_type);
+    if(chart){
+      const chartHTML = renderSizeChart(chart, label);
+      const chartContainer = document.getElementById('tifKdSizeChart');
+      chartContainer.innerHTML='<button class="kd-size-chart-btn" onclick="toggleSizeChart(this)"><span>View Size Chart</span><span class="arr">▼</span></button><div class="kd-size-chart-content">'+chartHTML+'</div>';
+    }
+  }
+}
+
+function tifSelectSize(el, size){
+  document.querySelectorAll('#tifKdSizes .kd-page-size').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+  tifSelectedSize = size;
+  updateTifWhatsAppLink();
+}
+
+function updateTifWhatsAppLink(){
+  if(!tifData || !tifData.kit) return;
+  const kit = tifData.kit;
+  const WA_NUM = '27710396374';
+  let msg = `Hi JerseyZone_ZA! I'm interested in the This is Football kit: ${kit.name}`;
+  if(tifSelectedVersion) msg += ` (${tifSelectedVersion})`;
+  if(tifSelectedSize) msg += ` - Size: ${tifSelectedSize}`;
+  document.getElementById('tifKdOrderBtn').href = `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
+}
+
+// ============================================
+// THIS IS FOOTBALL - ADMIN FUNCTIONS
+// ============================================
+
+let tifEditingId = null;
+let tifAdminSport = '';
+let tifAdminType = '';
+let tifAdminLeague = '';
+
+async function loadTIFAdmin(){
+  const {data,error} = await sb.from('this_is_football').select('*').limit(1).single();
+  if(error && error.code !== 'PGRST116'){
+    console.error('TIF admin load error:',error);
+  }
+  renderTIFAdmin(data);
+}
+
+function renderTIFAdmin(data){
+  const preview = document.getElementById('tifPreview');
+  if(!data){
+    preview.innerHTML='<p style="color:var(--muted);font-size:0.83rem;">No weekly moment set. Click "Edit Weekly Content" to create one.</p>';
+  } else {
+    const imgCount = (data.images||[]).length;
+    preview.innerHTML=`
+      <div style="margin-bottom:1rem;"><strong style="color:var(--red);">Weekly Title:</strong> ${data.weekly_title||'N/A'}</div>
+      <div style="margin-bottom:1rem;"><strong style="color:var(--red);">Instagram Link:</strong> ${data.instagram_link?'<a href="'+data.instagram_link+'" target="_blank" style="color:var(--cream);text-decoration:underline;">'+data.instagram_link+'</a>':'N/A'}</div>
+      <div style="margin-bottom:1rem;"><strong style="color:var(--red);">Images:</strong> ${imgCount} image${imgCount===1?'':'s'}</div>
+      <div><strong style="color:var(--red);">Kit:</strong> ${data.kit?.name||'N/A'}</div>
+    `;
+  }
+}
+
+function openTIFM(){
+  tifEditingId = null;
+  
+  // Load existing data
+  sb.from('this_is_football').select('*').limit(1).single().then(({data,error})=>{
+    if(data){
+      tifEditingId = data.id;
+      document.getElementById('tif-title').value = data.weekly_title || '';
+      document.getElementById('tif-ig').value = data.instagram_link || '';
+      
+      // Load images
+      const container = document.getElementById('tifImagesContainer');
+      container.innerHTML = '';
+      const images = data.images || [];
+      images.forEach((img,idx)=>{
+        const div = document.createElement('div');
+        div.className = 'img-field';
+        div.innerHTML = `
+          <div style="display:flex;gap:0.5rem;align-items:start;">
+            <div style="flex:1;">
+              <input class="fi" placeholder="Image URL (imghippo)" value="${img.url||''}" data-tif-img-url="${idx}"/>
+              <textarea class="fta" placeholder="Caption" style="margin-top:0.5rem;min-height:60px;" data-tif-img-caption="${idx}">${img.caption||''}</textarea>
+            </div>
+            <button class="btn-d" style="flex-shrink:0;" onclick="removeTifImage(${idx})">Delete</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      
+      // Load kit data
+      if(data.kit){
+        const kit = data.kit;
+        tifAdminSport = kit.sport || 'Football';
+        tifAdminType = kit.item_type || '';
+        tifAdminLeague = kit.league || '';
+        
+        document.getElementById('tif-kit-name').value = kit.name || '';
+        document.getElementById('tif-kit-team').value = kit.team || '';
+        document.getElementById('tif-kit-badges').value = (kit.badges||[]).join(', ');
+        
+        // Render sport/type/league buttons
+        renderTifSportButtons();
+        if(tifAdminSport === 'Football'){
+          renderTifTypeButtons();
+          if(['Shirt','Full Kit','Kids Full Kit'].includes(tifAdminType)){
+            renderTifLeagueButtons();
+            renderTifVersionChecks(kit.price_variants||[]);
+          }
+        }
+        
+        // Set sizes
+        const sizes = kit.sizes || [];
+        document.querySelectorAll('[data-tif-size]').forEach(cb=>{
+          cb.checked = sizes.includes(cb.value);
+        });
+        
+        // Set addons
+        const addons = kit.addons || [];
+        document.querySelectorAll('[data-tif-addon]').forEach(cb=>{
+          cb.checked = addons.includes(cb.value);
+        });
+      } else {
+        renderTifSportButtons();
+      }
+    } else {
+      // Fresh start
+      document.getElementById('tif-title').value = '';
+      document.getElementById('tif-ig').value = '';
+      document.getElementById('tifImagesContainer').innerHTML = '';
+      document.getElementById('tif-kit-name').value = '';
+      document.getElementById('tif-kit-team').value = '';
+      document.getElementById('tif-kit-badges').value = '';
+      tifAdminSport = '';
+      tifAdminType = '';
+      tifAdminLeague = '';
+      renderTifSportButtons();
+    }
+  });
+  
+  document.getElementById('tifModal').style.display='flex';
+}
+
+function closeTIFM(){
+  document.getElementById('tifModal').style.display='none';
+}
+
+function addTifImage(){
+  const container = document.getElementById('tifImagesContainer');
+  const idx = container.children.length;
+  const div = document.createElement('div');
+  div.className = 'img-field';
+  div.innerHTML = `
+    <div style="display:flex;gap:0.5rem;align-items:start;">
+      <div style="flex:1;">
+        <input class="fi" placeholder="Image URL (imghippo)" data-tif-img-url="${idx}"/>
+        <textarea class="fta" placeholder="Caption" style="margin-top:0.5rem;min-height:60px;" data-tif-img-caption="${idx}"></textarea>
+      </div>
+      <button class="btn-d" style="flex-shrink:0;" onclick="removeTifImage(${idx})">Delete</button>
+    </div>
+  `;
+  container.appendChild(div);
+}
+
+function removeTifImage(idx){
+  const container = document.getElementById('tifImagesContainer');
+  if(container.children[idx]){
+    container.children[idx].remove();
+  }
+}
+
+function renderTifSportButtons(){
+  const sports = ['Football','F1','Rugby','NBA','More'];
+  const btns = document.getElementById('tif-sport-btns');
+  btns.innerHTML = sports.map(s=>`<button class="admin-sport-btn${tifAdminSport===s?' active':''}" onclick="selectTifSport('${s}')">${s}</button>`).join('');
+}
+
+function selectTifSport(sport){
+  tifAdminSport = sport;
+  tifAdminType = '';
+  tifAdminLeague = '';
+  renderTifSportButtons();
+  
+  if(sport === 'Football'){
+    renderTifTypeButtons();
+    document.getElementById('tif-type-wrap').style.display='block';
+  } else {
+    document.getElementById('tif-type-wrap').style.display='none';
+    document.getElementById('tif-league-wrap').style.display='none';
+    document.getElementById('tif-version-wrap').style.display='none';
+  }
+}
+
+function renderTifTypeButtons(){
+  const types = ['Shirt','Shorts','Full Kit','Kids Full Kit','Training Set','Windbreaker','Tracksuit','Baby Grower'];
+  const btns = document.getElementById('tif-type-btns');
+  btns.innerHTML = types.map(t=>`<button class="admin-type-btn${tifAdminType===t?' active':''}" onclick="selectTifType('${t}')">${t}</button>`).join('');
+}
+
+function selectTifType(type){
+  tifAdminType = type;
+  renderTifTypeButtons();
+  
+  // Show/hide size options
+  const stdSizes = document.getElementById('tif-sizes-standard');
+  const bgSizes = document.getElementById('tif-sizes-bg');
+  if(type === 'Baby Grower'){
+    stdSizes.style.display='none';
+    bgSizes.style.display='flex';
+  } else {
+    stdSizes.style.display='flex';
+    bgSizes.style.display='none';
+  }
+  
+  // Show league/version for specific types
+  if(['Shirt','Full Kit','Kids Full Kit'].includes(type)){
+    renderTifLeagueButtons();
+    document.getElementById('tif-league-wrap').style.display='block';
+    document.getElementById('tif-version-wrap').style.display='block';
+    renderTifVersionChecks([]);
+  } else {
+    document.getElementById('tif-league-wrap').style.display='none';
+    document.getElementById('tif-version-wrap').style.display='none';
+  }
+}
+
+function renderTifLeagueButtons(){
+  const leagues = ['La Liga','Premier League','Ligue 1','Bundesliga','Serie A','International','Other'];
+  const btns = document.getElementById('tif-league-btns');
+  btns.innerHTML = leagues.map(l=>`<button class="admin-type-btn${tifAdminLeague===l?' active':''}" onclick="tifAdminLeague='${l}';renderTifLeagueButtons()">${l}</button>`).join('');
+}
+
+function renderTifVersionChecks(existingPVs){
+  const versions = ['Fan Version','Player Version','Retro','Special Edition','Replica'];
+  const container = document.getElementById('tif-version-checks');
+  const existingLabels = existingPVs.map(pv=>pv.label);
+  container.innerHTML = versions.map(v=>{
+    const checked = existingLabels.includes(v)?'checked':'';
+    return `<label class="cl"><input type="checkbox" value="${v}" data-tif-version ${checked}/>${v}</label>`;
+  }).join('');
+}
+
+async function saveTIF(){
+  const title = document.getElementById('tif-title').value.trim();
+  const ig = document.getElementById('tif-ig').value.trim();
+  const kitName = document.getElementById('tif-kit-name').value.trim();
+  
+  if(!title || !ig || !kitName || !tifAdminSport){
+    alert('Please fill in all required fields (Weekly Title, Instagram Link, Sport, Kit Name)');
+    return;
+  }
+  
+  // Collect images
+  const images = [];
+  const urlInputs = document.querySelectorAll('[data-tif-img-url]');
+  urlInputs.forEach(input=>{
+    const idx = input.dataset.tifImgUrl;
+    const url = input.value.trim();
+    const caption = document.querySelector(`[data-tif-img-caption="${idx}"]`)?.value.trim()||'';
+    if(url){
+      images.push({url, caption});
+    }
+  });
+  
+  // Build kit object
+  const kit = {
+    name: kitName,
+    team: document.getElementById('tif-kit-team').value.trim(),
+    sport: tifAdminSport,
+    item_type: tifAdminType || 'Shirt',
+    league: tifAdminLeague || '',
+    sizes: Array.from(document.querySelectorAll('[data-tif-size]:checked')).map(cb=>cb.value),
+    badges: document.getElementById('tif-kit-badges').value.split(',').map(b=>b.trim()).filter(Boolean),
+    addons: Array.from(document.querySelectorAll('[data-tif-addon]:checked')).map(cb=>cb.value),
+    price_variants: []
+  };
+  
+  // Build price variants
+  const selectedVersions = Array.from(document.querySelectorAll('[data-tif-version]:checked')).map(cb=>cb.value);
+  if(selectedVersions.length > 0){
+    selectedVersions.forEach(ver=>{
+      const priceInfo = getVersionPrice(ver, tifAdminType);
+      kit.price_variants.push({label:ver, price:priceInfo.price});
+    });
+  } else {
+    // Default to Fan Version if football shirt/kit
+    if(tifAdminSport==='Football' && ['Shirt','Full Kit','Kids Full Kit'].includes(tifAdminType)){
+      kit.price_variants.push({label:'Fan Version', price:490});
+    } else {
+      const priceInfo = getVersionPrice('', tifAdminType);
+      kit.price_variants.push({label:priceInfo.label, price:priceInfo.price});
+    }
+  }
+  
+  const payload = {
+    weekly_title: title,
+    instagram_link: ig,
+    images: images,
+    kit: kit
+  };
+  
+  let result;
+  if(tifEditingId){
+    result = await sb.from('this_is_football').update(payload).eq('id', tifEditingId);
+  } else {
+    result = await sb.from('this_is_football').insert([payload]);
+  }
+  
+  if(result.error){
+    console.error('Save TIF error:', result.error);
+    alert('Error saving. Check console.');
+    return;
+  }
+  
+  toast('This is Football updated!');
+  closeTIFM();
+  loadTIFAdmin();
+  loadTIF();
+}
+
+function getVersionPrice(version, itemType){
+  const priceMap = {
+    'Fan Version': {label:'Fan Version', price:490},
+    'Player Version': {label:'Player Version', price:575},
+    'Retro': {label:'Retro', price:575},
+    'Special Edition': {label:'Special Edition', price:575},
+    'Replica': {label:'Replica', price:230}
+  };
+  
+  // Item-specific pricing
+  if(itemType === 'Training Set') return {label:'Training Set', price:750};
+  if(itemType === 'Windbreaker') return {label:'Windbreaker', price:900};
+  if(itemType === 'Tracksuit') return {label:'Tracksuit', price:850};
+  if(itemType === 'Baby Grower') return {label:'Baby Grower', price:500};
+  if(itemType === 'Kids Full Kit') return {label:'Kids Imported', price:490};
+  
+  return priceMap[version] || {label:'Fan Version', price:490};
+}
+
 init();
 </script>
 
